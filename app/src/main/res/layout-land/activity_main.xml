@@ -68,7 +68,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.66"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="10dp"
+        />
 
     <Button
         android:id="@+id/forgetPassword"
@@ -107,7 +110,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.521"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="10dp"
+        />
 
     <Button
         android:id="@+id/login"

@@ -8,12 +8,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/Theme.BTA">
         <activity
+            android:name=".instructor_account"
+            android:exported="false" />
+        <activity
+            android:name=".advisor_account"
+            android:exported="false" />
+        <activity
+            android:name=".admin_account"
+            android:exported="false" />
+        <activity
+            android:name=".student_account"
+            android:exported="false" />
+        <activity
+            android:name=".administrator_account"
+            android:exported="false"
+            android:label="@string/title_activity_administrator_account" />
+        <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
