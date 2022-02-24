@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="false"
+    android:background="@color/white">
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/dark_green"
+        android:onClick="buttonBackOnClick"
+        android:src="?attr/homeAsUpIndicator"
+        android:tint="@color/white"
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/dark_green"
+        android:text="@string/title_activity_student_list"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="724dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/listStudent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:choiceMode="singleChoice"
+            android:divider="@color/dark_green"
+            android:dividerHeight="1dp"
+            android:listSelector="@color/light_green" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/createStudent"
+            android:layout_width="509dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="768dp"
+            android:backgroundTint="@color/dark_green"
+            android:onClick="buttonCreateStudentOnClick"
+            android:text="@string/create_student"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
