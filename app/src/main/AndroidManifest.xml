@@ -18,13 +18,38 @@
         <activity
             android:name=".admin_account"
             android:exported="false" />
+                 <activity
+        android:name=".HomeActivity"
+        android:label="BTA">
+                     <meta-data
+                         android:name="android.support.PARENT_ACTIVITY"
+                         android:value=".MainActivity" />
+                 </activity>
+        <activity
+            android:name=".StudentListActivity"
+            android:label="BTA: Student List" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".CreateStudentActivity"
+            android:label="BTA: Create Student" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StudentListActivity" />
+        </activity>
+        <activity
+            android:name=".EditStudentActivity"
+            android:label="BTA: Edit Student" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StudentListActivity" />
+        </activity>
+
         <activity
             android:name=".student_account"
             android:exported="false" />
-        <activity
-            android:name=".administrator_account"
-            android:exported="false"
-            android:label="@string/title_activity_administrator_account" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

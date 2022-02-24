@@ -6,6 +6,7 @@ public class User implements IUser
     private String password;
     private String type;
 
+    public User(){}
     public User(String newName, String newPassword)
     {
         id = newName;

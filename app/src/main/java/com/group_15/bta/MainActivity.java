@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(userType.equals(ADMINISTRATOR_ACCOUNT_TYPE))
                     {
-                        intent = new Intent(MainActivity.this, admin_account.class);
+                        intent = new Intent(MainActivity.this, HomeActivity.class);
                     }
                     else if(userType.equals(INSTRUCTOR_ACCOUNT_TYPE))
                     {
