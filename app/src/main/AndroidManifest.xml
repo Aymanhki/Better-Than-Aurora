@@ -60,6 +60,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CourseActivity"
+            android:label="BTA: Sections">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseActivity" />
+        </activity>
+        <activity android:name=".CategoryActivity"
+            android:label="BTA: Courses">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CategoryActivity" />
+        </activity>
+        <activity android:name=".CourseLandingActivity"
+            android:label="BTA: Categories">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseLandingActivity" />
+        </activity>
     </application>
 
 </manifest>
