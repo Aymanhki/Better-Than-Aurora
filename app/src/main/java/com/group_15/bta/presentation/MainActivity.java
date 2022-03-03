@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.group_15.bta.DataGenerator;
+import com.group_15.bta.R;
+import com.group_15.bta.advisor_account;
+import com.group_15.bta.instructor_account;
+import com.group_15.bta.persistence.User;
+import com.group_15.bta.student_account;
 
 import java.util.ArrayList;
 

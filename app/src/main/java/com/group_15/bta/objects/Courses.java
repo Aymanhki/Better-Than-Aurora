@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.objects;
 
 import java.util.ArrayList;
 

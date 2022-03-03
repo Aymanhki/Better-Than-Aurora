@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.persistence;
 
 public class User implements IUser
 {

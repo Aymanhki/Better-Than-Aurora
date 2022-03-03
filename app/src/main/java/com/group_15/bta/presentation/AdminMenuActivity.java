@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.group_15.bta.R;
 
 public class AdminMenuActivity extends AppCompatActivity{
 

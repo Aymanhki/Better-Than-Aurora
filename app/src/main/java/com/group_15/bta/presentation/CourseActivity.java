@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,12 +17,16 @@ import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
+import com.group_15.bta.objects.Section;
+import com.group_15.bta.persistence.SectionList;
+import com.group_15.bta.persistence.SectionListData;
 
 public class CourseActivity extends AppCompatActivity {
     protected String Name;
     protected String Description;
     protected ArrayList<Section> sections;
     protected ArrayAdapter arrayAdapter;
+    protected SectionList sectionList = SectionListData.getInstance();
 
     public CourseActivity(){ sections = new ArrayList<Section>();}
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,40 +46,9 @@ public class CourseActivity extends AppCompatActivity {
         tView.setText(this.Name);
         dView.setText(this.Description);
 
- /*       String[] days = {"M","W","F"};
-        String[] time = {"10:45am", "11:45am"};
-
-        Section s = new Section("A01",days, time, 66);
-        sections.add(s);
-        days= new String[]{"T", "TR"};
-        time= new String[]{"11:00am", "12:00pm"};
-
-        s = new Section("A02",days,time,66);
-        sections.add(s);
-*/
-        SectionList sectionList = com.group_15.bta.SectionListData.getInstance();
         sections = sectionList.getSectionList();
 
-        ListView listView = (ListView) findViewById(R.id.sectionsList);
-        String sectionName = this.Name;
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, sections) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                String keyPoints = sections.get(position).getSection() + " " + sectionName + " Instructor: TBD  Location: TBD";
-                String info = "Day(s): " + sections.get(position).getDays() + " Time: " + sections.get(position).getTime() + " CAP: " + sections.get(position).getCap();
-
-                text1.setText(keyPoints);
-                text2.setText(info);
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
+        listSections();
     }
 
     public void buttonAddSection(View v){
@@ -98,30 +71,12 @@ public class CourseActivity extends AppCompatActivity {
 
         Section s = new Section(section.getText().toString(), ds, Time, Cap);
 
-        sections.add(s);
+        sectionList.insertSection(s);
+        sections = sectionList.getSectionList();
 
-        ListView listView = (ListView) findViewById(R.id.sectionsList);
-        String sectionName = this.Name;
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, sections) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                String keyPoints = sections.get(position).getSection() + " " + sectionName + " Instructor: TBD  Location: TBD";
-                String info = "Day(s): " + sections.get(position).getDays() + " Time: " + sections.get(position).getTime() + " CAP: " + sections.get(position).getCap();
-
-                text1.setText(keyPoints);
-                text2.setText(info);
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
-
+        listSections();
     }
+
     public void buttonDeleteSec(View v){
         EditText section = (EditText) findViewById(id.DelSecNumber);
 
@@ -130,6 +85,10 @@ public class CourseActivity extends AppCompatActivity {
                 sections.remove(i);
             }
         }
+        listSections();
+    }
+
+    private void listSections(){
         ListView listView = (ListView) findViewById(R.id.sectionsList);
         String sectionName = this.Name;
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, sections) {
@@ -150,7 +109,6 @@ public class CourseActivity extends AppCompatActivity {
             }
         };
         listView.setAdapter(arrayAdapter);
-
     }
 
 

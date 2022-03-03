@@ -1,7 +1,6 @@
-package com.group_15.bta;
+package com.group_15.bta.objects;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.group_15.bta.persistence.User;
 
 import java.io.Serializable;
 import java.util.Objects;

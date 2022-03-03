@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -17,10 +17,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.group_15.bta.objects.Category;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
+import com.group_15.bta.persistence.CategoryList;
+import com.group_15.bta.persistence.CategoryListData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +30,7 @@ import java.util.Comparator;
 
 public class CourseLandingActivity extends AppCompatActivity{
     //ArrayList<Category> categories = new ArrayList<Category>();
-    CategoryList categoryList = com.group_15.bta.CategoryListData.getInstance();
+    protected CategoryList categoryList = CategoryListData.getInstance();
     private ArrayList<Category> categories = categoryList.getCategoryList();
     ArrayAdapter arrayAdapter;
     public String categoryName = "Default";
@@ -42,57 +44,12 @@ public class CourseLandingActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_landing);
 
-        searchView = (SearchView)findViewById(id.searchCategories);
-
         ActionBar actionBar = getSupportActionBar();//back button
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //Category c = new Category("Computer Science");//This should be an array accessed in data
-        //categories.add(c);
-        //c = new Category("Engineering");
-        //categories.add(c);
-        //c = new Category("Education");
-        //categories.add(c);
-        /*c = new Category("English");
-        categories.add(c);
-        c = new Category("French");
-        categories.add(c);
-        c = new Category("Kinesiology");
-        categories.add(c);
-        c = new Category("History");
-        categories.add(c);
-        c = new Category("Mathematics");
-        categories.add(c);
-        c = new Category("Slavic Studies");
-        categories.add(c);
-        c = new Category("Physics");
-        categories.add(c);
-        c = new Category("Yiddish");
-        categories.add(c);*/
-
-        Collections.sort(categories, new Comparator<Category>(){
-            @Override
-            public int compare(Category l, Category r) {
-                int i = l.getName().compareTo(r.getName());
-                return i;
-            }
-        });
+        listCategories();
 
         ListView listView = (ListView)findViewById(R.id.CategoriesList); //List of cats
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1,categories){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-
-                text1.setText(categories.get(position).getName());
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,19 +63,15 @@ public class CourseLandingActivity extends AppCompatActivity{
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     public void buttonAddCategory(View v){
         EditText category = (EditText) findViewById(id.newCategoryName);
         Category c = new Category(category.getText().toString());
-        categories.add(c);
+        categoryList.insertCategory(c);
+        categories = categoryList.getCategoryList();
+        listCategories();
+    }
+
+    private void listCategories(){
         Collections.sort(categories, new Comparator<Category>(){
             @Override
             public int compare(Category l, Category r) {
@@ -142,14 +95,14 @@ public class CourseLandingActivity extends AppCompatActivity{
         };
         listView.setAdapter(arrayAdapter);
     }
-   /* public boolean onQueryTextSubmit(String query){
-        for (int i =0; i<categories.size();i++) {
-            if (categories.get(i).getName().contains(query)) {
-                arrayAdapter.getFilter().;
-            } else {
-                Toast.makeText(CourseLandingActivity.this, "No Match Found", Toast.LENGTH_LONG);
-            }
+    //back button
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish(  );
+                return true;
         }
-        return false;
-    }*/
+        return super.onOptionsItemSelected(item);
+    }
 }

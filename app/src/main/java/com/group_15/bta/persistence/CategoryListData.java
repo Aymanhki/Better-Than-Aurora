@@ -1,4 +1,6 @@
-package com.group_15.bta;
+package com.group_15.bta.persistence;
+
+import com.group_15.bta.objects.Category;
 
 import java.util.ArrayList;
 

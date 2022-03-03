@@ -1,5 +1,4 @@
-package com.group_15.bta;
-import android.app.Activity;
+package com.group_15.bta.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.StudentList;
+import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.StudentList;
+import com.group_15.bta.persistence.StudentListData;
 
 public class StudentListActivity extends AppCompatActivity {
-    StudentList students = com.group_15.bta.StudentListData.getInstance();
+    StudentList students = StudentListData.getInstance();
     private ArrayList<Student> studentList = students.getStudentList();
     private ArrayAdapter<Student> studentArrayAdapter;
     private int selectedStudentPosition = -1;

@@ -1,6 +1,5 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +7,14 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group_15.bta.Student;
+import com.group_15.bta.objects.Student;
 import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.R.layout;
+import com.group_15.bta.persistence.StudentList;
+import com.group_15.bta.persistence.StudentListData;
 
 public class CreateStudentActivity extends AppCompatActivity {
 private ArrayList<Student> students;
@@ -33,7 +34,7 @@ private ArrayList<Student> students;
 
         Student student = new Student(editID.getText().toString(), editPassword.getText().toString(), editName.getText().toString());
         //students.add(student);
-        StudentList studs = com.group_15.bta.StudentListData.getInstance();
+        StudentList studs = StudentListData.getInstance();
         studs.insertStudent(student);
         Intent createIntent = new Intent(CreateStudentActivity.this, StudentListActivity.class);
        // finish();

@@ -1,8 +1,10 @@
-package com.group_15.bta;
+package com.group_15.bta.persistence;
+
+import com.group_15.bta.objects.Section;
 
 import java.util.ArrayList;
 
-public class SectionListData implements SectionList{
+public class SectionListData implements SectionList {
     private static final SectionListData ourInstance = new SectionListData();
     public ArrayList<Section> sections = new ArrayList<>();
     private SectionListData () {
