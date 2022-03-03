@@ -1,7 +1,6 @@
-package com.group_15.bta;
+package com.group_15.bta.persistence;
 
-import com.group_15.bta.StudentList;
-import com.group_15.bta.Student;
+import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
 

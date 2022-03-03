@@ -16,39 +16,39 @@
             android:name=".advisor_account"
             android:exported="false" />
                  <activity
-        android:name=".AdminMenuActivity"
+        android:name=".presentation.AdminMenuActivity"
         android:label="BTA">
                      <meta-data
                          android:name="android.support.PARENT_ACTIVITY"
-                         android:value=".MainActivity" />
+                         android:value=".presentation.MainActivity" />
                  </activity>
         <activity
-            android:name=".StudentListActivity"
+            android:name=".presentation.StudentListActivity"
             android:label="BTA: Student List" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AdminMenuActivity" />
+                android:value=".presentation.AdminMenuActivity" />
         </activity>
         <activity
-            android:name=".CreateStudentActivity"
+            android:name=".presentation.CreateStudentActivity"
             android:label="BTA: Create Student" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudentListActivity" />
+                android:value=".presentation.StudentListActivity" />
         </activity>
         <activity
-            android:name=".EditStudentActivity"
+            android:name=".presentation.EditStudentActivity"
             android:label="BTA: Edit Student" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudentListActivity" />
+                android:value=".presentation.StudentListActivity" />
         </activity>
 
         <activity
             android:name=".student_account"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -57,23 +57,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CourseActivity"
+        <activity android:name=".presentation.CourseActivity"
             android:label="BTA: Sections">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CourseActivity" />
+                android:value=".presentation.CourseActivity" />
         </activity>
-        <activity android:name=".CategoryActivity"
+        <activity android:name=".presentation.CategoryActivity"
             android:label="BTA: Courses">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CategoryActivity" />
+                android:value=".presentation.CategoryActivity" />
         </activity>
-        <activity android:name=".CourseLandingActivity"
+        <activity android:name=".presentation.CourseLandingActivity"
             android:label="BTA: Categories">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CourseLandingActivity" />
+                android:value=".presentation.CourseLandingActivity" />
         </activity>
     </application>
 

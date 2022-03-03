@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.objects;
 
 public class Section {
     private String section;

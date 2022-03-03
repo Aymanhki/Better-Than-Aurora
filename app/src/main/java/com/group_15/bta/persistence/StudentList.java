@@ -1,8 +1,7 @@
-package com.group_15.bta;
+package com.group_15.bta.persistence;
 
 import java.util.ArrayList;
-import com.group_15.bta.Student;
-import java.util.List;
+import com.group_15.bta.objects.Student;
 
 public interface StudentList {
     static StudentListData getInstance() {

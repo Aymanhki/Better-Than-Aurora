@@ -1,10 +1,11 @@
 package com.group_15.bta;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.Administrator;
+import com.group_15.bta.persistence.Advisor;
+import com.group_15.bta.persistence.Instructor;
+import com.group_15.bta.persistence.User;
 
-import java.io.FileWriter;
+import java.util.ArrayList;
 
 
 public class DataGenerator

@@ -1,13 +1,10 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +12,9 @@ import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.R.layout;
-import com.group_15.bta.Student;
+import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.StudentList;
+import com.group_15.bta.persistence.StudentListData;
 
 public class EditStudentActivity extends AppCompatActivity {
     private ArrayList<Student> students;
@@ -27,7 +25,7 @@ public class EditStudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
-        StudentList studs = com.group_15.bta.StudentListData.getInstance();
+        StudentList studs = StudentListData.getInstance();
         ArrayList<Student> students = studs.getStudentList();
         //students = (ArrayList<Student>) bundle.getSerializable("Students");
         position = bundle.getInt("Position");
@@ -44,7 +42,7 @@ public class EditStudentActivity extends AppCompatActivity {
     }
 
     public void buttonEditStudent(View v) {
-        StudentList studs = com.group_15.bta.StudentListData.getInstance();
+        StudentList studs = StudentListData.getInstance();
         studs.deleteStudent(position);
        // students.remove(position);
         EditText editID = (EditText) findViewById(R.id.editStudentID);
