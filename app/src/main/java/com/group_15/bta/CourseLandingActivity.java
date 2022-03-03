@@ -27,7 +27,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class CourseLandingActivity extends AppCompatActivity{
-    ArrayList<Category> categories = new ArrayList<Category>();
+    //ArrayList<Category> categories = new ArrayList<Category>();
+    CategoryList categoryList = com.group_15.bta.CategoryListData.getInstance();
+    private ArrayList<Category> categories = categoryList.getCategoryList();
     ArrayAdapter arrayAdapter;
     public String categoryName = "Default";
     int selectedPosition = -1;
@@ -45,13 +47,13 @@ public class CourseLandingActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();//back button
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Category c = new Category("Computer Science");//This should be an array accessed in data
-        categories.add(c);
-        c = new Category("Engineering");
-        categories.add(c);
-        c = new Category("Education");
-        categories.add(c);
-        c = new Category("English");
+        //Category c = new Category("Computer Science");//This should be an array accessed in data
+        //categories.add(c);
+        //c = new Category("Engineering");
+        //categories.add(c);
+        //c = new Category("Education");
+        //categories.add(c);
+        /*c = new Category("English");
         categories.add(c);
         c = new Category("French");
         categories.add(c);
@@ -66,7 +68,7 @@ public class CourseLandingActivity extends AppCompatActivity{
         c = new Category("Physics");
         categories.add(c);
         c = new Category("Yiddish");
-        categories.add(c);
+        categories.add(c);*/
 
         Collections.sort(categories, new Comparator<Category>(){
             @Override

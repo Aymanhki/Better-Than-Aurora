@@ -42,7 +42,7 @@ public class CourseActivity extends AppCompatActivity {
         tView.setText(this.Name);
         dView.setText(this.Description);
 
-        String[] days = {"M","W","F"};
+ /*       String[] days = {"M","W","F"};
         String[] time = {"10:45am", "11:45am"};
 
         Section s = new Section("A01",days, time, 66);
@@ -52,6 +52,9 @@ public class CourseActivity extends AppCompatActivity {
 
         s = new Section("A02",days,time,66);
         sections.add(s);
+*/
+        SectionList sectionList = com.group_15.bta.SectionListData.getInstance();
+        sections = sectionList.getSectionList();
 
         ListView listView = (ListView) findViewById(R.id.sectionsList);
         String sectionName = this.Name;
