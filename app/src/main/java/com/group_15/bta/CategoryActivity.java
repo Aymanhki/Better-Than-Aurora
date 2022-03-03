@@ -44,11 +44,13 @@ public class CategoryActivity extends AppCompatActivity{
             final TextView tView = (TextView)findViewById(R.id.CategoryName);
             tView.setText(this.Name);
 
-
+            CourseList courseList = com.group_15.bta.CourseListData.getInstance();
+            courses = courseList.getCourseList();
+/*
             Courses c = new Courses("Comp 1010", "Introduction to Computer Science");
             courses.add(c);
             c = new Courses("Comp 1020", "Introduction to Computer Science 2");
-            courses.add(c);
+            courses.add(c); */
 
             ListView listView = (ListView) findViewById(R.id.coursesList);
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, courses) {
