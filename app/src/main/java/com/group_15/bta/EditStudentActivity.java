@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 import com.group_15.bta.R;
@@ -16,7 +18,7 @@ import com.group_15.bta.R.id;
 import com.group_15.bta.R.layout;
 import com.group_15.bta.Student;
 
-public class EditStudentActivity extends Activity{
+public class EditStudentActivity extends AppCompatActivity {
     private ArrayList<Student> students;
     private int position;
 
@@ -25,7 +27,9 @@ public class EditStudentActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
-        students = (ArrayList<Student>) bundle.getSerializable("Students");
+        StudentList studs = com.group_15.bta.StudentListData.getInstance();
+        ArrayList<Student> students = studs.getStudentList();
+        //students = (ArrayList<Student>) bundle.getSerializable("Students");
         position = bundle.getInt("Position");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_student);
@@ -40,7 +44,9 @@ public class EditStudentActivity extends Activity{
     }
 
     public void buttonEditStudent(View v) {
-        students.remove(position);
+        StudentList studs = com.group_15.bta.StudentListData.getInstance();
+        studs.deleteStudent(position);
+       // students.remove(position);
         EditText editID = (EditText) findViewById(R.id.editStudentID);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
@@ -48,14 +54,15 @@ public class EditStudentActivity extends Activity{
         Editable name = editName.getText();
         Editable password = editPassword.getText();
         Student student = new Student(id.toString(), password.toString(), name.toString());
-        students.add(student);
+       // students.add(student);
+        studs.insertStudent(student);
         Intent createIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
-        finish();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Students",students);
-        createIntent.putExtras(bundle);
+        //finish();
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("Students",students);
+        //createIntent.putExtras(bundle);
         EditStudentActivity.this.startActivity(createIntent);
-        overridePendingTransition(0,0);
+        //overridePendingTransition(0,0);
     }
 
     public void buttonBackOnClick(View v) {

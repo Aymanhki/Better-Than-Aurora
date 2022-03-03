@@ -15,11 +15,8 @@
         <activity
             android:name=".advisor_account"
             android:exported="false" />
-        <activity
-            android:name=".admin_account"
-            android:exported="false" />
                  <activity
-        android:name=".HomeActivity"
+        android:name=".AdminMenuActivity"
         android:label="BTA">
                      <meta-data
                          android:name="android.support.PARENT_ACTIVITY"
@@ -30,7 +27,7 @@
             android:label="BTA: Student List" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".AdminMenuActivity" />
         </activity>
         <activity
             android:name=".CreateStudentActivity"

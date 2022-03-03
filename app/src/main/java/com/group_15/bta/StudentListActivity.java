@@ -2,28 +2,23 @@ package com.group_15.bta;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.os.Parcel;
-import android.os.Parcelable;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.group_15.bta.Student;
-
-import com.group_15.bta.R;
 import com.group_15.bta.R.id;
+import com.group_15.bta.StudentList;
 
-public class StudentListActivity extends Activity {
-
-    private ArrayList<Student> studentList;
+public class StudentListActivity extends AppCompatActivity {
+    StudentList students = com.group_15.bta.StudentListData.getInstance();
+    private ArrayList<Student> studentList = students.getStudentList();
     private ArrayAdapter<Student> studentArrayAdapter;
     private int selectedStudentPosition = -1;
 
@@ -32,17 +27,17 @@ public class StudentListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_student_list);
 
-        Bundle bundle =  getIntent().getExtras();
-        if(bundle != null) {
-            studentList = (ArrayList<Student>) bundle.getSerializable("Students");
-        }
-        else {
-            studentList = new ArrayList<>();
-            Student one = new Student("12", "12", "Jane Doe");
-            Student two = new Student("13", "13", "John Doe");
-            studentList.add(one);
-            studentList.add(two);
-        }
+       // Bundle bundle =  getIntent().getExtras();
+        //if(bundle != null) {
+         //   studentList = (ArrayList<Student>) bundle.getSerializable("Students");
+        //}
+        //else {
+          //  studentList = new ArrayList<>();
+            //Student one = new Student("12", "12", "Jane Doe");
+            //Student two = new Student("13", "13", "John Doe");
+            //studentList.add(one);
+            //studentList.add(two);
+        //}
         studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, studentList){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -74,7 +69,7 @@ public class StudentListActivity extends Activity {
                 }
                 Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("Students",studentList);
+                //bundle.putSerializable("Students",studentList);
                 bundle.putInt("Position", selectedStudentPosition);
                 editIntent.putExtras(bundle);
                 StudentListActivity.this.startActivity(editIntent);
@@ -83,7 +78,7 @@ public class StudentListActivity extends Activity {
     }
 
     public void buttonBackOnClick(View v) {
-        Intent backIntent = new Intent(StudentListActivity.this, HomeActivity.class);
+        Intent backIntent = new Intent(StudentListActivity.this, AdminMenuActivity.class);
         StudentListActivity.this.startActivity(backIntent);
     }
 

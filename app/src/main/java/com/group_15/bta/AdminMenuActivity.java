@@ -1,8 +1,5 @@
 package com.group_15.bta;
 
-import com.group_15.bta.R;
-import android.app.Activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class HomeActivity extends AppCompatActivity{
+public class AdminMenuActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +27,17 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     public void buttonStudentsOnClick(View v) {
-        Intent studentsIntent = new Intent(HomeActivity.this, StudentListActivity.class);
-        HomeActivity.this.startActivity(studentsIntent);
+        Intent studentsIntent = new Intent(AdminMenuActivity.this, StudentListActivity.class);
+        AdminMenuActivity.this.startActivity(studentsIntent);
     }
     public void buttonCoursesOnClick(View v) {
-        Intent courseIntent = new Intent(HomeActivity.this, CourseLandingActivity.class);
-        HomeActivity.this.startActivity(courseIntent);
+        Intent courseIntent = new Intent(AdminMenuActivity.this, CourseLandingActivity.class);
+        AdminMenuActivity.this.startActivity(courseIntent);
+    }
+
+    public void buttonLogOutOnClick(View v) {
+        Intent courseIntent = new Intent(AdminMenuActivity.this, MainActivity.class);
+        AdminMenuActivity.this.startActivity(courseIntent);
     }
 
     @Override
