@@ -17,16 +17,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.R;
-import com.group_15.bta.persistence.CourseList;
+import com.group_15.bta.persistence.ICourseList;
 import com.group_15.bta.persistence.CourseListData;
 
 
 import java.util.ArrayList;
 
+/*
+* class for admin to add or delete a course
+ */
 public class CategoryActivity extends AppCompatActivity{
-        protected String Name;
-        private ArrayList<Courses> courses;
-        protected CourseList courseList = CourseListData.getInstance();
+
+        protected String Name; //name of course category
+        private ArrayList<Courses> courses; //list of courses
+        protected ICourseList courseList = CourseListData.getInstance(); //course "database"
 
         public CategoryActivity()
         {
@@ -34,24 +38,27 @@ public class CategoryActivity extends AppCompatActivity{
         }
 
         ArrayAdapter arrayAdapter;
+
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_category);
 
+            //get name of the course category
             Bundle b = getIntent().getExtras();
             this.Name = b.getString("Title"); //should be some global call to get name
 
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+            //let the textview contain the category name
             final TextView tView = (TextView)findViewById(R.id.CategoryName);
             tView.setText(this.Name);
 
+            //get list of courses from "database" and list them
             courses = courseList.getCourseList();
-
             listCourses();
 
+            //when course is clicked, go to course activity to edit that course
             ListView listView = (ListView) findViewById(R.id.coursesList);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -66,30 +73,39 @@ public class CategoryActivity extends AppCompatActivity{
             });
         }
 
-
+        //add a course to the list
         public void buttonAddCourse(View v){
+            //user input
             EditText CourseID = (EditText) findViewById(R.id.CourseID);
             EditText CourseName = (EditText) findViewById(R.id.CourseName);
 
+            //create new course
             Courses c = new Courses(CourseID.getText().toString(),CourseName.getText().toString());
             courseList.insertCourses(c);
             courses = courseList.getCourseList();
 
+            //show the new list of courses
             listCourses();
         }
 
+    //delete a course from the list
     public void buttonDeleteCourse(View v){
+        //get course to delete
         EditText CourseID = (EditText) findViewById(R.id.DeleteCourseID);
 
+        //remove course from list
         for(int i =0; i< courses.size();i++){
             if(0 == courses.get(i).getID().compareTo(CourseID.getText().toString())){
                 courseList.deleteCourses(i);
                 courses = courseList.getCourseList();
             }
         }
+
+        //show the new list of courses
         listCourses();
     }
 
+    //lists the courses
     public void listCourses(){
         ListView listView = (ListView) findViewById(R.id.coursesList);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, courses) {
@@ -109,6 +125,7 @@ public class CategoryActivity extends AppCompatActivity{
         listView.setAdapter(arrayAdapter);
     }
 
+    //back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){

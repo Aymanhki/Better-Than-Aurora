@@ -1,18 +1,23 @@
 package com.group_15.bta.persistence;
 
+//class for users
 public class User implements IUser
 {
     private String id;
     private String password;
     private String type;
 
+    //default constructor
     public User(){}
+
+    //constructor
     public User(String newName, String newPassword)
     {
         id = newName;
         password = newPassword;
     }
 
+    //getters
     @Override
     public String getName()
     {
@@ -25,6 +30,7 @@ public class User implements IUser
         return password;
     }
 
+    //check equal
     @Override
     public Boolean equals(User anotherUser)
     {

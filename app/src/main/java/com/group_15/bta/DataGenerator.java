@@ -7,7 +7,7 @@ import com.group_15.bta.persistence.User;
 
 import java.util.ArrayList;
 
-
+//creates users to simulate login
 public class DataGenerator
 {
     private final String ADMINISTRATOR_TEST_USERNAME = "admin";

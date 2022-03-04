@@ -4,7 +4,7 @@ import com.group_15.bta.objects.Category;
 
 import java.util.ArrayList;
 
-public interface CategoryList {
+public interface ICategoryList {
 
         static CategoryListData getInstance() {
             return null;

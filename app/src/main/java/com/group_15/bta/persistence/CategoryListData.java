@@ -4,10 +4,19 @@ import com.group_15.bta.objects.Category;
 
 import java.util.ArrayList;
 
-public class CategoryListData implements CategoryList {
-    private static final CategoryListData ourInstance = new CategoryListData();
-    public ArrayList<Category> categories = new ArrayList<>();
+/*
+ * Class for List of categories for courses ("database")
+ */
+
+public class CategoryListData implements ICategoryList {
+
+    private static final CategoryListData ourInstance = new CategoryListData(); //one instance
+    public ArrayList<Category> categories = new ArrayList<>(); //list of categories
+
+    //constructor
     private CategoryListData () {
+
+        //hardcoded data into "database"
         Category c = new Category("Computer Science");//This should be an array accessed in data
         categories.add(c);
         c = new Category("Engineering");
@@ -33,6 +42,7 @@ public class CategoryListData implements CategoryList {
 
     }
 
+    //getters
     public static CategoryListData getInstance(){
         return ourInstance;
     }
@@ -45,10 +55,12 @@ public class CategoryListData implements CategoryList {
         return this.categories;
     }
 
+    //add category to list
     public void insertCategory(Category currentCategory){
         categories.add(currentCategory);
     }
 
+    //delete category from list
     public void deleteCategory(int position){
         categories.remove(position);
     }

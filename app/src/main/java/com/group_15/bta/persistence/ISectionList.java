@@ -4,7 +4,7 @@ import com.group_15.bta.objects.Section;
 
 import java.util.ArrayList;
 
-public interface SectionList {
+public interface ISectionList {
 
     static SectionListData getInstance() {
         return null;
