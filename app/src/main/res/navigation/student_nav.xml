@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_student_home">
         <argument
             android:name="section"
-            app:argType="com.group_15.bta.objects.Section" />
+            app:argType="com.group_15.bta.objects.Section"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/student_courses"

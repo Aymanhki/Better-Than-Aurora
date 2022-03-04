@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.IDataReceiver;
 import com.group_15.bta.R;
 import com.group_15.bta.objects.SectionListAdapter;
@@ -83,6 +84,7 @@ public class StudentHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        //This is supposed to added sections selected to the home view but it is not working yet.
 //        if(StudentHomeFragmentArgs.fromBundle(getArguments()).getSection() != null)
 //        {
 //            Section addedSection = StudentHomeFragmentArgs.fromBundle(getArguments()).getSection();

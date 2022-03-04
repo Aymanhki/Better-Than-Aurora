@@ -1,16 +1,15 @@
 package com.group_15.bta.persistence;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.group_15.bta.objects.Administrator;
+import com.group_15.bta.objects.Advisor;
+import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.AdvisorAccountActivity;
 import com.group_15.bta.presentation.InstructorAccount;
-import com.group_15.bta.presentation.MainActivity;
 import com.group_15.bta.presentation.StudentAccountActivity;
 
 import java.io.Serializable;
@@ -18,7 +17,8 @@ import java.util.ArrayList;
 
 public class LogInHandler implements ILogInHandler{
 
-    ArrayList<User> appCurrentUsers;
+    private final ArrayList<User> appCurrentUsers;
+    public final String INVALID_DATA_MESSAGE  = "Multiple Users";
 
     public LogInHandler()
     {
@@ -33,7 +33,15 @@ public class LogInHandler implements ILogInHandler{
 
     public LogInHandler(ArrayList<User> newAppUsers)
     {
-        appCurrentUsers = newAppUsers;
+        if(validateDataBase(newAppUsers))
+        {
+            appCurrentUsers = newAppUsers;
+        }
+        else
+        {
+            appCurrentUsers = new ArrayList<>();
+        }
+
     }
 
     @Override
@@ -123,7 +131,7 @@ public class LogInHandler implements ILogInHandler{
         return toReturn;
     }
 
-    @Override
+    @Override //Used to generate key word needed to pass object from activity to activity.
     public String getUserTypeString(User newUser)
     {
         String toReturn = "User Not Found";
@@ -158,4 +166,20 @@ public class LogInHandler implements ILogInHandler{
         return toReturn;
     }
 
+    private boolean validateDataBase(ArrayList<User> data) throws IllegalArgumentException{
+        boolean valid = true;
+
+        for(int i=0; i<data.size(); i++)
+        {
+            for(int j=0; j<data.size(); j++)
+            {
+                if(i!=j && data.get(i).equals(data.get(j)))
+                {
+                    throw new IllegalArgumentException(INVALID_DATA_MESSAGE);
+                }
+            }
+        }
+
+        return valid;
+    }
 }
