@@ -73,7 +73,7 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        currentUser = ((StudentAccountActivity)getActivity()).currentUser;
+        currentUser = ((StudentAccountActivity)getActivity()).getData();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student_home, container, false);
     }

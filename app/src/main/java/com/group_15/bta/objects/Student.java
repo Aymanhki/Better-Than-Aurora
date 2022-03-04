@@ -1,7 +1,8 @@
 package com.group_15.bta.objects;
 
+import com.group_15.bta.persistence.LogInHandler;
 import com.group_15.bta.persistence.User;
-
+import com.group_15.bta.persistence.LogInHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
