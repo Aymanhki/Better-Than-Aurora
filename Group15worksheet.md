@@ -30,7 +30,7 @@ Provide a link to a test of exceptional code. In a few sentences,
 provide an explanation of why the exception is handled or thrown
 in the code you are testing.
 
-
+Our code currently does not throw any exceptions, given that the communication between data layers is incomplete there is no room for custom input currently, however planned for in the future, therefore there is no reason to throw exception. 
 
 Branching
 ----------
