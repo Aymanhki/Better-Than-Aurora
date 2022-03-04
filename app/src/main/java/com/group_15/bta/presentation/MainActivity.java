@@ -17,7 +17,7 @@ import com.group_15.bta.persistence.User;
 import com.group_15.bta.student_account;
 
 import java.util.ArrayList;
-
+//login
 public class MainActivity extends AppCompatActivity {
 
     private DataGenerator dataCreator = new DataGenerator();

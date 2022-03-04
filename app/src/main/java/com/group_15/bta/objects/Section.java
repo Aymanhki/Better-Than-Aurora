@@ -1,11 +1,18 @@
 package com.group_15.bta.objects;
 
-public class Section {
-    private String section;
-    private String[] Days;
-    private String[] Time;
-    private int CAP;
+/*
+ * Class for Section object
+ * used to store the section name, as well as other details for a section (days, time, cap)
+ */
 
+public class Section {
+
+    private String section; //section name
+    private String[] Days; //days class section is on
+    private String[] Time; //time class section is
+    private int CAP; //max # of students in section
+
+    //constructor
     public Section(String section, String[] Days, String[] Time, int CAP){
         this.section = section;
         this.Days = Days;
@@ -13,6 +20,7 @@ public class Section {
         this.CAP = CAP;
     }
 
+    //getters
     public String getSection(){return section;}
 
     public String getTime(){

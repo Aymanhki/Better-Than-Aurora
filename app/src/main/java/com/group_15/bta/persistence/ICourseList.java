@@ -4,7 +4,7 @@ import com.group_15.bta.objects.Courses;
 
 import java.util.ArrayList;
 
-public interface CourseList {
+public interface ICourseList {
 
     static CourseListData getInstance() {
         return null;

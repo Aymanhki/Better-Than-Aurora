@@ -21,22 +21,20 @@ import android.widget.TextView;
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.persistence.CategoryList;
+import com.group_15.bta.persistence.ICategoryList;
 import com.group_15.bta.persistence.CategoryListData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/*
+ * class for admin to add a category
+ */
 public class CourseLandingActivity extends AppCompatActivity{
-    //ArrayList<Category> categories = new ArrayList<Category>();
-    protected CategoryList categoryList = CategoryListData.getInstance();
-    private ArrayList<Category> categories = categoryList.getCategoryList();
+
+    protected ICategoryList categoryList = CategoryListData.getInstance(); //"database"
+    private ArrayList<Category> categories = categoryList.getCategoryList(); //get the list of all categories
     ArrayAdapter arrayAdapter;
-    public String categoryName = "Default";
-    int selectedPosition = -1;
-    public Category selectedCat;
-    SearchView searchView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -63,14 +61,21 @@ public class CourseLandingActivity extends AppCompatActivity{
         });
     }
 
+    //add a category to the category list
     public void buttonAddCategory(View v){
+        //get user input
         EditText category = (EditText) findViewById(id.newCategoryName);
+
+        //create a new category and add it to the list
         Category c = new Category(category.getText().toString());
         categoryList.insertCategory(c);
         categories = categoryList.getCategoryList();
+
+        //show the new list of categories
         listCategories();
     }
 
+    //shows the list of categories
     private void listCategories(){
         Collections.sort(categories, new Comparator<Category>(){
             @Override
@@ -95,6 +100,7 @@ public class CourseLandingActivity extends AppCompatActivity{
         };
         listView.setAdapter(arrayAdapter);
     }
+
     //back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){

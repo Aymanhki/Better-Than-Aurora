@@ -3,7 +3,7 @@ package com.group_15.bta.persistence;
 import java.util.ArrayList;
 import com.group_15.bta.objects.Student;
 
-public interface StudentList {
+public interface IStudentList {
     static StudentListData getInstance() {
         return null;
     }
