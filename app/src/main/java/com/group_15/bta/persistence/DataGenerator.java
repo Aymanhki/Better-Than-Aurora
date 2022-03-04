@@ -35,10 +35,11 @@ public class DataGenerator
     }
 
     //Before the last local merge this function read the course catalogue.csv file and created
-    //categories, courses, and random sections. I have no clue why it disappeared.
+    //categories, courses, and random sections user smaller function.
+    //I have no clue why it all disappeared.
     //This happened in many other classes. There is no time to implement it again now
     //but this is just a placeholder for the data class to call it.
-    //THIS WAS A REALLY IMPORTANT FUNCTION 
+    //THIS WAS A REALLY IMPORTANT FUNCTION :(
     public static ArrayList<Category> createCategories(Context context)
     {
         ArrayList<Category> toReturn = new ArrayList<>();
