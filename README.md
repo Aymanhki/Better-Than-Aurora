@@ -41,4 +41,9 @@ The system will provide unique value for students because it will gather resourc
 ## Success Criteria:
 
 
-In the early stages, the success of the system will be measured by a poll. If they have not used Aurora before we will ask them how they liked using BTA, or if they have used Aurora we will ask if they liked BTA better than Aurora. To meet our success criteria the poll must be at least 60% positive. The long term success will be measured by taking into account the number of calls to the registrar’s office helpdesk and the number of views on videos that help students register in courses using BTA. To meet our criteria the average must be less than 40% of the student population. 
+In the early stages, the success of the system will be measured by a poll. If they have not used Aurora before we will ask them how they liked using BTA, or if they have used Aurora we will ask if they liked BTA better than Aurora. To meet our success criteria the poll must be at least 60% positive. The long term success will be measured by taking into account the number of calls to the registrar’s office helpdesk and the number of views on videos that help students register in courses using BTA. To meet our criteria the average must be less than 40% of the student population.
+
+
+## Branching Strategy:
+
+Our team had discussed the thought about using Git flow as our branching strategy. As we progressed with the project, we committed and pushed all our changes to specified branches with a description of what that branch contained. Once it was made sure that there were not any bugs and the feature worked as intended with the rest of the program, we then merged the branch to main. We chose this branching method so that everything would update steadily, and everyone could stay up to date with all changes.
