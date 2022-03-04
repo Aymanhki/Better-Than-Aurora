@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.group_15.bta.persistence.DataGenerator;
 import com.group_15.bta.R;
+import com.group_15.bta.persistence.LogInHandler;
 import com.group_15.bta.persistence.User;
 
 import java.io.Serializable;
@@ -18,79 +19,42 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DataGenerator dataCreator = new DataGenerator();
-    private ArrayList<User> users = dataCreator.createUsers();
-    private final String STUDENT_ACCOUNT_TYPE = "Student";
-    private final String ADVISOR_ACCOUNT_TYPE = "Advisor";
-    private final String ADMINISTRATOR_ACCOUNT_TYPE = "Administrator";
-    private final String INSTRUCTOR_ACCOUNT_TYPE = "Instructor";
+
+
+    private LogInHandler logInHandler = new LogInHandler(new DataGenerator().createUsers());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginHandler();
+        handleLogIn();
     }
 
-    private void loginHandler()
+    private void handleLogIn()
     {
         TextView username = (TextView) findViewById(R.id.userName);
         TextView password = (TextView) findViewById(R.id.password);
         Button loginBtn = (Button) findViewById(R.id.login);
+
 
         View.OnClickListener loginAction = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                User loginAttempt = new User(username.getText().toString(), password.getText().toString());
 
-                boolean found = false;
-                for(int i=0; i<users.size(); i++)
+                if(logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString()))
                 {
-                    if(users.get(i).equals(loginAttempt) && !found)
-                    {
-                        loginAttempt = users.get(i);
-                        found = true;
-                    }
-                }
-
-                if(found)
-                {
-                    String[] userClasses = loginAttempt.getClass().toString().split("\\.");
-                    System.out.println(userClasses.toString());
-                    String userType = userClasses[userClasses.length-1];
-                    System.out.println(userType);
-                    String successfulLoginMessage = "Log in Successful, Hey "+userType;
+                    String successfulLoginMessage = "Log in Successful, Hi "+username.getText().toString();
                     Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
-
-                    Intent intent = null;
-
-                    if(userType.equals(STUDENT_ACCOUNT_TYPE))
-                    {
-                        intent = new Intent(MainActivity.this, StudentAccountActivity.class);
-                        intent.putExtra("student_account", (Serializable) loginAttempt);
-
-                    }
-                    else if(userType.equals(ADVISOR_ACCOUNT_TYPE))
-                    {
-                        intent = new Intent(MainActivity.this, AdvisorAccountActivity.class);
-                    }
-                    else if(userType.equals(ADMINISTRATOR_ACCOUNT_TYPE))
-                    {
-                        intent = new Intent(MainActivity.this, AdminMenuActivity.class);
-                    }
-                    else if(userType.equals(INSTRUCTOR_ACCOUNT_TYPE))
-                    {
-                        intent = new Intent(MainActivity.this, InstructorAccount.class);
-                    }
-
-                    startActivity(intent);
-
+                    startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
+                    username.setText("");
+                    password.setText("");
                 }
                 else
                 {
-                    String failedLoginMessage = "Log in Failed";
+                    String failedLoginMessage = "Log in Failed, Sorry, user not found";
                     Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -98,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(loginAction);
     }
+
 
 
 }

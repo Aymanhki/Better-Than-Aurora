@@ -24,7 +24,7 @@ public class StudentAccountActivity extends AppCompatActivity implements IDataRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_account);
-        currentUser = (Student) getIntent().getSerializableExtra("student_account");
+        currentUser = (Student) getIntent().getSerializableExtra("Student");
         BottomNavigationView studentNav = (BottomNavigationView) findViewById(R.id.student_nav_bar);
         NavHostFragment studentNavHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.student_nav_fragment);
         studentNavController = studentNavHost.getNavController();
