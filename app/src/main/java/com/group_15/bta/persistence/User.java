@@ -28,15 +28,9 @@ public class User implements IUser
     @Override
     public Boolean equals(User anotherUser)
     {
-        Boolean equal = false;
-
-        if(id.equals(anotherUser.id) && password.equals(anotherUser.password))
-        {
-            equal = true;
-        }
-
-        return equal;
+        return (this == anotherUser) || ( (id!=null && id.equals(anotherUser.id)) && ( password!=null && password.equals(anotherUser.password) ) );
     }
+
 
 
 }

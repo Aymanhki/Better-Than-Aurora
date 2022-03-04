@@ -83,9 +83,25 @@ public class LogInHandler implements ILogInHandler{
     {
         boolean userFound = false;
 
-        for(int i=0; i<appCurrentUsers.size(); i++)
+        for(int i=0; i<appCurrentUsers.size() && !userFound; i++)
         {
-            if(appCurrentUsers.get(i).equals(new User(userName, password)) && !userFound)
+            if(appCurrentUsers.get(i).equals(new User(userName, password)))
+            {
+                userFound = true;
+            }
+        }
+
+        return userFound;
+    }
+
+    @Override
+    public boolean validateLoginAttempt(User newUser)
+    {
+        boolean userFound = false;
+
+        for(int i=0; i<appCurrentUsers.size() && !userFound; i++)
+        {
+            if(appCurrentUsers.get(i).equals(newUser))
             {
                 userFound = true;
             }
@@ -106,6 +122,21 @@ public class LogInHandler implements ILogInHandler{
 
         return toReturn;
     }
+
+    @Override
+    public String getUserTypeString(User newUser)
+    {
+        String toReturn = "User Not Found";
+        if(validateLoginAttempt(newUser))
+        {
+            String[] userClasses = newUser.getClass().toString().split("\\.");
+            toReturn = userClasses[userClasses.length-1];
+        }
+
+        return toReturn;
+    }
+
+
 
     private User getUser(String userName, String password)
     {

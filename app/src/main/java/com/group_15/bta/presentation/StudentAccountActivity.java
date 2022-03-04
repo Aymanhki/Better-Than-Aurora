@@ -15,16 +15,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.persistence.IDataReceiver;
 import com.group_15.bta.R;
+import com.group_15.bta.persistence.LogInHandler;
 
 public class StudentAccountActivity extends AppCompatActivity implements IDataReceiver {
 
     private NavController studentNavController;
-    public Student currentUser;
+    private Student currentUser;
+    private Student studentAccountInstance = new Student();
+    private LogInHandler studentLoginInstance = new LogInHandler(studentAccountInstance);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_account);
-        currentUser = (Student) getIntent().getSerializableExtra("Student");
+        currentUser = (Student) getIntent().getSerializableExtra(studentLoginInstance.getUserTypeString(studentAccountInstance));
         BottomNavigationView studentNav = (BottomNavigationView) findViewById(R.id.student_nav_bar);
         NavHostFragment studentNavHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.student_nav_fragment);
         studentNavController = studentNavHost.getNavController();
