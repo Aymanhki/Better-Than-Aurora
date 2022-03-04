@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/CategoryName"
+        android:background="@color/light_green"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="50dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
+        android:background="@color/cosmic_latte">
+
+        <Button
+            android:id="@+id/AddCourse"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="16dp"
+            android:text="Add Course"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="buttonAddCourse"/>
+
+        <EditText
+            android:id="@+id/CourseID"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="26dp"
+            android:ems="10"
+            android:hint="Course ID"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/CourseName"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="195dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Course Name"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/DeleteCourseButton"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="98dp"
+            android:layout_marginBottom="5dp"
+            android:text="Delete Course"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="buttonDeleteCourse"/>
+
+        <EditText
+            android:id="@+id/DeleteCourseID"
+            android:layout_width="240dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="195dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint="Type Course ID"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_green" />
+
+    <ListView
+        android:id="@+id/coursesList"
+        android:layout_width="match_parent"
+        android:layout_height="394dp"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:background="@color/cosmic_latte"
+        android:choiceMode="singleChoice"
+        android:divider="@color/dark_green"
+        android:dividerHeight="1dp"
+        android:listSelector="@color/light_green" />
+
+</LinearLayout>

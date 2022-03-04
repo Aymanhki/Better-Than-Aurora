@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_nav"
+    app:startDestination="@id/student_home">
+
+    <fragment
+        android:id="@+id/student_home"
+        android:name="com.group_15.bta.presentation.StudentHomeFragment"
+        android:label="Hi _insert student name here_"
+        tools:layout="@layout/fragment_student_home">
+        <argument
+            android:name="section"
+            app:argType="com.group_15.bta.objects.Section" />
+    </fragment>
+    <fragment
+        android:id="@+id/student_courses"
+        android:name="com.group_15.bta.presentation.StudentCoursesFragment"
+        android:label="Courses"
+        tools:layout="@layout/fragment_student_courses" >
+        <action
+            android:id="@+id/action_student_courses_to_add_or_drop_courses"
+            app:destination="@id/add_or_drop_courses"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
+            app:popUpTo="@id/student_courses" />
+        <action
+            android:id="@+id/action_student_courses_to_view_courses"
+            app:destination="@id/view_courses" />
+        <action
+            android:id="@+id/action_student_courses_to_history"
+            app:destination="@id/history" />
+    </fragment>
+    <fragment
+        android:id="@+id/student_settings"
+        android:name="com.group_15.bta.presentation.StudentSettingsActivity"
+        android:label="Settings"
+        tools:layout="@layout/fragment_student_settings" />
+    <fragment
+        android:id="@+id/student_profile"
+        android:name="com.group_15.bta.presentation.StudentProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_student_profile" />
+    <fragment
+        android:id="@+id/add_or_drop_courses"
+        android:name="com.group_15.bta.presentation.AddOrDropCourseFragment"
+        android:label="Add or Drop a Course"
+        tools:layout="@layout/fragment_add_or_drop_courses" >
+        <action
+            android:id="@+id/action_add_or_drop_courses_to_add_a_course"
+            app:destination="@id/add_a_course"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+        <action
+            android:id="@+id/action_add_or_drop_courses_to_drop_a_course"
+            app:destination="@id/drop_a_course"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/view_courses"
+        android:name="com.group_15.bta.presentation.ViewCoursesFragment"
+        android:label="fragment_view_courses"
+        tools:layout="@layout/fragment_view_courses" />
+    <fragment
+        android:id="@+id/history"
+        android:name="com.group_15.bta.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/add_a_course"
+        android:name="com.group_15.bta.presentation.AddCourseFragment"
+        android:label="Select a Category"
+        tools:layout="@layout/fragment_add_a_course">
+        <action
+            android:id="@+id/action_add_a_course_to_add_a_course_from_category"
+            app:destination="@id/add_a_course_from_category"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/drop_a_course"
+        android:name="com.group_15.bta.DropCourseFragment"
+        android:label="fragment_drop_a_course"
+        tools:layout="@layout/fragment_drop_a_course" />
+    <fragment
+        android:id="@+id/add_a_course_from_category"
+        android:name="com.group_15.bta.presentation.AddCourseCategoryFragment"
+        android:label="Select a Course"
+        tools:layout="@layout/fragment_add_a_course_from_category">
+        <action
+            android:id="@+id/action_add_a_course_from_category_to_add_a_course_with_code"
+            app:destination="@id/add_a_course_with_code"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+        <argument
+            android:name="Category"
+            app:argType="com.group_15.bta.objects.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_a_course_with_code"
+        android:name="com.group_15.bta.presentation.AddCourseCodeFragment"
+        android:label="Select a Section"
+        tools:layout="@layout/fragment_add_a_course_with_code">
+        <action
+            android:id="@+id/action_add_a_course_with_code_to_add_a_course_with_section_confirmation"
+            app:destination="@id/add_a_course_with_section_confirmation"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+        <argument
+            android:name="Course"
+            app:argType="com.group_15.bta.objects.Courses" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_a_course_with_section_confirmation"
+        android:name="com.group_15.bta.presentation.AddSectionFragment"
+        android:label="Confirm Adding"
+        tools:layout="@layout/fragment_add_a_course_with_section_confirmation" >
+        <action
+            android:id="@+id/action_add_a_course_with_section_confirmation_to_student_home"
+            app:destination="@id/student_home"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_right_to_left"
+            app:popExitAnim="@anim/exit_right_to_left" />
+        <argument
+            android:name="section"
+            app:argType="com.group_15.bta.objects.Section" />
+    </fragment>
+</navigation>

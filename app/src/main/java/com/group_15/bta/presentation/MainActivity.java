@@ -9,15 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.group_15.bta.DataGenerator;
+import com.group_15.bta.persistence.DataGenerator;
 import com.group_15.bta.R;
-import com.group_15.bta.advisor_account;
-import com.group_15.bta.instructor_account;
 import com.group_15.bta.persistence.User;
-import com.group_15.bta.student_account;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-//login
+
 public class MainActivity extends AppCompatActivity {
 
     private DataGenerator dataCreator = new DataGenerator();
@@ -70,12 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
                     if(userType.equals(STUDENT_ACCOUNT_TYPE))
                     {
-                        intent = new Intent(MainActivity.this, student_account.class);
+                        intent = new Intent(MainActivity.this, StudentAccountActivity.class);
+                        intent.putExtra("student_account", (Serializable) loginAttempt);
 
                     }
                     else if(userType.equals(ADVISOR_ACCOUNT_TYPE))
                     {
-                        intent = new Intent(MainActivity.this, advisor_account.class);
+                        intent = new Intent(MainActivity.this, AdvisorAccountActivity.class);
                     }
                     else if(userType.equals(ADMINISTRATOR_ACCOUNT_TYPE))
                     {
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(userType.equals(INSTRUCTOR_ACCOUNT_TYPE))
                     {
-                        intent = new Intent(MainActivity.this, instructor_account.class);
+                        intent = new Intent(MainActivity.this, InstructorAccount.class);
                     }
 
                     startActivity(intent);

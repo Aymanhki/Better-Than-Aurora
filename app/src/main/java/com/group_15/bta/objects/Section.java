@@ -1,18 +1,38 @@
 package com.group_15.bta.objects;
 
-/*
- * Class for Section object
- * used to store the section name, as well as other details for a section (days, time, cap)
- */
+import java.io.Serializable;
 
-public class Section {
+public class Section implements Serializable {
+    private String section;
+    private String[] Days;
+    private String[] Time;
+    private String instructor;
+    private String location;
+    private int waitListCap;
+    private int available;
 
-    private String section; //section name
-    private String[] Days; //days class section is on
-    private String[] Time; //time class section is
-    private int CAP; //max # of students in section
+    public String getLocation() {
+        return location;
+    }
 
-    //constructor
+    public int getWaitListCap() {
+        return waitListCap;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public int getCAP() {
+        return CAP;
+    }
+
+    public String getInstructor() {
+        return instructor;
+    }
+
+    private int CAP;
+
     public Section(String section, String[] Days, String[] Time, int CAP){
         this.section = section;
         this.Days = Days;
@@ -20,7 +40,6 @@ public class Section {
         this.CAP = CAP;
     }
 
-    //getters
     public String getSection(){return section;}
 
     public String getTime(){
@@ -38,5 +57,15 @@ public class Section {
 
     public String getCap(){
         return String.valueOf(CAP);
+    }
+
+    public String[] getTimes()
+    {
+        return Time;
+    }
+
+    public String[] getDaysRaw()
+    {
+        return Days;
     }
 }

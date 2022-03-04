@@ -11,9 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
 
-/*
-* Class for the admin menu
- */
 public class AdminMenuActivity extends AppCompatActivity{
 
     @Override
@@ -23,6 +20,7 @@ public class AdminMenuActivity extends AppCompatActivity{
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //copyDatabaseToDevice();
     }
 
     @Override
@@ -30,13 +28,10 @@ public class AdminMenuActivity extends AppCompatActivity{
         super.onDestroy();
     }
 
-    //go to student side of admin
     public void buttonStudentsOnClick(View v) {
         Intent studentsIntent = new Intent(AdminMenuActivity.this, StudentListActivity.class);
         AdminMenuActivity.this.startActivity(studentsIntent);
     }
-
-    //go to courses side of admin
     public void buttonCoursesOnClick(View v) {
         Intent courseIntent = new Intent(AdminMenuActivity.this, CourseLandingActivity.class);
         AdminMenuActivity.this.startActivity(courseIntent);
@@ -47,7 +42,6 @@ public class AdminMenuActivity extends AppCompatActivity{
         AdminMenuActivity.this.startActivity(courseIntent);
     }
 
-    //back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){

@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BTA">
         <activity
-            android:name=".instructor_account"
+            android:name=".presentation.InstructorAccount"
             android:exported="false" />
         <activity
-            android:name=".advisor_account"
+            android:name=".presentation.AdvisorAccountActivity"
             android:exported="false" />
                  <activity
         android:name=".presentation.AdminMenuActivity"
@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".student_account"
+            android:name=".presentation.StudentAccountActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
