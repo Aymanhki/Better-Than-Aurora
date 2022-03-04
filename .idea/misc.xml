@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/Group15Project/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_admin_student_list.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/Group15Project/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_category.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/Group15Project/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_admin_student_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/Group15Project/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_category.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/Group15Project/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_course.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/TermProject/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_category.xml" value="0.2105978260869565" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/TermProject/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_course_landing.xml" value="0.38010204081632654" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_admin_menu.xml" value="0.36666666666666664" />

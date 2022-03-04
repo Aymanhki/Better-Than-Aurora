@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: me.biubiubiu.justifytext:library:1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e61a180da6ff21bd2205a25e511ca8a8/transformed/jetified-library-1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e61a180da6ff21bd2205a25e511ca8a8/transformed/jetified-library-1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e61a180da6ff21bd2205a25e511ca8a8/transformed/jetified-library-1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3ecf8bfc5f70c44c39e52b4b6824c685/transformed/jetified-library-1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3ecf8bfc5f70c44c39e52b4b6824c685/transformed/jetified-library-1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/3ecf8bfc5f70c44c39e52b4b6824c685/transformed/jetified-library-1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.biubiubiu.justifytext/library/1.1/ff97291115dabdb35635e5d342d8f5fe6bdf2254/library-1.1-javadoc.jar!/" />
