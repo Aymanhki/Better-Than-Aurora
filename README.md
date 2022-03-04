@@ -4,7 +4,7 @@
 ## Summary:
 
 
- The Better Than Aurora(BTA) Registration System is designed to assist students in progressing towards a designated degree by allowing them to enroll in prerequisite courses as well as keep track of completed ones. The system will also provide a detailed, editable, and up to date program plan with basic registrar’s office features.
+The Better Than Aurora(BTA) Registration System is designed to assist students in progressing towards a designated degree by allowing them to enroll in prerequisite courses as well as keep track of completed ones. The system will also provide a detailed, editable, and up to date program plan with basic registrar’s office features.
  
  
 ## Goal:

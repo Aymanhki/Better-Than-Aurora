@@ -15,14 +15,11 @@ import java.util.ArrayList;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.IStudentList;
+import com.group_15.bta.persistence.StudentList;
 import com.group_15.bta.persistence.StudentListData;
-/*
- * class for admin to see the list of students
- */
-public class StudentListActivity extends AppCompatActivity {
 
-    IStudentList students = StudentListData.getInstance();
+public class StudentListActivity extends AppCompatActivity {
+    StudentList students = StudentListData.getInstance();
     private ArrayList<Student> studentList = students.getStudentList();
     private ArrayAdapter<Student> studentArrayAdapter;
     private int selectedStudentPosition = -1;
@@ -32,7 +29,17 @@ public class StudentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_student_list);
 
-        //show list of students
+       // Bundle bundle =  getIntent().getExtras();
+        //if(bundle != null) {
+         //   studentList = (ArrayList<Student>) bundle.getSerializable("Students");
+        //}
+        //else {
+          //  studentList = new ArrayList<>();
+            //Student one = new Student("12", "12", "Jane Doe");
+            //Student two = new Student("13", "13", "John Doe");
+            //studentList.add(one);
+            //studentList.add(two);
+        //}
         studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, studentList){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -48,7 +55,6 @@ public class StudentListActivity extends AppCompatActivity {
             }
         };
 
-        //on click in list, go to edit the student clicked
         final ListView listView = (ListView)findViewById(id.listStudent);
         listView.setAdapter(studentArrayAdapter);
 
@@ -65,6 +71,7 @@ public class StudentListActivity extends AppCompatActivity {
                 }
                 Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
                 Bundle bundle = new Bundle();
+                //bundle.putSerializable("Students",studentList);
                 bundle.putInt("Position", selectedStudentPosition);
                 editIntent.putExtras(bundle);
                 StudentListActivity.this.startActivity(editIntent);
@@ -72,9 +79,16 @@ public class StudentListActivity extends AppCompatActivity {
         });
     }
 
-    //create a new student
+    public void buttonBackOnClick(View v) {
+        Intent backIntent = new Intent(StudentListActivity.this, AdminMenuActivity.class);
+        StudentListActivity.this.startActivity(backIntent);
+    }
+
     public void buttonCreateStudentOnClick(View v) {
         Intent createIntent = new Intent(StudentListActivity.this, CreateStudentActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Students",studentList);
+        createIntent.putExtras(bundle);
         StudentListActivity.this.startActivity(createIntent);
     }
 }

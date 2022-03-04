@@ -4,19 +4,10 @@ import com.group_15.bta.objects.Section;
 
 import java.util.ArrayList;
 
-/*
- * Class for List of sections of a course ("database")
- */
-
-public class SectionListData implements ISectionList {
-
-    private static final SectionListData ourInstance = new SectionListData(); //one instance
-    public ArrayList<Section> sections = new ArrayList<>(); //list of sections
-
-    //constructor
+public class SectionListData implements SectionList {
+    private static final SectionListData ourInstance = new SectionListData();
+    public ArrayList<Section> sections = new ArrayList<>();
     private SectionListData () {
-
-        //hardcoded data to add to list of sections "database"
         String[] days = {"M","W","F"};
         String[] time = {"10:45am", "11:45am"};
 
@@ -29,7 +20,6 @@ public class SectionListData implements ISectionList {
         sections.add(s);
     }
 
-    //getters
     public static SectionListData getInstance(){
         return ourInstance;
     }
@@ -42,12 +32,10 @@ public class SectionListData implements ISectionList {
         return this.sections;
     }
 
-    //add a section to the list
     public void insertSection(Section currentSection){
         sections.add(currentSection);
     }
 
-    //delete a section from the list
     public void deleteSection(int position){
         sections.remove(position);
     }

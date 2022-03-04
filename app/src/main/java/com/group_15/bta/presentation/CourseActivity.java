@@ -18,21 +18,17 @@ import java.util.ArrayList;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.ISectionList;
+import com.group_15.bta.persistence.SectionList;
 import com.group_15.bta.persistence.SectionListData;
-/*
- * class for admin to add or delete a section
- */
-public class CourseActivity extends AppCompatActivity {
 
+public class CourseActivity extends AppCompatActivity {
     protected String Name;
     protected String Description;
     protected ArrayList<Section> sections;
     protected ArrayAdapter arrayAdapter;
-    protected ISectionList sectionList = SectionListData.getInstance();
+    protected SectionList sectionList = SectionListData.getInstance();
 
     public CourseActivity(){ sections = new ArrayList<Section>();}
-
     protected void onCreate(Bundle savedInstanceState) {
 
         ActionBar actionBar = getSupportActionBar();//back button
@@ -55,16 +51,13 @@ public class CourseActivity extends AppCompatActivity {
         listSections();
     }
 
-    //add a section to the list
     public void buttonAddSection(View v){
-        //user input
         EditText section = (EditText) findViewById(id.SectionNumber);
         EditText startTime = (EditText) findViewById(id.StartTime);
         EditText endTime = (EditText) findViewById(id.EndTime);
         EditText Days = (EditText) findViewById(id.Days);
         EditText CAP = (EditText) findViewById(id.CAP);
 
-        //modify input
         String[] Time = new String[2];
         Time[0] = startTime.getText().toString();
         Time[1] = endTime.getText().toString();
@@ -76,33 +69,25 @@ public class CourseActivity extends AppCompatActivity {
 
         ds = d.split(" ");
 
-        //create new section and add to list
         Section s = new Section(section.getText().toString(), ds, Time, Cap);
 
         sectionList.insertSection(s);
         sections = sectionList.getSectionList();
 
-        //show the new list of sections
         listSections();
     }
 
-    //delete a section from the list
     public void buttonDeleteSec(View v){
-        //get section to delete
         EditText section = (EditText) findViewById(id.DelSecNumber);
 
-        //remove section from list
         for(int i = 0; i<sections.size();i++){
             if(0 == sections.get(i).getSection().compareTo(section.getText().toString())){
                 sections.remove(i);
             }
         }
-
-        //show the new list of sections
         listSections();
     }
 
-    //show list of all sections
     private void listSections(){
         ListView listView = (ListView) findViewById(R.id.sectionsList);
         String sectionName = this.Name;
@@ -127,7 +112,6 @@ public class CourseActivity extends AppCompatActivity {
     }
 
 
-    //back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
