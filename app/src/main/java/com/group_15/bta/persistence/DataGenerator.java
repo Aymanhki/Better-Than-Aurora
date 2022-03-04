@@ -1,15 +1,13 @@
 package com.group_15.bta.persistence;
 import android.content.Context;
 
+import com.group_15.bta.objects.Administrator;
+import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Category;
+import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import java.io.FileWriter;
 
 
 public class DataGenerator
@@ -20,8 +18,8 @@ public class DataGenerator
     private final String STUDENT_TEST_PASSWORD = "student";
     private final String ADVISOR_TEST_USERNAME = "advisor";
     private final String ADVISOR_TEST_PASSWORD = "advisor";
-    private final String INSTRUCTOR_TEST_USERNAME = "advisor";
-    private final String INSTRUCTOR_TEST_PASSWORD = "advisor";
+    private final String INSTRUCTOR_TEST_USERNAME = "instructor";
+    private final String INSTRUCTOR_TEST_PASSWORD = "instructor";
 
     public ArrayList<User> createUsers()
     {

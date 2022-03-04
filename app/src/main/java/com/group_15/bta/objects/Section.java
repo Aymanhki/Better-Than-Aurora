@@ -2,6 +2,10 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 
+/*
+ * Class for Section object
+ * used to store the section name, as well as other details for a section (days, time, cap)
+ */
 public class Section implements Serializable {
     private String section;
     private String[] Days;
@@ -10,36 +14,29 @@ public class Section implements Serializable {
     private String location;
     private int waitListCap;
     private int available;
-
-    public String getLocation() {
-        return location;
-    }
-
-    public int getWaitListCap() {
-        return waitListCap;
-    }
-
-    public int getAvailable() {
-        return available;
-    }
-
-    public int getCAP() {
-        return CAP;
-    }
-
-    public String getInstructor() {
-        return instructor;
-    }
-
     private int CAP;
 
-    public Section(String section, String[] Days, String[] Time, int CAP){
+    //constructor
+    public Section(String section, String[] days, String[] time, int CAP) {
         this.section = section;
-        this.Days = Days;
-        this.Time = Time;
+        Days = days;
+        Time = time;
         this.CAP = CAP;
     }
 
+    //constructor
+    public Section(String section, String[] days, String[] time, String instructor, String location, int waitListCap, int available, int CAP) {
+        this.section = section;
+        Days = days;
+        Time = time;
+        this.instructor = instructor;
+        this.location = location;
+        this.waitListCap = waitListCap;
+        this.available = available;
+        this.CAP = CAP;
+    }
+
+    //getters
     public String getSection(){return section;}
 
     public String getTime(){
@@ -67,5 +64,25 @@ public class Section implements Serializable {
     public String[] getDaysRaw()
     {
         return Days;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getWaitListCap() {
+        return waitListCap;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public int getCAP() {
+        return CAP;
+    }
+
+    public String getInstructor() {
+        return instructor;
     }
 }

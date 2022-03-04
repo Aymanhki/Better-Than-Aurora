@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/*
+ * Class for Student object
+ * used to store the student's name, as well as other details for a student (student id, password)
+ */
 public class Student extends User implements Serializable{
 
     private String studentID;
@@ -14,8 +18,10 @@ public class Student extends User implements Serializable{
     private ArrayList<Section> enrolledSections;
     private String studentName;
 
+    //default constructor
     public Student(){}
 
+    //constructor (used on student side)
     public Student(String newName, String newPassword) {
         super(newName, newPassword);
 
@@ -25,6 +31,7 @@ public class Student extends User implements Serializable{
         enrolledSections = new ArrayList<>();
     }
 
+    //constructor (used on admin side)
     public Student(final String newID, final String newPassword, final String newStudentName) {
         this.studentID = newID;
         this.studentPassword = newPassword;
@@ -35,6 +42,7 @@ public class Student extends User implements Serializable{
     }
 
 
+    //getters
     public String getStudentID()
     {
         return (studentID);
@@ -51,6 +59,7 @@ public class Student extends User implements Serializable{
     }
 
 
+    //tostring
     public String toString()
     {
         return String.format("Student: %s %s %s", studentID, studentPassword, studentName);
@@ -73,6 +82,9 @@ public class Student extends User implements Serializable{
         return enrolledSections;
     }
 
+    public void addSection(Section addedSection) {
+        enrolledSections.add(addedSection);
+    }
 }
 
 
