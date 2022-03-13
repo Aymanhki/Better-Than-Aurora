@@ -1,13 +1,14 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 
 import com.group_15.bta.objects.Category;
+import com.group_15.bta.persistence.CategoryList;
 
 import java.util.ArrayList;
 
-public class CategoryListData implements CategoryList {
-    private static final CategoryListData ourInstance = new CategoryListData();
+public class AccessCategories implements CategoryList {
+    private static final AccessCategories ourInstance = new AccessCategories();
     public ArrayList<Category> categories = new ArrayList<>();
-    private CategoryListData () {
+    private AccessCategories() {
         Category c = new Category("Computer Science");//This should be an array accessed in data
         categories.add(c);
         c = new Category("Engineering");
@@ -33,7 +34,7 @@ public class CategoryListData implements CategoryList {
 
     }
 
-    public static CategoryListData getInstance(){
+    public static AccessCategories getInstance(){
         return ourInstance;
     }
 

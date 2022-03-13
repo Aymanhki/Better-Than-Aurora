@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.Administrator;
-import com.group_15.bta.persistence.LogInHandler;
-import com.group_15.bta.persistence.User;
+import com.group_15.bta.business.LogInHandler;
+import com.group_15.bta.objects.User;
 
 
 import java.util.ArrayList;

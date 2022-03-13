@@ -19,14 +19,14 @@ import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.SectionList;
-import com.group_15.bta.persistence.SectionListData;
+import com.group_15.bta.business.AccessSections;
 
 public class CourseActivity extends AppCompatActivity {
     protected String Name;
     protected String Description;
     protected ArrayList<Section> sections;
     protected ArrayAdapter arrayAdapter;
-    protected SectionList sectionList = SectionListData.getInstance();
+    protected SectionList sectionList = AccessSections.getInstance();
 
     public CourseActivity(){ sections = new ArrayList<Section>();}
     protected void onCreate(Bundle savedInstanceState) {

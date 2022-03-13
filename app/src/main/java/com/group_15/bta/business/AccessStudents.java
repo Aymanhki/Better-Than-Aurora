@@ -1,20 +1,21 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.StudentList;
 
 import java.util.ArrayList;
 
-public class StudentListData implements StudentList{
-    private static final StudentListData ourInstance = new StudentListData();
+public class AccessStudents implements StudentList {
+    private static final AccessStudents ourInstance = new AccessStudents();
     public ArrayList<Student> studentList = new ArrayList<>();
-    private StudentListData () {
+    private AccessStudents() {
         Student one = new Student("12", "12", "Jane Doe");
         Student two = new Student("13", "13", "John Doe");
         this.studentList.add(one);
         this.studentList.add(two);
     }
 
-    public static StudentListData getInstance(){
+    public static AccessStudents getInstance(){
         return ourInstance;
     }
 

@@ -1,4 +1,4 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 import android.content.Context;
 
 import com.group_15.bta.objects.Administrator;
@@ -6,6 +6,7 @@ import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.User;
 
 import java.util.ArrayList;
 

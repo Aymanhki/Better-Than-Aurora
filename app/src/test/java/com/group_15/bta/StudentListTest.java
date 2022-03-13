@@ -6,19 +6,19 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.StudentListData;
+import com.group_15.bta.business.AccessStudents;
 
 import com.group_15.bta.objects.Category;
 
 import static org.junit.Assert.assertTrue;
 
 public class StudentListTest {
-    private StudentListData studentList;
+    private AccessStudents studentList;
     private ArrayList<Student> students;
 
     @Before
     public void setUp() {
-        studentList = StudentListData.getInstance();
+        studentList = AccessStudents.getInstance();
         students = studentList.getStudentList();
     }
 

@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.R;
 import com.group_15.bta.persistence.CourseList;
-import com.group_15.bta.persistence.CourseListData;
+import com.group_15.bta.business.AccessCourses;
 
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class CategoryActivity extends AppCompatActivity{
         protected String Name;
         private ArrayList<Courses> courses;
-        protected CourseList courseList = CourseListData.getInstance();
+        protected CourseList courseList = AccessCourses.getInstance();
 
         public CategoryActivity()
         {

@@ -22,7 +22,6 @@ import android.widget.ListView;
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.Data;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;
@@ -116,7 +115,7 @@ public class AddCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        categories = Data.getBTACategories(getContext());
+        categories = new ArrayList<>();
 
         categoriesName = new String[categories.size()];
         categoriesList = view.findViewById(R.id.categories_list_in_add_courses_fragment);

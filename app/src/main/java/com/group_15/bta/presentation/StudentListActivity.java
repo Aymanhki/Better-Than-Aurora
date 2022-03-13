@@ -16,10 +16,10 @@ import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.persistence.StudentList;
-import com.group_15.bta.persistence.StudentListData;
+import com.group_15.bta.business.AccessStudents;
 
 public class StudentListActivity extends AppCompatActivity {
-    StudentList students = StudentListData.getInstance();
+    StudentList students = AccessStudents.getInstance();
     private ArrayList<Student> studentList = students.getStudentList();
     private ArrayAdapter<Student> studentArrayAdapter;
     private int selectedStudentPosition = -1;

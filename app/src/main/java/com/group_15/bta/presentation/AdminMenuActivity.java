@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group_15.bta.R;
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.LogInHandler;
+import com.group_15.bta.business.LogInHandler;
 
 public class AdminMenuActivity extends AppCompatActivity{
 

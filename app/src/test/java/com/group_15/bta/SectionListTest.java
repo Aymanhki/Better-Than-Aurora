@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.SectionListData;
+import com.group_15.bta.business.AccessSections;
 
 import com.group_15.bta.objects.Section;
 
@@ -15,12 +15,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class SectionListTest {
-    private SectionListData sectionList;
+    private AccessSections sectionList;
     private ArrayList<Section> sections;
 
     @Before
     public void setUp(){
-        sectionList = SectionListData.getInstance();
+        sectionList = AccessSections.getInstance();
     }
 
     @Test

@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.group_15.bta.R;
-import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.LogInHandler;
+import com.group_15.bta.business.LogInHandler;
 
 public class InstructorAccount extends AppCompatActivity {
 

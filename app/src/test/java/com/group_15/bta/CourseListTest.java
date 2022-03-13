@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.CourseListData;
+import com.group_15.bta.business.AccessCourses;
 
 import com.group_15.bta.objects.Courses;
 
@@ -15,12 +15,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class CourseListTest {
-    private CourseListData courseList;
+    private AccessCourses courseList;
     private ArrayList<Courses> courses;
 
     @Before
     public void setup(){
-        courseList = CourseListData.getInstance();
+        courseList = AccessCourses.getInstance();
     }
 
     @Test

@@ -1,4 +1,6 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.objects;
+
+import com.group_15.bta.persistence.IUser;
 
 public class User implements IUser
 {

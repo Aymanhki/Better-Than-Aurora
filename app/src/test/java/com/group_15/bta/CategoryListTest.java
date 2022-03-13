@@ -5,19 +5,19 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.CategoryListData;
+import com.group_15.bta.business.AccessCategories;
 
 import com.group_15.bta.objects.Category;
 
 import static org.junit.Assert.assertTrue;
 
 public class CategoryListTest {
-        private CategoryListData categoryList;
+        private AccessCategories categoryList;
         private ArrayList<Category> categories;
 
         @Before
         public void setUp() {
-            categoryList = CategoryListData.getInstance();
+            categoryList = AccessCategories.getInstance();
             categories = categoryList.getCategoryList();
         }
 

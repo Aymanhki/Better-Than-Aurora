@@ -1,20 +1,21 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 
 import com.group_15.bta.objects.Courses;
+import com.group_15.bta.persistence.CourseList;
 
 import java.util.ArrayList;
 
-public class CourseListData implements CourseList {
-    private static final CourseListData ourInstance = new CourseListData();
+public class AccessCourses implements CourseList {
+    private static final AccessCourses ourInstance = new AccessCourses();
     public ArrayList<Courses> courses = new ArrayList<>();
-    private CourseListData () {
+    private AccessCourses() {
         Courses c = new Courses("Comp 1010", "Introduction to Computer Science");
         courses.add(c);
         c = new Courses("Comp 1020", "Introduction to Computer Science 2");
         courses.add(c);
     }
 
-    public static CourseListData getInstance(){
+    public static AccessCourses getInstance(){
         return ourInstance;
     }
 

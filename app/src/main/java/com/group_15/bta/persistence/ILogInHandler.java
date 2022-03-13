@@ -1,9 +1,8 @@
 package com.group_15.bta.persistence;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.group_15.bta.objects.User;
 
 public interface ILogInHandler {
      boolean validateLoginAttempt(String userName, String password);

@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.persistence.IDataReceiver;
 import com.group_15.bta.R;
-import com.group_15.bta.persistence.LogInHandler;
+import com.group_15.bta.business.LogInHandler;
 
 public class StudentAccountActivity extends AppCompatActivity implements IDataReceiver {
 

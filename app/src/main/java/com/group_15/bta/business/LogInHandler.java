@@ -1,4 +1,4 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.User;
+import com.group_15.bta.persistence.ILogInHandler;
 import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.AdvisorAccountActivity;
 import com.group_15.bta.presentation.InstructorAccount;
@@ -15,7 +17,7 @@ import com.group_15.bta.presentation.StudentAccountActivity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LogInHandler implements ILogInHandler{
+public class LogInHandler implements ILogInHandler {
 
     private final ArrayList<User> appCurrentUsers;
     public final String INVALID_DATA_MESSAGE  = "Multiple Users";

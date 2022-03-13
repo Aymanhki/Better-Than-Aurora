@@ -1,13 +1,16 @@
-package com.group_15.bta.persistence;
+package com.group_15.bta.business;
 
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.persistence.SectionList;
 
 import java.util.ArrayList;
 
-public class SectionListData implements SectionList {
-    private static final SectionListData ourInstance = new SectionListData();
+public class AccessSections implements SectionList {
+    private static final AccessSections ourInstance = new AccessSections();
+
     public ArrayList<Section> sections = new ArrayList<>();
-    private SectionListData () {
+
+    private AccessSections() {
         String[] days = {"M","W","F"};
         String[] time = {"10:45am", "11:45am"};
 
@@ -20,7 +23,7 @@ public class SectionListData implements SectionList {
         sections.add(s);
     }
 
-    public static SectionListData getInstance(){
+    public static AccessSections getInstance(){
         return ourInstance;
     }
 

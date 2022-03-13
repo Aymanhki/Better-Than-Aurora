@@ -2,20 +2,15 @@ package com.group_15.bta.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.group_15.bta.persistence.DataGenerator;
+import com.group_15.bta.business.DataGenerator;
 import com.group_15.bta.R;
-import com.group_15.bta.persistence.LogInHandler;
-import com.group_15.bta.persistence.User;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+import com.group_15.bta.business.LogInHandler;
 
 public class MainActivity extends AppCompatActivity {
 
