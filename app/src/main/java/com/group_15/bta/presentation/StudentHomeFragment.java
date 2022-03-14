@@ -87,7 +87,7 @@ public class StudentHomeFragment extends Fragment {
 //            Section addedSection = StudentHomeFragmentArgs.fromBundle(getArguments()).getSection();
 //            currentUser.addSection(addedSection);
 //        }
-
+        currentUser = new Student();
         enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.id.section_name_list_item, currentUser.getEnrolledSections());
         enrolledSectionsList = view.findViewById(R.id.student_enrolled_courses);
         enrolledSectionsList.setAdapter(enrolledSectionsAdapted);

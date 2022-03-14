@@ -16,7 +16,9 @@ public class Student extends User implements Serializable{
     private String studentName;
 
     //default constructor
-    public Student(){}
+    public Student() {
+        enrolledSections = new ArrayList<>();
+    }
 
     //constructor (used on student side)
     public Student(String newName, String newPassword) {
