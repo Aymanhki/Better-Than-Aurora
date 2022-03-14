@@ -15,8 +15,6 @@ public class Section implements Serializable {
     private int waitListCap;
     private int available;
     private int CAP;
-    private String grade;
-    private String associatedStudent;
     private String associatedCourse;
     private String associatedCategory;
 
@@ -40,13 +38,6 @@ public class Section implements Serializable {
         this.CAP = CAP;
     }
 
-    public String getGrade() {
-        return grade;
-    }
-
-    public String getAssociatedStudent() {
-        return associatedStudent;
-    }
 
     public String getAssociatedCourse() {
         return associatedCourse;
@@ -57,8 +48,8 @@ public class Section implements Serializable {
     }
 
     public Section(String sectionID, String instructor, String[] days, String[] times,
-                   String location, int available, int capacity, String grade,
-                   String associatedStudent, String associatedCourse, String associatedCategory) {
+                   String location, int available, int capacity,
+                   String associatedCourse, String associatedCategory) {
         section = sectionID;
         this.instructor = instructor;
         Days = days;
@@ -66,8 +57,6 @@ public class Section implements Serializable {
         this.location = location;
         this.available = available;
         this.CAP = capacity;
-        this.grade = grade;
-        this.associatedStudent = associatedStudent;
         this.associatedCourse = associatedCourse;
         this.associatedCategory = associatedCategory;
     }

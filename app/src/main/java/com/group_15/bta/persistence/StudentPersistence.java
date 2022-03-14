@@ -12,9 +12,7 @@ public interface StudentPersistence {
 
     ArrayList<Student> getStudentList();
 
-    Student getStudent(int position);
-
     void insertStudent(Student currentStudent);
 
-    void deleteStudent(int position);
+    void deleteStudent(Student toRemove);
 }

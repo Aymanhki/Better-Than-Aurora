@@ -32,11 +32,9 @@ public class SectionPersistenceHSQLDB implements SectionPersistence {
         final String location = rs.getString("LOCATION");
         final int available = rs.getInt("AVAILABLE");
         final int capacity = rs.getInt("CAPACITY");
-        final String grade = rs.getString("GRADE");
-        final String associatedStudent = rs.getString("STUDENTID");
         final String associatedCourse = rs.getString("COURSEID");
         final String associatedCategory = rs.getString("NAME");
-        return new Section(sectionID, instructor, days, times, location, available, capacity, grade, associatedStudent, associatedCourse, associatedCategory);
+        return new Section(sectionID, instructor, days, times, location, available, capacity, associatedCourse, associatedCategory);
     }
 
     @Override
@@ -92,10 +90,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence {
             statement.setString(5, currentSection.getLocation());
             statement.setString(6, Integer.toString(currentSection.getAvailable()));
             statement.setString(7, Integer.toString(currentSection.getCAP()));
-            statement.setString(8, currentSection.getGrade());
-            statement.setString(9, currentSection.getAssociatedStudent());
-            statement.setString(10, currentSection.getAssociatedCourse());
-            statement.setString(11, currentSection.getAssociatedCategory());
+            statement.setString(8, currentSection.getAssociatedCourse());
+            statement.setString(9, currentSection.getAssociatedCategory());
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

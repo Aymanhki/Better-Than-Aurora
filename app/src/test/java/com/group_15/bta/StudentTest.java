@@ -18,7 +18,7 @@ public class StudentTest
         assertNotNull(student);
         assertTrue("123".equals(student.getStudentID()));
         assertTrue("123".equals(student.getStudentPassword()));
-        assertTrue("Jo".equals(student.getStudentName()));
+        assertTrue("Jo".equals(student.getID()));
 
         System.out.println("Finished testStudent");
     }

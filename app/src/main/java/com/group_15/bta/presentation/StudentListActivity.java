@@ -49,7 +49,7 @@ public class StudentListActivity extends AppCompatActivity {
             TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
             text1.setText(studentList.get(position).getStudentID());
-            text2.setText(studentList.get(position).getStudentName());
+                text2.setText(studentList.get(position).getID());
 
             return view;
             }

@@ -35,15 +35,15 @@ public class EditStudentActivity extends AppCompatActivity {
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
             editID.setText(students.get(position).getStudentID());
-            editName.setText(students.get(position).getStudentName());
-            editPassword.setText(students.get(position).getStudentPassword());
+        editName.setText(students.get(position).getID());
+        editPassword.setText(students.get(position).getStudentPassword());
 
 
     }
 
     public void buttonEditStudent(View v) {
         StudentPersistence studs = AccessStudents.getInstance();
-        studs.deleteStudent(position);
+        studs.deleteStudent(studs.getStudentList().get(position));
        // students.remove(position);
         EditText editID = (EditText) findViewById(R.id.editStudentID);
         EditText editName = (EditText) findViewById(R.id.editStudentName);

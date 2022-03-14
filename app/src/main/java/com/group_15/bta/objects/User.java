@@ -1,29 +1,31 @@
 package com.group_15.bta.objects;
 
-import com.group_15.bta.persistence.IUser;
+public class User implements IUser {
+    protected String id;
+    protected String password;
+    protected String name;
 
-public class User implements IUser
-{
-    private String id;
-    private String password;
-    private String type;
+    public User() {
+    }
 
-    public User(){}
-    public User(String newName, String newPassword)
-    {
-        id = newName;
+    public User(String newId, String newPassword) {
+        id = newId;
         password = newPassword;
     }
 
+    public User(String newId, String newPassword, String newName) {
+        id = newId;
+        password = newPassword;
+        name = newName;
+    }
+
     @Override
-    public String getName()
-    {
+    public String getID() {
         return id;
     }
 
     @Override
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
@@ -34,5 +36,7 @@ public class User implements IUser
     }
 
 
-
+    public String getName() {
+        return name;
+    }
 }

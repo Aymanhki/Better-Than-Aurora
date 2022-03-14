@@ -9,4 +9,8 @@ public class Advisor extends User implements Serializable {
         super(newName, newPassword);
 
     }
+
+    public Advisor(String id, String password, String name) {
+        super(id, password, name);
+    }
 }

@@ -47,6 +47,8 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence {
                 }
                 categories.add(category);
             }
+            statement.close();
+            resultSet.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

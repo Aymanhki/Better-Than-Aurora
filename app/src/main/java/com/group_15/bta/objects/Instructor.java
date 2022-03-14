@@ -9,4 +9,8 @@ public class Instructor extends User implements Serializable {
         super(newName, newPassword);
 
     }
+
+    public Instructor(String id, String password, String name) {
+        super(id, password, name);
+    }
 }

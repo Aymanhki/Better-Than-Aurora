@@ -20,19 +20,15 @@ public class AccessStudents implements StudentPersistence {
         return ourInstance;
     }
 
-    public Student getStudent(int position){
-       return studentList.get(position);
-    }
-
-    public ArrayList<Student> getStudentList(){
+    public ArrayList<Student> getStudentList() {
         return this.studentList;
     }
 
-    public void insertStudent(Student currentStudent){
+    public void insertStudent(Student currentStudent) {
         studentList.add(currentStudent);
     }
 
-    public void deleteStudent(int position){
-        studentList.remove(position);
+    public void deleteStudent(Student toRemove) {
+        studentList.remove(toRemove);
     }
 }
