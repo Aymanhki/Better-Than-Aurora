@@ -7,13 +7,13 @@ import android.os.Bundle;
 import com.group_15.bta.R;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.LogInHandler;
+import com.group_15.bta.business.AccessUsers;
 
 public class AdvisorAccountActivity extends AppCompatActivity {
 
     private Advisor advisor;
     private Student advisorAccountInstance = new Student();
-    private LogInHandler advisorLogInInstance = new LogInHandler(advisorAccountInstance);
+    private AccessUsers advisorLogInInstance = new AccessUsers(advisorAccountInstance);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

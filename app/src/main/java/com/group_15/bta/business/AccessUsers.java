@@ -3,12 +3,14 @@ package com.group_15.bta.business;
 import android.content.Context;
 import android.content.Intent;
 
+import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
 import com.group_15.bta.persistence.ILogInHandler;
+import com.group_15.bta.persistence.UserPersistence;
 import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.AdvisorAccountActivity;
 import com.group_15.bta.presentation.InstructorAccount;
@@ -17,30 +19,26 @@ import com.group_15.bta.presentation.StudentAccountActivity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LogInHandler implements ILogInHandler {
+public class AccessUsers implements ILogInHandler {
 
+    private UserPersistence userPersistence;
     private final ArrayList<User> appCurrentUsers;
-    public final String INVALID_DATA_MESSAGE  = "Multiple Users";
+    public final String INVALID_DATA_MESSAGE = "Multiple Users";
 
-    public LogInHandler()
-    {
-        appCurrentUsers = new ArrayList<>();
+    public AccessUsers() {
+        userPersistence = Services.getUserPersistence();
+        appCurrentUsers = userPersistence.getUsers();
     }
 
-    public LogInHandler(User newUser)
-    {
+    public AccessUsers(User newUser) {
         appCurrentUsers = new ArrayList<>();
         appCurrentUsers.add(newUser);
     }
 
-    public LogInHandler(ArrayList<User> newAppUsers)
-    {
-        if(validateDataBase(newAppUsers))
-        {
+    public AccessUsers(ArrayList<User> newAppUsers) {
+        if (validateDataBase(newAppUsers)) {
             appCurrentUsers = newAppUsers;
-        }
-        else
-        {
+        } else {
             appCurrentUsers = new ArrayList<>();
         }
 

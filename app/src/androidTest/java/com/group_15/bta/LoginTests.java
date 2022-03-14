@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.LogInHandler;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.StudentAccountActivity;
 
@@ -21,7 +21,7 @@ import com.group_15.bta.presentation.StudentAccountActivity;
 @RunWith(AndroidJUnit4.class)
 public class LoginTests {
 
-    LogInHandler testLogIn;
+    AccessUsers testLogIn;
     Student testStudent = new Student();
     final String USER_SAMPLE = "Stew";
     final String PASS_SAMPLE = "Dent";
@@ -33,10 +33,10 @@ public class LoginTests {
     public void validateInstanceAwareness()
     {
         //Testing the  instance awareness
-        testLogIn = new LogInHandler(testStudent2);
+        testLogIn = new AccessUsers(testStudent2);
         assertEquals(testLogIn.intendedActivity(USER_SAMPLE, PASS_SAMPLE), StudentAccountActivity.class);
 
-        testLogIn = new LogInHandler(testAdmin2);
+        testLogIn = new AccessUsers(testAdmin2);
         assertEquals(testLogIn.intendedActivity(USER_SAMPLE, PASS_SAMPLE), AdminMenuActivity.class);
     }
 
@@ -44,7 +44,7 @@ public class LoginTests {
     public void testingPassingUsers()
     {
         //Testing passing the user from the login page to the account page.
-        testLogIn = new LogInHandler(testStudent2);
+        testLogIn = new AccessUsers(testStudent2);
         Intent intentTest = testLogIn.destinationIntent(USER_SAMPLE, PASS_SAMPLE, InstrumentationRegistry.getInstrumentation().getContext());
         assertEquals(testStudent2, intentTest.getSerializableExtra(testLogIn.getUserTypeString(testStudent2)));
     }

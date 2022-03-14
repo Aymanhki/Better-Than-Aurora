@@ -7,13 +7,13 @@ import android.os.Bundle;
 import com.group_15.bta.R;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.LogInHandler;
+import com.group_15.bta.business.AccessUsers;
 
 public class InstructorAccount extends AppCompatActivity {
 
     private Instructor instructor;
     private Student instructorAccountInstance = new Student();
-    private LogInHandler instructorLogInInstance = new LogInHandler(instructorAccountInstance);
+    private AccessUsers instructorLogInInstance = new AccessUsers(instructorAccountInstance);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,14 +14,14 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.R;
-import com.group_15.bta.business.LogInHandler;
+import com.group_15.bta.business.AccessUsers;
 
 public class StudentAccountActivity extends AppCompatActivity {
 
     private NavController studentNavController;
     private Student currentUser;
     private Student studentAccountInstance = new Student();
-    private LogInHandler studentLoginInstance = new LogInHandler(studentAccountInstance);
+    private AccessUsers studentLoginInstance = new AccessUsers(studentAccountInstance);
 
 
     @Override

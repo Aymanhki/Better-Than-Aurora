@@ -1,9 +1,7 @@
 package com.group_15.bta.persistence.HSQLDB;
 
-import com.group_15.bta.business.LogInHandler;
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
-import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;

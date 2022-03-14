@@ -23,9 +23,7 @@ public class Student extends User implements Serializable{
     public Student(String newName, String newPassword) {
         super(newName, newPassword);
 
-        this.id = "-1";
-        this.password = newPassword;
-        this.name = newName;
+
         enrolledSections = new ArrayList<>();
     }
 
