@@ -27,20 +27,16 @@ public class AccessSections implements SectionPersistence {
         return ourInstance;
     }
 
-    public Section getSection(int position){
-        return sections.get(position);
-    }
-
-    public ArrayList<Section> getSectionList(){
+    public ArrayList<Section> getSectionList() {
         return this.sections;
     }
 
-    public void insertSection(Section currentSection){
+    public void insertSection(Section currentSection) {
         sections.add(currentSection);
     }
 
-    public void deleteSection(int position){
-        sections.remove(position);
+    public void deleteSection(Section toRemove) {
+        sections.remove(toRemove);
     }
 
 }

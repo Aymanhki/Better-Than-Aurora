@@ -43,9 +43,6 @@ public class SectionListTest {
 
         assertTrue(sections.contains(sec));
 
-        sectionList.deleteSection(sections.size()-1);
-
-        assertFalse(sections.contains(sec));
 
         System.out.println("\n Section List Test Finished");
 

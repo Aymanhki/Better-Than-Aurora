@@ -31,7 +31,12 @@ public class Category implements Serializable {
     public String getName() {
         return Name;
     }
-    public ArrayList<Courses> getCourses(){
+
+    public ArrayList<Courses> getCourses() {
         return Courses;
+    }
+
+    public void addCourse(Courses newCourse) {
+        Courses.add(newCourse);
     }
 }

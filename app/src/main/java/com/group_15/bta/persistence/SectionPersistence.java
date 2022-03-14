@@ -13,9 +13,7 @@ public interface SectionPersistence {
 
     ArrayList<Section> getSectionList();
 
-    Section getSection(int position);
-
     void insertSection(Section currentSection);
 
-    void deleteSection(int position);
+    void deleteSection(Section toRemove);
 }

@@ -16,6 +16,9 @@ public class Section implements Serializable {
     private int available;
     private int CAP;
     private String grade;
+    private String associatedStudent;
+    private String associatedCourse;
+    private String associatedCategory;
 
     //constructor
     public Section(String section, String[] days, String[] time, int CAP) {
@@ -37,14 +40,48 @@ public class Section implements Serializable {
         this.CAP = CAP;
     }
 
-    //getters
-    public String getSection(){return section;}
-
-    public String getTime(){
-        return " " +Time[0] + " - " + Time[1];
+    public String getGrade() {
+        return grade;
     }
 
-    public String getDays(){
+    public String getAssociatedStudent() {
+        return associatedStudent;
+    }
+
+    public String getAssociatedCourse() {
+        return associatedCourse;
+    }
+
+    public String getAssociatedCategory() {
+        return associatedCategory;
+    }
+
+    public Section(String sectionID, String instructor, String[] days, String[] times,
+                   String location, int available, int capacity, String grade,
+                   String associatedStudent, String associatedCourse, String associatedCategory) {
+        section = sectionID;
+        this.instructor = instructor;
+        Days = days;
+        Time = times;
+        this.location = location;
+        this.available = available;
+        this.CAP = capacity;
+        this.grade = grade;
+        this.associatedStudent = associatedStudent;
+        this.associatedCourse = associatedCourse;
+        this.associatedCategory = associatedCategory;
+    }
+
+    //getters
+    public String getSection() {
+        return section;
+    }
+
+    public String getTime() {
+        return " " + Time[0] + " - " + Time[1];
+    }
+
+    public String getDays() {
         String ret = Days[0];
 
         for(int i = 1; i< Days.length;i++){

@@ -13,10 +13,8 @@ public interface CategoryPersistence {
 
     ArrayList<Category> getCategoryList();
 
-    Category getCategory(int position);
-
     void insertCategory(Category currentCategory);
 
-    void deleteCategory(int position);
+    void deleteCategory(Category toRemove);
 }
 

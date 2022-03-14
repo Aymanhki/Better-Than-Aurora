@@ -39,19 +39,16 @@ public class AccessCategories implements CategoryPersistence {
         return ourInstance;
     }
 
-    public Category getCategory(int position){
-        return categories.get(position);
-    }
 
-    public ArrayList<Category> getCategoryList(){
+    public ArrayList<Category> getCategoryList() {
         return this.categories;
     }
 
-    public void insertCategory(Category currentCategory){
+    public void insertCategory(Category currentCategory) {
         categories.add(currentCategory);
     }
 
-    public void deleteCategory(int position){
-        categories.remove(position);
+    public void deleteCategory(Category toRemove) {
+        categories.remove(toRemove);
     }
 }

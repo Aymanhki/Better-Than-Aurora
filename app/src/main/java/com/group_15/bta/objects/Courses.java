@@ -13,7 +13,7 @@ public class Courses implements Serializable {
     private String Description;//course description
     protected ArrayList<Section> sections; //sections for this course
     private String title;
-    private String sectionsTableName;
+    private String associatedCategory;
 
     //constructor
     public Courses(String ID, String title) {
@@ -21,9 +21,15 @@ public class Courses implements Serializable {
         this.ID = ID;
     }
 
+    public Courses(String courseID, String courseDescription, String associatedCategory) {
+        sections = new ArrayList<>();
+        ID = courseID;
+        Description = courseDescription;
+        this.associatedCategory = associatedCategory;
+    }
+
     //constructor
-    public Courses(String ID, String title, String Description, ArrayList<Section> sections)
-    {
+    public Courses(String ID, String title, String Description, ArrayList<Section> sections) {
         this.ID = ID;
         this.title = title;
         this.Description = Description;
@@ -31,9 +37,13 @@ public class Courses implements Serializable {
     }
 
     //adds section to this course
-    public void addSection(String sectionNumber, String[] Days, String[] Time,int CAP){
-        Section S = new Section(sectionNumber,Days,Time,CAP);
+    public void addSection(String sectionNumber, String[] Days, String[] Time, int CAP) {
+        Section S = new Section(sectionNumber, Days, Time, CAP);
         sections.add(S);
+    }
+
+    public void addSection(Section newSection) {
+        sections.add(newSection);
     }
 
     //getters
@@ -41,15 +51,19 @@ public class Courses implements Serializable {
         return Description;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public ArrayList<Section> getSections()
-    {
+    public ArrayList<Section> getSections() {
         return sections;
     }
 
-    public String getID(){ return this.ID;}
+    public String getID() {
+        return this.ID;
+    }
+
+    public String getAssociatedCategory() {
+        return associatedCategory;
+    }
 }
