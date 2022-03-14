@@ -1,13 +1,14 @@
 package com.group_15.bta.business;
 
 import com.group_15.bta.objects.Category;
-import com.group_15.bta.persistence.CategoryList;
+import com.group_15.bta.persistence.CategoryPersistence;
 
 import java.util.ArrayList;
 
-public class AccessCategories implements CategoryList {
+public class AccessCategories implements CategoryPersistence {
     private static final AccessCategories ourInstance = new AccessCategories();
     public ArrayList<Category> categories = new ArrayList<>();
+
     private AccessCategories() {
         Category c = new Category("Computer Science");//This should be an array accessed in data
         categories.add(c);

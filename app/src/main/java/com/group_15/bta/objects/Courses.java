@@ -13,10 +13,11 @@ public class Courses implements Serializable {
     private String Description;//course description
     protected ArrayList<Section> sections; //sections for this course
     private String title;
+    private String sectionsTableName;
 
     //constructor
-    public Courses(String ID, String Description){
-        this.Description = Description;
+    public Courses(String ID, String title) {
+        this.title = title;
         this.ID = ID;
     }
 

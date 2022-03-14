@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Category implements Serializable {
     protected String Name;
     protected ArrayList<com.group_15.bta.objects.Courses> Courses;
+    private String coursesTableName;
 
     //constructor
     public Category(String Name){

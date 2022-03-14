@@ -5,7 +5,7 @@ import com.group_15.bta.objects.Courses;
 
 import java.util.ArrayList;
 
-public interface CourseList {
+public interface CoursePersistence {
 
     static AccessCourses getInstance() {
         return null;
@@ -13,9 +13,8 @@ public interface CourseList {
 
     ArrayList<Courses> getCourseList();
 
-    Courses getCourses(int position);
-
     void insertCourses(Courses currentCourse);
 
-    void deleteCourses(int position);
+    void deleteCourses(Courses toRemove);
+
 }

@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.persistence.CategoryList;
+import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.business.AccessCategories;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.Comparator;
 
 public class CourseLandingActivity extends AppCompatActivity{
     //ArrayList<Category> categories = new ArrayList<Category>();
-    protected CategoryList categoryList = AccessCategories.getInstance();
+    protected CategoryPersistence categoryList = AccessCategories.getInstance();
     private ArrayList<Category> categories = categoryList.getCategoryList();
     ArrayAdapter arrayAdapter;
     public String categoryName = "Default";

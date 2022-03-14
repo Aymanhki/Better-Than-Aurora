@@ -15,6 +15,7 @@ public class Section implements Serializable {
     private int waitListCap;
     private int available;
     private int CAP;
+    private String grade;
 
     //constructor
     public Section(String section, String[] days, String[] time, int CAP) {

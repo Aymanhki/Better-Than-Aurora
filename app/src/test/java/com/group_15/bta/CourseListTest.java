@@ -39,11 +39,6 @@ public class CourseListTest {
 
         assertTrue(courses.contains(course));
 
-        courseList.deleteCourses(courses.size()-1);
-
-
-        assertFalse(courses.contains(course));
-
         System.out.println("\n Finished Course List Test");
     }
 }

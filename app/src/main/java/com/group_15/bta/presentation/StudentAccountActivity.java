@@ -13,11 +13,10 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.IDataReceiver;
 import com.group_15.bta.R;
 import com.group_15.bta.business.LogInHandler;
 
-public class StudentAccountActivity extends AppCompatActivity implements IDataReceiver {
+public class StudentAccountActivity extends AppCompatActivity {
 
     private NavController studentNavController;
     private Student currentUser;
@@ -42,12 +41,6 @@ public class StudentAccountActivity extends AppCompatActivity implements IDataRe
         NavigationUI.setupActionBarWithNavController(this, studentNavController, appBarConfiguration);
 
 
-    }
-
-    @Override
-    public Student getData()
-    {
-        return currentUser;
     }
 
     @Override

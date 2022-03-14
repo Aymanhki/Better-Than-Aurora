@@ -17,26 +17,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.R;
-import com.group_15.bta.persistence.CourseList;
+import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.business.AccessCourses;
 
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity{
-        protected String Name;
-        private ArrayList<Courses> courses;
-        protected CourseList courseList = AccessCourses.getInstance();
+public class CategoryActivity extends AppCompatActivity {
+    protected String Name;
+    private ArrayList<Courses> courses;
+    protected CoursePersistence courseList = AccessCourses.getInstance();
 
-        public CategoryActivity()
-        {
-            courses = new ArrayList<Courses>();
-        }
+    public CategoryActivity() {
+        courses = new ArrayList<Courses>();
+    }
 
-        ArrayAdapter arrayAdapter;
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_category);
+    ArrayAdapter arrayAdapter;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_category);
 
             Bundle b = getIntent().getExtras();
             this.Name = b.getString("Title"); //should be some global call to get name
@@ -83,7 +83,7 @@ public class CategoryActivity extends AppCompatActivity{
 
         for(int i =0; i< courses.size();i++){
             if(0 == courses.get(i).getID().compareTo(CourseID.getText().toString())){
-                courseList.deleteCourses(i);
+                courseList.deleteCourses(courses.get(i));
                 courses = courseList.getCourseList();
             }
         }

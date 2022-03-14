@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.StudentList;
+import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.business.AccessStudents;
 
 public class EditStudentActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class EditStudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
-        StudentList studs = AccessStudents.getInstance();
+        StudentPersistence studs = AccessStudents.getInstance();
         ArrayList<Student> students = studs.getStudentList();
         //students = (ArrayList<Student>) bundle.getSerializable("Students");
         position = bundle.getInt("Position");
@@ -42,7 +42,7 @@ public class EditStudentActivity extends AppCompatActivity {
     }
 
     public void buttonEditStudent(View v) {
-        StudentList studs = AccessStudents.getInstance();
+        StudentPersistence studs = AccessStudents.getInstance();
         studs.deleteStudent(position);
        // students.remove(position);
         EditText editID = (EditText) findViewById(R.id.editStudentID);

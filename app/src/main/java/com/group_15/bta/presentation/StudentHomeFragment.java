@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.IDataReceiver;
 import com.group_15.bta.R;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
@@ -35,7 +33,6 @@ public class StudentHomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private IDataReceiver userReceiver;
     private Student currentUser;
     private ListView enrolledSectionsList;
     private SectionListAdapter enrolledSectionsAdapted;
@@ -74,7 +71,7 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        currentUser = ((StudentAccountActivity)getActivity()).getData();
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student_home, container, false);
     }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.R.layout;
-import com.group_15.bta.persistence.StudentList;
+import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.business.AccessStudents;
 
 public class CreateStudentActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ private ArrayList<Student> students;
 
         Student student = new Student(editID.getText().toString(), editPassword.getText().toString(), editName.getText().toString());
         //students.add(student);
-        StudentList studs = AccessStudents.getInstance();
+        StudentPersistence studs = AccessStudents.getInstance();
         studs.insertStudent(student);
         Intent createIntent = new Intent(CreateStudentActivity.this, StudentListActivity.class);
        // finish();
