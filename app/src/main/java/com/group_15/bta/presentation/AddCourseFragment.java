@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.group_15.bta.business.AccessCategories;
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Section;
@@ -115,21 +116,9 @@ public class AddCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        categories = new ArrayList<>();
-
+        categories = new AccessCategories().getCategoryList();
         categoriesName = new String[categories.size()];
         categoriesList = view.findViewById(R.id.categories_list_in_add_courses_fragment);
-
-
-        //Fake data test:
-        ArrayList<Courses> courses = new ArrayList<>();
-        ArrayList<Section> sections = new ArrayList<>();
-
-        //String section, String[] days, String[] time, String instructor, String location, int waitListCap, int available, int CAP
-        sections.add(new Section("COMP 3350 - A01", new String[]{"Monday", "Wednesday", "Friday"}, new String[]{"9:30 AM - 10:20 PM", "9:30 AM - 10:20 PM", "9:30 AM - 10:20 PM"}, "Dr. Heather Matheson", "Remote", 0, 0, 0));
-        courses.add(new Courses("COMP 3350", "Software Engineering 1", "<Description goes here>", sections));
-        categories.add(new Category("Computer Science", courses));
-        categoriesName = new String[categories.size()];
         for(int i=0; i<categories.size(); i++)
         {
             categoriesName[i]=categories.get(i).getName();

@@ -15,13 +15,26 @@ import java.util.ArrayList;
 public class SectionPersistenceHSQLDB implements SectionPersistence {
 
     private String dbPath;
+    private Connection existingConnection = null;
 
     public SectionPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public SectionPersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
     }
 
     private Section fromResultSet(final ResultSet rs) throws SQLException {
@@ -43,7 +56,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence {
 
         try (final Connection newConnection = connection()) {
             final Statement newStatement = newConnection.createStatement();
-            final ResultSet newResultSet = newStatement.executeQuery("SELECT FROM * SECTIONS");
+            final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM SECTIONS");
             while (newResultSet.next()) {
                 final Section section = fromResultSet(newResultSet);
                 sections.add(section);

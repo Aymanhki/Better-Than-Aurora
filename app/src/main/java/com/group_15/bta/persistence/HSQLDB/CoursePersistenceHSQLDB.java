@@ -15,20 +15,35 @@ import java.util.ArrayList;
 public class CoursePersistenceHSQLDB implements CoursePersistence {
 
     private String dbPath;
+    private Connection existingConnection = null;
 
     public CoursePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public CoursePersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
     }
 
     private Courses fromResultSet(final ResultSet rs) throws SQLException {
         final String courseID = rs.getString("COURSEID");
         final String courseName = rs.getString("TITLE");
+        final String courseDescription = rs.getString("DESCRIPTION");
         final String category = rs.getString("NAME");
-        return new Courses(courseID, courseName, category);
+        final int credit = rs.getInt("CREDIT");
+        return new Courses(courseID, courseName, courseDescription, credit, category);
     }
 
     @Override
@@ -41,7 +56,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence {
             while (newResultSet.next()) {
                 final Courses course = fromResultSet(newResultSet);
 
-                SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(dbPath);
+                SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(newConnection);
                 ArrayList<Section> sections = sectionsGetter.getSectionList();
 
                 for (int i = 0; i < sections.size(); i++) {
@@ -66,11 +81,15 @@ public class CoursePersistenceHSQLDB implements CoursePersistence {
     @Override
     public void insertCourses(Courses currentCourse) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
             statement.setString(2, currentCourse.getTitle());
+            statement.setString(3, currentCourse.getDescription());
+            statement.setInt(4, currentCourse.getCreditHours());
+            statement.setString(5, currentCourse.getAssociatedCategory());
+
             statement.executeUpdate();
-            SectionPersistenceHSQLDB sectionInserter = new SectionPersistenceHSQLDB(dbPath);
+            SectionPersistenceHSQLDB sectionInserter = new SectionPersistenceHSQLDB(newConnection);
             for (int i = 0; i < currentCourse.getSections().size(); i++) {
                 sectionInserter.insertSection(currentCourse.getSections().get(i));
             }

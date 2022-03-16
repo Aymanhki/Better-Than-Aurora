@@ -15,13 +15,27 @@ import java.util.ArrayList;
 public class CategoryPersistenceHSQLDB implements CategoryPersistence {
 
     private String dbPath;
+    private Connection existingConnection = null;
 
     public CategoryPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public CategoryPersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
+
     }
 
     private Category fromResultSet(final ResultSet rs) throws SQLException {
@@ -38,7 +52,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence {
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM CATEGORIES");
             while (resultSet.next()) {
                 final Category category = fromResultSet(resultSet);
-                CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(dbPath);
+                CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(newConnection);
                 ArrayList<Courses> courses = coursesGetter.getCourseList();
                 for (int i = 0; i < courses.size(); i++) {
                     if (courses.get(i).getAssociatedCategory().equals(category.getName())) {
@@ -63,7 +77,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence {
             statement.setString(1, currentCategory.getName());
             statement.executeUpdate();
 
-            CoursePersistenceHSQLDB courseInserter = new CoursePersistenceHSQLDB(dbPath);
+            CoursePersistenceHSQLDB courseInserter = new CoursePersistenceHSQLDB(newConnection);
             for (int i = 0; i < currentCategory.getCourses().size(); i++) {
                 courseInserter.insertCourses(currentCategory.getCourses().get(i));
             }

@@ -14,6 +14,23 @@
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_admin_student_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_category.xml" value="0.5" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_course_landing.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/edittextwithborder.xml" value="0.32" />
+        <entry key="app/src/main/res/layout-land/activity_student_account.xml" value="0.33430913348946134" />
+        <entry key="app/src/main/res/layout-land/course_list_item.xml" value="0.26851851851851855" />
+        <entry key="app/src/main/res/layout-land/enrolled_sections_empty_list_view.xml" value="0.26851851851851855" />
+        <entry key="app/src/main/res/layout-land/enrolled_sections_empty_view.xml" value="0.31613756613756616" />
+        <entry key="app/src/main/res/layout-land/student_section_list_item.xml" value="0.26851851851851855" />
+        <entry key="app/src/main/res/layout/activity_student_account.xml" value="0.2912621359223301" />
+        <entry key="app/src/main/res/layout/course_list_item.xml" value="0.654843110504775" />
+        <entry key="app/src/main/res/layout/enrolled_sections_empty_list_view.xml" value="0.47578125" />
+        <entry key="app/src/main/res/layout/enrolled_sections_empty_view.xml" value="0.56015625" />
+        <entry key="app/src/main/res/layout/fragment_add_a_course.xml" value="0.2912621359223301" />
+        <entry key="app/src/main/res/layout/fragment_add_or_drop_courses.xml" value="0.2651699029126214" />
+        <entry key="app/src/main/res/layout/fragment_student_home.xml" value="0.2912621359223301" />
+        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.47578125" />
+        <entry key="app/src/main/res/layout/section_list_item.xml" value="0.3515102349438714" />
+        <entry key="app/src/main/res/layout/student_section_list_item.xml" value="0.47578125" />
+        <entry key="app/src/main/res/menu/courses_menu.xml" value="0.44609375" />
       </map>
     </option>
   </component>

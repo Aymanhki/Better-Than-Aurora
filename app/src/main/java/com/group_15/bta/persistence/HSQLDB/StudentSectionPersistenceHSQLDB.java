@@ -14,15 +14,27 @@ import java.util.ArrayList;
 
 public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistence {
 
-
     private String dbPath;
+    private Connection existingConnection = null;
 
     public StudentSectionPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public StudentSectionPersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
     }
 
     private StudentSection fromResultSet(final ResultSet rs) throws SQLException {
@@ -30,7 +42,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         final String grade = rs.getString("GRADE");
         final String sectionID = rs.getString("SECTIONID");
         Section section = null;
-        SectionPersistenceHSQLDB sectionGetter = new SectionPersistenceHSQLDB(dbPath);
+        SectionPersistenceHSQLDB sectionGetter = new SectionPersistenceHSQLDB(connection());
         ArrayList<Section> availableSections = sectionGetter.getSectionList();
         for (int i = 0; i < availableSections.size(); i++) {
             if (availableSections.get(i).getSection().equals(sectionID)) {
@@ -48,7 +60,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         try (final Connection newConnection = connection()) {
             final Statement newStatement = newConnection.createStatement();
-            final ResultSet newResultSet = newStatement.executeQuery("SELECT FROM * STUDENTSECTIONS");
+            final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM STUDENTSECTIONS");
             while (newResultSet.next()) {
                 final StudentSection section = fromResultSet(newResultSet);
                 toReturn.add(section);

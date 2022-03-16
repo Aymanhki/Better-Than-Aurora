@@ -15,8 +15,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
 
@@ -86,13 +89,16 @@ public class AddSectionFragment extends Fragment {
         selectedSections.add(selectedSection);
         sectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, selectedSections);
         confirmSectionList.setAdapter(sectionsAdapted);
+        Student currentUser = (Student) new AccessUsers().getCurrentUser();
+
 
         NavController navController = NavHostFragment.findNavController(this);
         Button addSectionBtn = (Button) view.findViewById(R.id.add_section_btn);
         addSectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(AddSectionFragmentDirections.actionAddACourseWithSectionConfirmationToStudentHome(selectedSection));
+                currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                navController.navigate(R.id.action_add_a_course_with_section_confirmation_to_student_home);
             }
         });
     }

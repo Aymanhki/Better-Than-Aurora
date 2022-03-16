@@ -10,4 +10,8 @@ public interface UserPersistence {
     void insertUser(User newUser);
 
     void deleteUser(User toRemove);
+
+    User getCurrentUser();
+
+    void setCurrentUser(User newUser);
 }

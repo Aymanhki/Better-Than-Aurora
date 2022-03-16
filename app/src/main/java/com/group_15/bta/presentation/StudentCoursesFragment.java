@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.objects.Student;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +29,7 @@ public class StudentCoursesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    Student currentUser;
     public StudentCoursesFragment() {
         // Required empty public constructor
 

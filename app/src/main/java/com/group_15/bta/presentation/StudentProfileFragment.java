@@ -2,6 +2,8 @@ package com.group_15.bta.presentation;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.objects.Student;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +29,7 @@ public class StudentProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    Student currentUser;
     public StudentProfileFragment() {
         // Required empty public constructor
     }
@@ -62,5 +66,11 @@ public class StudentProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

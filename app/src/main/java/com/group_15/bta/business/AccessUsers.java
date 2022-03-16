@@ -21,12 +21,12 @@ import java.util.ArrayList;
 
 public class AccessUsers implements ILogInHandler {
 
-    private UserPersistence userPersistence;
+    private final UserPersistence userPersistence = Services.getUserPersistence();
     private final ArrayList<User> appCurrentUsers;
+    private User currentUser = null;
     public final String INVALID_DATA_MESSAGE = "Multiple Users";
 
     public AccessUsers() {
-        userPersistence = Services.getUserPersistence();
         appCurrentUsers = userPersistence.getUsers();
     }
 
@@ -41,7 +41,6 @@ public class AccessUsers implements ILogInHandler {
         } else {
             appCurrentUsers = new ArrayList<>();
         }
-
     }
 
     @Override
@@ -135,25 +134,33 @@ public class AccessUsers implements ILogInHandler {
     public String getUserTypeString(User newUser)
     {
         String toReturn = "User Not Found";
-        if(validateLoginAttempt(newUser))
-        {
+        if (validateLoginAttempt(newUser)) {
             String[] userClasses = newUser.getClass().toString().split("\\.");
-            toReturn = userClasses[userClasses.length-1];
+            toReturn = userClasses[userClasses.length - 1];
         }
 
         return toReturn;
     }
 
+    @Override
+    public User getCurrentUser() {
+        return userPersistence.getCurrentUser();
+    }
+
+    @Override
+    public void setCurrentUser(User newUser) {
+        if (validateLoginAttempt(newUser)) {
+            userPersistence.setCurrentUser(getUser(newUser.getID(), newUser.getPassword()));
+        }
+    }
 
 
-    private User getUser(String userName, String password)
-    {
+    private User getUser(String userName, String password) {
         User toReturn = null;
 
-        if(validateLoginAttempt(userName, password))
-        {
+        if (validateLoginAttempt(userName, password)) {
             boolean userFound = false;
-            for(int i=0; i<appCurrentUsers.size() && !userFound; i++)
+            for (int i = 0; i < appCurrentUsers.size() && !userFound; i++)
             {
                 if(appCurrentUsers.get(i).equals(new User(userName, password)))
                 {

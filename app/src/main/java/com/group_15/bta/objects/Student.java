@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Student extends User implements Serializable{
 
 
-    private ArrayList<Section> enrolledSections;
+    private ArrayList<StudentSection> enrolledSections;
 
 
     //default constructor
@@ -71,12 +71,11 @@ public class Student extends User implements Serializable{
                 Objects.equals(this.name, o.name);
     }
 
-    public ArrayList<Section> getEnrolledSections()
-    {
+    public ArrayList<StudentSection> getEnrolledSections() {
         return enrolledSections;
     }
 
-    public void addSection(Section addedSection) {
+    public void addSection(StudentSection addedSection) {
         enrolledSections.add(addedSection);
     }
 }

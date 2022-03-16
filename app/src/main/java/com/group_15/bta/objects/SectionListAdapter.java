@@ -18,7 +18,6 @@ import java.util.List;
 
 public class SectionListAdapter extends ArrayAdapter<Section> {
 
-    private final static String TAG = "SectionListAdapter";
     private Context mainContext;
     private int resource;
 
@@ -43,17 +42,16 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         {
             if(i<times.length-1)
             {
-                dates = days[i]+": "+times[i]+"\n";
+                dates += days[i] + ": " + times[i] + "\n";
             }
             else
             {
-                dates = days[i]+": "+times[i];
+                dates += days[i] + ": " + times[i];
             }
 
         }
 
         int capacity = getItem(position).getCAP();
-        int waitListCapacity = getItem(position).getWaitListCap();
         int available = getItem(position).getAvailable();
         LayoutInflater inflater = LayoutInflater.from(mainContext);
         convertView = inflater.inflate(resource, parent, false);
@@ -63,7 +61,6 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         TextView instructorName = (TextView) convertView.findViewById(R.id.instructor_name_list_item);
         TextView datesBox = (TextView) convertView.findViewById(R.id.times_values_list_item);
         TextView capacityNumber = (TextView) convertView.findViewById(R.id.capacity_number_list_item);
-        TextView waitListCapacityNumber = (TextView) convertView.findViewById(R.id.wait_list_capacity_list_item);
         TextView availableNumber = (TextView) convertView.findViewById(R.id.available_number_list_item);
 
         sectionName.setText(sectionName.getText()+section);
@@ -71,7 +68,6 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         instructorName.setText(instructorName.getText()+instructor);
         datesBox.setText(datesBox.getText()+"\n"+dates);
         capacityNumber.setText(capacityNumber.getText()+""+capacity);
-        waitListCapacityNumber.setText(waitListCapacityNumber.getText()+""+waitListCapacity);
         availableNumber.setText(availableNumber.getText()+""+available);
 
 

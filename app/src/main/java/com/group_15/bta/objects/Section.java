@@ -12,7 +12,7 @@ public class Section implements Serializable {
     private String[] Time;
     private String instructor;
     private String location;
-    private int waitListCap;
+
     private int available;
     private int CAP;
     private String associatedCourse;
@@ -23,18 +23,6 @@ public class Section implements Serializable {
         this.section = section;
         Days = days;
         Time = time;
-        this.CAP = CAP;
-    }
-
-    //constructor
-    public Section(String section, String[] days, String[] time, String instructor, String location, int waitListCap, int available, int CAP) {
-        this.section = section;
-        Days = days;
-        Time = time;
-        this.instructor = instructor;
-        this.location = location;
-        this.waitListCap = waitListCap;
-        this.available = available;
         this.CAP = CAP;
     }
 
@@ -97,9 +85,6 @@ public class Section implements Serializable {
         return location;
     }
 
-    public int getWaitListCap() {
-        return waitListCap;
-    }
 
     public int getAvailable() {
         return available;

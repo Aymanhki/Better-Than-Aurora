@@ -4,18 +4,30 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.UserPersistence;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,8 +45,10 @@ public class StudentHomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Student currentUser;
+    private Student currentUser = (Student) new AccessUsers().getCurrentUser();
+    ;
     private ListView enrolledSectionsList;
+    private TextView emptyListView;
     private SectionListAdapter enrolledSectionsAdapted;
 
     public StudentHomeFragment() {
@@ -68,6 +82,7 @@ public class StudentHomeFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,20 +94,24 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        //This is supposed to added sections selected to the home view but it is not working yet.
-//        if(StudentHomeFragmentArgs.fromBundle(getArguments()).getSection() != null)
-//        {
-//            Section addedSection = StudentHomeFragmentArgs.fromBundle(getArguments()).getSection();
-//            currentUser.addSection(addedSection);
-//        }
-        currentUser = new Student();
-        enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.id.section_name_list_item, currentUser.getEnrolledSections());
+        ArrayList<Section> studentCurrentSections = new ArrayList<>();
+        for (int i = 0; i < currentUser.getEnrolledSections().size(); i++) {
+            studentCurrentSections.add(currentUser.getEnrolledSections().get(i).getSection());
+        }
+        enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, studentCurrentSections);
         enrolledSectionsList = view.findViewById(R.id.student_enrolled_courses);
         enrolledSectionsList.setAdapter(enrolledSectionsAdapted);
-        NavController navController = NavHostFragment.findNavController(this);
+        emptyListView = view.findViewById(R.id.student_enrolled_courses_empty);
 
+        if (currentUser.getEnrolledSections().isEmpty()) {
+            enrolledSectionsList.setVisibility(View.GONE);
+            emptyListView.setVisibility(View.VISIBLE);
+        } else {
+            enrolledSectionsList.setVisibility(View.VISIBLE);
+            emptyListView.setVisibility(View.GONE);
+        }
 
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
     }
+
 }

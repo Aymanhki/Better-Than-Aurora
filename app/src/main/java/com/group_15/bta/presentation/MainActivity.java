@@ -14,6 +14,7 @@ import com.group_15.bta.application.Main;
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.business.DataGenerator;
+import com.group_15.bta.objects.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +24,7 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
 
 
-    private AccessUsers logInHandler = new AccessUsers(DataGenerator.createUsers());
+    private AccessUsers logInHandler;
 
 
     @Override
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         copyDatabaseToDevice();
+        logInHandler = new AccessUsers();
         handleLogIn();
     }
 
@@ -47,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view)
             {
 
-                if(logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString()))
-                {
-                    String successfulLoginMessage = "Log in Successful, Hi "+username.getText().toString();
+                if(logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
+                    logInHandler.setCurrentUser(new User(username.getText().toString(), password.getText().toString()));
+                    String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
                     Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
                     startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
                     username.setText("");

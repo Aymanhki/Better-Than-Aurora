@@ -9,12 +9,7 @@
         android:id="@+id/student_home"
         android:name="com.group_15.bta.presentation.StudentHomeFragment"
         android:label="Hi _insert student name here_"
-        tools:layout="@layout/fragment_student_home">
-        <argument
-            android:name="section"
-            app:argType="com.group_15.bta.objects.Section"
-            app:nullable="true" />
-    </fragment>
+        tools:layout="@layout/fragment_student_home" />
     <fragment
         android:id="@+id/student_courses"
         android:name="com.group_15.bta.presentation.StudentCoursesFragment"

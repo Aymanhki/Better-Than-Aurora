@@ -1,5 +1,12 @@
 package com.group_15.bta.objects;
 
+import android.widget.ArrayAdapter;
+
+import com.group_15.bta.business.AccessCategories;
+import com.group_15.bta.business.AccessCourses;
+
+import java.util.ArrayList;
+
 public class StudentSection {
 
     private Section section;
@@ -22,5 +29,17 @@ public class StudentSection {
         associatedStudent = studentID;
         grade = newGrade;
         section = newSection;
+    }
+
+    public int getCreditHours() {
+        int credits = -1;
+        ArrayList<Courses> courses = new AccessCourses().getCourseList();
+        for (int i = 0; i < courses.size() && credits == -1; i++) {
+            if (courses.get(i).getID().equals(section.getAssociatedCourse())) {
+                credits = courses.get(i).getCreditHours();
+            }
+        }
+
+        return credits;
     }
 }

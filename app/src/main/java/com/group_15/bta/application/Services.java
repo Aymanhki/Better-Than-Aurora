@@ -4,6 +4,7 @@ import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.persistence.HSQLDB.CategoryPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.CoursePersistenceHSQLDB;
+import com.group_15.bta.persistence.HSQLDB.PersistenceException;
 import com.group_15.bta.persistence.HSQLDB.SectionPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentSectionPersistenceHSQLDB;
@@ -13,6 +14,9 @@ import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.persistence.UserPersistence;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Services {
     private static StudentPersistence studentPersistence = null;
     private static CoursePersistence coursePersistence = null;
@@ -20,6 +24,7 @@ public class Services {
     private static CategoryPersistence categoryPersistence = null;
     private static UserPersistence userPersistence = null;
     private static StudentSectionPersistence studentSectionPersistence = null;
+    private static Connection connection = null;
 
     public static synchronized StudentPersistence getStudentPersistence() {
         if (studentPersistence == null) {

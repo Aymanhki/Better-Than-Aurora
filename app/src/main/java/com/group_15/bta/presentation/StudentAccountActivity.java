@@ -1,6 +1,8 @@
 package com.group_15.bta.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
+
+import java.io.Serializable;
 
 public class StudentAccountActivity extends AppCompatActivity {
 
@@ -40,7 +44,6 @@ public class StudentAccountActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(studentNav, studentNavController);
         NavigationUI.setupActionBarWithNavController(this, studentNavController, appBarConfiguration);
 
-
     }
 
     @Override
@@ -59,5 +62,9 @@ public class StudentAccountActivity extends AppCompatActivity {
             }
         };
         fragmentButton.setOnClickListener(fragmentButtonAction);
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

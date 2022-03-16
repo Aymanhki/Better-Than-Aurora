@@ -21,6 +21,8 @@ import android.widget.SimpleAdapter;
 
 import com.group_15.bta.R;
 import com.group_15.bta.objects.Category;
+import com.group_15.bta.objects.CourseListAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +41,7 @@ public class AddCourseCategoryFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private ListView coursesList;
-    private SimpleAdapter coursesNamesAdapted;
+    private CourseListAdapter coursesNamesAdapted;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,25 +90,8 @@ public class AddCourseCategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Category selectedCategory = AddCourseCategoryFragmentArgs.fromBundle(requireArguments()).getCategory();
-
-
-
         coursesList = view.findViewById(R.id.courses_list_in_add_courses);
-
-        List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-        for (int i=0; i<selectedCategory.getCourses().size(); i++) {
-            Map<String, String> datum = new HashMap<String, String>(2);
-            datum.put("ID", selectedCategory.getCourses().get(i).getID());
-            datum.put("Title", selectedCategory.getCourses().get(i).getTitle());
-            data.add(datum);
-        }
-
-        coursesNamesAdapted = new SimpleAdapter(getContext(),
-                data,
-                android.R.layout.simple_list_item_2,
-                new String[]{"ID", "Title"},
-                new int[]{android.R.id.text1, android.R.id.text2});
-
+        coursesNamesAdapted = new CourseListAdapter(getContext(), R.layout.course_list_item, selectedCategory.getCourses());
         coursesList.setAdapter(coursesNamesAdapted);
         NavController navController = NavHostFragment.findNavController(this);
         coursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

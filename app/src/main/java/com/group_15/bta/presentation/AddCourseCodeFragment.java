@@ -92,7 +92,8 @@ public class AddCourseCodeFragment extends Fragment {
         sectionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                navController.navigate(AddCourseCodeFragmentDirections.actionAddACourseWithCodeToAddACourseWithSectionConfirmation(selectedCourse.getSections().get(i)));
+                navController.navigate(AddCourseCodeFragmentDirections
+                        .actionAddACourseWithCodeToAddACourseWithSectionConfirmation(selectedCourse.getSections().get(i)));
             }
         });
     }

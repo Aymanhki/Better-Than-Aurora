@@ -14,13 +14,26 @@ import java.util.ArrayList;
 
 public class StudentPersistenceHSQLDB implements StudentPersistence {
     private String dbPath;
+    private Connection existingConnection = null;
 
     public StudentPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public StudentPersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
     }
 
     private Student fromResultSet(final ResultSet rs) throws SQLException {
@@ -61,7 +74,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence {
             statement.setString(3, currentStudent.getID());
             statement.executeUpdate();
 
-            StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(dbPath);
+            StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
             ArrayList<StudentSection> sections = studentSectionInserter.getSectionList();
             for (int i = 0; i < sections.size(); i++) {
                 if (sections.get(i).getAssociatedStudent().equals(currentStudent.getStudentID())) {

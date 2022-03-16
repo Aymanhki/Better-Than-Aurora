@@ -1,5 +1,9 @@
 package com.group_15.bta.persistence.HSQLDB;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
@@ -7,28 +11,48 @@ import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
 import com.group_15.bta.persistence.UserPersistence;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLXML;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UserPersistenceHSQLDB implements UserPersistence {
 
     private String dbPath;
+    private Connection existingConnection = null;
+    private User currentUser = null;
     private final String STUDENT_ACCOUNT_TYPE = "Student";
     private final String ADMIN_ACCOUNT_TYPE = "Administrator";
     private final String ADVISOR_ACCOUNT_TYPE = "Advisor";
     private final String INSTRUCTOR_ACCOUNT_TYPE = "Instructor";
 
+
     public UserPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
+    public UserPersistenceHSQLDB(Connection newConnection) {
+        existingConnection = newConnection;
+    }
+
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        Connection toReturn;
+
+        if (existingConnection == null) {
+            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        } else {
+            toReturn = existingConnection;
+        }
+
+        return toReturn;
     }
 
     private User fromResultSet(final ResultSet rs, String userType) throws SQLException {
@@ -140,5 +164,15 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    @Override
+    public void setCurrentUser(User newUser) {
+        currentUser = newUser;
     }
 }
