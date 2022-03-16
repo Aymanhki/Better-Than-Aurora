@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
@@ -97,7 +98,11 @@ public class AddSectionFragment extends Fragment {
         addSectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                if (!currentUser.getEnrolledSections().contains(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection))) {
+                    currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                } else {
+                    Toast.makeText(getContext(), "You are already enrolled in this section", Toast.LENGTH_LONG).show();
+                }
                 navController.navigate(R.id.action_add_a_course_with_section_confirmation_to_student_home);
             }
         });

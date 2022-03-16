@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class AccessCategories implements CategoryPersistence {
     private static final AccessCategories ourInstance = new AccessCategories();
     public ArrayList<Category> categories = new ArrayList<>();
+    CategoryPersistence categoryPersistence;
+
 
     public AccessCategories() {
 //        Category c = new Category("Computer Science");//This should be an array accessed in data
@@ -34,8 +36,8 @@ public class AccessCategories implements CategoryPersistence {
 //        c = new Category("Yiddish");
 //        categories.add(c);
 
-        CategoryPersistence categoryPersistence = Services.getCategoryPersistence();
-        categories = categoryPersistence.getCategoryList();
+        categoryPersistence = Services.getCategoryPersistence();
+
 
     }
 
@@ -45,14 +47,14 @@ public class AccessCategories implements CategoryPersistence {
 
 
     public ArrayList<Category> getCategoryList() {
-        return this.categories;
+        return categoryPersistence.getCategoryList();
     }
 
     public void insertCategory(Category currentCategory) {
-        categories.add(currentCategory);
+        categoryPersistence.insertCategory(currentCategory);
     }
 
     public void deleteCategory(Category toRemove) {
-        categories.remove(toRemove);
+        categoryPersistence.insertCategory(toRemove);
     }
 }

@@ -5,9 +5,10 @@ import android.widget.ArrayAdapter;
 import com.group_15.bta.business.AccessCategories;
 import com.group_15.bta.business.AccessCourses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudentSection {
+public class StudentSection implements Serializable {
 
     private Section section;
     private String associatedStudent;
@@ -42,4 +43,12 @@ public class StudentSection {
 
         return credits;
     }
+
+    @Override
+    public boolean equals(Object another) {
+        StudentSection temp = (StudentSection) another;
+        return associatedStudent.equals(temp.associatedStudent) && grade.equals(temp.grade) && section.getSection().equals(temp.section.getSection());
+    }
+
+
 }

@@ -12,6 +12,7 @@ import com.group_15.bta.objects.User;
 import com.group_15.bta.persistence.UserPersistence;
 
 import java.io.File;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -24,7 +25,7 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class UserPersistenceHSQLDB implements UserPersistence {
+public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
     private String dbPath;
     private Connection existingConnection = null;

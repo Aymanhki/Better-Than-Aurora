@@ -14,10 +14,11 @@ import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.persistence.UserPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Services {
+public class Services implements Serializable {
     private static StudentPersistence studentPersistence = null;
     private static CoursePersistence coursePersistence = null;
     private static SectionPersistence sectionPersistence = null;

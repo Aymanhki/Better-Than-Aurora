@@ -1,10 +1,12 @@
 package com.group_15.bta.objects;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,5 +48,25 @@ public class CourseListAdapter extends ArrayAdapter<Courses> {
         courseCredits.setText(credit);
 
         return convertView;
+    }
+
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+
+            //TODO:Implement this method.
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+            }
+        };
+        return filter;
     }
 }

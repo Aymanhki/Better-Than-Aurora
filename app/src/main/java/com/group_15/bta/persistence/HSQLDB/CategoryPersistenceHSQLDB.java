@@ -4,6 +4,7 @@ import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.persistence.CategoryPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class CategoryPersistenceHSQLDB implements CategoryPersistence {
+public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializable {
 
     private String dbPath;
     private Connection existingConnection = null;
@@ -86,6 +87,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence {
             throw new PersistenceException(newException);
         }
     }
+
 
     @Override
     public void deleteCategory(Category toRemove) {

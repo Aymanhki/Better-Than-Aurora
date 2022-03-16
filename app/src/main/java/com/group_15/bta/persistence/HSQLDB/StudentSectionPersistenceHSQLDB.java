@@ -1,9 +1,11 @@
 package com.group_15.bta.persistence.HSQLDB;
 
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistence {
+public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistence, Serializable {
 
     private String dbPath;
     private Connection existingConnection = null;
@@ -75,6 +77,19 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
+    @Override
+    public void updateStudentSection(StudentSection currentSection) {
+        try (final Connection newConnection = connection()) {
+
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET GRADE = ?,  WHERE STUDENTID = ? AND SECTIONID = ?");
+            statement.setString(1, currentSection.getGrade());
+            statement.setString(2, currentSection.getAssociatedStudent());
+            statement.setString(3, currentSection.getSection().getSection());
+            statement.executeUpdate();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+    }
 
     @Override
     public void insertSection(StudentSection currentSection) {
@@ -82,7 +97,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTSECTIONS VALUES(?, ?, ?)");
             statement.setString(1, currentSection.getAssociatedStudent());
             statement.setString(2, currentSection.getGrade());
-            statement.setString(2, currentSection.getSection().getSection());
+            statement.setString(3, currentSection.getSection().getSection());
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

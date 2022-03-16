@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class AccessCourses implements CoursePersistence {
     private static final AccessCourses ourInstance = new AccessCourses();
-    private CoursePersistence coursePersistence = Services.getCoursePersistence();
+    private CoursePersistence coursePersistence;
     public ArrayList<Courses> courses = new ArrayList<>();
 
     public AccessCourses() {
@@ -17,7 +17,7 @@ public class AccessCourses implements CoursePersistence {
 //        courses.add(c);
 //        c = new Courses("Comp 1020", "Introduction to Computer Science 2");
 //        courses.add(c);
-        courses = coursePersistence.getCourseList();
+        coursePersistence = Services.getCoursePersistence();
     }
 
     public static AccessCourses getInstance() {
@@ -26,15 +26,23 @@ public class AccessCourses implements CoursePersistence {
 
 
     public ArrayList<Courses> getCourseList() {
-        return this.courses;
+        return coursePersistence.getCourseList();
     }
 
+    @Override
     public void insertCourses(Courses currentCourse) {
-        courses.add(currentCourse);
+        coursePersistence.insertCourses(currentCourse);
     }
 
-    public void deleteCourses(Courses toRemove) {
-        courses.remove(toRemove);
+    @Override
+    public void updateCourse(Courses currentCourse) {
+        coursePersistence.updateCourse(currentCourse);
     }
+
+    @Override
+    public void deleteCourses(Courses toRemove) {
+        coursePersistence.deleteCourses(toRemove);
+    }
+
 
 }

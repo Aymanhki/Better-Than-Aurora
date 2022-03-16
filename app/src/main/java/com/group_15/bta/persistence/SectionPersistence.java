@@ -11,12 +11,11 @@ public interface SectionPersistence {
     static AccessSections getInstance() {
         return null;
     }
-
     ArrayList<Section> getSectionList();
-
     void insertSection(Section currentSection);
-
     void deleteSection(Section toRemove);
+
+    void updateSection(Section section);
 
 
 }

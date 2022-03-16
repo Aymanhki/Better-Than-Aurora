@@ -9,10 +9,10 @@ public interface StudentPersistence {
     static AccessStudents getInstance() {
         return null;
     }
-
     ArrayList<Student> getStudentList();
-
     void insertStudent(Student currentStudent);
+
+    void updateStudent(Student currentStudent);
 
     void deleteStudent(Student toRemove);
 }

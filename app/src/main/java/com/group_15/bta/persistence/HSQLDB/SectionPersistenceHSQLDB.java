@@ -4,6 +4,7 @@ import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.SectionPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SectionPersistenceHSQLDB implements SectionPersistence {
+public class SectionPersistenceHSQLDB implements SectionPersistence, Serializable {
 
     private String dbPath;
     private Connection existingConnection = null;
@@ -105,6 +106,57 @@ public class SectionPersistenceHSQLDB implements SectionPersistence {
             statement.setString(7, Integer.toString(currentSection.getCAP()));
             statement.setString(8, currentSection.getAssociatedCourse());
             statement.setString(9, currentSection.getAssociatedCategory());
+            statement.executeUpdate();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+    }
+
+    @Override
+    public void updateSection(Section currentSection) {
+        try (final Connection newConnection = connection()) {
+
+            // new Section(sectionID, instructor, days, times, location, available, capacity, associatedCourse, associatedCategory);
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE SECTIONS SET " +
+                    "INSTRUCTOR = ?, " +
+                    "DAYS = ?, " +
+                    "TIMES = ?, " +
+                    "LOCATION = ?  " +
+                    "AVAILABLE = ?, " +
+                    "CAPACITY = ?, " +
+                    "COURSEID = ?, " +
+                    "NAME = ?  " +
+                    "WHERE SECTIONID = ?");
+            statement.setString(1, currentSection.getInstructor());
+
+            String tempDays[] = currentSection.getDaysRaw();
+            String daysToAdd = "";
+            for (int i = 0; i < tempDays.length; i++) {
+                daysToAdd += tempDays[i];
+
+                if (i < tempDays.length - 1) {
+                    daysToAdd += ", ";
+                }
+            }
+            statement.setString(2, daysToAdd);
+
+            String tempTimes[] = currentSection.getTimes();
+            String timesToAdd = "";
+            for (int i = 0; i < tempTimes.length; i++) {
+                timesToAdd += tempTimes[i];
+
+                if (i < tempTimes.length - 1) {
+                    timesToAdd += ", ";
+                }
+            }
+            statement.setString(3, timesToAdd);
+            statement.setString(4, String.valueOf(currentSection.getLocation()));
+            statement.setString(5, String.valueOf(currentSection.getAvailable()));
+            statement.setString(6, String.valueOf(currentSection.getCAP()));
+            statement.setString(7, currentSection.getAssociatedCourse());
+            statement.setString(8, currentSection.getAssociatedCategory());
+            statement.setString(9, currentSection.getSection());
+
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

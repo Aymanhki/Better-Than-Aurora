@@ -19,7 +19,7 @@ import com.group_15.bta.presentation.StudentAccountActivity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AccessUsers implements ILogInHandler {
+public class AccessUsers implements ILogInHandler, UserPersistence {
 
     private final UserPersistence userPersistence = Services.getUserPersistence();
     private final ArrayList<User> appCurrentUsers;
@@ -140,6 +140,21 @@ public class AccessUsers implements ILogInHandler {
         }
 
         return toReturn;
+    }
+
+    @Override
+    public ArrayList<User> getUsers() {
+        return userPersistence.getUsers();
+    }
+
+    @Override
+    public void insertUser(User newUser) {
+        userPersistence.insertUser(newUser);
+    }
+
+    @Override
+    public void deleteUser(User toRemove) {
+        userPersistence.deleteUser(toRemove);
     }
 
     @Override

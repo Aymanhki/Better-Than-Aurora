@@ -10,11 +10,8 @@ public interface CategoryPersistence {
     static AccessCategories getInstance() {
         return null;
     }
-
     ArrayList<Category> getCategoryList();
-
     void insertCategory(Category currentCategory);
-
     void deleteCategory(Category toRemove);
 }
 

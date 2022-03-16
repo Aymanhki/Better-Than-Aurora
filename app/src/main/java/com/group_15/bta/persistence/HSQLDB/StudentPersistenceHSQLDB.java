@@ -1,9 +1,11 @@
 package com.group_15.bta.persistence.HSQLDB;
 
+import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class StudentPersistenceHSQLDB implements StudentPersistence {
+public class StudentPersistenceHSQLDB implements StudentPersistence, Serializable {
     private String dbPath;
     private Connection existingConnection = null;
 
@@ -61,6 +63,20 @@ public class StudentPersistenceHSQLDB implements StudentPersistence {
         }
 
         return students;
+    }
+
+    @Override
+    public void updateStudent(Student currentStudent) {
+        try (final Connection newConnection = connection()) {
+
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET PASSWORD = ?, NAME = ?,  WHERE STUDENTID = ?");
+            statement.setString(1, currentStudent.getPassword());
+            statement.setString(2, currentStudent.getName());
+            statement.setString(3, currentStudent.getStudentID());
+            statement.executeUpdate();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
     }
 
 

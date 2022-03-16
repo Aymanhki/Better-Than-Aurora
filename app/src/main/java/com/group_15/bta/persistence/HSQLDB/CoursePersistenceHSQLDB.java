@@ -4,6 +4,7 @@ import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.CoursePersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class CoursePersistenceHSQLDB implements CoursePersistence {
+public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable {
 
     private String dbPath;
     private Connection existingConnection = null;
@@ -94,6 +95,22 @@ public class CoursePersistenceHSQLDB implements CoursePersistence {
                 sectionInserter.insertSection(currentCourse.getSections().get(i));
             }
 
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+    }
+
+    @Override
+    public void updateCourse(Courses currentCourse) {
+        try (final Connection newConnection = connection()) {
+            //COURSEID , TITLE , DESCRIPTION , CREDIT,  NAME VARCHAR(100))
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?  WHERE COURSEID = ?");
+            statement.setString(1, currentCourse.getTitle());
+            statement.setString(2, currentCourse.getDescription());
+            statement.setString(3, String.valueOf(currentCourse.getCreditHours()));
+            statement.setString(4, currentCourse.getAssociatedCategory());
+            statement.setString(5, currentCourse.getID());
+            statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

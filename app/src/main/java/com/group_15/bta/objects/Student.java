@@ -1,5 +1,8 @@
 package com.group_15.bta.objects;
 
+import com.group_15.bta.application.Services;
+import com.group_15.bta.persistence.StudentSectionPersistence;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -12,29 +15,25 @@ public class Student extends User implements Serializable{
 
 
     private ArrayList<StudentSection> enrolledSections;
-
+    private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
 
     //default constructor
     public Student() {
-        enrolledSections = new ArrayList<>();
+        enrolledSections = studentSectionPersistence.getSectionList();
     }
 
     //constructor (used on student side)
     public Student(String newName, String newPassword) {
         super(newName, newPassword);
-
-
-        enrolledSections = new ArrayList<>();
+        enrolledSections = studentSectionPersistence.getSectionList();
     }
 
     //constructor (used on admin side)
     public Student(final String newID, final String newPassword, final String newStudentName) {
         this.id = newID;
         this.password = newPassword;
-
         this.name = newStudentName;
-        enrolledSections = new ArrayList<>();
-
+        enrolledSections = studentSectionPersistence.getSectionList();
     }
 
 
@@ -72,11 +71,13 @@ public class Student extends User implements Serializable{
     }
 
     public ArrayList<StudentSection> getEnrolledSections() {
-        return enrolledSections;
+        return studentSectionPersistence.getSectionList();
     }
 
     public void addSection(StudentSection addedSection) {
+
         enrolledSections.add(addedSection);
+        studentSectionPersistence.insertSection(addedSection);
     }
 }
 
