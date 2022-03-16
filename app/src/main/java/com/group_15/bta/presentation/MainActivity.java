@@ -2,9 +2,12 @@ package com.group_15.bta.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private AccessUsers logInHandler;
-
+    Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,31 +43,39 @@ public class MainActivity extends AppCompatActivity {
     {
         TextView username = (TextView) findViewById(R.id.userName);
         TextView password = (TextView) findViewById(R.id.password);
-        Button loginBtn = (Button) findViewById(R.id.login);
+        loginBtn = (Button) findViewById(R.id.login);
 
 
         View.OnClickListener loginAction = new View.OnClickListener()
         {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-                if(logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
+                loginBtn.setText("Loading...");
+                if (logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
                     logInHandler.setCurrentUser(new User(username.getText().toString(), password.getText().toString()));
                     String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
                     Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
                     startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
                     username.setText("");
                     password.setText("");
-                }
-                else {
+
+
+                } else {
                     String failedLoginMessage = "Log in Failed, Sorry, user not found";
                     Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
                 }
+
             }
         };
 
         loginBtn.setOnClickListener(loginAction);
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        loginBtn.setText("Login");
     }
 
     private void copyDatabaseToDevice() {

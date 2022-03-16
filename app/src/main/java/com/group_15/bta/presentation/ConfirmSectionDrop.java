@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.os.Bundle;
 
@@ -8,33 +8,29 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.DropBoxManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.group_15.bta.business.AccessCategories;
+import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Category;
+import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.objects.StudentSectionAdapter;
-import com.group_15.bta.presentation.AddCourseFragmentDirections;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DropCourseFragment#newInstance} factory method to
+ * Use the {@link ConfirmSectionDrop#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DropCourseFragment extends Fragment {
-
-    private ListView toDropSectionsList;
-    private StudentSectionAdapter studentSectionAdapter;
+public class ConfirmSectionDrop extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +41,7 @@ public class DropCourseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DropCourseFragment() {
+    public ConfirmSectionDrop() {
         // Required empty public constructor
     }
 
@@ -55,11 +51,11 @@ public class DropCourseFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment drop_a_course.
+     * @return A new instance of fragment confirm_dropping_a_course.
      */
     // TODO: Rename and change types and number of parameters
-    public static DropCourseFragment newInstance(String param1, String param2) {
-        DropCourseFragment fragment = new DropCourseFragment();
+    public static ConfirmSectionDrop newInstance(String param1, String param2) {
+        ConfirmSectionDrop fragment = new ConfirmSectionDrop();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,23 +76,30 @@ public class DropCourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drop_a_course, container, false);
+        return inflater.inflate(R.layout.fragment_confirm_dropping_a_course, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        StudentSection selectedSection;
+        selectedSection = ConfirmSectionDropArgs.fromBundle(requireArguments()).getCourseToBeDropped();
+        ListView confirmSectionList = view.findViewById(R.id.confirm_section_to_be_dropped_list);
+        ArrayList<StudentSection> selectedSections = new ArrayList<>();
+        selectedSections.add(selectedSection);
+        StudentSectionAdapter sectionsAdapted = new StudentSectionAdapter(getContext(), R.layout.student_section_list_item, selectedSections);
+        confirmSectionList.setAdapter(sectionsAdapted);
         Student currentUser = (Student) new AccessUsers().getCurrentUser();
-        ArrayList<StudentSection> sections = currentUser.getEnrolledSections();
-        studentSectionAdapter = new StudentSectionAdapter(getContext(), R.layout.student_section_list_item, sections);
-        toDropSectionsList = view.findViewById(R.id.enrolled_sections_in_drop_a_course_list_fragment);
-        toDropSectionsList.setAdapter(studentSectionAdapter);
-        NavController navController = NavHostFragment.findNavController(this);
-        toDropSectionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        NavController navController = NavHostFragment.findNavController(this);
+        Button dropSectionBtn = (Button) view.findViewById(R.id.drop_section_btn);
+        dropSectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                navController.navigate(DropCourseFragmentDirections.actionDropACourseToConfirmDroppingACourse(sections.get(i)));
+            public void onClick(View view) {
+
+                currentUser.deleteSection(selectedSection);
+                Toast.makeText(getContext(), "Course Dropped", Toast.LENGTH_LONG).show();
+                navController.navigate(R.id.action_confirm_dropping_a_course_to_student_home);
             }
         });
 

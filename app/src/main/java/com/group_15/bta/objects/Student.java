@@ -79,6 +79,10 @@ public class Student extends User implements Serializable{
         enrolledSections.add(addedSection);
         studentSectionPersistence.insertSection(addedSection);
     }
+
+    public void deleteSection(StudentSection selectedSection) {
+        studentSectionPersistence.deleteSection(selectedSection);
+    }
 }
 
 

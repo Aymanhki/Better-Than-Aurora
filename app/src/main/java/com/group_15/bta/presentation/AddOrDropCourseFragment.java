@@ -76,5 +76,6 @@ public class AddOrDropCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         StudentAccountActivity.setFragmentNavigationButton(view, R.id.add_courses_btn, R.id.action_add_or_drop_courses_to_add_a_course);
+        StudentAccountActivity.setFragmentNavigationButton(view, R.id.drop_courses_btn, R.id.action_add_or_drop_courses_to_drop_a_course);
     }
 }

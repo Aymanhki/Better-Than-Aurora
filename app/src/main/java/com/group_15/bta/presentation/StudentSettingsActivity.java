@@ -1,5 +1,6 @@
 package com.group_15.bta.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
@@ -72,6 +74,19 @@ public class StudentSettingsActivity extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button logoutBtn = (Button) view.findViewById(R.id.logout_student_account_btn);
 
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent courseIntent = new Intent(getContext(), MainActivity.class);
+                getActivity().startActivity(courseIntent);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/student_home"
         android:name="com.group_15.bta.presentation.StudentHomeFragment"
-        android:label="Hi _insert student name here_"
         tools:layout="@layout/fragment_student_home" />
     <fragment
         android:id="@+id/student_courses"
@@ -86,8 +85,16 @@
     <fragment
         android:id="@+id/drop_a_course"
         android:name="com.group_15.bta.DropCourseFragment"
-        android:label="fragment_drop_a_course"
-        tools:layout="@layout/fragment_drop_a_course" />
+        android:label="Select a Course"
+        tools:layout="@layout/fragment_drop_a_course">
+        <action
+            android:id="@+id/action_drop_a_course_to_confirm_dropping_a_course"
+            app:destination="@id/confirm_dropping_a_course"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+    </fragment>
     <fragment
         android:id="@+id/add_a_course_from_category"
         android:name="com.group_15.bta.presentation.AddCourseCategoryFragment"
@@ -135,5 +142,21 @@
         <argument
             android:name="section"
             app:argType="com.group_15.bta.objects.Section" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirm_dropping_a_course"
+        android:name="com.group_15.bta.presentation.ConfirmSectionDrop"
+        android:label="Confirm Dropping"
+        tools:layout="@layout/fragment_confirm_dropping_a_course">
+        <action
+            android:id="@+id/action_confirm_dropping_a_course_to_student_home"
+            app:destination="@id/student_home"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_right_to_left"
+            app:popExitAnim="@anim/exit_right_to_left" />
+        <argument
+            android:name="courseToBeDropped"
+            app:argType="com.group_15.bta.objects.StudentSection" />
     </fragment>
 </navigation>

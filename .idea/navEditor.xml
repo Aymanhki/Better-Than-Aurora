@@ -118,6 +118,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="confirm_dropping_a_course">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="573" />
+                            <option name="y" value="-21" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="drop_a_course">
                     <value>
                       <LayoutPositions>

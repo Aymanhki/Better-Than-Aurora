@@ -42,11 +42,11 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         {
             if(i<times.length-1)
             {
-                dates += days[i] + ": " + times[i] + "\n";
+                dates += (days[i] + ": " + times[i]).trim() + "\n";
             }
             else
             {
-                dates += days[i] + ": " + times[i];
+                dates += (days[i] + ": " + times[i]).trim();
             }
 
         }
@@ -63,13 +63,12 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         TextView capacityNumber = (TextView) convertView.findViewById(R.id.capacity_number_list_item);
         TextView availableNumber = (TextView) convertView.findViewById(R.id.available_number_list_item);
 
-        sectionName.setText(sectionName.getText()+section);
-        locationName.setText(locationName.getText()+location);
-        instructorName.setText(instructorName.getText()+instructor);
-        datesBox.setText(datesBox.getText()+"\n"+dates);
-        capacityNumber.setText(capacityNumber.getText()+""+capacity);
-        availableNumber.setText(availableNumber.getText()+""+available);
-
+        sectionName.setText(sectionName.getText() + "" + section);
+        locationName.setText(locationName.getText() + "" + location);
+        instructorName.setText(instructorName.getText() + "" + instructor);
+        datesBox.setText(datesBox.getText() + "\n" + dates);
+        capacityNumber.setText(capacityNumber.getText() + "" + capacity);
+        availableNumber.setText(availableNumber.getText() + "" + available);
 
 
         return convertView;

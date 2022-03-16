@@ -3,12 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.StudentSettingsActivity">
+    tools:context=".presentation.StudentCoursesFragment"
+    android:background="@color/cosmic_latte">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="settings" />
 
+    <RelativeLayout
+        android:layout_width="307dp"
+        android:layout_height="486dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center">
+
+
+        <Button
+            android:id="@+id/logout_student_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_brown"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 </FrameLayout>

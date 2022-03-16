@@ -54,6 +54,7 @@
         tools:ignore="HardcodedText"
         />
 
+
     <EditText
         android:id="@+id/userName"
         android:layout_width="280dp"
@@ -79,8 +80,8 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Login"
         android:textColor="@color/dark_brown"
         android:textSize="16sp"

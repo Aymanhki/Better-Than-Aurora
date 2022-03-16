@@ -1,5 +1,6 @@
 package com.group_15.bta.persistence.HSQLDB;
 
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
@@ -89,7 +90,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(2, currentStudent.getPassword());
             statement.setString(3, currentStudent.getID());
             statement.executeUpdate();
-
+            new AccessUsers().insertUser(currentStudent);
             StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
             ArrayList<StudentSection> sections = studentSectionInserter.getSectionList();
             for (int i = 0; i < sections.size(); i++) {

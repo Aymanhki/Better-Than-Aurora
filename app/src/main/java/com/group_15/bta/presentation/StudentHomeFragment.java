@@ -76,19 +76,22 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student_home, container, false);
+
     }
 
     @Override
@@ -110,8 +113,9 @@ public class StudentHomeFragment extends Fragment {
             enrolledSectionsList.setVisibility(View.VISIBLE);
             emptyListView.setVisibility(View.GONE);
         }
-
         ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
+
+
     }
 
 }
