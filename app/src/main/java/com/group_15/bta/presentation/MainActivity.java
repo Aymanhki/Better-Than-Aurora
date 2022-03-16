@@ -28,12 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private AccessUsers logInHandler;
-    Button loginBtn;
+    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loginBtn = (Button) findViewById(R.id.login);
         copyDatabaseToDevice();
         logInHandler = new AccessUsers();
         handleLogIn();
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     {
         TextView username = (TextView) findViewById(R.id.userName);
         TextView password = (TextView) findViewById(R.id.password);
-        loginBtn = (Button) findViewById(R.id.login);
+
 
 
         View.OnClickListener loginAction = new View.OnClickListener()
@@ -73,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onStop() {
+        super.onStop();
         loginBtn.setText("Login");
     }
 
