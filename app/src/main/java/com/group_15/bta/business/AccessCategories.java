@@ -7,7 +7,7 @@ import com.group_15.bta.persistence.CategoryPersistence;
 import java.util.ArrayList;
 
 public class AccessCategories implements CategoryPersistence {
-    private static final AccessCategories ourInstance = new AccessCategories();
+    //private static final AccessCategories ourInstance = new AccessCategories();
     public ArrayList<Category> categories = new ArrayList<>();
     CategoryPersistence categoryPersistence;
 
@@ -41,9 +41,7 @@ public class AccessCategories implements CategoryPersistence {
 
     }
 
-    public static AccessCategories getInstance() {
-        return ourInstance;
-    }
+    //public static AccessCategories getInstance() {return ourInstance;}
 
 
     public ArrayList<Category> getCategoryList() {

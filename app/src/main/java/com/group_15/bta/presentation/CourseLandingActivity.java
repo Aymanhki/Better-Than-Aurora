@@ -28,10 +28,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class CourseLandingActivity extends AppCompatActivity{
+public class CourseLandingActivity extends AppCompatActivity {
     //ArrayList<Category> categories = new ArrayList<Category>();
-    protected CategoryPersistence categoryList = AccessCategories.getInstance();
-    private ArrayList<Category> categories = categoryList.getCategoryList();
+    //  protected CategoryPersistence categoryList = AccessCategories.getInstance();
+    AccessCategories getter = new AccessCategories();
+    private ArrayList<Category> categories = getter.getCategoryList();
     ArrayAdapter arrayAdapter;
     public String categoryName = "Default";
     int selectedPosition = -1;
@@ -63,11 +64,11 @@ public class CourseLandingActivity extends AppCompatActivity{
         });
     }
 
-    public void buttonAddCategory(View v){
+    public void buttonAddCategory(View v) {
         EditText category = (EditText) findViewById(id.newCategoryName);
         Category c = new Category(category.getText().toString());
-        categoryList.insertCategory(c);
-        categories = categoryList.getCategoryList();
+        new AccessCategories().insertCategory(c);
+        categories = new AccessCategories().getCategoryList();
         listCategories();
     }
 

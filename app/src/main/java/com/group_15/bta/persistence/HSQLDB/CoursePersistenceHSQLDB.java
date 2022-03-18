@@ -54,11 +54,12 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         try (final Connection newConnection = connection()) {
             final Statement newStatement = newConnection.createStatement();
             final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM COURSES");
+            SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(newConnection);
+            ArrayList<Section> sections = sectionsGetter.getSectionList();
+
             while (newResultSet.next()) {
                 final Courses course = fromResultSet(newResultSet);
 
-                SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(newConnection);
-                ArrayList<Section> sections = sectionsGetter.getSectionList();
 
                 for (int i = 0; i < sections.size(); i++) {
                     if (sections.get(i).getAssociatedCourse().equals(course.getID())) {

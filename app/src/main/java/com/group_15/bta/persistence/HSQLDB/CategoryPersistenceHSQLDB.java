@@ -51,10 +51,11 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
         try (Connection newConnection = connection()) {
             final Statement statement = newConnection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM CATEGORIES");
+            CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(newConnection);
+            ArrayList<Courses> courses = coursesGetter.getCourseList();
             while (resultSet.next()) {
                 final Category category = fromResultSet(resultSet);
-                CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(newConnection);
-                ArrayList<Courses> courses = coursesGetter.getCourseList();
+
                 for (int i = 0; i < courses.size(); i++) {
                     if (courses.get(i).getAssociatedCategory().equals(category.getName())) {
                         category.addCourse(courses.get(i));
