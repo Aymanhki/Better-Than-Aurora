@@ -26,6 +26,7 @@ public class Services implements Serializable {
     private static UserPersistence userPersistence = null;
     private static StudentSectionPersistence studentSectionPersistence = null;
     private static Connection connection = null;
+    private static boolean newCourse = false;
 
     public static synchronized StudentPersistence getStudentPersistence() {
         if (studentPersistence == null) {
@@ -81,4 +82,9 @@ public class Services implements Serializable {
         return studentSectionPersistence;
     }
 
+    public static boolean getNewCourse(){ return newCourse; }
+
+    public static void setCourseToFalse(){newCourse = false;}
+
+    public static void setCourseToTrue(){newCourse = true;}
 }

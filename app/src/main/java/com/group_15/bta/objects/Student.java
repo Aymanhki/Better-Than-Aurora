@@ -16,6 +16,7 @@ public class Student extends User implements Serializable{
 
     private ArrayList<StudentSection> enrolledSections;
     private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
+    private int MAX_CLASSES =  5;
 
     //default constructor
     public Student() {
@@ -75,14 +76,14 @@ public class Student extends User implements Serializable{
     }
 
     public void addSection(StudentSection addedSection) {
-
-        enrolledSections.add(addedSection);
-        studentSectionPersistence.insertSection(addedSection);
+            enrolledSections.add(addedSection);
+            studentSectionPersistence.insertSection(addedSection);
     }
 
     public void deleteSection(StudentSection selectedSection) {
         studentSectionPersistence.deleteSection(selectedSection);
     }
+    public int getMAX_CLASSES(){return MAX_CLASSES;}
 }
 
 

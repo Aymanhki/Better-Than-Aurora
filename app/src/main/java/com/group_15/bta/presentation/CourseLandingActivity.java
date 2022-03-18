@@ -30,14 +30,13 @@ import java.util.Comparator;
 
 public class CourseLandingActivity extends AppCompatActivity {
     //ArrayList<Category> categories = new ArrayList<Category>();
-    //  protected CategoryPersistence categoryList = AccessCategories.getInstance();
     AccessCategories getter = new AccessCategories();
     private ArrayList<Category> categories = getter.getCategoryList();
     ArrayAdapter arrayAdapter;
     public String categoryName = "Default";
     int selectedPosition = -1;
     public Category selectedCat;
-    SearchView searchView;
+    //SearchView searchView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

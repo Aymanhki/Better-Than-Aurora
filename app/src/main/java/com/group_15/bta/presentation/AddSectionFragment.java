@@ -99,7 +99,13 @@ public class AddSectionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!currentUser.getEnrolledSections().contains(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection))) {
-                    currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                    if(currentUser.getEnrolledSections().size()<currentUser.getMAX_CLASSES()) {
+                        currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(), "You are already enrolled in the maximum number of classes", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Toast.makeText(getContext(), "You are already enrolled in this section", Toast.LENGTH_LONG).show();
                 }

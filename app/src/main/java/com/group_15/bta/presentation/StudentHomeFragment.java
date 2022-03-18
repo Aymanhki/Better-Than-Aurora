@@ -1,5 +1,6 @@
 package com.group_15.bta.presentation;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,8 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.group_15.bta.R;
+import com.group_15.bta.application.Services;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
@@ -81,7 +85,11 @@ public class StudentHomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        if(Services.getNewCourse()){
+            Toast toast = Toast.makeText(getContext(), "New Courses Available", Toast.LENGTH_LONG);
+            toast.show();
+            Services.setCourseToFalse();
+        }
     }
 
 

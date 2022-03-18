@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
+import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.SectionPersistence;
 import com.group_15.bta.business.AccessSections;
@@ -24,9 +25,10 @@ import com.group_15.bta.business.AccessSections;
 public class CourseActivity extends AppCompatActivity {
     protected String Name;
     protected String Description;
+    protected String Category;
     protected ArrayList<Section> sections;
     protected ArrayAdapter arrayAdapter;
-    protected SectionPersistence sectionList = AccessSections.getInstance();
+    protected AccessSections sectionList = new AccessSections();
 
     public CourseActivity(){ sections = new ArrayList<Section>();}
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class CourseActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         this.Name = b.getString("Title"); //should be some global call to get name
         this.Description = b.getString("Description");
+        this.Category = b.getString("Category");
 
         final TextView tView = (TextView)findViewById(id.CourseName);
         final TextView dView = (TextView)findViewById(id.Description);
@@ -57,6 +60,8 @@ public class CourseActivity extends AppCompatActivity {
         EditText endTime = (EditText) findViewById(id.EndTime);
         EditText Days = (EditText) findViewById(id.Days);
         EditText CAP = (EditText) findViewById(id.CAP);
+        EditText Instructor = (EditText) findViewById(id.Instructor);
+        EditText Location = (EditText) findViewById(id.Location);
 
         String[] Time = new String[2];
         Time[0] = startTime.getText().toString();
@@ -69,10 +74,13 @@ public class CourseActivity extends AppCompatActivity {
 
         ds = d.split(" ");
 
-        Section s = new Section(section.getText().toString(), ds, Time, Cap);
+
+        Section s = new Section(this.Name + " - " +section.getText().toString(), Instructor.getText().toString(), ds, Time ,
+                Location.getText().toString(), Cap, Cap,Name,Category);
 
         sectionList.insertSection(s);
         sections = sectionList.getSectionList();
+        Services.setCourseToTrue();
 
         listSections();
     }
@@ -81,8 +89,9 @@ public class CourseActivity extends AppCompatActivity {
         EditText section = (EditText) findViewById(id.DelSecNumber);
 
         for(int i = 0; i<sections.size();i++){
-            if(0 == sections.get(i).getSection().compareTo(section.getText().toString())){
-                sections.remove(i);
+            if(0 == sections.get(i).getSection().compareTo(this.Name + " - " +section.getText().toString())){
+                sectionList.deleteSection(sections.get(i));
+                sections = sectionList.getSectionList();
             }
         }
         listSections();
@@ -99,7 +108,7 @@ public class CourseActivity extends AppCompatActivity {
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                String keyPoints = sections.get(position).getSection() + " " + sectionName + " Instructor: TBD  Location: TBD";
+                String keyPoints = sections.get(position).getSection() + " Instructor: " + sections.get(position).getInstructor() + " Location: " + sections.get(position).getLocation();
                 String info = "Day(s): " + sections.get(position).getDays() + " Time: " + sections.get(position).getTime() + " CAP: " + sections.get(position).getCap();
 
                 text1.setText(keyPoints);

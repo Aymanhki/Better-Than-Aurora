@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class CategoryActivity extends AppCompatActivity {
     protected String Name;
     private ArrayList<Courses> courses;
-    protected CoursePersistence courseList = AccessCourses.getInstance();
+    protected AccessCourses courseList = new AccessCourses();
 
     public CategoryActivity() {
         courses = new ArrayList<Courses>();
@@ -60,6 +60,7 @@ public class CategoryActivity extends AppCompatActivity {
                     Intent i = new Intent(CategoryActivity.this, CourseActivity.class);
                     b.putString("Title",courses.get(position).getID());
                     b.putString("Description",courses.get(position).getDescription());
+                    b.putString("Category", Name);
                     i.putExtras(b);
                     startActivity(i);
                 }
@@ -70,8 +71,12 @@ public class CategoryActivity extends AppCompatActivity {
         public void buttonAddCourse(View v){
             EditText CourseID = (EditText) findViewById(R.id.CourseID);
             EditText CourseName = (EditText) findViewById(R.id.CourseName);
+            EditText CourseDescription = (EditText) findViewById(R.id.CourseDescription);
+            EditText CourseCreditHours = (EditText) findViewById(R.id.CourseCreditHours);
 
-            Courses c = new Courses(CourseID.getText().toString(),CourseName.getText().toString());
+            int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
+
+            Courses c = new Courses(CourseID.getText().toString(),CourseName.getText().toString(),CourseDescription.getText().toString(),CH,Name);
             courseList.insertCourses(c);
             courses = courseList.getCourseList();
 
@@ -100,7 +105,7 @@ public class CategoryActivity extends AppCompatActivity {
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(courses.get(position).getID());
+                text1.setText(courses.get(position).getID() + " " + courses.get(position).getTitle());
                 text2.setText(courses.get(position).getDescription());
 
                 return view;

@@ -14,6 +14,25 @@
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_admin_student_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_category.xml" value="0.5" />
         <entry key="..\:/Users/Shin Taro/AndroidStudioProjects/better-than-aurora-registration-system-a01-main/app/src/main/res/layout/activity_course_landing.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/custom_bubble.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/edittextwithborder.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/section_list_item.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/student_courses_icon.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/drawable/student_home_icon.xml" value="0.274" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_category.xml" value="0.4691358024691358" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_course.xml" value="0.4691358024691358" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_category.xml" value="0.75" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_course.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/course_list_item.xml" value="0.43070652173913043" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_a_course.xml" value="0.3066123188405797" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_a_course_from_category.xml" value="0.3066123188405797" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_a_course_with_section_confirmation.xml" value="0.3115942028985507" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_or_drop_courses.xml" value="0.3066123188405797" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/layout/student_section_list_item.xml" value="0.3066123188405797" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/menu/courses_menu.xml" value="0.5494791666666666" />
+        <entry key="..\:/Users/martc/AndroidStudioProjects/Term Work/better-than-aurora-registration-system-a01/app/src/main/res/menu/student_nav_menu.xml" value="0.5494791666666666" />
         <entry key="app/src/main/res/drawable/edittextwithborder.xml" value="0.32" />
         <entry key="app/src/main/res/layout-land/activity_student_account.xml" value="0.33430913348946134" />
         <entry key="app/src/main/res/layout-land/course_list_item.xml" value="0.26851851851851855" />

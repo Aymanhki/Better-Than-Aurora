@@ -10,8 +10,8 @@ public class Section implements Serializable {
     private String section;
     private String[] Days;
     private String[] Time;
-    private String instructor;
-    private String location;
+    private String instructor = "TBA";
+    private String location = "TBA";
 
     private int available;
     private int CAP;

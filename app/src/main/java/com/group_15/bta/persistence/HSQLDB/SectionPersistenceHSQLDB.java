@@ -76,7 +76,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
     @Override
     public void insertSection(Section currentSection) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO SECTIONS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO SECTIONS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentSection.getSection());
             statement.setString(2, currentSection.getInstructor());
 

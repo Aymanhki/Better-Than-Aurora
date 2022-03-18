@@ -13,32 +13,7 @@ public class AccessCategories implements CategoryPersistence {
 
 
     public AccessCategories() {
-//        Category c = new Category("Computer Science");//This should be an array accessed in data
-//        categories.add(c);
-//        c = new Category("Engineering");
-//        categories.add(c);
-//        c = new Category("Education");
-//        categories.add(c);
-//        c = new Category("English");
-//        categories.add(c);
-//        c = new Category("French");
-//        categories.add(c);
-//        c = new Category("Kinesiology");
-//        categories.add(c);
-//        c = new Category("History");
-//        categories.add(c);
-//        c = new Category("Mathematics");
-//        categories.add(c);
-//        c = new Category("Slavic Studies");
-//        categories.add(c);
-//        c = new Category("Physics");
-//        categories.add(c);
-//        c = new Category("Yiddish");
-//        categories.add(c);
-
         categoryPersistence = Services.getCategoryPersistence();
-
-
     }
 
     //public static AccessCategories getInstance() {return ourInstance;}
