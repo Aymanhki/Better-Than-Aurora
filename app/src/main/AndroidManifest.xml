@@ -10,8 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BTA">
         <activity
-            android:name=".presentation.InstructorAccount"
-            android:exported="false" />
+            android:name=".presentation.InstructorSectionsActivity"
+            android:exported="false"
+            android:label="BTA: Course List">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".presentation.MainActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.InstructorStudentsActivity"
+            android:exported="false"
+            android:label="BTA: Students">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.InstructorSectionsActivity" />
+        </activity>
         <activity
             android:name=".presentation.AdvisorAccountActivity"
             android:exported="false" />

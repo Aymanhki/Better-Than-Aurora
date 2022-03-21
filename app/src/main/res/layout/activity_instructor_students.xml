@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/SectionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_green"
+        android:textAlignment="center"
+        android:textColor="@color/cosmic_latte"
+        android:textSize="24sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@color/cosmic_latte">
+
+        <Button
+            android:id="@+id/UpdateGrade"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:onClick="buttonUpdateGrade"
+            android:text="Update Grade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Grade"
+            android:layout_width="180dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="212dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="Grade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_green" />
+
+    <ListView
+        android:id="@+id/studentSectionList"
+        android:layout_width="match_parent"
+        android:layout_height="394dp"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:background="@color/cosmic_latte"
+        android:choiceMode="singleChoice"
+        android:divider="@color/dark_green"
+        android:dividerHeight="1dp"
+        android:listSelector="@color/light_green" />
+
+</LinearLayout>

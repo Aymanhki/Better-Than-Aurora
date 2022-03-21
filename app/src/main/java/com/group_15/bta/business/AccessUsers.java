@@ -15,6 +15,7 @@ import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.AdvisorAccountActivity;
 import com.group_15.bta.presentation.InstructorAccount;
 import com.group_15.bta.presentation.StudentAccountActivity;
+import com.group_15.bta.presentation.InstructorSectionsActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class AccessUsers implements ILogInHandler, UserPersistence {
             }
             else if(loginAttempt instanceof Instructor)
             {
-                toReturn = InstructorAccount.class;
+                toReturn = InstructorSectionsActivity.class;
             }
         }
 

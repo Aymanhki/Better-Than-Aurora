@@ -76,12 +76,36 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
+    @Override
+    public ArrayList<StudentSection> getStudentsInSection(String courseID) {
+        final ArrayList<StudentSection> students = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS,STUDENTSECTIONS WHERE STUDENTS.STUDENTID=STUDENTSECTIONS.STUDENTID AND SECTIONID = ?");
+            st.setString(1, courseID);
+
+            final ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                final StudentSection record = fromResultSet(rs);
+                students.add(record);
+            }
+
+            rs.close();
+            st.close();
+
+            return students;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
 
     @Override
     public void updateStudentSection(StudentSection currentSection) {
         try (final Connection newConnection = connection()) {
 
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET GRADE = ?,  WHERE STUDENTID = ? AND SECTIONID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTSECTIONS SET GRADE = ?  WHERE STUDENTID = ? AND SECTIONID = ?");
             statement.setString(1, currentSection.getGrade());
             statement.setString(2, currentSection.getAssociatedStudent());
             statement.setString(3, currentSection.getSection().getSection());

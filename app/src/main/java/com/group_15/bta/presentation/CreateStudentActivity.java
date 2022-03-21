@@ -2,9 +2,11 @@ package com.group_15.bta.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.objects.Student;
@@ -49,6 +51,15 @@ private ArrayList<Student> students;
     public void buttonBackOnClick(View v) {
         Intent backIntent = new Intent(CreateStudentActivity.this, StudentListActivity.class);
         CreateStudentActivity.this.startActivity(backIntent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish(  );
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
