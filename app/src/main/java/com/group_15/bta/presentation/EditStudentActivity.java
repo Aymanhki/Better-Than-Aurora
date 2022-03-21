@@ -3,9 +3,11 @@ package com.group_15.bta.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -66,5 +68,15 @@ public class EditStudentActivity extends AppCompatActivity {
     public void buttonBackOnClick(View v) {
         Intent backIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
         EditStudentActivity.this.startActivity(backIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish(  );
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

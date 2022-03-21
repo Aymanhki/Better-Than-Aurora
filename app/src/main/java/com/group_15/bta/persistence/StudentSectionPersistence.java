@@ -10,6 +10,8 @@ public interface StudentSectionPersistence {
     ArrayList<StudentSection> getSectionList();
     void insertSection(StudentSection currentSection);
 
+    ArrayList<StudentSection> getStudentsInSection(final String sectionID);
+
     void updateStudentSection(StudentSection currentSection);
 
     void deleteSection(StudentSection toRemove);

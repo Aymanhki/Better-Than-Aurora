@@ -1,6 +1,7 @@
 package com.group_15.bta.presentation;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -90,6 +92,16 @@ public class StudentListActivity extends AppCompatActivity {
         bundle.putSerializable("Students",studentList);
         createIntent.putExtras(bundle);
         StudentListActivity.this.startActivity(createIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish(  );
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
