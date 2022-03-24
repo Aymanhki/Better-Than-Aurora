@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.group_15.bta.objects.Category;
 import com.group_15.bta.R;
@@ -65,8 +66,14 @@ public class CourseLandingActivity extends AppCompatActivity {
 
     public void buttonAddCategory(View v) {
         EditText category = (EditText) findViewById(id.newCategoryName);
-        Category c = new Category(category.getText().toString());
-        new AccessCategories().insertCategory(c);
+        if(category.getText().toString().length() != 0){
+            Category c = new Category(category.getText().toString());
+            new AccessCategories().insertCategory(c);
+        }
+        else
+        {
+            Toast.makeText(CourseLandingActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
+        }
         categories = new AccessCategories().getCategoryList();
         listCategories();
     }

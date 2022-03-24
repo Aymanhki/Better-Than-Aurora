@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -74,10 +75,17 @@ public class CategoryActivity extends AppCompatActivity {
             EditText CourseDescription = (EditText) findViewById(R.id.CourseDescription);
             EditText CourseCreditHours = (EditText) findViewById(R.id.CourseCreditHours);
 
-            int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
+            if(CourseID.getText().toString().length() != 0 && CourseName.getText().toString().length() != 0 &&
+                    CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0) {
 
-            Courses c = new Courses(CourseID.getText().toString(),CourseName.getText().toString(),CourseDescription.getText().toString(),CH,Name);
-            courseList.insertCourses(c);
+                int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
+                Courses c = new Courses(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name);
+                courseList.insertCourses(c);
+            }
+            else
+            {
+                Toast.makeText(CategoryActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
+            }
             courses = courseList.getCourseList();
 
             listCourses();

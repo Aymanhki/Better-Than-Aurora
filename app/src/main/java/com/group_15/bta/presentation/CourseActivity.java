@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -63,25 +64,33 @@ public class CourseActivity extends AppCompatActivity {
         EditText Instructor = (EditText) findViewById(id.Instructor);
         EditText Location = (EditText) findViewById(id.Location);
 
-        String[] Time = new String[2];
-        Time[0] = startTime.getText().toString();
-        Time[1] = endTime.getText().toString();
+        if(section.getText().toString().length() != 0 && startTime.getText().toString().length() != 0 &&
+            endTime.getText().toString().length() != 0 && Days.getText().toString().length() != 0 &&
+            CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 &&
+            Location.getText().toString().length() != 0) {
+            String[] Time = new String[2];
+            Time[0] = startTime.getText().toString();
+            Time[1] = endTime.getText().toString();
 
-        int Cap = Integer.parseInt(CAP.getText().toString());
+            int Cap = Integer.parseInt(CAP.getText().toString());
 
-        String[] ds;
-        String d = Days.getText().toString();
+            String[] ds;
+            String d = Days.getText().toString();
 
-        ds = d.split(" ");
+            ds = d.split(" ");
 
 
-        Section s = new Section(this.Name + " - " +section.getText().toString(), Instructor.getText().toString(), ds, Time ,
-                Location.getText().toString(), Cap, Cap,Name,Category);
+            Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,
+                    Location.getText().toString(), Cap, Cap, Name, Category);
 
-        sectionList.insertSection(s);
-        sections = sectionList.getSectionList();
-        Services.setCourseToTrue();
-
+            sectionList.insertSection(s);
+            sections = sectionList.getSectionList();
+            Services.setCourseToTrue();
+        }
+        else
+        {
+            Toast.makeText(CourseActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
+        }
         listSections();
     }
 
