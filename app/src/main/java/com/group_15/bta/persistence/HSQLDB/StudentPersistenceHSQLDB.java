@@ -70,7 +70,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     public void updateStudent(Student currentStudent) {
         try (final Connection newConnection = connection()) {
 
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET PASSWORD = ?, NAME = ?,  WHERE STUDENTID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTS SET PASSWORD = ?, NAME = ?  WHERE STUDENTID = ?");
             statement.setString(1, currentStudent.getPassword());
             statement.setString(2, currentStudent.getName());
             statement.setString(3, currentStudent.getStudentID());
@@ -90,14 +90,14 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(2, currentStudent.getPassword());
             statement.setString(3, currentStudent.getID());
             statement.executeUpdate();
-            new AccessUsers().insertUser(currentStudent);
+           /* new AccessUsers().insertUser(currentStudent);
             StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
             ArrayList<StudentSection> sections = studentSectionInserter.getSectionList();
             for (int i = 0; i < sections.size(); i++) {
                 if (sections.get(i).getAssociatedStudent().equals(currentStudent.getStudentID())) {
                     studentSectionInserter.insertSection(sections.get(i));
                 }
-            }
+            }*/
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

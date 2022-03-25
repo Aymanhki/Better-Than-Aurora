@@ -14,7 +14,7 @@ public class AccessStudents implements StudentPersistence {
     private static final AccessStudents ourInstance = new AccessStudents();
     public ArrayList<Student> studentList = new ArrayList<>();
     private StudentPersistence studentPersistence;
-    private AccessStudents() {
+    public AccessStudents() {
 //        Student one = new Student("12", "12", "Jane Doe");
 //        Student two = new Student("13", "13", "John Doe");
 //        this.studentList.add(one);
