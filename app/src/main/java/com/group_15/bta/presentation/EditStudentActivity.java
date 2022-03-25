@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,29 +34,29 @@ public class EditStudentActivity extends AppCompatActivity {
         position = bundle.getInt("Position");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_student);
-        EditText editID = (EditText) findViewById(R.id.editStudentID);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
-            editID.setText(students.get(position).getStudentID());
         editName.setText(students.get(position).getID());
         editPassword.setText(students.get(position).getStudentPassword());
 
+        final TextView tView = (TextView)findViewById(id.studentID);
+        tView.setText(students.get(position).getStudentID());
 
     }
 
     public void buttonEditStudent(View v) {
         StudentPersistence studs = AccessStudents.getInstance();
-        studs.deleteStudent(studs.getStudentList().get(position));
-       // students.remove(position);
-        EditText editID = (EditText) findViewById(R.id.editStudentID);
+        //studs.deleteStudent(studs.getStudentList().get(position));
+        // students.remove(position);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
-        Editable id = editID.getText();
         Editable name = editName.getText();
         Editable password = editPassword.getText();
-        Student student = new Student(id.toString(), password.toString(), name.toString());
-       // students.add(student);
-        studs.insertStudent(student);
+        final TextView tView = (TextView)findViewById(id.studentID);
+        String id = (String) tView.getText();
+        Student student = new Student(id, password.toString(), name.toString());
+        // students.add(student);
+        studs.updateStudent(student);
         Intent createIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
         //finish();
         //Bundle bundle = new Bundle();
@@ -63,11 +64,6 @@ public class EditStudentActivity extends AppCompatActivity {
         //createIntent.putExtras(bundle);
         EditStudentActivity.this.startActivity(createIntent);
         //overridePendingTransition(0,0);
-    }
-
-    public void buttonBackOnClick(View v) {
-        Intent backIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
-        EditStudentActivity.this.startActivity(backIntent);
     }
 
     @Override

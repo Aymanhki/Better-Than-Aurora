@@ -16,13 +16,18 @@ import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
+import com.group_15.bta.business.AccessStudentSections;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.business.AccessStudents;
 
+
 public class StudentListActivity extends AppCompatActivity {
-    StudentPersistence students = AccessStudents.getInstance();
-    private ArrayList<Student> studentList = students.getStudentList();
+    private AccessStudents accessStudents;
+    private ArrayList<Student> students = new ArrayList<>();
+
     private ArrayAdapter<Student> studentArrayAdapter;
     private int selectedStudentPosition = -1;
 
@@ -31,29 +36,32 @@ public class StudentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_student_list);
 
-       // Bundle bundle =  getIntent().getExtras();
+        // Bundle bundle =  getIntent().getExtras();
         //if(bundle != null) {
-         //   studentList = (ArrayList<Student>) bundle.getSerializable("Students");
+        //   studentList = (ArrayList<Student>) bundle.getSerializable("Students");
         //}
         //else {
-          //  studentList = new ArrayList<>();
-            //Student one = new Student("12", "12", "Jane Doe");
-            //Student two = new Student("13", "13", "John Doe");
-            //studentList.add(one);
-            //studentList.add(two);
+        //  studentList = new ArrayList<>();
+        //Student one = new Student("12", "12", "Jane Doe");
+        //Student two = new Student("13", "13", "John Doe");
+        //studentList.add(one);
+        //studentList.add(two);
         //}
-        studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, studentList){
+        accessStudents = new AccessStudents();
+
+        students = accessStudents.getStudentList();
+        studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, students){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
+                View view = super.getView(position, convertView, parent);
 
-            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-            text1.setText(studentList.get(position).getStudentID());
-                text2.setText(studentList.get(position).getID());
+                text1.setText(students.get(position).getStudentID());
+                text2.setText(students.get(position).getID());
 
-            return view;
+                return view;
             }
         };
 
@@ -81,16 +89,11 @@ public class StudentListActivity extends AppCompatActivity {
         });
     }
 
-    public void buttonBackOnClick(View v) {
-        Intent backIntent = new Intent(StudentListActivity.this, AdminMenuActivity.class);
-        StudentListActivity.this.startActivity(backIntent);
-    }
-
     public void buttonCreateStudentOnClick(View v) {
         Intent createIntent = new Intent(StudentListActivity.this, CreateStudentActivity.class);
-        Bundle bundle = new Bundle();
+      /*  Bundle bundle = new Bundle();
         bundle.putSerializable("Students",studentList);
-        createIntent.putExtras(bundle);
+        createIntent.putExtras(bundle); */
         StudentListActivity.this.startActivity(createIntent);
     }
 
