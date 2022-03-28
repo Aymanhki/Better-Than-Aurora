@@ -33,10 +33,6 @@ public class InstructorStudentsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //accessStudentSections = new AccessStudentSections();
-       // studentSections = accessStudentSections.getStudentsInSection(currentSection.getSection());
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_students);
         ActionBar actionBar = getSupportActionBar();//back button
@@ -101,16 +97,6 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             }
         });
     }
-  /*  public void buttonUpdateGrade(View v) {
-        StudentSection currentStudentSection = studentSections.get(selectedStudentPosition);
-        EditText updateGrade = (EditText)findViewById(R.id.Grade);
-        currentStudentSection.setGrade(updateGrade.toString());
-        displayList();
-
-        StudentSection student = createStudentSectionFromEditText(currentStudentSection);
-
-
-    }*/
 
     private StudentSection createStudentSectionFromEditText(StudentSection student) {
         EditText updateGrade = (EditText)findViewById(R.id.Grade);
@@ -122,7 +108,6 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     public void buttonUpdateGrade(View v) {
         if (selectedStudentPosition != -1) {
-            // StudentSection student = createStudentSectionFromEditText();
             String result;
             StudentSection currentStudentSection = studentSections.get(selectedStudentPosition);
 
@@ -150,6 +135,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
         return "Not a valid grade.";
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){

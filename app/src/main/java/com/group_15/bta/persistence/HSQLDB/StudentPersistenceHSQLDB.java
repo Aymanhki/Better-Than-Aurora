@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentPersistenceHSQLDB implements StudentPersistence, Serializable {
     private String dbPath;
@@ -64,6 +65,27 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         }
 
         return students;
+    }
+    @Override
+    public ArrayList<Student> getStudent(Student currentStudent) {
+        final ArrayList<Student> students = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS WHERE STUDENTID = ?");
+            st.setString(1, currentStudent.getStudentID());
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                final Student student = fromResultSet(rs);
+                students.add(student);
+            }
+
+            rs.close();
+            st.close();
+
+            return students;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override

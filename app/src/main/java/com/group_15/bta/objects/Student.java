@@ -22,7 +22,12 @@ public class Student extends User implements Serializable{
     public Student() {
         enrolledSections = studentSectionPersistence.getSectionList();
     }
-
+    public Student(final String newID)
+    {
+        this.id = newID;
+        this.name = null;
+        this.password = null;
+    }
     //constructor (used on student side)
     public Student(String newName, String newPassword) {
         super(newName, newPassword);

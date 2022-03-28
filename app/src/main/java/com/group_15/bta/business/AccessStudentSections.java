@@ -2,6 +2,7 @@ package com.group_15.bta.business;
 
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.StudentSection;
+import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.persistence.StudentSectionPersistence;
@@ -19,6 +20,12 @@ public class AccessStudentSections implements StudentSectionPersistence {
     public AccessStudentSections() {
         studentSectionPersistence = Services.getStudentSectionPersistence();
     }
+
+    public AccessStudentSections(final StudentSectionPersistence studentSectionPersistence) {
+        this();
+        this.studentSectionPersistence = studentSectionPersistence;
+    }
+
 
     public static AccessStudentSections getInstance() {
         return ourInstance;

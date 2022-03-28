@@ -17,7 +17,10 @@ public class AccessCategories implements CategoryPersistence {
     }
 
     //public static AccessCategories getInstance() {return ourInstance;}
-
+    public AccessCategories(final CategoryPersistence categoryPersistence) {
+        this();
+        this.categoryPersistence = categoryPersistence;
+    }
 
     public ArrayList<Category> getCategoryList() {
         return categoryPersistence.getCategoryList();
@@ -28,6 +31,6 @@ public class AccessCategories implements CategoryPersistence {
     }
 
     public void deleteCategory(Category toRemove) {
-        categoryPersistence.insertCategory(toRemove);
+        categoryPersistence.deleteCategory(toRemove);
     }
 }

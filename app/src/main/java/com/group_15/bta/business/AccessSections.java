@@ -2,6 +2,8 @@ package com.group_15.bta.business;
 
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.persistence.SectionPersistence;
 
 import java.util.ArrayList;
@@ -15,10 +17,18 @@ public class AccessSections implements SectionPersistence {
         sectionPersistence = Services.getSectionPersistence();
     }
 
+    public AccessSections(final SectionPersistence sectionPersistence) {
+        this();
+        this.sectionPersistence = sectionPersistence;
+    }
     //public static AccessSections getInstance(){return ourInstance;}
 
     public ArrayList<Section> getSectionList() {
         return sectionPersistence.getSectionList();
+    }
+
+    public ArrayList<Section> getInstructorSections(String name) {
+        return sectionPersistence.getInstructorSections(name);
     }
 
     @Override

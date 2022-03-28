@@ -12,6 +12,9 @@ public interface SectionPersistence {
         return null;
     }
     ArrayList<Section> getSectionList();
+
+    ArrayList<Section> getInstructorSections(final String name);
+
     void insertSection(Section currentSection);
     void deleteSection(Section toRemove);
 

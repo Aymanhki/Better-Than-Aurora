@@ -41,20 +41,28 @@ public class InstructorSectionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        /*accessSections = new AccessSections();
-        sectionList = accessSections.getSectionList();*/
-accessSections = new AccessSections();
-        sectionList = accessSections.getSectionList();
+        accessSections = new AccessSections();
         super.onCreate(savedInstanceState);
         instructor = (Instructor) getIntent().getSerializableExtra(instructorLogInInstance.getUserTypeString(instructorAccountInstance));
         setContentView(R.layout.activity_instructor_sections);
         ActionBar actionBar = getSupportActionBar();//back button
         actionBar.setDisplayHomeAsUpEnabled(true);
-
+        sectionList = accessSections.getInstructorSections(currentUser.getName());
 
        listSections();
 
     }
+
+    //private ArrayList<Section> getInstructorsSection(ArrayList<Section> allSections){
+       // ArrayList<Section> instructorsSections = new ArrayList<>();
+       // for(int i=0; i<allSections.size(); i++){
+        //    if(allSections.get(i).getInstructor().equals(currentUser.getName())){
+         //       instructorsSections.add(allSections.get(i));
+         //   }
+       // }
+       // return instructorsSections;
+
+   // }
 
     private void listSections(){
         if (!sectionList.isEmpty()) {

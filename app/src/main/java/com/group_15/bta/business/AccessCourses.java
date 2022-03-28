@@ -17,7 +17,10 @@ public class AccessCourses implements CoursePersistence {
     }
 
    // public static AccessCourses getInstance() {return ourInstance;}
-
+   public AccessCourses(final CoursePersistence coursePersistence) {
+       this();
+       this.coursePersistence = coursePersistence;
+   }
 
     public ArrayList<Courses> getCourseList() {
         return coursePersistence.getCourseList();
