@@ -3,6 +3,7 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /*
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 public class Category implements Serializable {
     protected String Name;
     protected ArrayList<com.group_15.bta.objects.Courses> Courses;
-    private String coursesTableName;
 
     //constructor
     public Category(String Name){
@@ -38,5 +38,11 @@ public class Category implements Serializable {
 
     public void addCourse(Courses newCourse) {
         Courses.add(newCourse);
+    }
+
+    public boolean equals(final Category o)
+    {
+        return Objects.equals(this.Name, o.Name) &&
+                Objects.equals(this.Courses, o.Courses);
     }
 }

@@ -2,6 +2,7 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /*
  * Class for Courses object
@@ -71,5 +72,16 @@ public class Courses implements Serializable {
 
     public int getCreditHours() {
         return creditHours;
+    }
+
+    public boolean equals(final Courses o)
+    {
+        return Objects.equals(this.ID, o.ID) &&
+                Objects.equals(this.Description, o.Description) &&
+                Objects.equals(this.sections, o.sections) &&
+                Objects.equals(this.title, o.title) &&
+                Objects.equals(this.associatedCategory, o.associatedCategory) &&
+                Objects.equals(this.creditHours, o.creditHours);
+
     }
 }

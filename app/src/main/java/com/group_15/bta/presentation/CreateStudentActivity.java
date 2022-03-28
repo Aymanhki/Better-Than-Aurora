@@ -75,10 +75,9 @@ public class CreateStudentActivity extends AppCompatActivity {
     }
     private boolean findStudent(Student student){
         boolean result = false;
-        for (int i = 0; i < studentList.size(); i++){
-            String curr = studentList.get(i).getStudentID();
-            if (curr.equals(student.getStudentID())) {result = true;}
-        }
+        ArrayList<Student> studentFound = new ArrayList<>();
+        studentFound = accessStudents.getStudent(student);
+        if(studentFound.size() != 0) {result = true;}
         return result;
     }
 
