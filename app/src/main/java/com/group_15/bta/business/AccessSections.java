@@ -31,6 +31,10 @@ public class AccessSections implements SectionPersistence {
         return sectionPersistence.getInstructorSections(name);
     }
 
+    public ArrayList<Section> getCourseSections(String courseID){
+        return sectionPersistence.getCourseSections(courseID);
+    }
+
     @Override
     public void insertSection(Section currentSection) {
         sectionPersistence.insertSection(currentSection);

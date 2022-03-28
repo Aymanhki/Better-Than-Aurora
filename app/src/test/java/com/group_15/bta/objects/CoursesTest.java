@@ -2,8 +2,6 @@ package com.group_15.bta.objects;
 
 import org.junit.Test;
 
-import com.group_15.bta.objects.Courses;
-
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -13,17 +11,17 @@ public class CoursesTest {
     @Test
     public void testCourses(){
 
-        Courses courses;
-        Courses course2;
-        Courses course3;
+        Course courses;
+        Course course2;
+        Course course3;
         System.out.println("\nStarting Course Test");
 
-        courses = new Courses("Comp 2160", "Object Orientation");
+        courses = new Course("Comp 2160", "Object Orientation");
         assertNotNull(courses);
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));
 
-        course2 = new Courses("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science");
+        course2 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science");
         assertNotNull(course2);
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));
@@ -35,7 +33,7 @@ public class CoursesTest {
         String[] days = {"T","TR"};
         String[] time = {"10:00am", "11:00am"};
         Section section = new Section("A01",days,time,80);
-        course3 = new Courses("COMP 2160", "Object Orientation", "Objects and stuff.",sections);
+        course3 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",sections);
         assertNotNull(course2);
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));

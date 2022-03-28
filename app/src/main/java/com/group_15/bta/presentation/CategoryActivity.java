@@ -16,9 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.R;
-import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.business.AccessCourses;
 
 
@@ -26,11 +25,11 @@ import java.util.ArrayList;
 
 public class CategoryActivity extends AppCompatActivity {
     protected String Name;
-    private ArrayList<Courses> courses;
+    private ArrayList<Course> courses;
     protected AccessCourses courseList = new AccessCourses();
 
     public CategoryActivity() {
-        courses = new ArrayList<Courses>();
+        courses = new ArrayList<Course>();
     }
 
     ArrayAdapter arrayAdapter;
@@ -49,7 +48,7 @@ public class CategoryActivity extends AppCompatActivity {
             final TextView tView = (TextView)findViewById(R.id.CategoryName);
             tView.setText(this.Name);
 
-            courses = courseList.getCourseList();
+            courses = courseList.getCategoryCourses(Name);
 
             listCourses();
 
@@ -74,19 +73,22 @@ public class CategoryActivity extends AppCompatActivity {
             EditText CourseName = (EditText) findViewById(R.id.CourseName);
             EditText CourseDescription = (EditText) findViewById(R.id.CourseDescription);
             EditText CourseCreditHours = (EditText) findViewById(R.id.CourseCreditHours);
+            EditText TuitionFee = (EditText) findViewById(R.id.TuitionFee);
 
             if(CourseID.getText().toString().length() != 0 && CourseName.getText().toString().length() != 0 &&
-                    CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0) {
+                    CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0
+            && TuitionFee.getText().toString().length() !=0) {
 
+                int TF = Integer.parseInt(TuitionFee.getText().toString());
                 int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
-                Courses c = new Courses(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name);
+                Course c = new Course(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name);
                 courseList.insertCourses(c);
             }
             else
             {
                 Toast.makeText(CategoryActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
             }
-            courses = courseList.getCourseList();
+            courses = courseList.getCategoryCourses(Name);
 
             listCourses();
         }
@@ -97,7 +99,7 @@ public class CategoryActivity extends AppCompatActivity {
         for(int i =0; i< courses.size();i++){
             if(0 == courses.get(i).getID().compareTo(CourseID.getText().toString())){
                 courseList.deleteCourses(courses.get(i));
-                courses = courseList.getCourseList();
+                courses = courseList.getCategoryCourses(Name);
             }
         }
         listCourses();

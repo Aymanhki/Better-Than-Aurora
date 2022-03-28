@@ -17,13 +17,11 @@ import android.widget.TextView;
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InstructorSectionsActivity extends AppCompatActivity {
     private Instructor instructor;

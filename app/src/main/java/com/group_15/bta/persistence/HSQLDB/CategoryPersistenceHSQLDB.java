@@ -1,7 +1,7 @@
 package com.group_15.bta.persistence.HSQLDB;
 
 import com.group_15.bta.objects.Category;
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.persistence.CategoryPersistence;
 
 import java.io.Serializable;
@@ -52,7 +52,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
             final Statement statement = newConnection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM CATEGORIES");
             CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(newConnection);
-            ArrayList<Courses> courses = coursesGetter.getCourseList();
+            ArrayList<Course> courses = coursesGetter.getCourseList();
             while (resultSet.next()) {
                 final Category category = fromResultSet(resultSet);
 

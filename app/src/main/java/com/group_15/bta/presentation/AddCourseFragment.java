@@ -21,8 +21,6 @@ import android.widget.ListView;
 
 import com.group_15.bta.business.AccessCategories;
 import com.group_15.bta.objects.Category;
-import com.group_15.bta.objects.Courses;
-import com.group_15.bta.objects.Section;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;

@@ -20,7 +20,7 @@ import android.widget.ListView;
 
 import com.group_15.bta.R;
 import com.group_15.bta.objects.SectionListAdapter;
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,7 +83,7 @@ public class AddCourseCodeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Courses selectedCourse = AddCourseCodeFragmentArgs.fromBundle(requireArguments()).getCourse();
+        Course selectedCourse = AddCourseCodeFragmentArgs.fromBundle(requireArguments()).getCourse();
         sectionsList = view.findViewById(R.id.sections_list_fragment);
         sectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, selectedCourse.getSections());
         sectionsList.setAdapter(sectionsAdapted);

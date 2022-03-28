@@ -8,7 +8,7 @@ import java.util.Objects;
  * Class for Courses object
  * used to store the course id, description, and sections that are available for this course
  */
-public class Courses implements Serializable {
+public class Course implements Serializable {
 
     private String ID; //course id
     private String Description;//course description
@@ -17,12 +17,12 @@ public class Courses implements Serializable {
     private String associatedCategory;
     private int creditHours;
     //constructor
-    public Courses(String ID, String title) {
+    public Course(String ID, String title) {
         this.title = title;
         this.ID = ID;
     }
 
-    public Courses(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory) {
+    public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory) {
         sections = new ArrayList<>();
         ID = courseID;
         title = courseTitle;
@@ -32,7 +32,7 @@ public class Courses implements Serializable {
     }
 
     //constructor
-    public Courses(String ID, String title, String Description, ArrayList<Section> sections) {
+    public Course(String ID, String title, String Description, ArrayList<Section> sections) {
         this.ID = ID;
         this.title = title;
         this.Description = Description;
@@ -74,7 +74,7 @@ public class Courses implements Serializable {
         return creditHours;
     }
 
-    public boolean equals(final Courses o)
+    public boolean equals(final Course o)
     {
         return Objects.equals(this.ID, o.ID) &&
                 Objects.equals(this.Description, o.Description) &&

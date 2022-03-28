@@ -81,9 +81,10 @@
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/CourseDescription"
-            android:layout_width="720dp"
+            android:layout_width="594dp"
             android:layout_height="66dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="96dp"
@@ -103,6 +104,18 @@
             android:hint="CH"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TuitionFee"
+            android:layout_width="114dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="96dp"
+            android:ems="10"
+            android:hint="Tuition Fee"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

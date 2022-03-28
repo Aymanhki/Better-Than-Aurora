@@ -1,9 +1,6 @@
 package com.group_15.bta.persistence.HSQLDB;
 
-import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
 
 import java.io.Serializable;
@@ -14,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StudentPersistenceHSQLDB implements StudentPersistence, Serializable {
     private String dbPath;

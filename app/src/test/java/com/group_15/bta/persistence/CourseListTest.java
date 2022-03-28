@@ -1,15 +1,8 @@
 package com.group_15.bta.persistence;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import com.group_15.bta.objects.Courses;
-import com.group_15.bta.business.AccessCourses;
 
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -17,29 +10,30 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class CourseListTest implements CoursePersistence {
-    private ArrayList<Courses> courses;
+    private ArrayList<Course> courses;
 
     public CourseListTest() {
         this.courses = new ArrayList<>();
 
-        courses.add(new Courses("COMP3010", "Distributed Computing"));
-        courses.add(new Courses("COMP3020", "Human-Computer Interaction"));
-        courses.add(new Courses("COMP3350", "Software Engineering I"));
-        courses.add(new Courses("COMP3380", "Databases"));
+        courses.add(new Course("COMP3010", "Distributed Computing"));
+        courses.add(new Course("COMP3020", "Human-Computer Interaction"));
+        courses.add(new Course("COMP3350", "Software Engineering I"));
+        courses.add(new Course("COMP3380", "Databases"));
     }
     @Override
-    public ArrayList<Courses> getCourseList() {
+    public ArrayList<Course> getCourseList() {
         return courses;
     }
+    public ArrayList<Course> getCategoryCourses(String catName){return courses;}
 
     @Override
-    public void insertCourses(Courses currentCourse) {
+    public void insertCourses(Course currentCourse) {
         // don't bother checking for duplicates
         courses.add(currentCourse);
     }
 
     @Override
-    public void updateCourse(Courses currentCourse) {
+    public void updateCourse(Course currentCourse) {
         int index;
 
         index = courses.indexOf(currentCourse.getID());
@@ -50,7 +44,7 @@ public class CourseListTest implements CoursePersistence {
     }
 
     @Override
-    public void deleteCourses(Courses currentCourse) {
+    public void deleteCourses(Course currentCourse) {
         int index;
 
         index = courses.indexOf(currentCourse);

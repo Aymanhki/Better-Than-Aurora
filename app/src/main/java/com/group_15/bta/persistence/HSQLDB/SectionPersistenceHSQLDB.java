@@ -1,8 +1,6 @@
 package com.group_15.bta.persistence.HSQLDB;
 
-import com.group_15.bta.objects.Courses;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.SectionPersistence;
 
 import java.io.Serializable;
@@ -79,6 +77,31 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM SECTIONS WHERE INSTRUCTOR = ?");
             st.setString(1, name);
+
+            final ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                final Section record = fromResultSet(rs);
+                sections.add(record);
+            }
+
+            rs.close();
+            st.close();
+
+            return sections;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Section> getCourseSections(String courseID) {
+        final ArrayList<Section> sections = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM SECTIONS WHERE COURSEID = ?");
+            st.setString(1, courseID);
 
             final ResultSet rs = st.executeQuery();
 

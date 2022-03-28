@@ -12,19 +12,19 @@ import java.util.Objects;
  */
 public class Category implements Serializable {
     protected String Name;
-    protected ArrayList<com.group_15.bta.objects.Courses> Courses;
+    protected ArrayList<Course> Course;
 
     //constructor
     public Category(String Name){
         this.Name = Name; //category name
-        Courses = new ArrayList<Courses>(); //courses under this category
+        Course = new ArrayList<Course>(); //courses under this category
     }
 
     //constructor
-    public Category(String Name, ArrayList<Courses> courses)
+    public Category(String Name, ArrayList<Course> courses)
     {
         this.Name = Name;
-        this.Courses = courses;
+        this.Course = courses;
     }
 
     //getters
@@ -32,17 +32,17 @@ public class Category implements Serializable {
         return Name;
     }
 
-    public ArrayList<Courses> getCourses() {
-        return Courses;
+    public ArrayList<Course> getCourses() {
+        return Course;
     }
 
-    public void addCourse(Courses newCourse) {
-        Courses.add(newCourse);
+    public void addCourse(Course newCourse) {
+        Course.add(newCourse);
     }
 
     public boolean equals(final Category o)
     {
         return Objects.equals(this.Name, o.Name) &&
-                Objects.equals(this.Courses, o.Courses);
+                Objects.equals(this.Course, o.Course);
     }
 }

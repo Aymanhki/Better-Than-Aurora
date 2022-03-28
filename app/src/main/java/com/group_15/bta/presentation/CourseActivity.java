@@ -50,7 +50,7 @@ public class CourseActivity extends AppCompatActivity {
         tView.setText(this.Name);
         dView.setText(this.Description);
 
-        sections = sectionList.getSectionList();
+        sections = sectionList.getCourseSections(Name);
 
         listSections();
     }
@@ -84,7 +84,7 @@ public class CourseActivity extends AppCompatActivity {
                     Location.getText().toString(), Cap, Cap, Name, Category);
 
             sectionList.insertSection(s);
-            sections = sectionList.getSectionList();
+            sections = sectionList.getCourseSections(Name);
             Services.setCourseToTrue();
         }
         else
@@ -100,7 +100,7 @@ public class CourseActivity extends AppCompatActivity {
         for(int i = 0; i<sections.size();i++){
             if(0 == sections.get(i).getSection().compareTo(this.Name + " - " +section.getText().toString())){
                 sectionList.deleteSection(sections.get(i));
-                sections = sectionList.getSectionList();
+                sections = sectionList.getCourseSections(Name);
             }
         }
         listSections();

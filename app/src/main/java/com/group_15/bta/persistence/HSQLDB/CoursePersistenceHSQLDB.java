@@ -1,6 +1,6 @@
 package com.group_15.bta.persistence.HSQLDB;
 
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.CoursePersistence;
 
@@ -38,18 +38,18 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         return toReturn;
     }
 
-    private Courses fromResultSet(final ResultSet rs) throws SQLException {
+    private Course fromResultSet(final ResultSet rs) throws SQLException {
         final String courseID = rs.getString("COURSEID");
         final String courseName = rs.getString("TITLE");
         final String courseDescription = rs.getString("DESCRIPTION");
         final String category = rs.getString("NAME");
         final int credit = rs.getInt("CREDIT");
-        return new Courses(courseID, courseName, courseDescription, credit, category);
+        return new Course(courseID, courseName, courseDescription, credit, category);
     }
 
     @Override
-    public ArrayList<Courses> getCourseList() {
-        final ArrayList<Courses> courses = new ArrayList<>();
+    public ArrayList<Course> getCourseList() {
+        final ArrayList<Course> courses = new ArrayList<>();
 
         try (final Connection newConnection = connection()) {
             final Statement newStatement = newConnection.createStatement();
@@ -58,7 +58,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             ArrayList<Section> sections = sectionsGetter.getSectionList();
 
             while (newResultSet.next()) {
-                final Courses course = fromResultSet(newResultSet);
+                final Course course = fromResultSet(newResultSet);
 
 
                 for (int i = 0; i < sections.size(); i++) {
@@ -81,7 +81,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
 
 
     @Override
-    public void insertCourses(Courses currentCourse) {
+    public void insertCourses(Course currentCourse) {
         try (final Connection newConnection = connection()) {
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
@@ -102,7 +102,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     }
 
     @Override
-    public void updateCourse(Courses currentCourse) {
+    public void updateCourse(Course currentCourse) {
         try (final Connection newConnection = connection()) {
             //COURSEID , TITLE , DESCRIPTION , CREDIT,  NAME VARCHAR(100))
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?  WHERE COURSEID = ?");
@@ -118,7 +118,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     }
 
     @Override
-    public void deleteCourses(Courses toRemove) {
+    public void deleteCourses(Course toRemove) {
         try (final Connection newConnection = connection()) {
             PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE COURSEID = ?");
             statement.setString(1, toRemove.getID());
@@ -128,6 +128,31 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
+        }
+    }
+
+    @Override
+    public ArrayList<Course> getCategoryCourses(String catName){
+        final ArrayList<Course> courses = new ArrayList<>();
+        try(final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM COURSES WHERE NAME = ?");
+            st.setString(1,catName);
+
+            final ResultSet rs = st.executeQuery();
+
+            while(rs.next()){
+                final Course record = fromResultSet(rs);
+                courses.add(record);
+            }
+
+            rs.close();
+            st.close();
+
+            return courses;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
         }
     }
 }

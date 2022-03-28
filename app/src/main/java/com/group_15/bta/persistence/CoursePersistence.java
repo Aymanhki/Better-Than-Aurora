@@ -1,7 +1,7 @@
 package com.group_15.bta.persistence;
 
 import com.group_15.bta.business.AccessCourses;
-import com.group_15.bta.objects.Courses;
+import com.group_15.bta.objects.Course;
 
 import java.util.ArrayList;
 
@@ -10,11 +10,14 @@ public interface CoursePersistence {
     static AccessCourses getInstance() {
         return null;
     }
-    ArrayList<Courses> getCourseList();
-    void insertCourses(Courses currentCourse);
+    ArrayList<Course> getCourseList();
 
-    void updateCourse(Courses currentCourse);
+    ArrayList<Course> getCategoryCourses(String catName);
 
-    void deleteCourses(Courses toRemove);
+    void insertCourses(Course currentCourse);
+
+    void updateCourse(Course currentCourse);
+
+    void deleteCourses(Course toRemove);
 
 }

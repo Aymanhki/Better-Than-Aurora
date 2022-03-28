@@ -14,6 +14,7 @@ public interface SectionPersistence {
     ArrayList<Section> getSectionList();
 
     ArrayList<Section> getInstructorSections(final String name);
+    ArrayList<Section> getCourseSections(final String courseID);
 
     void insertSection(Section currentSection);
     void deleteSection(Section toRemove);

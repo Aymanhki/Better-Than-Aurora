@@ -3,9 +3,7 @@ package com.group_15.bta.business;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.group_15.bta.objects.Category;
-import com.group_15.bta.objects.Courses;
-import com.group_15.bta.persistence.CategoryListTest;
+import com.group_15.bta.objects.Course;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,13 +23,13 @@ public class AccessCoursesTest {
     @Test
     public void test1()
     {
-        ArrayList<Courses> courses = accessCourses.getCourseList();
+        ArrayList<Course> courses = accessCourses.getCourseList();
         assertNotNull(courses);
 
         int currSize = courses.size();
         assertEquals("4", String.valueOf(currSize));
 
-        accessCourses.insertCourses(new Courses("COMP4000", "Some Course"));
+        accessCourses.insertCourses(new Course("COMP4000", "Some Course"));
         courses = accessCourses.getCourseList();
         currSize = courses.size();
         assertEquals("5", String.valueOf(currSize));

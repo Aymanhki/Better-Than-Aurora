@@ -1,6 +1,5 @@
 package com.group_15.bta.objects;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +15,12 @@ import com.group_15.bta.R;
 
 import java.util.ArrayList;
 
-public class CourseListAdapter extends ArrayAdapter<Courses> {
+public class CourseListAdapter extends ArrayAdapter<Course> {
 
     private Context mainContext;
     private int resource;
 
-    public CourseListAdapter(Context context, int resource, ArrayList<Courses> courses) {
+    public CourseListAdapter(Context context, int resource, ArrayList<Course> courses) {
         super(context, resource, courses);
         mainContext = context;
         this.resource = resource;

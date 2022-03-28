@@ -2,10 +2,6 @@ package com.group_15.bta.objects;
 
 import org.junit.Test;
 
-import com.group_15.bta.objects.Category;
-import com.group_15.bta.objects.Courses;
-import com.group_15.bta.objects.Section;
-
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -19,8 +15,8 @@ public class CategoryTest {
 
         System.out.println("\nStarting Category Test");
 
-        Courses course1 = new Courses("test", "test");
-        ArrayList<Courses> courses = new ArrayList<>();
+        Course course1 = new Course("test", "test");
+        ArrayList<Course> courses = new ArrayList<>();
         courses.add(course1);
 
         cat = new Category("Test Category");

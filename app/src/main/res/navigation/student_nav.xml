@@ -125,7 +125,7 @@
             app:popExitAnim="@anim/exit_left_to_right" />
         <argument
             android:name="Course"
-            app:argType="com.group_15.bta.objects.Courses" />
+            app:argType="com.group_15.bta.objects.Course" />
     </fragment>
     <fragment
         android:id="@+id/add_a_course_with_section_confirmation"
