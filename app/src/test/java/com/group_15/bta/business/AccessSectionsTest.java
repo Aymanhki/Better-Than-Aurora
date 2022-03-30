@@ -37,6 +37,9 @@ public class AccessSectionsTest {
         ArrayList<Section> instructorSections = accessSections.getInstructorSections("Sara");
         assertEquals("Sara", instructorSections.get(0).getInstructor());
 
+        ArrayList<Section> courseSections = accessSections.getCourseSections("COMP 4000");
+        assertEquals("COMP 4000", courseSections.get(0).getAssociatedCourse());
+
         accessSections.insertSection(new Section("A05", days, time, 120));
         sections = accessSections.getSectionList();
         currSize = sections.size();

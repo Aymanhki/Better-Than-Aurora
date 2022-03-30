@@ -35,8 +35,6 @@ public class SectionTest  {
         assertTrue(time.equals(section2.getTimes()));
         String testTime =  " " + time[0] + " - " + time[1];
         assertTrue(testTime.equals(section2.getTime()));
-        String testDays = days[0] + ", " + days[1];
-        assertTrue(testDays.equals(section2.getDays()));
         assertTrue("Online".equals(section2.getLocation()));
         assertTrue("10".equals(String.valueOf(section2.getAvailable())));
         assertTrue("100".equals(String.valueOf(section2.getCAP())));

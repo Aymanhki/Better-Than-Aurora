@@ -14,13 +14,13 @@ import java.util.Objects;
 public class Student extends User implements Serializable{
 
 
-    private ArrayList<StudentSection> enrolledSections;
+   // private ArrayList<StudentSection> enrolledSections;
     private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private int MAX_CLASSES =  5;
 
     //default constructor
     public Student() {
-        enrolledSections = studentSectionPersistence.getSectionList();
+       // enrolledSections = studentSectionPersistence.getSectionList();
     }
     public Student(final String newID)
     {
@@ -31,7 +31,7 @@ public class Student extends User implements Serializable{
     //constructor (used on student side)
     public Student(String newName, String newPassword) {
         super(newName, newPassword);
-        enrolledSections = studentSectionPersistence.getSectionList();
+       // enrolledSections = studentSectionPersistence.getSectionList();
     }
 
     //constructor (used on admin side)
@@ -39,7 +39,7 @@ public class Student extends User implements Serializable{
         this.id = newID;
         this.password = newPassword;
         this.name = newStudentName;
-        enrolledSections = studentSectionPersistence.getSectionList();
+       // enrolledSections = studentSectionPersistence.getSectionList();
     }
 
 
@@ -81,7 +81,7 @@ public class Student extends User implements Serializable{
     }
 
     public void addSection(StudentSection addedSection) {
-            enrolledSections.add(addedSection);
+         //   enrolledSections.add(addedSection);
             studentSectionPersistence.insertSection(addedSection);
     }
 
