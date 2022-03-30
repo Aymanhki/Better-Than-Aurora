@@ -91,11 +91,13 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             statement.setString(5, currentCourse.getAssociatedCategory());
 
             statement.executeUpdate();
-            SectionPersistenceHSQLDB sectionInserter = new SectionPersistenceHSQLDB(newConnection);
-            for (int i = 0; i < currentCourse.getSections().size(); i++) {
-                sectionInserter.insertSection(currentCourse.getSections().get(i));
-            }
+            if( currentCourse.getSections() != null) {
 
+                SectionPersistenceHSQLDB sectionInserter = new SectionPersistenceHSQLDB(newConnection);
+                for (int i = 0; i < currentCourse.getSections().size(); i++) {
+                    sectionInserter.insertSection(currentCourse.getSections().get(i));
+                }
+            }
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

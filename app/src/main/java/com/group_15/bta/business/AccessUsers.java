@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class AccessUsers implements ILogInHandler, UserPersistence {
 
-    private final UserPersistence userPersistence = Services.getUserPersistence();
+    private UserPersistence userPersistence = Services.getUserPersistence();
     private final ArrayList<User> appCurrentUsers;
     private User currentUser = null;
     public final String INVALID_DATA_MESSAGE = "Multiple Users";
@@ -42,6 +42,11 @@ public class AccessUsers implements ILogInHandler, UserPersistence {
         } else {
             appCurrentUsers = new ArrayList<>();
         }
+    }
+
+    public AccessUsers(final UserPersistence userPersistence) {
+        this();
+        this.userPersistence = userPersistence;
     }
 
     @Override

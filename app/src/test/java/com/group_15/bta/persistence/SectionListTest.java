@@ -44,6 +44,19 @@ public class SectionListTest implements SectionPersistence {
     }
 
     @Override
+    public ArrayList<Section> getCourseSections(String courseID) {
+        ArrayList<Section> courseSections = new ArrayList<>();
+        for (int i = 0; i < sections.size(); i++) {
+            if(sections.get(i).getAssociatedCourse()!=null) {
+                if (sections.get(i).getAssociatedCourse().equals(courseID)) {
+                    courseSections.add(sections.get(i));
+                }
+            }
+            }
+        return courseSections;
+    }
+
+    @Override
     public void updateSection(Section currentSection) {
         int index;
 

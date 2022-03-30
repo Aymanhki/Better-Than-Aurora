@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-public class CoursesTest {
+public class CourseTest {
 
     @Test
     public void testCourses(){
