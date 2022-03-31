@@ -36,6 +36,24 @@
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_category.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_category.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_a_course_with_code.xml" value="0.25416666666666665" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/activity_student_account.xml" value="0.13802083333333334" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_account_summary.xml" value="0.31040564373897706" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_add_a_course.xml" value="0.31040564373897706" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_add_a_course_with_code.xml" value="0.31040564373897706" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_add_or_drop_courses.xml" value="0.1796875" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_history.xml" value="0.234375" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout-land/fragment_summary_by_term.xml" value="0.234375" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/activity_student_account.xml" value="0.36666666666666664" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_account_summary.xml" value="0.67" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_add_a_course.xml" value="0.28940217391304346" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_add_a_course_with_code.xml" value="0.28940217391304346" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_add_or_drop_courses.xml" value="0.17831813576494426" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_drop_a_course.xml" value="0.28940217391304346" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_student_courses.xml" value="0.17831813576494426" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_student_home.xml" value="0.1" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_student_profile.xml" value="0.17831813576494426" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_student_settings.xml" value="0.28940217391304346" />
+        <entry key="..\:/interface_design_branch/app/src/main/res/layout/fragment_summary_by_term.xml" value="0.17272727272727273" />
         <entry key="app/src/main/res/drawable/edittextwithborder.xml" value="0.32" />
         <entry key="app/src/main/res/layout-land/activity_student_account.xml" value="0.33430913348946134" />
         <entry key="app/src/main/res/layout-land/course_list_item.xml" value="0.26851851851851855" />

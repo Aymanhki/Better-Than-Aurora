@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.AccountSummaryFragment"
+    android:background="@color/cosmic_latte"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center">
+
+
+
+
+    <Button
+        android:id="@+id/open_account_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account Summary by Term"
+        android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+</FrameLayout>
