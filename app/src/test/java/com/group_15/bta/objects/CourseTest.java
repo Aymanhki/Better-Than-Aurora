@@ -21,7 +21,7 @@ public class CourseTest {
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));
 
-        course2 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science");
+        course2 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science", 1782.25);
         assertNotNull(course2);
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));

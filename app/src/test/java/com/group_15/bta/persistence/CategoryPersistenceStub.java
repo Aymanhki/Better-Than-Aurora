@@ -1,22 +1,13 @@
 package com.group_15.bta.persistence;
 
-import org.junit.Before;
-import org.junit.Test;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.group_15.bta.business.AccessCategories;
-
 import com.group_15.bta.objects.Category;
 
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
 
-public class CategoryListTest implements CategoryPersistence {
+public class CategoryPersistenceStub implements CategoryPersistence {
     private ArrayList<Category> categories;
 
-    public CategoryListTest() {
+    public CategoryPersistenceStub() {
         this.categories = new ArrayList<>();
 
         categories.add(new Category("COMP3010"));

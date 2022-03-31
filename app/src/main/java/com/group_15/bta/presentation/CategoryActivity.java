@@ -79,9 +79,9 @@ public class CategoryActivity extends AppCompatActivity {
                     CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0
             && TuitionFee.getText().toString().length() !=0) {
 
-                int TF = Integer.parseInt(TuitionFee.getText().toString());
+                double TF = Double.parseDouble(TuitionFee.getText().toString());
                 int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
-                Course c = new Course(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name);
+                Course c = new Course(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name, TF);
                 courseList.insertCourses(c);
             }
             else

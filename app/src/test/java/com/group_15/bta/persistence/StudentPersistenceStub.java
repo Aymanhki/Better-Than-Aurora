@@ -1,28 +1,13 @@
 package com.group_15.bta.persistence;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import com.group_15.bta.persistence.StudentPersistence;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.AccessSections;
-
-import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.SectionPersistence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-public class StudentListTest implements StudentPersistence {
+public class StudentPersistenceStub implements StudentPersistence {
     private ArrayList<Student> students;
 
-    public StudentListTest() {
+    public StudentPersistenceStub() {
         this.students = new ArrayList<>();
 
         students.add(new Student("101"));

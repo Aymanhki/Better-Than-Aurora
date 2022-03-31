@@ -3,23 +3,21 @@ package com.group_15.bta.business;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.CategoryListTest;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.SectionListTest;
+import com.group_15.bta.persistence.SectionPersistenceStub;
 
 public class AccessSectionsTest {
     private AccessSections accessSections;
 
     @Before
     public void setUp() {
-        this.accessSections = new AccessSections(new SectionListTest());
+        this.accessSections = new AccessSections(new SectionPersistenceStub());
     }
 
     @Test

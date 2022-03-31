@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
 
         } catch (final IOException ioe) {
-            // Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
+            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
 

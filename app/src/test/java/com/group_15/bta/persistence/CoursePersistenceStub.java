@@ -1,18 +1,13 @@
 package com.group_15.bta.persistence;
 
-import java.util.ArrayList;
-
 import com.group_15.bta.objects.Course;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
 
-public class CourseListTest implements CoursePersistence {
+public class CoursePersistenceStub implements CoursePersistence {
     private ArrayList<Course> courses;
 
-    public CourseListTest() {
+    public CoursePersistenceStub() {
         this.courses = new ArrayList<>();
 
         courses.add(new Course("COMP3010", "Distributed Computing"));

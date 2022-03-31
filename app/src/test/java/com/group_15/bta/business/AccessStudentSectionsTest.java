@@ -3,25 +3,22 @@ package com.group_15.bta.business;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.StudentSection;
-import com.group_15.bta.persistence.CategoryListTest;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.StudentListTest;
-import com.group_15.bta.persistence.StudentSectionListTest;
+import com.group_15.bta.persistence.StudentSectionPersistenceStub;
 
 public class AccessStudentSectionsTest {
     private AccessStudentSections accessStudentSections;
 
     @Before
     public void setUp() {
-        this.accessStudentSections = new AccessStudentSections(new StudentSectionListTest());
+        this.accessStudentSections = new AccessStudentSections(new StudentSectionPersistenceStub());
     }
 
     @Test

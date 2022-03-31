@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.group_15.bta.objects.Category;
-import com.group_15.bta.persistence.CategoryListTest;
+import com.group_15.bta.persistence.CategoryPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class AccessCategoriesTest {
 
     @Before
     public void setUp() {
-        this.accessCategories = new AccessCategories(new CategoryListTest());
+        this.accessCategories = new AccessCategories(new CategoryPersistenceStub());
     }
 
     @Test
