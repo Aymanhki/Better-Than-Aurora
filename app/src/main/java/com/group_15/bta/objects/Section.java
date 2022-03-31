@@ -92,9 +92,7 @@ public class Section implements Serializable {
         return section;
     }
 
-    public String getTime() {
-        return " " + Time[0] + " - " + Time[1];
-    }
+
 
     public String getDays() {
         String ret = classDays[0].toString();

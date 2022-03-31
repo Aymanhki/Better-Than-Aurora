@@ -4,7 +4,6 @@ import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.persistence.HSQLDB.CategoryPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.CoursePersistenceHSQLDB;
-import com.group_15.bta.persistence.HSQLDB.PersistenceException;
 import com.group_15.bta.persistence.HSQLDB.SectionPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentSectionPersistenceHSQLDB;
@@ -16,7 +15,6 @@ import com.group_15.bta.persistence.UserPersistence;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class Services implements Serializable {
     private static StudentPersistence studentPersistence = null;

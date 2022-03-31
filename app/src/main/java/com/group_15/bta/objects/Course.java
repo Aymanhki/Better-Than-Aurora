@@ -16,19 +16,21 @@ public class Course implements Serializable {
     private String title;
     private String associatedCategory;
     private int creditHours;
+    private double tuition;
     //constructor
     public Course(String ID, String title) {
         this.title = title;
         this.ID = ID;
     }
 
-    public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory) {
+    public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory, double tuition) {
         sections = new ArrayList<>();
         ID = courseID;
         title = courseTitle;
         Description = courseDescription;
         this.associatedCategory = associatedCategory;
         creditHours = credit;
+        this.tuition = tuition;
     }
 
     //constructor
@@ -83,5 +85,8 @@ public class Course implements Serializable {
                 Objects.equals(this.associatedCategory, o.associatedCategory) &&
                 Objects.equals(this.creditHours, o.creditHours);
 
+    }
+
+    public double getTuition() { return tuition;
     }
 }

@@ -10,14 +10,14 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import com.group_15.bta.persistence.CourseListTest;
+import com.group_15.bta.persistence.CoursePersistenceStub;
 
 public class AccessCoursesTest {
     private AccessCourses accessCourses;
 
     @Before
     public void setUp() {
-        this.accessCourses = new AccessCourses(new CourseListTest());
+        this.accessCourses = new AccessCourses(new CoursePersistenceStub());
     }
 
     @Test

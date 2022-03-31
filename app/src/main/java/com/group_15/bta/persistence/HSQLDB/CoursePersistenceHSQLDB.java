@@ -5,6 +5,7 @@ import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.CoursePersistence;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +45,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         final String courseDescription = rs.getString("DESCRIPTION");
         final String category = rs.getString("NAME");
         final int credit = rs.getInt("CREDIT");
-        return new Course(courseID, courseName, courseDescription, credit, category);
+        final double tuition = rs.getDouble("TUITION");
+        return new Course(courseID, courseName, courseDescription, credit, category, tuition);
     }
 
     @Override
@@ -83,13 +85,13 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public void insertCourses(Course currentCourse) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
             statement.setString(2, currentCourse.getTitle());
             statement.setString(3, currentCourse.getDescription());
             statement.setInt(4, currentCourse.getCreditHours());
             statement.setString(5, currentCourse.getAssociatedCategory());
-
+            statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
             statement.executeUpdate();
             if( currentCourse.getSections() != null) {
 
@@ -106,13 +108,13 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public void updateCourse(Course currentCourse) {
         try (final Connection newConnection = connection()) {
-            //COURSEID , TITLE , DESCRIPTION , CREDIT,  NAME VARCHAR(100))
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?  WHERE COURSEID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?, TUITION = ?  WHERE COURSEID = ?");
             statement.setString(1, currentCourse.getTitle());
             statement.setString(2, currentCourse.getDescription());
             statement.setString(3, String.valueOf(currentCourse.getCreditHours()));
             statement.setString(4, currentCourse.getAssociatedCategory());
             statement.setString(5, currentCourse.getID());
+            statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

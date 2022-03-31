@@ -20,7 +20,7 @@ import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.SectionPersistence;
+import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.business.AccessSections;
 
 public class CourseActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class CourseActivity extends AppCompatActivity {
     protected String Description;
     protected String Category;
     protected ArrayList<Section> sections;
-    protected ArrayAdapter arrayAdapter;
+    protected SectionListAdapter sectionsAdapted;
     protected AccessSections sectionList = new AccessSections();
 
     public CourseActivity(){ sections = new ArrayList<Section>();}
@@ -109,24 +109,9 @@ public class CourseActivity extends AppCompatActivity {
     private void listSections(){
         ListView listView = (ListView) findViewById(R.id.sectionsList);
         String sectionName = this.Name;
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, sections) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                String keyPoints = sections.get(position).getSection() + " Instructor: " + sections.get(position).getInstructor() + " Location: " + sections.get(position).getLocation();
-                String info = "Day(s): " + sections.get(position).getDays() + " Time: " + sections.get(position).getTime() + " CAP: " + sections.get(position).getCap();
-
-                text1.setText(keyPoints);
-                text2.setText(info);
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
+        sectionsAdapted = new SectionListAdapter(this, R.layout.section_list_item, sections);
+        listView.setAdapter(sectionsAdapted);
     }
 
 

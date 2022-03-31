@@ -33,8 +33,7 @@ public class SectionTest  {
         assertTrue("Sara".equals(section2.getInstructor()));
         assertTrue(days.equals(section2.getDaysRaw()));
         assertTrue(time.equals(section2.getTimes()));
-        String testTime =  " " + time[0] + " - " + time[1];
-        assertTrue(testTime.equals(section2.getTime()));
+
         assertTrue("Online".equals(section2.getLocation()));
         assertTrue("10".equals(String.valueOf(section2.getAvailable())));
         assertTrue("100".equals(String.valueOf(section2.getCAP())));
