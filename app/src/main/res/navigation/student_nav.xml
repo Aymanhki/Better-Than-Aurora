@@ -38,7 +38,15 @@
         android:id="@+id/student_profile"
         android:name="com.group_15.bta.presentation.StudentProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_student_profile" />
+        tools:layout="@layout/fragment_student_profile" >
+        <action
+            android:id="@+id/action_student_profile_to_accountSummaryFragment"
+            app:destination="@id/accountSummaryFragment"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_right_to_left"
+            app:popExitAnim="@anim/exit_right_to_left" />
+    </fragment>
     <fragment
         android:id="@+id/add_or_drop_courses"
         android:name="com.group_15.bta.presentation.AddOrDropCourseFragment"
@@ -159,4 +167,22 @@
             android:name="courseToBeDropped"
             app:argType="com.group_15.bta.objects.StudentSection" />
     </fragment>
+    <fragment
+        android:id="@+id/accountSummaryFragment"
+        android:name="com.group_15.bta.presentation.AccountSummaryFragment"
+        android:label="AccountSummaryFragment"
+        tools:layout="@layout/fragment_account_summary">
+        <action
+            android:id="@+id/action_accountSummaryFragment_to_summaryByTermFragment"
+            app:destination="@id/summaryByTermFragment"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_right_to_left"
+            app:popExitAnim="@anim/exit_right_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryByTermFragment"
+        android:name="com.group_15.bta.presentation.SummaryByTermFragment"
+        android:label="fragment_summary_by_term"
+        tools:layout="@layout/fragment_summary_by_term" />
 </navigation>

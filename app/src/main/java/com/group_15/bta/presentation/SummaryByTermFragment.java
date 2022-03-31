@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
@@ -16,10 +18,10 @@ import com.group_15.bta.objects.Student;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudentProfileFragment#newInstance} factory method to
+ * Use the {@link SummaryByTermFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudentProfileFragment extends Fragment {
+public class SummaryByTermFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,9 +31,10 @@ public class StudentProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Student currentUser;
-    public StudentProfileFragment() {
+    //private Student currentUser = (Student) new AccessUsers().getCurrentUser();
+    public SummaryByTermFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -40,11 +43,11 @@ public class StudentProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment student_profile.
+     * @return A new instance of fragment summary_by_term.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudentProfileFragment newInstance(String param1, String param2) {
-        StudentProfileFragment fragment = new StudentProfileFragment();
+    public static SummaryByTermFragment newInstance(String param1, String param2) {
+        SummaryByTermFragment fragment = new SummaryByTermFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,23 +58,27 @@ public class StudentProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Account Summary");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_profile, container, false);
+        return inflater.inflate(R.layout.fragment_summary_by_term, container, false);
+
+
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        StudentAccountActivity.setFragmentNavigationButton(view, R.id.show_summary, R.id.action_student_profile_to_accountSummaryFragment);
-
     }
 }
