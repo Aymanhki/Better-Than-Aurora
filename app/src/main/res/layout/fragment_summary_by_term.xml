@@ -3,16 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.StudentProfileFragment"
+    tools:context=".presentation.SummaryByTermFragment"
     android:background="@color/cosmic_latte">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/show_summary"
+    <TextView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="You owe a lot of money, basically"
+        />
+    <TableLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Student Records"
-        android:textAllCaps="false" />
+        
         />
 
 </FrameLayout>
