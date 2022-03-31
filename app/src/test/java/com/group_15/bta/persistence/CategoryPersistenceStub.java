@@ -9,11 +9,11 @@ public class CategoryPersistenceStub implements CategoryPersistence {
 
     public CategoryPersistenceStub() {
         this.categories = new ArrayList<>();
-
-        categories.add(new Category("COMP3010"));
-        categories.add(new Category("COMP3020"));
-        categories.add(new Category("COMP3350"));
-        categories.add(new Category("COMP3380"));
+        categories.add(new Category("Computer Science"));
+        categories.add(new Category("Biological Sciences"));
+        categories.add(new Category("Chemistry"));
+        categories.add(new Category("English"));
+        categories.add(new Category("Mathematics"));
     }
     @Override
     public ArrayList<Category> getCategoryList() {

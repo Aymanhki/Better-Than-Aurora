@@ -15,14 +15,19 @@ import android.widget.Toast;
 
 import com.group_15.bta.application.Main;
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessCourses;
+import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.business.DataGenerator;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.User;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +43,48 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         logInHandler = new AccessUsers();
         handleLogIn();
+        ArrayList<Course> courses = new AccessCourses().getCourseList();
+        System.out.println("\n");
+        for(int i=0; i<courses.size(); i++)
+        {
+            System.out.println("courses.add(new Course(\""+courses.get(i).getID()+"\", \""+courses.get(i).getTitle()+"\", \""+courses.get(i).getDescription()+"\", "+courses.get(i).getCreditHours()+", \""+courses.get(i).getAssociatedCategory()+"\", "+courses.get(i).getTuition()+"));");
+        }
+        System.out.println("\n");
+        ArrayList<Section> sections = new AccessSections().getSectionList();
+        System.out.println("\n");
+        for(int i=0; i<sections.size(); i++)
+        {
+            String[] days = sections.get(i).getDaysRaw();
+            String daysArrayString = "{";
+            for(int j=0; j<days.length; j++)
+            {
+                daysArrayString+="\""+days[j]+"\"";
+                if(j<days.length-1)
+                {
+                    daysArrayString+=", ";
+                }
+                else
+                {
+                    daysArrayString+="}";
+                }
+            }
+            String[] times = sections.get(i).getTimes();
+            String timesArrayString ="{";
+            for(int j=0; j<times.length; j++)
+            {
+                timesArrayString+="\""+times[j]+"\"";
+                if(j<days.length-1)
+                {
+                    timesArrayString+=", ";
+                }
+                else
+                {
+                    timesArrayString+="}";
+                }
+            }
+            System.out.println("sections.add(new Section(\""+sections.get(i).getSection()+"\", \""+sections.get(i).getInstructor()+"\", new String[]"+daysArrayString+", new String[]"+timesArrayString+", \""+sections.get(i).getLocation()+"\", "+sections.get(i).getAvailable()+", "+sections.get(i).getCap()+", \""+sections.get(i).getAssociatedCourse()+"\", \""+sections.get(i).getAssociatedCategory()+"\"));");
+        }
+        System.out.println("\n");
     }
 
     private void handleLogIn()
