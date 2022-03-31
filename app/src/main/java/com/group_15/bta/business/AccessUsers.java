@@ -194,7 +194,7 @@ public class AccessUsers implements ILogInHandler, UserPersistence {
         return toReturn;
     }
 
-    private boolean validateDataBase(ArrayList<User> data) throws IllegalArgumentException{
+    private boolean validateDataBase(ArrayList<User> data) throws IllegalArgumentException {
         boolean valid = true;
 
         for(int i=0; i<data.size(); i++)

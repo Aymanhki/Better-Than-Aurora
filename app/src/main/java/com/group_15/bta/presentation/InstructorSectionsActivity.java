@@ -19,6 +19,7 @@ import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
@@ -65,23 +66,7 @@ public class InstructorSectionsActivity extends AppCompatActivity {
     private void listSections(){
         if (!sectionList.isEmpty()) {
             ListView listView = (ListView) findViewById(R.id.listSections);
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, sectionList) {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    View view = super.getView(position, convertView, parent);
-
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                    String keyPoints = sectionList.get(position).getSection() + " " + " Location: TBD";
-                    String info = " Day(s): " + sectionList.get(position).getDays() + " Time: " + sectionList.get(position).getTime() + " CAP: " + sectionList.get(position).getCap();
-
-                    text1.setText(sectionList.get(position).getAssociatedCategory() + ": " + sectionList.get(position).getAssociatedCourse());
-                    text2.setText(keyPoints + info);
-
-                    return view;
-                }
-            };
+            arrayAdapter = new SectionListAdapter(this, R.layout.section_list_item, sectionList);
             listView.setAdapter(arrayAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

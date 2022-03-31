@@ -9,11 +9,10 @@ public class StudentPersistenceStub implements StudentPersistence {
 
     public StudentPersistenceStub() {
         this.students = new ArrayList<>();
-
-        students.add(new Student("101"));
-        students.add(new Student("102"));
-        students.add(new Student("303"));
-        students.add(new Student("404"));
+        students.add(new Student("student", "student", "Ayman"));
+        students.add(new Student("student1", "student1", "Nilin"));
+        students.add(new Student("student2", "student2", "Dara"));
+        students.add(new Student("student3", "student3", "Amelia"));
     }
     @Override
     public ArrayList<Student> getStudentList() {
