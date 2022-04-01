@@ -23,29 +23,33 @@ public class EditStudentActivity extends AppCompatActivity {
     private ArrayList<Student> students;
     private int position;
 
-
+    private AccessStudents accessStudents;
+    private ArrayList<Student> studentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
-        StudentPersistence studs = AccessStudents.getInstance();
-        ArrayList<Student> students = studs.getStudentList();
+        accessStudents = new AccessStudents();
+        studentList = accessStudents.getStudentList();
+
+        // StudentPersistence studs = AccessStudents.getInstance();
+      //  ArrayList<Student> students = studs.getStudentList();
         //students = (ArrayList<Student>) bundle.getSerializable("Students");
         position = bundle.getInt("Position");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_student);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
-        editName.setText(students.get(position).getID());
-        editPassword.setText(students.get(position).getPassword());
+        editName.setText(studentList.get(position).getID());
+        editPassword.setText(studentList.get(position).getPassword());
 
         final TextView tView = (TextView)findViewById(id.studentID);
-        tView.setText(students.get(position).getPassword());
+        tView.setText(studentList.get(position).getPassword());
 
     }
 
     public void buttonEditStudent(View v) {
-        StudentPersistence studs = AccessStudents.getInstance();
+       // StudentPersistence studs = AccessStudents.getInstance();
         //studs.deleteStudent(studs.getStudentList().get(position));
         // students.remove(position);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
@@ -56,7 +60,9 @@ public class EditStudentActivity extends AppCompatActivity {
         String id = (String) tView.getText();
         Student student = new Student(id, password.toString(), name.toString());
         // students.add(student);
-        studs.updateStudent(student);
+        accessStudents = new AccessStudents();
+        accessStudents.updateStudent(student);
+        //studs.updateStudent(student);
         Intent createIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
         //finish();
         //Bundle bundle = new Bundle();
