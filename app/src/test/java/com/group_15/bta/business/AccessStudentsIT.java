@@ -42,7 +42,7 @@ public class AccessStudentsIT {
     @Test
     public void testGetStudents() {
         final ArrayList<Student> students = accessStudents.getStudentList();
-        assertEquals(1, students.size());
+        assertEquals(4, students.size());
     }
 
     @Test
@@ -56,17 +56,17 @@ public class AccessStudentsIT {
     public void testDeleteStudent() {
         final Student c = accessStudents.getStudentList().get(0);
         ArrayList<Student> students = accessStudents.getStudentList();
-        assertEquals(1, students.size());
+        assertEquals(4, students.size());
         accessStudents.deleteStudent(c);
         students = accessStudents.getStudentList();
-        assertEquals(0, students.size());
+        assertEquals(3, students.size());
     }
 
     @Test
     public void testInsertStudent() {
-        final Student c = new Student("student2", "2", "Sara");
+        final Student c = new Student("student4", "2", "Sara");
         accessStudents.insertStudent(c);
-        assertEquals(2, accessStudents.getStudentList().size());
+        assertEquals(5, accessStudents.getStudentList().size());
     }
 
     @After
@@ -75,3 +75,4 @@ public class AccessStudentsIT {
         this.tempDB.delete();
     }
 }
+

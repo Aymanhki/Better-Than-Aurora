@@ -37,7 +37,7 @@ public class AccessCategoriesIT {
 
         category = accessCategories.getCategoryList().get(0);
         assertNotNull("first sequential course should not be null", category);
-        assertTrue("Computer Science".equals(category.getName()));
+        assertTrue("Biological Sciences".equals(category.getName()));
 
         System.out.println("Finished test AccessCategories");
     }
@@ -45,24 +45,14 @@ public class AccessCategoriesIT {
     @Test
     public void testGetCategories() {
         final ArrayList<Category> courses = accessCategories.getCategoryList();
-        assertEquals(1, courses.size());
+        assertEquals(5, courses.size());
     }
-    /*
-            @Test
-            public void testDeleteCategory() {
-                final Category c = accessCategories.getCategoryList().get(0);
-                ArrayList<Category> categories = accessCategories.getCategoryList();
-                assertEquals(1, categories.size());
-                accessCategories.deleteCategory(c);
-                categories = accessCategories.getCategoryList();
-                assertEquals(0, categories.size());
-            }
-    */
+
     @Test
     public void testInsertCategory() {
         final Category c = new Category("Art");
         accessCategories.insertCategory(c);
-        assertEquals(2, accessCategories.getCategoryList().size());
+        assertEquals(6, accessCategories.getCategoryList().size());
     }
 
     @After

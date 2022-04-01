@@ -35,31 +35,19 @@ public class AccessSectionsIT {
 
         section = accessSections.getSectionList().get(0);
         assertNotNull("first sequential course should not be null", section);
-        assertTrue("COMP 3350 - A01".equals(section.getSection()));
+        assertTrue("BIOL 1000 - A01".equals(section.getSection()));
 
     }
 
     @Test
     public void testGetSections() {
         final ArrayList<Section> sections = accessSections.getSectionList();
-        assertEquals(2, sections.size());
+        assertEquals(62, sections.size());
     }
 
     @Test
     public void testGetInstructorSections() {
         final ArrayList<Section> sections = accessSections.getInstructorSections("Dr. Heather Matheson");
-        assertEquals(2, sections.size());
-    }
-
-
-
-    @Test
-    public void testDeleteSection() {
-        final Section c = accessSections.getSectionList().get(1);
-        ArrayList<Section> sections = accessSections.getSectionList();
-        assertEquals(2, sections.size());
-        accessSections.deleteSection(c);
-        sections = accessSections.getSectionList();
         assertEquals(1, sections.size());
     }
 
@@ -70,7 +58,7 @@ public class AccessSectionsIT {
 
         final Section c = new Section("A05", days, time, 120);
         accessSections.insertSection(c);
-        assertEquals(3, accessSections.getSectionList().size());
+        assertEquals(63, accessSections.getSectionList().size());
     }
 
     @After

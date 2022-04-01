@@ -17,8 +17,8 @@ public class StudentTest
 
         student = new Student("123");
         assertNotNull(student);
-        assertTrue("123".equals(student.getStudentID()));
-        assertNull(student.getStudentPassword());
+        assertTrue("123".equals(student.getID()));
+        assertNull(student.getPassword());
         assertNull(student.getID());
 
         assertEquals("Student: 123 null null", student.toString());

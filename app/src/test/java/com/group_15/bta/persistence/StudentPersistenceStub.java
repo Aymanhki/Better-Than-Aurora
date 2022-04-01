@@ -23,7 +23,7 @@ public class StudentPersistenceStub implements StudentPersistence {
     public ArrayList<Student> getStudent(Student student) {
         ArrayList<Student> studentToReturn = new ArrayList<>();
         for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudentID().equals(student.getStudentID())) {studentToReturn.add(students.get(i));}
+            if (students.get(i).getID().equals(student.getID())) {studentToReturn.add(students.get(i));}
         }
         return studentToReturn;
     }
