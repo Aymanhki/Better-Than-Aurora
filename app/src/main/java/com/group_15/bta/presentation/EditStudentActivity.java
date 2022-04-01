@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class EditStudentActivity extends AppCompatActivity {
         accessStudents = new AccessStudents();
         studentList = accessStudents.getStudentList();
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         // StudentPersistence studs = AccessStudents.getInstance();
       //  ArrayList<Student> students = studs.getStudentList();
         //students = (ArrayList<Student>) bundle.getSerializable("Students");
@@ -40,7 +45,7 @@ public class EditStudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_edit_student);
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
-        editName.setText(studentList.get(position).getID());
+        editName.setText(studentList.get(position).getName());
         editPassword.setText(studentList.get(position).getPassword());
 
         final TextView tView = (TextView)findViewById(id.studentID);

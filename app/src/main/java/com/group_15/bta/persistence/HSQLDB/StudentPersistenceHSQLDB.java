@@ -104,9 +104,9 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
 
         try (final Connection newConnection = connection()) {
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTS VALUES(?, ?, ?)");
-            statement.setString(1, currentStudent.getID());
-            statement.setString(2, currentStudent.getPassword());
-            statement.setString(3, currentStudent.getID());
+            statement.setString(1, currentStudent.getPassword());
+            statement.setString(2, currentStudent.getID());
+            statement.setString(3, currentStudent.getName());
             statement.executeUpdate();
            /* new AccessUsers().insertUser(currentStudent);
             StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
