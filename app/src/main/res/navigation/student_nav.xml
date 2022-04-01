@@ -23,11 +23,21 @@
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/student_courses" />
         <action
-            android:id="@+id/action_student_courses_to_view_courses"
-            app:destination="@id/view_courses" />
-        <action
             android:id="@+id/action_student_courses_to_history"
-            app:destination="@id/history" />
+            app:destination="@id/history"
+            app:enterAnim="@anim/enter_right_to_left_long"
+            app:exitAnim="@anim/exit_right_to_left_long"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
+            app:popUpTo="@id/student_courses" />
+        <action
+            android:id="@+id/action_student_courses_to_viewCategories"
+            app:destination="@id/viewCategories"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
+            app:popUpTo="@id/student_courses" />
     </fragment>
     <fragment
         android:id="@+id/student_settings"
@@ -68,14 +78,9 @@
             app:popExitAnim="@anim/exit_left_to_right" />
     </fragment>
     <fragment
-        android:id="@+id/view_courses"
-        android:name="com.group_15.bta.presentation.ViewCoursesFragment"
-        android:label="fragment_view_courses"
-        tools:layout="@layout/fragment_view_courses" />
-    <fragment
         android:id="@+id/history"
-        android:name="com.group_15.bta.HistoryFragment"
-        android:label="fragment_history"
+        android:name="com.group_15.bta.presentation.HistoryFragment"
+        android:label="History"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/add_a_course"
@@ -168,6 +173,37 @@
             app:argType="com.group_15.bta.objects.StudentSection" />
     </fragment>
     <fragment
+        android:id="@+id/viewCategories"
+        android:name="com.group_15.bta.viewCategories"
+        android:label="Select Categories"
+        tools:layout="@layout/fragment_view_categories" >
+        <action
+            android:id="@+id/action_viewCategories_to_viewCoursesFragment"
+            app:destination="@id/viewCoursesFragment"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
+            app:popUpTo="@id/viewCategories" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewCoursesFragment"
+        android:name="com.group_15.bta.viewCoursesFragment"
+        android:label="Available Courses"
+        tools:layout="@layout/fragment_view_courses">
+        <argument
+            android:name="categories"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_viewCoursesFragment_to_viewSectionsFragment"
+            app:destination="@id/viewSectionsFragment"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
+            app:popUpTo="@id/viewCoursesFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/accountSummaryFragment"
         android:name="com.group_15.bta.presentation.AccountSummaryFragment"
         android:label="AccountSummaryFragment"
@@ -185,4 +221,13 @@
         android:name="com.group_15.bta.presentation.SummaryByTermFragment"
         android:label="fragment_summary_by_term"
         tools:layout="@layout/fragment_summary_by_term" />
+    <fragment
+        android:id="@+id/viewSectionsFragment"
+        android:name="com.group_15.bta.viewSectionsFragment"
+        android:label="Available Sections"
+        tools:layout="@layout/fragment_view_sections">
+        <argument
+            android:name="course"
+            app:argType="com.group_15.bta.objects.Course" />
+    </fragment>
 </navigation>

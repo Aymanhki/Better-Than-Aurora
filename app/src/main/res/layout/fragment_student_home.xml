@@ -34,15 +34,15 @@
                 android:background="@color/cosmic_latte"></ListView>
 
             <TextView
+                android:id="@+id/student_enrolled_courses_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/student_enrolled_courses_empty"
-                android:text="You are so lucky to not be registered in any section right now."
+                android:gravity="center"
                 android:padding="10dp"
+                android:text="You are so lucky to not be registered in any sections right now."
+                android:textAlignment="center"
                 android:textColor="@color/dark_brown"
                 android:textSize="30sp"
-                android:textAlignment="center"
-                android:gravity="center"
                 tools:ignore="HardcodedText"></TextView>
         </RelativeLayout>
 

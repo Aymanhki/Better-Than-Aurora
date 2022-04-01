@@ -36,9 +36,6 @@
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout-land/activity_category.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout/activity_category.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/martc/AndroidStudioProjects/better-than-aurora-registration-system-a01/app/src/main/res/layout/fragment_add_a_course_with_code.xml" value="0.25416666666666665" />
-        <entry key="..\:/commit_folder/app/src/main/res/layout/fragment_account_summary.xml" value="0.3109375" />
-        <entry key="..\:/commit_folder/app/src/main/res/layout/fragment_student_profile.xml" value="0.358695652173913" />
-        <entry key="..\:/commit_folder/app/src/main/res/layout/fragment_summary_by_term.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/edittextwithborder.xml" value="0.32" />
         <entry key="app/src/main/res/layout-land/activity_student_account.xml" value="0.33430913348946134" />
         <entry key="app/src/main/res/layout-land/course_list_item.xml" value="0.26851851851851855" />
@@ -46,14 +43,19 @@
         <entry key="app/src/main/res/layout-land/enrolled_sections_empty_view.xml" value="0.31613756613756616" />
         <entry key="app/src/main/res/layout-land/fragment_add_a_course.xml" value="0.35655737704918034" />
         <entry key="app/src/main/res/layout-land/fragment_confirm_dropping_a_course.xml" value="0.2517636684303351" />
+        <entry key="app/src/main/res/layout-land/fragment_view_categories.xml" value="0.2605820105820106" />
+        <entry key="app/src/main/res/layout-land/fragment_view_courses.xml" value="0.2605820105820106" />
+        <entry key="app/src/main/res/layout-land/fragment_view_sections.xml" value="0.2605820105820106" />
         <entry key="app/src/main/res/layout-land/loading_alert_dialog.xml" value="0.11458333333333333" />
+        <entry key="app/src/main/res/layout-land/section_list_item.xml" value="0.1111111111111111" />
         <entry key="app/src/main/res/layout-land/student_section_list_item.xml" value="0.26851851851851855" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.7494802281476449" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_account.xml" value="0.2912621359223301" />
-        <entry key="app/src/main/res/layout/course_list_item.xml" value="0.654843110504775" />
+        <entry key="app/src/main/res/layout/course_list_item.xml" value="0.5486381322957199" />
         <entry key="app/src/main/res/layout/enrolled_sections_empty_list_view.xml" value="0.47578125" />
         <entry key="app/src/main/res/layout/enrolled_sections_empty_view.xml" value="0.56015625" />
+        <entry key="app/src/main/res/layout/fragment_account_summary.xml" value="0.254247572815534" />
         <entry key="app/src/main/res/layout/fragment_add_a_course.xml" value="0.2912621359223301" />
         <entry key="app/src/main/res/layout/fragment_add_a_course_with_code.xml" value="0.2263349514563107" />
         <entry key="app/src/main/res/layout/fragment_add_a_course_with_section_confirmation.xml" value="0.52734375" />
@@ -62,12 +64,17 @@
         <entry key="app/src/main/res/layout/fragment_courses_to_be_dropped_list.xml" value="0.3070388349514563" />
         <entry key="app/src/main/res/layout/fragment_drop_a_course.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_drop_a_course_list.xml" value="0.3070388349514563" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_student_courses.xml" value="0.3070388349514563" />
         <entry key="app/src/main/res/layout/fragment_student_home.xml" value="0.2912621359223301" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.47578125" />
         <entry key="app/src/main/res/layout/fragment_student_settings.xml" value="0.3070388349514563" />
+        <entry key="app/src/main/res/layout/fragment_summary_by_term.xml" value="0.254247572815534" />
+        <entry key="app/src/main/res/layout/fragment_view_categories.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_view_courses.xml" value="0.43046875" />
+        <entry key="app/src/main/res/layout/fragment_view_sections.xml" value="0.46171875" />
         <entry key="app/src/main/res/layout/loading_alert_dialog.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/section_list_item.xml" value="0.3515102349438714" />
+        <entry key="app/src/main/res/layout/section_list_item.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/student_section_list_item.xml" value="0.47578125" />
         <entry key="app/src/main/res/menu/courses_menu.xml" value="0.44609375" />
       </map>

@@ -56,7 +56,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
-    private User fromResultSet(final ResultSet rs, String userType) throws SQLException {
+    public User fromResultSet(final ResultSet rs, String userType) throws SQLException {
 
         User toReturn = null;
         final String userName;

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
@@ -39,7 +40,7 @@ public class AccessStudentSectionsIT {
     public void testListStudentSections() {
         final StudentSection studentSection;
 
-        studentSection = accessStudentSections.getSectionList().get(0);
+        studentSection = accessStudentSections.getStudentSectionList().get(0);
         assertNotNull("first sequential course should not be null", studentSection);
         assertTrue("student".equals(studentSection.getAssociatedStudent()));
 
@@ -47,7 +48,7 @@ public class AccessStudentSectionsIT {
 
     @Test
     public void testGetStudentSections() {
-        final ArrayList<StudentSection> studentSections = accessStudentSections.getSectionList();
+        final ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
         assertEquals(1, studentSections.size());
     }
 
@@ -58,22 +59,22 @@ public class AccessStudentSectionsIT {
     }
     @Test
     public void testDeleteStudentSection() {
-        final StudentSection c = accessStudentSections.getSectionList().get(0);
-        ArrayList<StudentSection> studentSections = accessStudentSections.getSectionList();
+        final StudentSection c = accessStudentSections.getStudentSectionList().get(0);
+        ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
         assertEquals(1, studentSections.size());
         accessStudentSections.deleteSection(c);
-        studentSections = accessStudentSections.getSectionList();
+        studentSections = accessStudentSections.getStudentSectionList();
         assertEquals(0, studentSections.size());
     }
 
     @Test
     public void testInsertStudentSection() {
-        final ArrayList<StudentSection> studentSections = accessStudentSections.getSectionList();
+        final ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
         Student newStudent = new Student("student2", "2", "Sara");
         accessStudents.insertStudent(newStudent);
-        final StudentSection c = new StudentSection("student2", "A", studentSections.get(0).getSection());
+        final StudentSection c = new StudentSection("student2", "A", studentSections.get(0).getSection(), new Course("", ""));
         accessStudentSections.insertSection(c);
-        assertEquals(2, accessStudentSections.getSectionList().size());
+        assertEquals(2, accessStudentSections.getStudentSectionList().size());
     }
 
     @After

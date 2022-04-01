@@ -36,6 +36,21 @@ public class CoursePersistenceStub implements CoursePersistence {
     public ArrayList<Course> getCategoryCourses(String catName){return courses;}
 
     @Override
+    public Course getCourse(String courseID) {
+        Course toReturn = null;
+
+        for(int i=0; i<courses.size(); i++)
+        {
+            if(courses.get(i).getID().equals(courseID))
+            {
+                toReturn = courses.get(i);
+            }
+        }
+
+        return toReturn;
+    }
+
+    @Override
     public void insertCourses(Course currentCourse) {
         // don't bother checking for duplicates
         courses.add(currentCourse);

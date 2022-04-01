@@ -37,7 +37,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         return toReturn;
     }
 
-    private Section fromResultSet(final ResultSet rs) throws SQLException {
+    public Section fromResultSet(final ResultSet rs) throws SQLException {
         final String sectionID = rs.getString("SECTIONID");
         final String instructor = rs.getString("INSTRUCTOR");
         final String[] days = rs.getString("DAYS").split(",");
@@ -220,5 +220,27 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
+    }
+
+    @Override
+    public Section getSection(String sectionID) {
+        Section toReturn = null;
+        try (Connection newConnection = connection())
+        {
+            final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM SECTIONS WHERE SECTIONID = ?");
+            statement.setString(1, sectionID);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next())
+            {
+                toReturn = fromResultSet(rs);
+            }
+            rs.close();
+            statement.close();
+        }
+        catch (final SQLException newException)
+        {
+            throw new PersistenceException(newException);
+        }
+        return toReturn;
     }
 }

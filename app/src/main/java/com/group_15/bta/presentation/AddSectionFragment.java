@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessCourses;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Section;
@@ -98,9 +99,9 @@ public class AddSectionFragment extends Fragment {
         addSectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!currentUser.getEnrolledSections().contains(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection))) {
+                if (!currentUser.getEnrolledSections().contains(new StudentSection(currentUser.getID(), "In Progress", selectedSection,  new AccessCourses().getCourse(selectedSection.getAssociatedCourse())))) {
                     if(currentUser.getEnrolledSections().size()<currentUser.getMAX_CLASSES()) {
-                        currentUser.addSection(new StudentSection(currentUser.getStudentID(), "In Progress", selectedSection));
+                        currentUser.addSection(new StudentSection(currentUser.getID(), "In Progress", selectedSection, new AccessCourses().getCourse(selectedSection.getAssociatedCourse())));
                     }
                     else
                     {

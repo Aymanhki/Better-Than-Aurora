@@ -1,27 +1,16 @@
 package com.group_15.bta.presentation;
 
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.group_15.bta.R;
 import com.group_15.bta.application.Services;
@@ -29,7 +18,6 @@ import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.UserPersistence;
 
 import java.util.ArrayList;
 
@@ -105,10 +93,7 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Section> studentCurrentSections = new ArrayList<>();
-        for (int i = 0; i < currentUser.getEnrolledSections().size(); i++) {
-            studentCurrentSections.add(currentUser.getEnrolledSections().get(i).getSection());
-        }
+        ArrayList<Section> studentCurrentSections = currentUser.getSections(true);
         enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, studentCurrentSections);
         enrolledSectionsList = view.findViewById(R.id.student_enrolled_courses);
         enrolledSectionsList.setAdapter(enrolledSectionsAdapted);

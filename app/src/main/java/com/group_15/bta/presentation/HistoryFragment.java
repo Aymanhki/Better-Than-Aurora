@@ -1,12 +1,24 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.group_15.bta.R;
+import com.group_15.bta.business.AccessStudentSections;
+import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.business.Calculate;
+import com.group_15.bta.objects.StudentSection;
+import com.group_15.bta.objects.StudentSectionAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +31,11 @@ public class HistoryFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+
+    ArrayList<StudentSection> studentSections;
+    String gpa;
+    String creditHours;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -53,6 +70,9 @@ public class HistoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        studentSections = new AccessStudentSections().getStudentSectionList(new AccessUsers().getCurrentUser().getID(), false);
+        gpa = Calculate.gpa(studentSections);
+        creditHours = Calculate.creditHours(studentSections);
     }
 
     @Override
@@ -60,5 +80,30 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_history, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TextView gpaBox = (TextView) view.findViewById(R.id.gpa_history_text);
+        TextView creditHoursBox = (TextView) view.findViewById(R.id.credit_hours_history_text);
+        ListView completedCourses = (ListView) view.findViewById(R.id.completed_courses_student_section_list);
+        TextView noCourses = (TextView) view.findViewById(R.id.completed_courses_student_section_list_empty_text);
+        if(!studentSections.isEmpty())
+        {
+            gpaBox.setText(gpaBox.getText()+" "+ gpa);
+            creditHoursBox.setText(creditHoursBox.getText()+" "+ creditHours);
+            completedCourses.setVisibility(View.VISIBLE);
+            noCourses.setVisibility(View.GONE);
+            completedCourses.setAdapter(new StudentSectionAdapter(getContext(), R.layout.student_section_list_item, studentSections));
+        }
+        else
+        {
+            gpaBox.setText(gpaBox.getText()+" 0.0");
+            creditHoursBox.setText(creditHoursBox.getText()+" 0.0");
+            completedCourses.setVisibility(View.GONE);
+            noCourses.setVisibility(View.VISIBLE);
+        }
     }
 }

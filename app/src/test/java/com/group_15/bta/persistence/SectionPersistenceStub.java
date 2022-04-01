@@ -125,5 +125,19 @@ public class SectionPersistenceStub implements SectionPersistence {
             sections.remove(index);
         }
     }
+
+    @Override
+    public Section getSection(String sectionID) {
+        Section toReturn = null;
+
+        for(int i=0; i<sections.size(); i++)
+        {
+            if(sections.get(i).getSection().equals(sectionID))
+            {
+                toReturn = sections.get(i);
+            }
+        }
+        return toReturn;
+    }
 }
 

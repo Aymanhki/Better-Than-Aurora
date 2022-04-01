@@ -1,17 +1,17 @@
 package com.group_15.bta.presentation;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.group_15.bta.R;
-import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Student;
 
 /**
@@ -29,7 +29,7 @@ public class StudentCoursesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Student currentUser;
+
     public StudentCoursesFragment() {
         // Required empty public constructor
 
@@ -73,9 +73,9 @@ public class StudentCoursesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         StudentAccountActivity.setFragmentNavigationButton(view, R.id.add_or_drop_courses_btn, R.id.action_student_courses_to_add_or_drop_courses);
+        StudentAccountActivity.setFragmentNavigationButton(view, R.id.view_courses_btn, R.id.action_student_courses_to_viewCategories);
+        StudentAccountActivity.setFragmentNavigationButton(view, R.id.history_btn, R.id.action_student_courses_to_history);
     }
-
-
 
 
 }

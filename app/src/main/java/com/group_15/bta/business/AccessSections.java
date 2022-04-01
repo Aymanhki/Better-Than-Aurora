@@ -46,6 +46,11 @@ public class AccessSections implements SectionPersistence {
     }
 
     @Override
+    public Section getSection(String sectionID) {
+        return sectionPersistence.getSection(sectionID);
+    }
+
+    @Override
     public void updateSection(Section section) {
         sectionPersistence.updateSection(section);
     }

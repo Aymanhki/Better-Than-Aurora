@@ -2,6 +2,7 @@ package com.group_15.bta.persistence.HSQLDB;
 
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.CoursePersistence;
 
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         return toReturn;
     }
 
-    private Course fromResultSet(final ResultSet rs) throws SQLException {
+    public Course fromResultSet(final ResultSet rs) throws SQLException {
         final String courseID = rs.getString("COURSEID");
         final String courseName = rs.getString("TITLE");
         final String courseDescription = rs.getString("DESCRIPTION");
@@ -141,11 +142,18 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM COURSES WHERE NAME = ?");
             st.setString(1,catName);
-
             final ResultSet rs = st.executeQuery();
-
+            SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(c);
+            ArrayList<Section> sections = sectionsGetter.getSectionList();
             while(rs.next()){
                 final Course record = fromResultSet(rs);
+
+                for (int i = 0; i < sections.size(); i++) {
+                    if (sections.get(i).getAssociatedCourse().equals(record.getID())) {
+                        record.addSection(sections.get(i));
+                    }
+                }
+
                 courses.add(record);
             }
 
@@ -159,4 +167,29 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             throw new PersistenceException(e);
         }
     }
+
+    @Override
+    public Course getCourse(String courseID) {
+        Course toReturn = null;
+        try (Connection newConnection = connection())
+        {
+            final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID = ?");
+            statement.setString(1, courseID);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next())
+            {
+                toReturn = fromResultSet(rs);
+            }
+
+            rs.close();
+            statement.close();
+        }
+        catch (final SQLException newException)
+        {
+            throw new PersistenceException(newException);
+        }
+        return toReturn;
+    }
+
+
 }

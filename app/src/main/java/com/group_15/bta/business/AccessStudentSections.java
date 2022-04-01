@@ -1,13 +1,12 @@
 package com.group_15.bta.business;
 
 import com.group_15.bta.application.Services;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.StudentSection;
-import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.StudentSectionPersistence;
-import com.group_15.bta.application.Services;
-import com.group_15.bta.persistence.StudentSectionPersistence;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccessStudentSections implements StudentSectionPersistence {
     private static final AccessStudentSections ourInstance = new AccessStudentSections();
@@ -31,9 +30,16 @@ public class AccessStudentSections implements StudentSectionPersistence {
         return ourInstance;
     }
 
-    public ArrayList<StudentSection> getSectionList() {
-        return studentSectionPersistence.getSectionList();
+    public ArrayList<StudentSection> getStudentSectionList() {
+        return studentSectionPersistence.getStudentSectionList();
     }
+
+    @Override
+    public ArrayList<StudentSection> getStudentSectionList(String studentID, boolean inProgress) {
+        return studentSectionPersistence.getStudentSectionList(studentID, inProgress);
+    }
+
+
 
     @Override
     public ArrayList<StudentSection> getStudentsInSection(String sectionID) {
@@ -53,6 +59,23 @@ public class AccessStudentSections implements StudentSectionPersistence {
     public void deleteSection(StudentSection toRemove) {
         studentSectionPersistence.deleteSection(toRemove);
     }
+
+    @Override
+    public ArrayList<Section> getSectionList(String studentID, boolean inProgress) {
+        return studentSectionPersistence.getSectionList(studentID, inProgress);
+    }
+
+    @Override
+    public ArrayList<Section> getSectionList(String studentID) {
+        return studentSectionPersistence.getSectionList(studentID);
+    }
+
+    @Override
+    public ArrayList<Course> getCourses(String studentID) {
+        return studentSectionPersistence.getCourses(studentID);
+    }
+
+
 }
 
 

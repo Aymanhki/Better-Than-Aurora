@@ -37,10 +37,10 @@ public class EditStudentActivity extends AppCompatActivity {
         EditText editName = (EditText) findViewById(R.id.editStudentName);
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
         editName.setText(students.get(position).getID());
-        editPassword.setText(students.get(position).getStudentPassword());
+        editPassword.setText(students.get(position).getPassword());
 
         final TextView tView = (TextView)findViewById(id.studentID);
-        tView.setText(students.get(position).getStudentID());
+        tView.setText(students.get(position).getPassword());
 
     }
 

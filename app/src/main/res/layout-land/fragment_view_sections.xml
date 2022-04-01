@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewCoursesFragment"
-    android:background="@color/cosmic_latte">
+    tools:context=".viewSectionsFragment">
 
-    <ListView
-        android:id="@+id/view_courses_course_list"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
 </FrameLayout>

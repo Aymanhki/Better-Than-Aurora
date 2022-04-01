@@ -1,7 +1,7 @@
 package com.group_15.bta.persistence.HSQLDB;
 
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 
@@ -39,24 +39,19 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
-    private StudentSection fromResultSet(final ResultSet rs) throws SQLException {
+    public StudentSection fromResultSet(final ResultSet rs) throws SQLException {
         final String studentID = rs.getString("STUDENTID");
         final String grade = rs.getString("GRADE");
         final String sectionID = rs.getString("SECTIONID");
-        Section section = null;
+        final String courseID = rs.getString("COURSEID");
         SectionPersistenceHSQLDB sectionGetter = new SectionPersistenceHSQLDB(connection());
-        ArrayList<Section> availableSections = sectionGetter.getSectionList();
-        for (int i = 0; i < availableSections.size(); i++) {
-            if (availableSections.get(i).getSection().equals(sectionID)) {
-                section = availableSections.get(i);
-            }
-        }
-        return new StudentSection(studentID, grade, section);
+        CoursePersistenceHSQLDB courseGetter = new CoursePersistenceHSQLDB(connection());
+        return new StudentSection(studentID, grade, sectionGetter.getSection(sectionID), courseGetter.getCourse(courseID));
 
     }
 
     @Override
-    public ArrayList<StudentSection> getSectionList() {
+    public ArrayList<StudentSection> getStudentSectionList() {
 
         ArrayList<StudentSection> toReturn = new ArrayList<>();
 
@@ -76,6 +71,123 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
+
+    @Override
+    public ArrayList<StudentSection> getStudentSectionList(String studentID, boolean inProgress) {
+
+        ArrayList<StudentSection> toReturn = new ArrayList<>();
+
+        try (final Connection newConnection = connection()) {
+            PreparedStatement preparedStatement;
+            if(inProgress)
+            {
+                preparedStatement = newConnection.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE = 'In Progress'");
+            }
+            else
+            {
+                preparedStatement = newConnection.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE != 'In Progress'");
+            }
+            preparedStatement.setString(1, studentID);
+            final ResultSet newResultSet = preparedStatement.executeQuery();
+
+            while (newResultSet.next()) {
+                final StudentSection studentSection = fromResultSet(newResultSet);
+                toReturn.add(studentSection);
+            }
+
+            newResultSet.close();
+            preparedStatement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return toReturn;
+    }
+
+    @Override
+    public ArrayList<Section> getSectionList(String studentID, boolean inProgress) {
+
+        ArrayList<Section> toReturn = new ArrayList<>();
+
+        try (final Connection newConnection = connection()) {
+            PreparedStatement preparedStatement;
+            if(inProgress)
+            {
+                preparedStatement = newConnection.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE = 'In Progress'");
+            }
+            else
+            {
+                preparedStatement = newConnection.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE != 'In Progress'");
+            }
+            preparedStatement.setString(1, studentID);
+            final ResultSet newResultSet = preparedStatement.executeQuery();
+
+            while (newResultSet.next()) {
+                final StudentSection studentSection = fromResultSet(newResultSet);
+                toReturn.add(studentSection.getSection());
+            }
+
+            newResultSet.close();
+            preparedStatement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return toReturn;
+    }
+
+    @Override
+    public ArrayList<Section> getSectionList(String studentID) {
+        final ArrayList<Section> toReturn = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ?");
+            st.setString(1, studentID);
+            final ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                final StudentSection studentSection = fromResultSet(rs);
+                toReturn.add(studentSection.getSection());
+            }
+
+            rs.close();
+            st.close();
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+
+
+        return toReturn;
+    }
+
+    @Override
+    public ArrayList<Course> getCourses(String studentID) {
+        ArrayList<Course> toReturn = new ArrayList<>();
+        try(Connection newConnection = connection())
+        {
+
+            PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ?)");
+            statement.setString(1, studentID);
+            ResultSet rs = statement.executeQuery();
+            CoursePersistenceHSQLDB courseParser = new CoursePersistenceHSQLDB(newConnection);
+            while (rs.next())
+            {
+                //StudentSection studentSection = fromResultSet(rs);
+
+                toReturn.add(courseParser.fromResultSet(rs));
+            }
+            rs.close();
+            statement.close();
+        }
+        catch(final SQLException newException)
+        {
+            throw new PersistenceException(newException);
+        }
+        return toReturn;
+    }
+
+
     @Override
     public ArrayList<StudentSection> getStudentsInSection(String courseID) {
         final ArrayList<StudentSection> students = new ArrayList<>();
@@ -93,12 +205,14 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             rs.close();
             st.close();
 
-            return students;
+
         }
         catch (final SQLException e)
         {
             throw new PersistenceException(e);
         }
+
+        return students;
     }
 
     @Override
@@ -118,10 +232,11 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     @Override
     public void insertSection(StudentSection currentSection) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTSECTIONS VALUES(?, ?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTSECTIONS VALUES(?, ?, ?, ?)");
             statement.setString(1, currentSection.getAssociatedStudent());
             statement.setString(2, currentSection.getGrade());
             statement.setString(3, currentSection.getSection().getSection());
+            statement.setString(4, currentSection.getAssociatedCourse().getID());
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -140,4 +255,5 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             throw new PersistenceException(newException);
         }
     }
+
 }
