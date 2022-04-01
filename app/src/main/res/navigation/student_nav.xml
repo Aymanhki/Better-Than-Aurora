@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/drop_a_course"
-        android:name="com.group_15.bta.DropCourseFragment"
+        android:name="com.group_15.bta.presentation.DropCourseFragment"
         android:label="Select a Course"
         tools:layout="@layout/fragment_drop_a_course">
         <action

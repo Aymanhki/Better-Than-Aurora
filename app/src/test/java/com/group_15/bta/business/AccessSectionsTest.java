@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.group_15.bta.objects.Section;
+import com.group_15.bta.persistence.SectionPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import com.group_15.bta.persistence.SectionPersistenceStub;
 
 public class AccessSectionsTest {
     private AccessSections accessSections;
@@ -30,24 +29,20 @@ public class AccessSectionsTest {
         assertNotNull(sections);
 
         int currSize = sections.size();
-        assertEquals("4", String.valueOf(currSize));
+        assertEquals("62", String.valueOf(currSize));
 
         ArrayList<Section> instructorSections = accessSections.getInstructorSections("Sara");
         assertEquals("Sara", instructorSections.get(0).getInstructor());
 
-        ArrayList<Section> courseSections = accessSections.getCourseSections("COMP 4000");
-        assertEquals("COMP 4000", courseSections.get(0).getAssociatedCourse());
+        ArrayList<Section> courseSections = accessSections.getCourseSections("COMP 3350");
+        assertEquals("COMP 3350", courseSections.get(0).getAssociatedCourse());
 
         accessSections.insertSection(new Section("A05", days, time, 120));
         sections = accessSections.getSectionList();
         currSize = sections.size();
-        assertEquals("5", String.valueOf(currSize));
+        assertEquals("63", String.valueOf(currSize));
 
-        accessSections.deleteSection(sections.get(4));
-        accessSections.deleteSection(sections.get(3));
-        sections = accessSections.getSectionList();
-        currSize = sections.size();
-        assertEquals("3", String.valueOf(currSize));
+
 
     }
 }

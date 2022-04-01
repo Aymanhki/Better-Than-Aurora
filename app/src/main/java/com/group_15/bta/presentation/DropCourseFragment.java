@@ -1,6 +1,11 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,21 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.DropBoxManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.group_15.bta.business.AccessCategories;
+import com.group_15.bta.R;
+import com.group_15.bta.business.AccessStudentSections;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.objects.StudentSectionAdapter;
-import com.group_15.bta.presentation.AddCourseFragmentDirections;
 
 import java.util.ArrayList;
 
@@ -87,7 +83,8 @@ public class DropCourseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Student currentUser = (Student) new AccessUsers().getCurrentUser();
-        ArrayList<StudentSection> sections = currentUser.getEnrolledSections();
+        ArrayList<StudentSection> sections = new AccessStudentSections().getStudentSectionList(currentUser.getID(), true);
+
         studentSectionAdapter = new StudentSectionAdapter(getContext(), R.layout.student_section_list_item, sections);
         toDropSectionsList = view.findViewById(R.id.enrolled_sections_in_drop_a_course_list_fragment);
         toDropSectionsList.setAdapter(studentSectionAdapter);

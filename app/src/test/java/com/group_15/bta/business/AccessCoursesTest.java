@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.group_15.bta.objects.Course;
+import com.group_15.bta.persistence.CoursePersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import com.group_15.bta.persistence.CoursePersistenceStub;
 
 public class AccessCoursesTest {
     private AccessCourses accessCourses;
@@ -27,18 +26,18 @@ public class AccessCoursesTest {
         assertNotNull(courses);
 
         int currSize = courses.size();
-        assertEquals("4", String.valueOf(currSize));
+        assertEquals("14", String.valueOf(currSize));
 
         accessCourses.insertCourses(new Course("COMP4000", "Some Course"));
         courses = accessCourses.getCourseList();
         currSize = courses.size();
-        assertEquals("5", String.valueOf(currSize));
+        assertEquals("15", String.valueOf(currSize));
 
         accessCourses.deleteCourses(courses.get(4));
         accessCourses.deleteCourses(courses.get(3));
         courses = accessCourses.getCourseList();
         currSize = courses.size();
-        assertEquals("3", String.valueOf(currSize));
+        assertEquals("13", String.valueOf(currSize));
 
     }
 }

@@ -1,9 +1,12 @@
 package com.group_15.bta.objects;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.group_15.bta.objects.Student;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class StudentTest
 {
@@ -19,7 +22,7 @@ public class StudentTest
         assertNotNull(student);
         assertTrue("123".equals(student.getID()));
         assertNull(student.getPassword());
-        assertNull(student.getID());
+
 
         assertEquals("Student: 123 null null", student.toString());
 
