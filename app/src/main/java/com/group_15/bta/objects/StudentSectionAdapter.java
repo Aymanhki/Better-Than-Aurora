@@ -30,7 +30,7 @@ public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
         String course = getItem(position).getSection().getAssociatedCourse();
         String location = getItem(position).getSection().getLocation();
         String instructor = getItem(position).getSection().getInstructor();
-        String creditHours = getItem(position).getCreditHours() + " Credit Hours";
+        String creditHours = getItem(position).getCreditHours()+"";
         String grade = getItem(position).getGrade();
 
         LayoutInflater inflater = LayoutInflater.from(mainContext);
@@ -43,11 +43,11 @@ public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
         TextView gradeText = (TextView) convertView.findViewById(R.id.grade_in_graded_section_list_item);
 
 
-        courseName.setText(courseName.getText() + "" + course);
-        locationName.setText(locationName.getText() + "" + location);
-        instructorName.setText(instructorName.getText() + "" + instructor);
-        credits.setText(credits.getText() + "" + creditHours);
-        gradeText.setText(gradeText.getText() + "" + grade);
+        courseName.setText(courseName.getText() + " " + course);
+        locationName.setText(locationName.getText() + " " + location);
+        instructorName.setText(instructorName.getText() + " " + instructor);
+        credits.setText(credits.getText() + " " + creditHours);
+        gradeText.setText(gradeText.getText() + " " + grade);
 
 
         return convertView;

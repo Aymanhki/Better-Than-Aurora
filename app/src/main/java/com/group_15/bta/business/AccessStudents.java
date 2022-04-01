@@ -34,7 +34,7 @@ public class AccessStudents implements StudentPersistence {
     public ArrayList<Student> getStudent (Student getStudent) {
         student = null;
         ArrayList<Student> studentToReturn = new ArrayList<>();
-        studentList = studentPersistence.getStudent(new Student(getStudent.getStudentID()));
+        studentList = studentPersistence.getStudent(new Student(getStudent.getID()));
         if (studentList.size()==1)
         {
             student = studentList.get(0);

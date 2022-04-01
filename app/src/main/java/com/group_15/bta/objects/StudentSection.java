@@ -9,6 +9,7 @@ public class StudentSection implements Serializable {
 
     private Section section;
     private String associatedStudent;
+    private Course associatedCourse;
     private String grade;
 
 
@@ -24,10 +25,11 @@ public class StudentSection implements Serializable {
         return grade;
     }
 
-    public StudentSection(String studentID, String newGrade, Section newSection) {
+    public StudentSection(String studentID, String newGrade, Section newSection, Course associatedCourse) {
         associatedStudent = studentID;
         grade = newGrade;
         section = newSection;
+        this.associatedCourse = associatedCourse;
     }
 
     public int getCreditHours() {
@@ -49,4 +51,7 @@ public class StudentSection implements Serializable {
     }
 
 
+    public Course getAssociatedCourse() {
+        return associatedCourse;
+    }
 }

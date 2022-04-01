@@ -1,12 +1,11 @@
 package com.group_15.bta.presentation;
 //goes with activity_courses
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,11 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group_15.bta.objects.Course;
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessCourses;
+import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.CourseListAdapter;
-
 
 import java.util.ArrayList;
 
@@ -109,20 +107,6 @@ public class CategoryActivity extends AppCompatActivity {
     public void listCourses(){
         ListView listView = (ListView) findViewById(R.id.coursesList);
         coursesAdapted = new CourseListAdapter(this, R.layout.course_list_item, courses);
-//        {
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                View view = super.getView(position, convertView, parent);
-//
-//                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-//                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-//
-//                text1.setText(courses.get(position).getID() + " " + courses.get(position).getTitle());
-//                text2.setText(courses.get(position).getDescription());
-//
-//                return view;
-//            }
-//        };
         listView.setAdapter(coursesAdapted);
     }
 

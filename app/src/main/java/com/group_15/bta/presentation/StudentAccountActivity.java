@@ -58,6 +58,7 @@ public class StudentAccountActivity extends AppCompatActivity {
         View.OnClickListener fragmentButtonAction = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fragmentButton.setText("Loading...");
                 navController.navigate(fragmentActionId);
             }
         };

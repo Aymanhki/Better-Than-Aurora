@@ -16,9 +16,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
+import com.group_15.bta.business.AccessCourses;
+import com.group_15.bta.business.AccessStudentSections;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.StudentSection;
-import com.group_15.bta.business.AccessStudentSections;
+
 import java.util.ArrayList;
 
 public class InstructorStudentsActivity extends AppCompatActivity {
@@ -101,7 +103,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
     private StudentSection createStudentSectionFromEditText(StudentSection student) {
         EditText updateGrade = (EditText)findViewById(R.id.Grade);
 
-        StudentSection newStudent = new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection());
+        StudentSection newStudent = new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
 
         return newStudent;
     }
@@ -116,7 +118,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             if (result == null) {
                 try {
                     accessStudentSections.updateStudentSection(student);
-                    studentSections = accessStudentSections.getSectionList();
+                    studentSections = accessStudentSections.getStudentSectionList();
                 } catch (final Exception e) {
                   Messages.fatalError(this, e.getMessage());
                 }

@@ -43,4 +43,10 @@ public class AccessCourses implements CoursePersistence {
     @Override
     public ArrayList<Course> getCategoryCourses(String catName){return coursePersistence.getCategoryCourses(catName); }
 
+    @Override
+    public Course getCourse(String courseID) {
+        return coursePersistence.getCourse(courseID);
+    }
+
+
 }

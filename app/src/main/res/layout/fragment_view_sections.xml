@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewCoursesFragment"
+    tools:context=".viewSectionsFragment"
     android:background="@color/cosmic_latte">
 
     <ListView
-        android:id="@+id/view_courses_course_list"
+        android:id="@+id/view_sections_section_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

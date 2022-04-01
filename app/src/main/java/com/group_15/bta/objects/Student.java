@@ -43,20 +43,6 @@ public class Student extends User implements Serializable{
     }
 
 
-    //getters
-    public String getStudentID()
-    {
-        return (id);
-    }
-
-    public String getStudentPassword()
-    {
-        return (password);
-    }
-
-    public String getID() {
-        return (name);
-    }
 
 
     //tostring
@@ -77,7 +63,7 @@ public class Student extends User implements Serializable{
     }
 
     public ArrayList<StudentSection> getEnrolledSections() {
-        return studentSectionPersistence.getSectionList();
+        return studentSectionPersistence.getStudentSectionList();
     }
 
     public void addSection(StudentSection addedSection) {
@@ -89,6 +75,23 @@ public class Student extends User implements Serializable{
 
     public void deleteSection(StudentSection selectedSection) {
         studentSectionPersistence.deleteSection(selectedSection);
+    }
+
+    public ArrayList<Section> getSections(boolean inProgress)
+    {
+        return  studentSectionPersistence.getSectionList(id, inProgress);
+
+    }
+
+    public ArrayList<StudentSection> getStudentSections(boolean inProgress)
+    {
+        return  studentSectionPersistence.getStudentSectionList(id, inProgress);
+
+    }
+
+    public ArrayList<Course> getCourses()
+    {
+        return studentSectionPersistence.getCourses(id);
     }
     public int getMAX_CLASSES(){return MAX_CLASSES;}
 }

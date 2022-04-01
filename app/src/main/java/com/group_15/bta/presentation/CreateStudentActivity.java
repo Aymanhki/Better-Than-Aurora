@@ -87,16 +87,16 @@ public class CreateStudentActivity extends AppCompatActivity {
             return "Student name required";
         }
 
-        if (student.getStudentID().length() == 0) {
+        if (student.getID().length() == 0) {
             return "Student ID required";
         }
 
-        if (student.getStudentPassword().length() == 0) {
+        if (student.getPassword().length() == 0) {
             return "Student password required";
         }
 
         if (findStudent(student)) {
-            return "Student ID " + student.getStudentID() + " already exists.";
+            return "Student ID " + student.getID() + " already exists.";
         }
 
         return null;
