@@ -11,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 

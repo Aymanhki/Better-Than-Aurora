@@ -78,6 +78,5 @@ public class AddOrDropCourseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         StudentAccountActivity.setFragmentNavigationButton(view, R.id.add_courses_btn, R.id.action_add_or_drop_courses_to_add_a_course);
         StudentAccountActivity.setFragmentNavigationButton(view, R.id.drop_courses_btn, R.id.action_add_or_drop_courses_to_drop_a_course);
-        Toast.makeText(getContext(),"Good",Toast.LENGTH_LONG).show();
     }
 }
