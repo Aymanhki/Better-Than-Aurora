@@ -24,7 +24,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textSize="25dp"
-                android:text="Winter 2022\n----------------------------------------------"
+                android:text="Winter 2022\n"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:id="@+id/endowment_fee_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$90.00"
+                    android:text="$39.00"
                     android:textSize="30dp"
                     android:textStyle="bold" />
             </LinearLayout>
