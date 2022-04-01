@@ -27,11 +27,11 @@ public class SummaryByTermFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private Student currentUser = (Student) new AccessUsers().getCurrentUser();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Student currentUser = (Student) new AccessUsers().getCurrentUser();
+    //private Student currentUser = (Student) new AccessUsers().getCurrentUser();
     public SummaryByTermFragment() {
         // Required empty public constructor
 
@@ -58,14 +58,13 @@ public class SummaryByTermFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((StudentAccountActivity) getActivity()).setActionBarTitle("Summary by Term");
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Account Summary");
+        String course="";
+        currentUser.g
+        Log.d("got until courseName",course);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        for (int i = 0; i <currentUser.getEnrolledSections().size() ; i++) {
-
-
         }
 
 

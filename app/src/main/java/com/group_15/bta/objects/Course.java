@@ -89,4 +89,5 @@ public class Course implements Serializable {
 
     public double getTuition() { return tuition;
     }
+
 }

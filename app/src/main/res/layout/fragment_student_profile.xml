@@ -11,7 +11,7 @@
         android:id="@+id/show_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account Summary"
+        android:text="View Student Records"
         />
 
 </FrameLayout>

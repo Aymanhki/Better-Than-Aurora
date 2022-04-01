@@ -11,6 +11,7 @@ public class StudentSection implements Serializable {
     private String associatedStudent;
     private String grade;
 
+
     public Section getSection() {
         return section;
     }

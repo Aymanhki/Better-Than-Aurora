@@ -55,7 +55,7 @@ public class AccountSummaryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((StudentAccountActivity) getActivity()).setActionBarTitle("Account Summary");
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Student Records");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
