@@ -173,8 +173,6 @@
             app:argType="com.group_15.bta.objects.StudentSection" />
     </fragment>
     <fragment
-<<<<<<< HEAD
-=======
         android:id="@+id/viewCategories"
         android:name="com.group_15.bta.viewCategories"
         android:label="Select Categories"
@@ -206,7 +204,6 @@
             app:popUpTo="@id/viewCoursesFragment" />
     </fragment>
     <fragment
->>>>>>> origin/main
         android:id="@+id/accountSummaryFragment"
         android:name="com.group_15.bta.presentation.AccountSummaryFragment"
         android:label="AccountSummaryFragment"
@@ -224,8 +221,7 @@
         android:name="com.group_15.bta.presentation.SummaryByTermFragment"
         android:label="fragment_summary_by_term"
         tools:layout="@layout/fragment_summary_by_term" />
-<<<<<<< HEAD
-=======
+
     <fragment
         android:id="@+id/viewSectionsFragment"
         android:name="com.group_15.bta.viewSectionsFragment"
@@ -235,5 +231,4 @@
             android:name="course"
             app:argType="com.group_15.bta.objects.Course" />
     </fragment>
->>>>>>> origin/main
 </navigation>
