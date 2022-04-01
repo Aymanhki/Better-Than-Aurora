@@ -75,6 +75,10 @@ public class AccessStudentSections implements StudentSectionPersistence {
         return studentSectionPersistence.getCourses(studentID);
     }
 
+    public boolean duplicate(StudentSection potential){
+        return getCourses(new AccessUsers().getCurrentUser().getID()).contains(potential.getAssociatedCourse());
+    }
+
 
 }
 

@@ -174,7 +174,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewCategories"
-        android:name="com.group_15.bta.viewCategories"
+        android:name="com.group_15.bta.presentation.viewCategories"
         android:label="Select Categories"
         tools:layout="@layout/fragment_view_categories" >
         <action
@@ -188,7 +188,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewCoursesFragment"
-        android:name="com.group_15.bta.viewCoursesFragment"
+        android:name="com.group_15.bta.presentation.viewCoursesFragment"
         android:label="Available Courses"
         tools:layout="@layout/fragment_view_courses">
         <argument
@@ -224,7 +224,7 @@
 
     <fragment
         android:id="@+id/viewSectionsFragment"
-        android:name="com.group_15.bta.viewSectionsFragment"
+        android:name="com.group_15.bta.presentation.viewSectionsFragment"
         android:label="Available Sections"
         tools:layout="@layout/fragment_view_sections">
         <argument

@@ -1,6 +1,11 @@
 package com.group_15.bta.objects;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 /*
  * Class for Section object
@@ -17,6 +22,8 @@ public class Section implements Serializable {
     private int CAP;
     private String associatedCourse;
     private String associatedCategory;
+
+
 
     enum ClassDays{
         Monday,
@@ -133,5 +140,39 @@ public class Section implements Serializable {
 
     public String getInstructor() {
         return instructor;
+    }
+
+
+    public boolean interferes(Section potential) {
+        boolean toReturn = false;
+        String[] toCompare = potential.Time;
+
+        for (int i = 0; i < toCompare.length && !toReturn; i++) {
+            if (i < Time.length) {
+                Scanner scanner;
+                String potentialTime = toCompare[i];
+                String currentTime = Time[i];
+                DateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
+
+                try {
+                    scanner = new Scanner(potentialTime);
+                    scanner.useDelimiter("-");
+                    String potentialTimeStart = scanner.next().trim();
+                    String potentialTimeEnd = scanner.next().trim();
+                    Date startTimeA = dateFormat.parse(potentialTimeStart);
+                    Date endTimeA = dateFormat.parse(potentialTimeEnd);
+                    scanner = new Scanner(currentTime);
+                    scanner.useDelimiter("-");
+                    String otherTimeStart = scanner.next().trim();
+                    String otherTimeEnd = scanner.next().trim();
+                    Date startTimeB = dateFormat.parse(otherTimeStart);
+                    Date endTimeB = dateFormat.parse(otherTimeEnd);
+                    toReturn  = startTimeA.getTime() <= endTimeB.getTime() && startTimeB.getTime() <= endTimeA.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return toReturn;
     }
 }

@@ -1,4 +1,4 @@
-package com.group_15.bta;
+package com.group_15.bta.presentation;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,17 +15,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.group_15.bta.R;
+import com.group_15.bta.business.AccessCourses;
 import com.group_15.bta.objects.Course;
-import com.group_15.bta.objects.SectionListAdapter;
+import com.group_15.bta.objects.CourseListAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link viewSectionsFragment#newInstance} factory method to
+ * Use the {@link viewCoursesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class viewSectionsFragment extends Fragment {
+public class viewCoursesFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +40,8 @@ public class viewSectionsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private SectionListAdapter sectionAdapted;
-    public viewSectionsFragment() {
+    private CourseListAdapter coursesAdapted;
+    public viewCoursesFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +51,11 @@ public class viewSectionsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment viewSectionsFragment.
+     * @return A new instance of fragment viewCoursesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static viewSectionsFragment newInstance(String param1, String param2) {
-        viewSectionsFragment fragment = new viewSectionsFragment();
+    public static viewCoursesFragment newInstance(String param1, String param2) {
+        viewCoursesFragment fragment = new viewCoursesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,7 +79,7 @@ public class viewSectionsFragment extends Fragment {
         inflater.inflate(R.menu.courses_menu, menu);
         MenuItem menuItem = menu.findItem(R.id.categories_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Search Sections");
+        searchView.setQueryHint("Search Courses");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -82,7 +89,7 @@ public class viewSectionsFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                sectionAdapted.getFilter().filter(newText);
+                coursesAdapted.getFilter().filter(newText);
                 return false;
             }
         });
@@ -92,16 +99,31 @@ public class viewSectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_sections, container, false);
+        return inflater.inflate(R.layout.fragment_view_courses, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Course selectedCourse = viewSectionsFragmentArgs.fromBundle(requireArguments()).getCourse();
-        ListView sectionsList = (ListView) view.findViewById(R.id.view_sections_section_list);
-        sectionAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, selectedCourse.getSections());
-        sectionsList.setAdapter(sectionAdapted);
+        String[] selectedCategories = viewCoursesFragmentArgs.fromBundle(requireArguments()).getCategories();
+        ListView coursesList = (ListView) view.findViewById(R.id.view_courses_course_list);
+        ArrayList<Course> courses = new ArrayList<>();
+        AccessCourses coursesGetter = new AccessCourses();
+        for(int i=0; i<selectedCategories.length; i++)
+        {
+            courses.addAll(coursesGetter.getCategoryCourses(selectedCategories[i]));
+        }
+        coursesAdapted = new CourseListAdapter(getContext(), R.layout.course_list_item, courses);
+        coursesList.setAdapter(coursesAdapted);
+        NavController navController = NavHostFragment.findNavController(this);
+        coursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                navController.navigate(viewCoursesFragmentDirections.actionViewCoursesFragmentToViewSectionsFragment(courses.get(i)));
+            }
+        });
     }
+
+
 }

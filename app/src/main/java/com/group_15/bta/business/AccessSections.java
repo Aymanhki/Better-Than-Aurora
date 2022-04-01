@@ -2,8 +2,6 @@ package com.group_15.bta.business;
 
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.persistence.SectionPersistence;
 
 import java.util.ArrayList;
@@ -53,6 +51,23 @@ public class AccessSections implements SectionPersistence {
     @Override
     public void updateSection(Section section) {
         sectionPersistence.updateSection(section);
+    }
+
+    public boolean overlaps(Section potential)
+    {
+        boolean toReturn = false;
+        ArrayList<Section> sections = new AccessStudentSections().getSectionList(new AccessUsers().getCurrentUser().getID(), true);
+
+        for(int i=0; i<sections.size() && !toReturn; i++)
+        {
+            Section currentSection = sections.get(i);
+            if(currentSection.interferes(potential))
+            {
+                toReturn = true;
+            }
+        }
+
+        return toReturn;
     }
 
 }

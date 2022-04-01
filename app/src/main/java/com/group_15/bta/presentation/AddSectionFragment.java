@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessCourses;
+import com.group_15.bta.business.AccessSections;
+import com.group_15.bta.business.AccessStudentSections;
+import com.group_15.bta.business.AccessStudents;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Section;
@@ -99,9 +102,17 @@ public class AddSectionFragment extends Fragment {
         addSectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!currentUser.getEnrolledSections().contains(new StudentSection(currentUser.getID(), "In Progress", selectedSection,  new AccessCourses().getCourse(selectedSection.getAssociatedCourse())))) {
-                    if(currentUser.getEnrolledSections().size()<currentUser.getMAX_CLASSES()) {
-                        currentUser.addSection(new StudentSection(currentUser.getID(), "In Progress", selectedSection, new AccessCourses().getCourse(selectedSection.getAssociatedCourse())));
+                StudentSection toAdd = new StudentSection(currentUser.getID(), "In Progress", selectedSection,  new AccessCourses().getCourse(selectedSection.getAssociatedCourse()));
+                if (!new AccessStudentSections().duplicate(toAdd)){
+                    if(!new AccessStudents().fullTime()) {
+                        if(!new AccessSections().overlaps(selectedSection))
+                        {
+                            currentUser.addSection(new StudentSection(currentUser.getID(), "In Progress", selectedSection, new AccessCourses().getCourse(selectedSection.getAssociatedCourse())));
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "This section interferes with another one", Toast.LENGTH_LONG).show();
+                        }
                     }
                     else
                     {

@@ -2,20 +2,19 @@ package com.group_15.bta.business;
 
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.HSQLDB.PersistenceException;
-import com.group_15.bta.persistence.SectionPersistence;
+import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
+import com.group_15.bta.persistence.StudentSectionPersistence;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AccessStudents implements StudentPersistence {
 
     private static final AccessStudents ourInstance = new AccessStudents();
     public ArrayList<Student> studentList = new ArrayList<>();
     private StudentPersistence studentPersistence;
+    private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private Student student;
 
     public AccessStudents() {
@@ -58,5 +57,27 @@ public class AccessStudents implements StudentPersistence {
 
     public void deleteStudent(Student toRemove) {
         studentPersistence.deleteStudent(toRemove);
+    }
+
+
+    public boolean fullTime()
+    {
+        int counter = 0;
+        Student student = (Student) new AccessUsers().getCurrentUser();
+        ArrayList<StudentSection> studentSections = student.getEnrolledSections();
+
+        for(int i=0; i<studentSections.size(); i++)
+        {
+            Scanner scanner = new Scanner(studentSections.get(i).getSection().getSection());
+            scanner.useDelimiter("-");
+            String sectionID = scanner.next().trim();
+
+            if(!sectionID.contains("B0"))
+            {
+                counter++;
+            }
+        }
+
+        return counter == student.getMAX_CLASSES();
     }
 }
