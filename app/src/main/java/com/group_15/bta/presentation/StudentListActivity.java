@@ -58,7 +58,7 @@ public class StudentListActivity extends AppCompatActivity {
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(students.get(position).getID());
+                text1.setText(students.get(position).getName());
                 text2.setText(students.get(position).getID());
 
                 return view;
