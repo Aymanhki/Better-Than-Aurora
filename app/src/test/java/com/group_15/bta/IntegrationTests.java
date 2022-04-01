@@ -9,6 +9,7 @@ import com.group_15.bta.business.AccessStudentSectionsIT;
 import com.group_15.bta.business.AccessStudentsIT;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.business.AccessUsersIT;
+import com.group_15.bta.business.CalculateTestIT;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -17,7 +18,8 @@ import com.group_15.bta.business.AccessUsersIT;
         AccessSectionsIT.class,
         AccessStudentSectionsIT.class,
         AccessStudentsIT.class,
-        AccessUsersIT.class
+        AccessUsersIT.class,
+        CalculateTestIT.class
 })
 public class IntegrationTests {
 }

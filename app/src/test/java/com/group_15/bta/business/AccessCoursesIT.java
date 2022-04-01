@@ -37,7 +37,7 @@ public class AccessCoursesIT {
 
         course = accessCourses.getCourseList().get(0);
         assertNotNull("first sequential course should not be null", course);
-        assertTrue("COMP 3350".equals(course.getID()));
+        assertTrue("BIOL 1000".equals(course.getID()));
 
         System.out.println("Finished test AccessCourses");
     }
@@ -45,32 +45,14 @@ public class AccessCoursesIT {
     @Test
     public void testGetCourses() {
         final ArrayList<Course> courses = accessCourses.getCourseList();
-        assertEquals(1, courses.size());
+        assertEquals(14, courses.size());
     }
-    /*
-        @Test
-        public void testDeleteCourse() {
-            final Courses c = accessCourses.getCourseList().get(0);
-            ArrayList<Courses> courses = accessCourses.getCourseList();
-            assertEquals(1, courses.size());
-            accessCourses.deleteCourses(c);
-            courses = accessCourses.getCourseList();
-            assertEquals(0, courses.size());
-        }
-    */
+
     @Test
     public void testInsertCourse() {
         final Course c = new Course("COMP 3190", "AI");
         accessCourses.insertCourses(c);
-        assertEquals(2, accessCourses.getCourseList().size());
-    }
-
-    @Test
-    public void testUpdateCourse() {
-        final Course c = accessCourses.getCourseList().get(0);
-        final Course u = new Course(c.getID(), "A new name");
-        accessCourses.updateCourse(u);
-        assertEquals(1, accessCourses.getCourseList().size());
+        assertEquals(15, accessCourses.getCourseList().size());
     }
 
     @After

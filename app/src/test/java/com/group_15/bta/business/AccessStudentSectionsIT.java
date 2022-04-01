@@ -47,9 +47,22 @@ public class AccessStudentSectionsIT {
     }
 
     @Test
+    public void testGetStudentCourses() {
+        ArrayList<Course> courses = new ArrayList<>();
+        final StudentSection studentSection;
+
+        studentSection = accessStudentSections.getStudentSectionList().get(0);
+        String studentId = studentSection.getAssociatedStudent();
+        courses = accessStudentSections.getCourses(studentId);
+        assertNotNull("first sequential course should not be null", studentId);
+        assertTrue("BIOL 1010".equals(courses.get(0).getID()));
+
+    }
+
+    @Test
     public void testGetStudentSections() {
         final ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(1, studentSections.size());
+        assertEquals(9, studentSections.size());
     }
 
     @Test
@@ -61,20 +74,10 @@ public class AccessStudentSectionsIT {
     public void testDeleteStudentSection() {
         final StudentSection c = accessStudentSections.getStudentSectionList().get(0);
         ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(1, studentSections.size());
+        assertEquals(9, studentSections.size());
         accessStudentSections.deleteSection(c);
         studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(0, studentSections.size());
-    }
-
-    @Test
-    public void testInsertStudentSection() {
-        final ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
-        Student newStudent = new Student("student2", "2", "Sara");
-        accessStudents.insertStudent(newStudent);
-        final StudentSection c = new StudentSection("student2", "A", studentSections.get(0).getSection(), new Course("", ""));
-        accessStudentSections.insertSection(c);
-        assertEquals(2, accessStudentSections.getStudentSectionList().size());
+        assertEquals(8, studentSections.size());
     }
 
     @After

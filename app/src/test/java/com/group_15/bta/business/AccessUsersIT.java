@@ -29,40 +29,13 @@ public class AccessUsersIT {
         final UserPersistence persistence = new UserPersistenceHSQLDB(this.tempDB.getAbsolutePath().replace(".script", ""));
         this.accessUsers = new AccessUsers(persistence);
     }
-    /*
-        @Test
-        public void testListUsers() {
-            final Student user;
 
-            user =(Student)accessUsers.getUsers().get(0);
-            assertNotNull("first sequential course should not be null", user);
-            assertTrue("Ayman".equals(user.getName()));
-
-        }
-    */
     @Test
     public void testGetUsers() {
         final ArrayList<User> users = accessUsers.getUsers();
-        assertEquals(4, users.size());
+        assertEquals(16, users.size());
     }
-    /*
-        @Test
-        public void testDeleteUser() {
-            final Student c =(Student) accessUsers.getUsers().get(0);
-            ArrayList<User> users = accessUsers.getUsers();
-            assertEquals(4, users.size());
-            accessUsers.deleteUser(c);
-            users = accessUsers.getUsers();
-            assertEquals(3, users.size());
-        }
 
-        @Test
-        public void testInsertUser() {
-            final User c = new User("student2", "2", "Sara");
-            accessUsers.insertUser(c);
-            assertEquals(5, accessUsers.getUsers().size());
-        }
-    */
     @After
     public void tearDown() {
         // reset DB
