@@ -51,3 +51,7 @@ Our team had discussed the thought about using Git flow as our branching strateg
 ## Worksheet Iteration 1 link:
 
 https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/Group15worksheet.md
+
+## Worksheet Iteration 2 link:
+
+https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/i2_Worksheet_Group15.md 
