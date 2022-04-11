@@ -52,7 +52,7 @@ INSERT INTO COURSES VALUES('MATH 1500', 'Introduction to Calculus', '(Lab Requir
 INSERT INTO COURSES VALUES('MATH 1300', 'Vector Geometry and Linear Algebra', '(Lab Required) An introduction to vectors, matrices, systems of linear equations and three-dimensional geometry.', 3, 'Mathematics', 1782.25)
 INSERT INTO SECTIONS VALUES('COMP 3350 - A01', 'Dr. Heather Matheson', 'Monday, Wednesday, Friday', '9:30 AM - 10:20 AM, 9:30 AM - 10:20 AM, 9:30 AM - 10:20 AM', 'Remote', 10, 500, 'COMP 3350', 'Computer Science')
 INSERT INTO SECTIONS VALUES('COMP 3350 - A02', 'Sara', 'Tuesday, Thursday', '11:30 AM - 12:20 PM, 11:30 AM - 12:20 PM', 'Remote', 10, 500, 'COMP 3350', 'Computer Science')
-INSERT INTO SECTIONS VALUES('COMP 1010 - A01', 'Vilhelm', 'Tuesday, Thrusday', '12:30 PM - 3:45 PM, 12:30 PM - 3:45 PM', 'Remote', 10, 110, 'COMP 1010', 'Computer Science')
+INSERT INTO SECTIONS VALUES('COMP 1010 - A01', 'Vilhelm', 'Tuesday, Thursday', '12:30 PM - 3:45 PM, 12:30 PM - 3:45 PM', 'Remote', 10, 110, 'COMP 1010', 'Computer Science')
 INSERT INTO SECTIONS VALUES('COMP 1010 - A02', 'Yhorm', 'Monday, Wednesday, Friday', '12:30 PM - 1:20 PM, 12:30 PM - 1:20 PM, 12:30 PM - 1:20 PM', 'Remote', 10, 110, 'COMP 1010', 'Computer Science')
 INSERT INTO SECTIONS VALUES('COMP 1010 - B01', 'Yhorm', 'Wednesday', '10:30 AM - 11:20 AM', 'Remote', 2, 28, 'COMP 1010', 'Computer Science')
 INSERT INTO SECTIONS VALUES('COMP 1010 - B02', 'Yhorm', 'Wednesday', '11:30 AM - 12.20 PM', 'Remote', 3, 28, 'COMP 1010', 'Computer Science')

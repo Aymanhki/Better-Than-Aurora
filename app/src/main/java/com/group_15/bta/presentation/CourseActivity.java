@@ -68,16 +68,18 @@ public class CourseActivity extends AppCompatActivity {
             endTime.getText().toString().length() != 0 && Days.getText().toString().length() != 0 &&
             CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 &&
             Location.getText().toString().length() != 0) {
-            String[] Time = new String[2];
-            Time[0] = startTime.getText().toString();
-            Time[1] = endTime.getText().toString();
 
             int Cap = Integer.parseInt(CAP.getText().toString());
-
+            String classTime = startTime.getText().toString() + " - " + endTime.getText().toString();
             String[] ds;
             String d = Days.getText().toString();
 
             ds = d.split(" ");
+
+            String[] Time = new String[ds.length];
+            for(int i = 0; i<ds.length;i++){
+                Time[i] = classTime;
+            }
 
 
             Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,

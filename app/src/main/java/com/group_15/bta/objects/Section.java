@@ -64,32 +64,43 @@ public class Section implements Serializable {
         this.CAP = capacity;
         this.associatedCourse = associatedCourse;
         this.associatedCategory = associatedCategory;
-        classDays = new ClassDays[days.length];
+        setClassDays();
+    }
 
-        for (int i = 0; i <days.length; i++){
-            if(days[i].replaceAll("\\s+","").equals("M") || days[i].replaceAll("\\s+","").equals("Monday"))
+    //set days
+    private void setClassDays(){
+        classDays = new ClassDays[Days.length];
+
+        for (int i = 0; i <Days.length; i++){
+            if(Days[i].replaceAll("\\s+","").equals("M") || Days[i].replaceAll("\\s+","").equals("Monday"))
             {
                 classDays[i] = ClassDays.Monday;
+                Days[i] = ClassDays.Monday.toString();
             }
-            else if(days[i].replaceAll("\\s+","").equals("T") || days[i].replaceAll("\\s+","").equals("Tuesday"))
+            else if(Days[i].replaceAll("\\s+","").equals("T") || Days[i].replaceAll("\\s+","").equals("Tuesday"))
             {
                 classDays[i] = ClassDays.Tuesday;
+                Days[i] = ClassDays.Tuesday.toString();
             }
-            else if(days[i].replaceAll("\\s+","").equals("W") || days[i].replaceAll("\\s+","").equals("Wednesday"))
+            else if(Days[i].replaceAll("\\s+","").equals("W") || Days[i].replaceAll("\\s+","").equals("Wednesday"))
             {
                 classDays[i] = ClassDays.Wednesday;
+                Days[i] = ClassDays.Wednesday.toString();
             }
-            else if(days[i].replaceAll("\\s+","").equals("TR") || days[i].replaceAll("\\s+","").equals("Thursday"))
+            else if(Days[i].replaceAll("\\s+","").equals("TR") || Days[i].replaceAll("\\s+","").equals("Thursday"))
             {
                 classDays[i] = ClassDays.Thursday;
+                Days[i] = ClassDays.Thursday.toString();
             }
-            else if(days[i].replaceAll("\\s+","").equals("F") || days[i].replaceAll("\\s+","").equals("Friday"))
+            else if(Days[i].replaceAll("\\s+","").equals("F") || Days[i].replaceAll("\\s+","").equals("Friday"))
             {
                 classDays[i] = ClassDays.Friday;
+                Days[i] = ClassDays.Friday.toString();
             }
             else
             {
                 classDays[i] = ClassDays.NotValid;
+                Days[i] = ClassDays.NotValid.toString();
             }
         }
     }
