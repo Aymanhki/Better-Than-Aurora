@@ -45,8 +45,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         final String sectionID = rs.getString("SECTIONID");
         final String courseID = rs.getString("COURSEID");
         SectionPersistenceHSQLDB sectionGetter = new SectionPersistenceHSQLDB(connection());
+        Section section = sectionGetter.getSection(sectionID);
         CoursePersistenceHSQLDB courseGetter = new CoursePersistenceHSQLDB(connection());
-        return new StudentSection(studentID, grade, sectionGetter.getSection(sectionID), courseGetter.getCourse(courseID));
+        Course course  = courseGetter.getCourse(courseID);
+        return new StudentSection(studentID, grade, section, course);
 
     }
 
@@ -173,8 +175,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             CoursePersistenceHSQLDB courseParser = new CoursePersistenceHSQLDB(newConnection);
             while (rs.next())
             {
-                //StudentSection studentSection = fromResultSet(rs);
-
                 toReturn.add(courseParser.fromResultSet(rs));
             }
             rs.close();

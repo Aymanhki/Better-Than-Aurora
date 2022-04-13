@@ -2,7 +2,6 @@ package com.group_15.bta.persistence.HSQLDB;
 
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.CoursePersistence;
 
 import java.io.Serializable;
@@ -41,13 +40,25 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     }
 
     public Course fromResultSet(final ResultSet rs) throws SQLException {
-        final String courseID = rs.getString("COURSEID");
-        final String courseName = rs.getString("TITLE");
-        final String courseDescription = rs.getString("DESCRIPTION");
-        final String category = rs.getString("NAME");
-        final int credit = rs.getInt("CREDIT");
-        final double tuition = rs.getDouble("TUITION");
-        return new Course(courseID, courseName, courseDescription, credit, category, tuition);
+        final String COURSEID = rs.getString("COURSEID");
+        final String COURSE_NAME = rs.getString("TITLE");
+        final String COURSE_DESCRIPTION = rs.getString("DESCRIPTION");
+        final String CATEGORY = rs.getString("NAME");
+        final int CREDIT = rs.getInt("CREDIT");
+        final double TUITION = rs.getDouble("TUITION");
+        final String ASSOCIATED_DEGREE = rs.getString("ASSOCIATEDDEGREE");
+        return new Course(COURSEID, COURSE_NAME, COURSE_DESCRIPTION, CREDIT, CATEGORY, TUITION, ASSOCIATED_DEGREE);
+    }
+
+    public static Course fromResultSetStatic(final ResultSet rs) throws SQLException {
+        final String COURSEID = rs.getString("COURSEID");
+        final String COURSE_NAME = rs.getString("TITLE");
+        final String COURSE_DESCRIPTION = rs.getString("DESCRIPTION");
+        final String CATEGORY = rs.getString("NAME");
+        final int CREDIT = rs.getInt("CREDIT");
+        final double TUITION = rs.getDouble("TUITION");
+        final String ASSOCIATED_DEGREE = rs.getString("ASSOCIATEDDEGREE");
+        return new Course(COURSEID, COURSE_NAME, COURSE_DESCRIPTION, CREDIT, CATEGORY, TUITION, ASSOCIATED_DEGREE);
     }
 
     @Override
@@ -83,16 +94,18 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     }
 
 
+
     @Override
     public void insertCourses(Course currentCourse) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
             statement.setString(2, currentCourse.getTitle());
             statement.setString(3, currentCourse.getDescription());
             statement.setInt(4, currentCourse.getCreditHours());
             statement.setString(5, currentCourse.getAssociatedCategory());
             statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
+            statement.setString(7, currentCourse.getAssociatedDegree());
             statement.executeUpdate();
             if( currentCourse.getSections() != null) {
 
@@ -109,13 +122,14 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public void updateCourse(Course currentCourse) {
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?, TUITION = ?  WHERE COURSEID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?, TUITION = ?, ASSOCIATEDDEGREE = ?  WHERE COURSEID = ?");
             statement.setString(1, currentCourse.getTitle());
             statement.setString(2, currentCourse.getDescription());
             statement.setString(3, String.valueOf(currentCourse.getCreditHours()));
             statement.setString(4, currentCourse.getAssociatedCategory());
             statement.setString(5, currentCourse.getID());
             statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
+            statement.setString(7, currentCourse.getAssociatedDegree());
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

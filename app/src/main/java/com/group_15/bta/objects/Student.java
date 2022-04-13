@@ -17,6 +17,7 @@ public class Student extends User implements Serializable{
    // private ArrayList<StudentSection> enrolledSections;
     private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private int MAX_CLASSES =  5;
+    private String associatedDegree;
 
     //default constructor
     public Student() {
@@ -35,15 +36,14 @@ public class Student extends User implements Serializable{
     }
 
     //constructor (used on admin side)
-    public Student(final String newID, final String newPassword, final String newStudentName) {
+    public Student(final String newID, final String newPassword, final String newStudentName, String associatedDegree) {
         this.id = newID;
         this.password = newPassword;
         this.name = newStudentName;
+        this.associatedDegree = associatedDegree;
+
        // enrolledSections = studentSectionPersistence.getSectionList();
     }
-
-
-
 
     //tostring
     public String toString()
@@ -93,7 +93,13 @@ public class Student extends User implements Serializable{
     {
         return studentSectionPersistence.getCourses(id);
     }
+
     public int getMAX_CLASSES(){return MAX_CLASSES;}
+
+
+    public String getAssociatedDegree() {
+        return associatedDegree;
+    }
 }
 
 

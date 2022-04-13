@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class AccessCourses implements CoursePersistence {
     //private static final AccessCourses ourInstance = new AccessCourses();
     private CoursePersistence coursePersistence;
-    public ArrayList<Course> courses = new ArrayList<>();
 
     public AccessCourses() {
         coursePersistence = Services.getCoursePersistence();

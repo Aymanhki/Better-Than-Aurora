@@ -1,8 +1,9 @@
 package com.group_15.bta.objects;
 
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class CourseTest {
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));
 
-        course2 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science", 1782.25);
+        course2 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",3,"Computer Science", 1782.25, "B.Sc. (Hons)");
         assertNotNull(course2);
         assertTrue("Comp 2160".equals(courses.getID()));
         assertTrue("Object Orientation".equals(courses.getTitle()));

@@ -12,16 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.business.AccessStudentSections;
-import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.objects.StudentSection;
-import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.business.AccessStudents;
+import com.group_15.bta.objects.Student;
+
+import java.util.ArrayList;
 
 
 public class StudentListActivity extends AppCompatActivity {
@@ -59,7 +55,7 @@ public class StudentListActivity extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText(students.get(position).getName());
-                text2.setText(students.get(position).getName());
+                text2.setText(students.get(position).getAssociatedDegree());
 
                 return view;
             }

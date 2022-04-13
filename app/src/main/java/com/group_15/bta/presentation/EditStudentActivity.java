@@ -1,24 +1,35 @@
 package com.group_15.bta.presentation;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.StudentPersistence;
+import com.group_15.bta.business.AccessDegrees;
 import com.group_15.bta.business.AccessStudents;
+import com.group_15.bta.objects.Degree;
+import com.group_15.bta.objects.Student;
+
+import java.util.ArrayList;
 
 public class EditStudentActivity extends AppCompatActivity {
     private ArrayList<Student> students;
@@ -26,6 +37,15 @@ public class EditStudentActivity extends AppCompatActivity {
 
     private AccessStudents accessStudents;
     private ArrayList<Student> studentList;
+
+    private TextView studentDegree;
+    private Dialog selectADegreeDialog;
+    private ListView toSelectDegrees;
+    private ArrayAdapter degreesAdapted;
+    private EditText newDegree;
+    private Button addDegreeBtn;
+    private Button cancel;
+    private AccessDegrees accessDegrees = new AccessDegrees();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +67,8 @@ public class EditStudentActivity extends AppCompatActivity {
         EditText editPassword = (EditText) findViewById(id.editStudentPassword);
         editName.setText(studentList.get(position).getName());
         editPassword.setText(studentList.get(position).getPassword());
-
+        TextView editDegree = (TextView) findViewById(id.studentDegree);
+        editDegree.setText(studentList.get(position).getAssociatedDegree());
         final TextView tView = (TextView)findViewById(id.studentID);
         tView.setText(studentList.get(position).getPassword());
 
@@ -63,7 +84,8 @@ public class EditStudentActivity extends AppCompatActivity {
         Editable password = editPassword.getText();
         final TextView tView = (TextView)findViewById(id.studentID);
         String id = (String) tView.getText();
-        Student student = new Student(id, password.toString(), name.toString());
+
+        Student student = new Student(id, password.toString(), name.toString(), studentDegree.getText().toString());
         // students.add(student);
         accessStudents = new AccessStudents();
         accessStudents.updateStudent(student);
@@ -85,5 +107,102 @@ public class EditStudentActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        studentDegree = (TextView) findViewById(id.studentDegree);
+        studentDegree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectANewDegree();
+            }
+        });
+    }
+
+    private void selectANewDegree()
+    {
+        AlertDialog.Builder dialogBuildr = new AlertDialog.Builder(this);
+        final View selectADegree = getLayoutInflater().inflate(R.layout.select_a_degree_popup, null);
+        dialogBuildr.setView(selectADegree);
+        selectADegreeDialog = dialogBuildr.create();
+        selectADegreeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        selectADegreeDialog.show();
+
+
+        toSelectDegrees = (ListView) selectADegree.findViewById(id.to_select_a_degree_from_list);
+        Button addANewDegree = (Button) selectADegree.findViewById(id.add_a_new_degree_btn_for_student);
+
+        degreesAdapted = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, accessDegrees.getDegreeListNames());
+        toSelectDegrees.setAdapter(degreesAdapted);
+
+        toSelectDegrees.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                studentDegree.setText(degreesAdapted.getItem(i).toString());
+                selectADegreeDialog.dismiss();
+            }
+        });
+
+        addANewDegree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectADegreeDialog.dismiss();
+                promptAddNewDegree();
+            }
+        });
+
+    }
+
+    private void promptAddNewDegree() {
+        AlertDialog.Builder dialogBuildr = new AlertDialog.Builder(this);
+        final View enterADegreePopUp = getLayoutInflater().inflate(R.layout.add_a_degree_popup, null);
+        dialogBuildr.setView(enterADegreePopUp);
+        AlertDialog dialog = dialogBuildr.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        newDegree = (EditText) enterADegreePopUp.findViewById(R.id.new_degree_text_box);
+        addDegreeBtn = (Button) enterADegreePopUp.findViewById(R.id.add_a_degree_btn);
+        cancel = (Button) enterADegreePopUp.findViewById(R.id.cancel_add_a_degree_button);
+
+        addDegreeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString()))) {
+                    addAnewDegree();
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(EditStudentActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        newDegree.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (keyCode == event.KEYCODE_ENTER) {
+                    addAnewDegree();
+                    dialog.dismiss();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void addAnewDegree()
+    {
+        accessDegrees.insert(new Degree(newDegree.getText().toString()));
+        degreesAdapted = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, accessDegrees.getDegreeListNames());
+        toSelectDegrees.setAdapter(degreesAdapted);
+        selectADegreeDialog.show();
     }
 }

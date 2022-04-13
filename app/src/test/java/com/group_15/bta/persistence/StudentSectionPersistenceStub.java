@@ -4,9 +4,6 @@ import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.StudentSection;
 
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
-
 import java.util.ArrayList;
 
 public class StudentSectionPersistenceStub implements StudentSectionPersistence {
@@ -15,14 +12,14 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
     public StudentSectionPersistenceStub() {
         this.studentSections = new ArrayList<>();
 
-        Course comp3350Course = new Course("COMP 3350", "Software Engineering I", "Introduction to software engineering. Software life cycle models, system and software requirements analysis, specifications, software design, testing and maintenance, software quality.", 3, "Computer Science", 1782.25);
-        Course biol1300Course = new Course("BIOL 1300", "Economic Plants", "A survey of economically important plants and their products. The history of plant use, plants in folklore and medicine, fermentation and viticulture, domestication of plants, and forestry are the major topics covered. Chemical, structural, and nutritional aspects of plant products are also discussed.", 3, "Biological Sciences", 1782.25);
-        Course math1500Course = new Course("MATH 1500", "Introduction to Calculus", "(Lab Required) Differentiation and integration of elementary functions, with applications to maxima and minima, rates of change, area, and volume", 3, "Mathematics", 1782.25);
-        Course engl1400Course = new Course("ENGL 1400", "Thematic Approaches to the Study of Literature", "An introduction to the study of literature, with emphasis on the development of reading and writing skills. Poetry, prose, and drama from various thematic perspectives.", 3, "English", 1782.25);
-        Course chem1110Course = new Course("CHEM 1110", "Introductory Chemistry 2: Interaction, Reactivity, and Chemical Properties", "This course builds upon students' foundation in chemistry to give them a better understanding of chemical reactivity and physical properties.", 3, "Chemistry", 1782.25);
-        Course math1300Course = new Course("MATH 1300", "Vector Geometry and Linear Algebra", "(Lab Required) An introduction to vectors, matrices, systems of linear equations and three-dimensional geometry.", 3, "Mathematics", 1782.25);
-        Course comp1012Course =  new Course("COMP 1012", "Computer Programming for Scientists and Engineers", "(Lab Required) An introduction to computer programming suitable for solving problems in science and engineering. Students will implement algorithms for numerical processing, statistical analysis and matrix operations", 3, "Computer Science", 1782.25);
-        Course biol1010Course = new Course("BIOL 1010", "Biology: Biological Diversity and Interactions", "An introduction to biological diversity including prokaryotes, protists, fungi, plants and animals; the form and function of plants and animals and basic concepts of ecology", 3, "Biological Sciences", 1782.25);
+        Course comp3350Course = new Course("COMP 3350", "Software Engineering I", "Introduction to software engineering. Software life cycle models, system and software requirements analysis, specifications, software design, testing and maintenance, software quality.", 3, "Computer Science", 1782.25, "B.Sc. (Hons)");
+        Course biol1300Course = new Course("BIOL 1300", "Economic Plants", "A survey of economically important plants and their products. The history of plant use, plants in folklore and medicine, fermentation and viticulture, domestication of plants, and forestry are the major topics covered. Chemical, structural, and nutritional aspects of plant products are also discussed.", 3, "Biological Sciences", 1782.25, "B.Sc. (Hons)");
+        Course math1500Course = new Course("MATH 1500", "Introduction to Calculus", "(Lab Required) Differentiation and integration of elementary functions, with applications to maxima and minima, rates of change, area, and volume", 3, "Mathematics", 1782.25, "B.Sc. (Hons)");
+        Course engl1400Course = new Course("ENGL 1400", "Thematic Approaches to the Study of Literature", "An introduction to the study of literature, with emphasis on the development of reading and writing skills. Poetry, prose, and drama from various thematic perspectives.", 3, "English", 1782.25, "B.Sc. (Hons)");
+        Course chem1110Course = new Course("CHEM 1110", "Introductory Chemistry 2: Interaction, Reactivity, and Chemical Properties", "This course builds upon students' foundation in chemistry to give them a better understanding of chemical reactivity and physical properties.", 3, "Chemistry", 1782.25, "B.Sc. (Hons)");
+        Course math1300Course = new Course("MATH 1300", "Vector Geometry and Linear Algebra", "(Lab Required) An introduction to vectors, matrices, systems of linear equations and three-dimensional geometry.", 3, "Mathematics", 1782.25, "B.Sc. (Hons)");
+        Course comp1012Course =  new Course("COMP 1012", "Computer Programming for Scientists and Engineers", "(Lab Required) An introduction to computer programming suitable for solving problems in science and engineering. Students will implement algorithms for numerical processing, statistical analysis and matrix operations", 3, "Computer Science", 1782.25, "B.Sc. (Hons)");
+        Course biol1010Course = new Course("BIOL 1010", "Biology: Biological Diversity and Interactions", "An introduction to biological diversity including prokaryotes, protists, fungi, plants and animals; the form and function of plants and animals and basic concepts of ecology", 3, "Biological Sciences", 1782.25, "B.Sc. (Hons)");
         Section comp3350 = new Section("COMP 3350 - A01", "Dr. Heather Matheson", new String[]{"Monday", " Wednesday", " Friday"}, new String[]{"9:30 AM - 10:20 AM", " 9:30 AM - 10:20 AM", " 9:30 AM - 10:20 AM"}, "Remote", 10, 500, "COMP 3350", "Computer Science");
         Section biol1300 = new Section("BIOL 1300 - A01", "Micolash", new String[]{"Tuesday", " Thursday"}, new String[]{"11:30 AM - 12:45 PM", " 11:30 AM - 12:45 PM"}, "Remote", 10, 200, "BIOL 1300", "Biological Sciences");
         Section math1500 = new Section("MATH 1500 - A01", "Eilo", new String[]{"Monday", " Wednesday", " Friday"}, new String[]{"11:30 AM - 12:20 PM", " 11:30 AM - 12:20 PM", " 11:30 AM - 12:20 PM"}, "Remote", 5, 200, "MATH 1500", "Mathematics");

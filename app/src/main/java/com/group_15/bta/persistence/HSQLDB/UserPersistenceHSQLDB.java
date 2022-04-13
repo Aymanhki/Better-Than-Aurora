@@ -1,9 +1,5 @@
 package com.group_15.bta.persistence.HSQLDB;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
@@ -11,17 +7,12 @@ import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
 import com.group_15.bta.persistence.UserPersistence;
 
-import java.io.File;
 import java.io.Serializable;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLXML;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -65,7 +56,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
         if (userType.equals(STUDENT_ACCOUNT_TYPE)) {
             userName = rs.getString("STUDENTID");
-            toReturn = new Student(userName, password, name);
+            final String associatedDegree = rs.getString("ASSOCIATEDDEGREE");
+            toReturn = new Student(userName, password, name, associatedDegree);
         } else if (userType.equals(ADMIN_ACCOUNT_TYPE)) {
             userName = rs.getString("ADMINID");
             toReturn = new Administrator(userName, password, name);

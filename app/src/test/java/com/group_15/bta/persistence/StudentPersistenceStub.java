@@ -1,6 +1,10 @@
 package com.group_15.bta.persistence;
 
+import com.github.mikephil.charting.data.PieEntry;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
 
@@ -9,10 +13,10 @@ public class StudentPersistenceStub implements StudentPersistence {
 
     public StudentPersistenceStub() {
         this.students = new ArrayList<>();
-        students.add(new Student("student", "student", "Ayman"));
-        students.add(new Student("student1", "student1", "Nilin"));
-        students.add(new Student("student2", "student2", "Dara"));
-        students.add(new Student("student3", "student3", "Amelia"));
+        students.add(new Student("student", "student", "Ayman", "B.Sc. (Hons)"));
+        students.add(new Student("student1", "student1", "Nilin", "B.Sc. (Hons)"));
+        students.add(new Student("student2", "student2", "Dara", "B.Sc. (Hons)"));
+        students.add(new Student("student3", "student3", "Amelia", "B.Sc. (Hons)"));
     }
     @Override
     public ArrayList<Student> getStudentList() {
@@ -54,4 +58,24 @@ public class StudentPersistenceStub implements StudentPersistence {
             students.remove(index);
         }
     }
+
+    //TODO: Implement this method
+    @Override
+    public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student) {
+        return null;
+    }
+
+    //TODO: Implement this method
+    @Override
+    public StudentSection getEnrolledSection(Student student, Section section) {
+        return null;
+    }
+
+    //TODO: Implement this method
+    @Override
+    public ArrayList<PieEntry> getDegreeCreditBreakDown(Student student) {
+        return null;
+    }
+
+
 }

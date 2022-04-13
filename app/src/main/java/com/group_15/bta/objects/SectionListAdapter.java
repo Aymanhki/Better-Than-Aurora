@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SectionListAdapter extends ArrayAdapter<Section> {
 
@@ -38,17 +36,25 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         String[] days = getItem(position).getDaysRaw();
         String dates = "";
 
-        for(int i=0; i<times.length; i++)
+        for(int i=0; i<days.length; i++)
         {
-            if(i<times.length-1)
+            dates += days[i]+":\n";
+            for(int j = 0; j < times.length; j++)
             {
-                dates += (days[i] + ": " + times[i]).trim() + "\n";
-            }
-            else
-            {
-                dates += (days[i] + ": " + times[i]).trim();
+                if(j<times.length-1)
+                {
+                    dates += times[j].trim() + ",\n";
+                }
+                else
+                {
+                    dates += times[j].trim() + "\n";
+                }
             }
 
+            if(i < days.length-1)
+            {
+                dates += "\n";
+            }
         }
 
         int capacity = getItem(position).getCAP();

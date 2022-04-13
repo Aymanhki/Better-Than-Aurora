@@ -2,8 +2,10 @@ package com.group_15.bta.application;
 
 import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.persistence.CoursePersistence;
+import com.group_15.bta.persistence.DegreePersistence;
 import com.group_15.bta.persistence.HSQLDB.CategoryPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.CoursePersistenceHSQLDB;
+import com.group_15.bta.persistence.HSQLDB.DegreePersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.SectionPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
 import com.group_15.bta.persistence.HSQLDB.StudentSectionPersistenceHSQLDB;
@@ -14,7 +16,6 @@ import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.persistence.UserPersistence;
 
 import java.io.Serializable;
-import java.sql.Connection;
 
 public class Services implements Serializable {
     private static StudentPersistence studentPersistence = null;
@@ -23,7 +24,7 @@ public class Services implements Serializable {
     private static CategoryPersistence categoryPersistence = null;
     private static UserPersistence userPersistence = null;
     private static StudentSectionPersistence studentSectionPersistence = null;
-    private static Connection connection = null;
+    private static DegreePersistence degreePersistence = null;
     private static boolean newCourse = false;
 
     public static synchronized StudentPersistence getStudentPersistence() {
@@ -79,6 +80,16 @@ public class Services implements Serializable {
 
         return studentSectionPersistence;
     }
+
+    public static synchronized DegreePersistence getDegreePersistence() {
+        if (degreePersistence == null) {
+            //degreePersistence = new DegreePersistenceStub();
+            degreePersistence = new DegreePersistenceHSQLDB(Main.getDBPathName());
+        }
+        return degreePersistence;
+    }
+
+
 
     public static boolean getNewCourse(){ return newCourse; }
 

@@ -29,7 +29,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
     private Connection connection() throws SQLException {
         Connection toReturn;
 
-        if (existingConnection == null) {
+        if (existingConnection == null || !existingConnection.isClosed()) {
             toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
         } else {
             toReturn = existingConnection;
@@ -63,8 +63,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
                 }
                 categories.add(category);
             }
-            statement.close();
-            resultSet.close();
+
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

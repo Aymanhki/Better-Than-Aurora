@@ -3,8 +3,6 @@ package com.group_15.bta.presentation;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,14 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.application.Services;
+import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
-import com.group_15.bta.business.AccessSections;
+
+import java.util.ArrayList;
 
 public class CourseActivity extends AppCompatActivity {
     protected String Name;
@@ -69,31 +67,40 @@ public class CourseActivity extends AppCompatActivity {
             CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 &&
             Location.getText().toString().length() != 0) {
 
-            int Cap = Integer.parseInt(CAP.getText().toString());
-            String classTime = startTime.getText().toString() + " - " + endTime.getText().toString();
-            String[] ds;
+            String startTimes = startTime.getText().toString();
+            String endTimes = endTime.getText().toString();
             String d = Days.getText().toString();
+            String[] ds = new String[0];
+            String[] Time = new String[0];
 
-            ds = d.split(" ");
-
-            String[] Time = new String[ds.length];
-            for(int i = 0; i<ds.length;i++){
-                Time[i] = classTime;
+            if (sectionList.validateDayAndTime(startTimes, endTimes, d)) {
+                try
+                {
+                    Time = sectionList.timeParser(startTimes, endTimes);
+                    ds = d.split(",");
+                    int Cap = Integer.parseInt(CAP.getText().toString());
+                    Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,
+                            Location.getText().toString(), Cap, Cap, Name, Category);
+                    sectionList.insertSection(s);
+                    sections = sectionList.getCourseSections(Name);
+                    Services.setCourseToTrue();
+                    listSections();
+                }
+                catch(final Exception e)
+                {
+                    Messages.fatalError(this, e.getMessage());
+                }
+            } else {
+                Messages.warning(this, "The number of start times have to match the number of end times\nand the days have to be in the correct format");
             }
 
-
-            Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,
-                    Location.getText().toString(), Cap, Cap, Name, Category);
-
-            sectionList.insertSection(s);
-            sections = sectionList.getCourseSections(Name);
-            Services.setCourseToTrue();
         }
         else
         {
             Toast.makeText(CourseActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
         }
-        listSections();
+
+
     }
 
     public void buttonDeleteSec(View v){

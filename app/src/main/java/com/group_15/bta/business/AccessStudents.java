@@ -1,6 +1,9 @@
 package com.group_15.bta.business;
 
+import com.github.mikephil.charting.data.PieEntry;
 import com.group_15.bta.application.Services;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
@@ -14,6 +17,9 @@ public class AccessStudents implements StudentPersistence {
     private static final AccessStudents ourInstance = new AccessStudents();
     public ArrayList<Student> studentList = new ArrayList<>();
     private StudentPersistence studentPersistence;
+
+
+
     private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private Student student;
 
@@ -59,6 +65,21 @@ public class AccessStudents implements StudentPersistence {
         studentPersistence.deleteStudent(toRemove);
     }
 
+    @Override
+    public StudentSection getEnrolledSection(Student student, Section section) {
+        return studentPersistence.getEnrolledSection(student, section);
+    }
+
+    @Override
+    public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student) {
+        return studentPersistence.getStudentDegreeNotTakenCourses(student);
+    }
+
+    @Override
+    public ArrayList<PieEntry> getDegreeCreditBreakDown(Student student) {
+        return studentPersistence.getDegreeCreditBreakDown(student);
+    }
+
 
     public boolean fullTime()
     {
@@ -80,4 +101,6 @@ public class AccessStudents implements StudentPersistence {
 
         return counter == student.getMAX_CLASSES();
     }
+
+
 }

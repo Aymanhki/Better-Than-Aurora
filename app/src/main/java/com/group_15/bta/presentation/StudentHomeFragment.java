@@ -1,9 +1,11 @@
 package com.group_15.bta.presentation;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,13 +13,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.group_15.bta.R;
 import com.group_15.bta.application.Services;
+import com.group_15.bta.business.AccessStudents;
 import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.CourseListAdapter;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
 
@@ -40,9 +52,17 @@ public class StudentHomeFragment extends Fragment {
     private Student currentUser = (Student) new AccessUsers().getCurrentUser();
     ;
     private ListView enrolledSectionsList;
-    private TextView emptyListView;
+    private ListView needToTakeCourses;
+    private TextView needToTakeCourseEmptyText;
+    private TextView emptyEnrolledSectionsText;
     private SectionListAdapter enrolledSectionsAdapted;
+    private CourseListAdapter needToTakeCoursesAdapted;
+    private AccessStudents studentsPersistence = new AccessStudents();
 
+    private NavController navController;
+
+    private PieChart pieChart;
+    private ArrayList<PieEntry> pieEntries = studentsPersistence.getDegreeCreditBreakDown( currentUser );
     public StudentHomeFragment() {
         // Required empty public constructor
     }
@@ -78,14 +98,14 @@ public class StudentHomeFragment extends Fragment {
             toast.show();
             Services.setCourseToFalse();
         }
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_student_home, container, false);
 
     }
@@ -93,21 +113,71 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
+        navController = NavHostFragment.findNavController(this);
+        pieChart = view.findViewById(R.id.degree_breakdown_pie);
+        setupPieChart();
+
         ArrayList<Section> studentCurrentSections = currentUser.getSections(true);
         enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, studentCurrentSections);
         enrolledSectionsList = view.findViewById(R.id.student_enrolled_courses);
         enrolledSectionsList.setAdapter(enrolledSectionsAdapted);
-        emptyListView = view.findViewById(R.id.student_enrolled_courses_empty);
+        enrolledSectionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                StudentSection toSend = currentUser.getEnrolledSections().get(i);
+                navController.navigate(StudentHomeFragmentDirections.actionStudentHomeToConfirmDroppingACourse(toSend));
+            }
+        });
+        emptyEnrolledSectionsText = view.findViewById(R.id.student_enrolled_courses_empty);
 
-        if (currentUser.getEnrolledSections().isEmpty()) {
+        if (studentCurrentSections.isEmpty()) {
             enrolledSectionsList.setVisibility(View.GONE);
-            emptyListView.setVisibility(View.VISIBLE);
+            emptyEnrolledSectionsText.setVisibility(View.VISIBLE);
         } else {
             enrolledSectionsList.setVisibility(View.VISIBLE);
-            emptyListView.setVisibility(View.GONE);
+            emptyEnrolledSectionsText.setVisibility(View.GONE);
         }
-        ((StudentAccountActivity) getActivity()).setActionBarTitle("Hi " + currentUser.getName());
 
+        ArrayList<Course> studentNeedToTakeCourses = studentsPersistence.getStudentDegreeNotTakenCourses(currentUser);
+        needToTakeCoursesAdapted = new CourseListAdapter(getContext(), R.layout.course_list_item, studentNeedToTakeCourses);
+        needToTakeCourses = view.findViewById(R.id.student_required_courses);
+        needToTakeCourses.setAdapter(needToTakeCoursesAdapted);
+        needToTakeCourses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                navController.navigate(StudentHomeFragmentDirections.actionStudentHomeToAddACourseWithCode(studentNeedToTakeCourses.get(i)));
+            }
+        });
+        needToTakeCourseEmptyText = view.findViewById(R.id.student_required_courses_empty);
+
+        if (studentNeedToTakeCourses.isEmpty()) {
+            needToTakeCourses.setVisibility(View.GONE);
+            needToTakeCourseEmptyText.setVisibility(View.VISIBLE);
+        } else {
+            needToTakeCourses.setVisibility(View.VISIBLE);
+            needToTakeCourseEmptyText.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    public void setupPieChart() {
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, currentUser.getAssociatedDegree());
+        int[] pieColors = new int[]{Color.rgb(58, 202, 116), Color.rgb(57, 153, 216), Color.rgb(234, 118, 110)};
+
+        pieDataSet.setColors(pieColors);
+        pieDataSet.setValueTextColor(Color.rgb(233, 229, 214));
+        pieDataSet.setValueTextSize(20f);
+        pieDataSet.setValueTextSize(30f);
+        pieChart.setData(new PieData( pieDataSet) );
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setUsePercentValues(false);
+        pieChart.animateX(300);
+        pieChart.animateY(300);
+        pieChart.getLegend().setEnabled(false);
 
     }
 

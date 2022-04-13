@@ -8,7 +8,22 @@
     <fragment
         android:id="@+id/student_home"
         android:name="com.group_15.bta.presentation.StudentHomeFragment"
-        tools:layout="@layout/fragment_student_home" />
+        tools:layout="@layout/fragment_student_home" >
+        <action
+            android:id="@+id/action_student_home_to_add_a_course_with_code"
+            app:destination="@id/add_a_course_with_code"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+        <action
+            android:id="@+id/action_student_home_to_confirm_dropping_a_course"
+            app:destination="@id/confirm_dropping_a_course"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
+    </fragment>
     <fragment
         android:id="@+id/student_courses"
         android:name="com.group_15.bta.presentation.StudentCoursesFragment"

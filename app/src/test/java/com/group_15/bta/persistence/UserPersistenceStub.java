@@ -1,19 +1,11 @@
 package com.group_15.bta.persistence;
 
-import android.content.Context;
-import android.content.Intent;
-
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
-import com.group_15.bta.presentation.AdminMenuActivity;
-import com.group_15.bta.presentation.AdvisorAccountActivity;
-import com.group_15.bta.presentation.InstructorSectionsActivity;
-import com.group_15.bta.presentation.StudentAccountActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UserPersistenceStub implements UserPersistence {
@@ -23,10 +15,10 @@ public class UserPersistenceStub implements UserPersistence {
     public UserPersistenceStub()
     {
         users = new ArrayList<>();
-        users.add(new Student("student", "student", "Ayman"));
-        users.add(new Student("student1", "student1", "Nilin"));
-        users.add(new Student("student2", "student2", "Dara"));
-        users.add(new Student("student3", "student3", "Amelia"));
+        users.add(new Student("student", "student", "Ayman", "B.Sc. (Hons)"));
+        users.add(new Student("student1", "student1", "Nilin", "B.Sc. (Hons)"));
+        users.add(new Student("student2", "student2", "Dara", "B.Sc. (Hons)"));
+        users.add(new Student("student3", "student3", "Amelia", "B.Sc. (Hons)"));
         users.add(new Administrator("admin", "admin", "Sara"));
         users.add(new Administrator("admin1", "admin1", "Alex"));
         users.add(new Administrator("admin2", "admin2", "Gwynn"));

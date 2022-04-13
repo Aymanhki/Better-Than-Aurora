@@ -64,7 +64,7 @@ public class AccessStudentsIT {
 
     @Test
     public void testInsertStudent() {
-        final Student c = new Student("student4", "2", "Sara");
+        final Student c = new Student("student4", "2", "Sara", "B.Sc. (Hons)");
         accessStudents.insertStudent(c);
         assertEquals(5, accessStudents.getStudentList().size());
     }

@@ -1,10 +1,5 @@
 package com.group_15.bta.presentation;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,15 +10,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.group_15.bta.objects.Category;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
-import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.business.AccessCategories;
+import com.group_15.bta.objects.Category;
 
 import java.util.ArrayList;
 import java.util.Collections;

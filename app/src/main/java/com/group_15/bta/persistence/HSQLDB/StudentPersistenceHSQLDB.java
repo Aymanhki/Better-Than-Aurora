@@ -1,6 +1,10 @@
 package com.group_15.bta.persistence.HSQLDB;
 
+import com.github.mikephil.charting.data.PieEntry;
+import com.group_15.bta.objects.Course;
+import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
 
 import java.io.Serializable;
@@ -40,7 +44,8 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         final String userName = rs.getString("STUDENTID");
         final String password = rs.getString("PASSWORD");
         final String name = rs.getString("NAME");
-        return new Student(userName, password, name);
+        final String associatedDegree = rs.getString("ASSOCIATEDDEGREE");
+        return new Student(userName, password, name, associatedDegree);
     }
 
     @Override
@@ -88,11 +93,14 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     public void updateStudent(Student currentStudent) {
         try (final Connection newConnection = connection()) {
 
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTS SET PASSWORD = ?, NAME = ?  WHERE STUDENTID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTS SET PASSWORD = ?, NAME = ?, ASSOCIATEDDEGREE = ?  WHERE STUDENTID = ?");
             statement.setString(1, currentStudent.getPassword());
             statement.setString(2, currentStudent.getName());
-            statement.setString(3, currentStudent.getID());
+            statement.setString(3, currentStudent.getAssociatedDegree());
+            statement.setString(4, currentStudent.getID());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -103,10 +111,11 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     public void insertStudent(Student currentStudent) {
 
         try (final Connection newConnection = connection()) {
-            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTS VALUES(?, ?, ?)");
+            final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTS VALUES(?, ?, ?, ?)");
             statement.setString(1, currentStudent.getPassword());
             statement.setString(2, currentStudent.getID());
             statement.setString(3, currentStudent.getName());
+            statement.setString(4, currentStudent.getAssociatedDegree());
             statement.executeUpdate();
            /* new AccessUsers().insertUser(currentStudent);
             StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
@@ -132,9 +141,169 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
 
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
     }
 
+    public int getStudentDegreeInProgressCredit(Student student)
+    {
+        int sumRequiredInProgressCourses = 0;
+        String studentDegree = student.getAssociatedDegree();
+        try (final Connection newConnection = connection()) {
+            PreparedStatement statement = newConnection.prepareStatement("SELECT CREDIT FROM COURSES WHERE COURSEID IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE = ?) AND (ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ?)");
+            statement.setString(1, student.getID());
+            statement.setString(2, "In Progress");
+            statement.setString(3, "%, "+studentDegree+"%");
+            statement.setString(4, "%"+studentDegree+", %");
+            statement.setString(5, "%"+studentDegree+"%");
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                sumRequiredInProgressCourses += rs.getInt("CREDIT");
+            }
+
+            newConnection.close();
+            rs.close();
+            statement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return sumRequiredInProgressCourses;
+    }
+
+
+    public int getStudentDegreeTakenCredit(Student student)
+    {
+        int sumRequiredTakenCourses = 0;
+        String studentDegree = student.getAssociatedDegree();
+        try (final Connection newConnection = connection()) {
+            PreparedStatement statement = newConnection.prepareStatement("SELECT CREDIT FROM COURSES WHERE COURSEID IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE != ?) AND (ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ?)");
+            statement.setString(1, student.getID());
+            statement.setString(2, "In Progress");
+            statement.setString(3, "%, "+studentDegree+"%");
+            statement.setString(4, "%"+studentDegree+", %");
+            statement.setString(5, "%"+studentDegree+"%");
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                sumRequiredTakenCourses += rs.getInt("CREDIT");
+            }
+
+            newConnection.close();
+            rs.close();
+            statement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return sumRequiredTakenCourses;
+    }
+
+    public int getStudentDegreeNotTakenCredit(Student student)
+    {
+        int sumRequiredNotTakenCourses = 0;
+        String studentDegree = student.getAssociatedDegree();
+        try (final Connection newConnection = connection()) {
+            PreparedStatement statement = newConnection.prepareStatement("SELECT CREDIT FROM COURSES WHERE COURSEID NOT IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ?) AND (ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ?)");
+            statement.setString(1, student.getID());
+            statement.setString(2, "%, "+studentDegree+"%");
+            statement.setString(3, "%"+studentDegree+", %");
+            statement.setString(4, "%"+studentDegree+"%");
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                sumRequiredNotTakenCourses += rs.getInt("CREDIT");
+            }
+            newConnection.close();
+            rs.close();
+            statement.close();
+
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return sumRequiredNotTakenCourses;
+    }
+
+    @Override
+    public ArrayList<PieEntry> getDegreeCreditBreakDown(Student student)
+    {
+        ArrayList<PieEntry> degreeBreakDown = new ArrayList();
+        degreeBreakDown.add(new PieEntry(getStudentDegreeTakenCredit(student), "Complete"));
+        degreeBreakDown.add(new PieEntry(getStudentDegreeInProgressCredit(student), "In Progress"));
+        degreeBreakDown.add(new PieEntry(getStudentDegreeNotTakenCredit(student), "Unfulfilled"));
+        return degreeBreakDown;
+    }
+
+    @Override
+    public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student)
+    {
+        ArrayList<Course> nonTakenCourses = new ArrayList();
+        String studentDegree = student.getAssociatedDegree();
+        try (final Connection newConnection = connection()) {
+            PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID NOT IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ?) AND (ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ?)");
+
+            statement.setString(1, student.getID());
+            statement.setString(2, "%, "+studentDegree+"%");
+            statement.setString(3, "%"+studentDegree+", %");
+            statement.setString(4, "%"+studentDegree+"%");
+            ResultSet rs = statement.executeQuery();
+
+            SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(newConnection);
+            ArrayList<Section> sections = sectionsGetter.getSectionList();
+
+            while (rs.next()) {
+                final Course course = CoursePersistenceHSQLDB.fromResultSetStatic(rs);
+
+
+                for (int i = 0; i < sections.size(); i++) {
+                    if (sections.get(i).getAssociatedCourse().equals(course.getID())) {
+                        course.addSection(sections.get(i));
+                    }
+                }
+
+                nonTakenCourses.add(course);
+            }
+
+
+            newConnection.close();
+            rs.close();
+            statement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+
+        return nonTakenCourses;
+    }
+
+    @Override
+    public StudentSection getEnrolledSection(Student student, Section section) {
+        StudentSection toReturn = null;
+
+        try(Connection newConnection = connection())
+        {
+            PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ? AND SECTIONID = ?");
+            statement.setString(1, student.getID());
+            statement.setString(2, section.getSection());
+            ResultSet rs = statement.executeQuery();
+            StudentSectionPersistenceHSQLDB parser = new StudentSectionPersistenceHSQLDB(newConnection);
+            if(rs.next())
+            {
+                toReturn = parser.fromResultSet(rs);
+            }
+
+            rs.close();
+            statement.close();
+        }
+        catch (final SQLException newException)
+        {
+            throw new PersistenceException(newException);
+        }
+
+        return toReturn;
+    }
 }

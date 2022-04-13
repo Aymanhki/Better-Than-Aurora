@@ -12,7 +12,8 @@
         <activity
             android:name=".presentation.InstructorSectionsActivity"
             android:exported="false"
-            android:label="BTA: Course List">
+            android:label="BTA: Course List"
+            android:windowSoftInputMode="stateAlwaysHidden">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".presentation.MainActivity" />
@@ -20,14 +21,16 @@
         <activity
             android:name=".presentation.InstructorStudentsActivity"
             android:exported="false"
-            android:label="BTA: Students">
+            android:label="BTA: Students"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.InstructorSectionsActivity" />
         </activity>
         <activity
             android:name=".presentation.AdvisorAccountActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
                  <activity
         android:name=".presentation.AdminMenuActivity"
         android:label="BTA">
@@ -37,21 +40,24 @@
                  </activity>
         <activity
             android:name=".presentation.StudentListActivity"
-            android:label="BTA: Student List" >
+            android:label="BTA: Student List"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.AdminMenuActivity" />
         </activity>
         <activity
             android:name=".presentation.CreateStudentActivity"
-            android:label="BTA: Create Student" >
+            android:label="BTA: Create Student"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.StudentListActivity" />
         </activity>
         <activity
             android:name=".presentation.EditStudentActivity"
-            android:label="BTA: Edit Student" >
+            android:label="BTA: Edit Student"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.StudentListActivity" />
@@ -59,7 +65,8 @@
 
         <activity
             android:name=".presentation.StudentAccountActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
@@ -71,19 +78,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.CourseActivity"
-            android:label="BTA: Sections">
+            android:label="BTA: Sections"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.CourseActivity" />
         </activity>
         <activity android:name=".presentation.CategoryActivity"
-            android:label="BTA: Courses">
+            android:label="BTA: Courses"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.CategoryActivity" />
         </activity>
         <activity android:name=".presentation.CourseLandingActivity"
-            android:label="BTA: Categories">
+            android:label="BTA: Categories"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.CourseLandingActivity" />

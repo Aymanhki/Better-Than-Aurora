@@ -1,34 +1,24 @@
 package com.group_15.bta.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.group_15.bta.application.Main;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.group_15.bta.R;
-import com.group_15.bta.business.AccessCourses;
-import com.group_15.bta.business.AccessSections;
+import com.group_15.bta.application.Main;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.business.DataGenerator;
-import com.group_15.bta.objects.Course;
-import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
         copyDatabaseToDevice();
         logInHandler = new AccessUsers();
         handleLogIn();
+
     }
 
     private void handleLogIn()
     {
         TextView username = (TextView) findViewById(R.id.userName);
         TextView password = (TextView) findViewById(R.id.password);
-
 
 
         View.OnClickListener loginAction = new View.OnClickListener()

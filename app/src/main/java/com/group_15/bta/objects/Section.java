@@ -22,7 +22,7 @@ public class Section implements Serializable {
     private int CAP;
     private String associatedCourse;
     private String associatedCategory;
-
+    private static String[] validDays = new String[]{"M", "Monday", "T", "Tuesday", "W", "Wednesday", "TR", "Thursday", "F", "Friday"};
 
 
     enum ClassDays{
@@ -184,6 +184,21 @@ public class Section implements Serializable {
                 }
             }
         }
+        return toReturn;
+    }
+
+    public static boolean validDay(String day)
+    {
+        boolean toReturn = false;
+
+        for(int i=0; i<validDays.length && !toReturn; i++)
+        {
+            if(validDays[i].equals(day))
+            {
+                toReturn = true;
+            }
+        }
+
         return toReturn;
     }
 }

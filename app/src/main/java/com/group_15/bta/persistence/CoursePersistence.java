@@ -20,4 +20,5 @@ public interface CoursePersistence {
 
     void deleteCourses(Course toRemove);
 
+
 }

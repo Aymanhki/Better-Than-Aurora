@@ -2,6 +2,7 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /*
@@ -15,6 +16,8 @@ public class Course implements Serializable {
     protected ArrayList<Section> sections; //sections for this course
     private String title;
     private String associatedCategory;
+    private String associatedDegree;
+    HashMap<String, String> degrees;
     private int creditHours;
     private double tuition;
     //constructor
@@ -23,7 +26,11 @@ public class Course implements Serializable {
         this.ID = ID;
     }
 
-    public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory, double tuition) {
+    public String getAssociatedDegree() {
+        return associatedDegree;
+    }
+
+    public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory, double tuition, String associatedDegree) {
         sections = new ArrayList<>();
         ID = courseID;
         title = courseTitle;
@@ -31,6 +38,14 @@ public class Course implements Serializable {
         this.associatedCategory = associatedCategory;
         creditHours = credit;
         this.tuition = tuition;
+        this.associatedDegree = associatedDegree;
+        String[] tempDeg = associatedDegree.split(",");
+
+        degrees = new HashMap<>();
+        for(int i=0; i<tempDeg.length; i++)
+        {
+            degrees.put(tempDeg[i].trim(), tempDeg[i].trim());
+        }
     }
 
     //constructor
@@ -51,6 +66,7 @@ public class Course implements Serializable {
         sections.add(newSection);
     }
 
+    public void addSections(ArrayList<Section> newSection){sections.addAll(newSection);}
     //getters
     public String getDescription() {
         return Description;
@@ -88,6 +104,11 @@ public class Course implements Serializable {
     }
 
     public double getTuition() { return tuition;
+    }
+
+    public boolean associatedWithDegree(String newDegree)
+    {
+        return degrees.get(newDegree) != null;
     }
 
 }
