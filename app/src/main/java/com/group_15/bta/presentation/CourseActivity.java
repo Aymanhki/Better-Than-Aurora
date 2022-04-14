@@ -70,14 +70,15 @@ public class CourseActivity extends AppCompatActivity {
             String startTimes = startTime.getText().toString();
             String endTimes = endTime.getText().toString();
             String d = Days.getText().toString();
-            String[] ds = new String[0];
-            String[] Time = new String[0];
+            d = d.replaceAll("\\s+", "");
+            String[] ds;
+            String[] Time;
 
             if (sectionList.validateDayAndTime(startTimes, endTimes, d)) {
                 try
                 {
-                    Time = sectionList.timeParser(startTimes, endTimes);
                     ds = d.split(",");
+                    Time = sectionList.timeParser(startTimes, endTimes, ds);
                     int Cap = Integer.parseInt(CAP.getText().toString());
                     Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,
                             Location.getText().toString(), Cap, Cap, Name, Category);

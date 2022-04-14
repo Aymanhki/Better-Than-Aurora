@@ -97,7 +97,7 @@ public class AccessSections implements SectionPersistence {
         return (startTimesSplit.length == endTimesSplit.length) && validateDays(days);
     }
 
-    public String[] timeParser(String startTimes, String endTimes)
+    public String[] timeParser(String startTimes, String endTimes, String[] days)
     {
 
         String[] finalTimes = null;
@@ -106,11 +106,11 @@ public class AccessSections implements SectionPersistence {
 
         if(startTimesSplit.length == endTimesSplit.length)
         {
-            finalTimes = new String[startTimesSplit.length];
+            finalTimes = new String[days.length];
 
-            for(int i=0; i<finalTimes.length; i++)
+            for(int i=0; i<days.length; i++)
             {
-                finalTimes[i] = startTimesSplit[i]+" - "+endTimesSplit[i];
+                finalTimes[i] = startTimesSplit[0]+" - "+endTimesSplit[0];
             }
         }
 

@@ -39,7 +39,7 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         for(int i=0; i<days.length; i++)
         {
             dates += days[i]+":\n";
-            for(int j = 0; j < times.length; j++)
+      /*      for(int j = 0; j < times.length; j++)
             {
                 if(j<times.length-1)
                 {
@@ -49,7 +49,8 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
                 {
                     dates += times[j].trim() + "\n";
                 }
-            }
+            }*/
+            dates+= times[i].trim() + "\n";
 
             if(i < days.length-1)
             {
