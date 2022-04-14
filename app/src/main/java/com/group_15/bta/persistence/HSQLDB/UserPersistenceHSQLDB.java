@@ -112,10 +112,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     public void insertUser(User newUser) {
         try (final Connection newConnection = connection()) {
 
-            PreparedStatement statement = newConnection.prepareStatement("");
+            PreparedStatement statement = null;
 
             if (newUser instanceof Student) {
-                statement = newConnection.prepareStatement("INSERT INTO STUDENTS VALUES(?, ?, ?)");
+                statement = newConnection.prepareStatement("INSERT INTO STUDENTS VALUES(?, ?, ?, ?)");
+                statement.setString(4, ((Student)newUser).getAssociatedDegree());
             } else if (newUser instanceof Administrator) {
                 statement = newConnection.prepareStatement("INSERT INTO ADMINS VALUES(?, ?, ?)");
             } else if (newUser instanceof Advisor) {
@@ -124,12 +125,12 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 statement = newConnection.prepareStatement("INSERT INTO INSTRUCTORS VALUES(?, ?, ?)");
             }
 
-
-            statement.setString(1, newUser.getID());
-            statement.setString(2, newUser.getPassword());
-            statement.setString(2, newUser.getName());
-            statement.executeUpdate();
-
+            if (statement!=null) {
+                statement.setString(1, newUser.getID());
+                statement.setString(2, newUser.getPassword());
+                statement.setString(3, newUser.getName());
+                statement.executeUpdate();
+            }
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
