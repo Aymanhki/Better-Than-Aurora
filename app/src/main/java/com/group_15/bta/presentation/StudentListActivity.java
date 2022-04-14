@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.business.AccessStudents;
+import com.group_15.bta.objects.Degree;
 import com.group_15.bta.objects.Student;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -31,21 +35,13 @@ public class StudentListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_student_list);
-
-        // Bundle bundle =  getIntent().getExtras();
-        //if(bundle != null) {
-        //   studentList = (ArrayList<Student>) bundle.getSerializable("Students");
-        //}
-        //else {
-        //  studentList = new ArrayList<>();
-        //Student one = new Student("12", "12", "Jane Doe");
-        //Student two = new Student("13", "13", "John Doe");
-        //studentList.add(one);
-        //studentList.add(two);
-        //}
         accessStudents = new AccessStudents();
 
         students = accessStudents.getStudentList();
+        listStudents();
+    }
+
+    private void listStudents(){
         studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, students){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -77,7 +73,6 @@ public class StudentListActivity extends AppCompatActivity {
                 }
                 Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
                 Bundle bundle = new Bundle();
-                //bundle.putSerializable("Students",studentList);
                 bundle.putInt("Position", selectedStudentPosition);
                 editIntent.putExtras(bundle);
                 StudentListActivity.this.startActivity(editIntent);
@@ -87,10 +82,42 @@ public class StudentListActivity extends AppCompatActivity {
 
     public void buttonCreateStudentOnClick(View v) {
         Intent createIntent = new Intent(StudentListActivity.this, CreateStudentActivity.class);
-      /*  Bundle bundle = new Bundle();
-        bundle.putSerializable("Students",studentList);
-        createIntent.putExtras(bundle); */
         StudentListActivity.this.startActivity(createIntent);
+    }
+
+    public void buttonDeleteStudent(View v) {
+        EditText StudentID = (EditText) findViewById(R.id.DeleteStudentID);
+
+        String result;
+
+        result = validateStudentData(StudentID.getText().toString());
+        if (result == null) {
+            try {
+
+                for (int i = 0; i < students.size(); i++) {
+                    if (students.get(i).getID().equals(StudentID.getText().toString())) {
+                        accessStudents.deleteStudent(students.get(i));
+                        String successfulDeleteMessage = "Student: " + StudentID.getText().toString() + " deleted.";
+                        Toast.makeText(StudentListActivity.this, successfulDeleteMessage, Toast.LENGTH_SHORT).show();
+                        students = accessStudents.getStudentList();
+                    }
+                }
+            } catch (final Exception e) {
+                Messages.fatalError(this, e.getMessage());
+            }
+        } else {
+            Messages.warning(this, result);
+        }
+        students = accessStudents.getStudentList();
+        listStudents();
+    }
+
+    public String validateStudentData(String id) {
+        ArrayList<Student> student = accessStudents.getStudent(new Student(id));
+        if (student.size() == 0) {
+            return "Student id: " + id + " not found, no student was deleted.";
+        }
+        return null;
     }
 
     @Override

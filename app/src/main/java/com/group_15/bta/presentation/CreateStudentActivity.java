@@ -25,6 +25,7 @@ import com.group_15.bta.R.id;
 import com.group_15.bta.R.layout;
 import com.group_15.bta.business.AccessDegrees;
 import com.group_15.bta.business.AccessStudents;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Degree;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.persistence.StudentPersistence;
@@ -32,8 +33,8 @@ import com.group_15.bta.persistence.StudentPersistence;
 import java.util.ArrayList;
 
 public class CreateStudentActivity extends AppCompatActivity {
-    //private ArrayList<Student> students;
     private AccessStudents accessStudents;
+    private AccessUsers accessUsers;
     private TextView studentDegree;
     private Dialog selectADegreeDialog;
     private ListView toSelectDegrees;
@@ -47,9 +48,9 @@ public class CreateStudentActivity extends AppCompatActivity {
     private ArrayAdapter<Student> studentArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Bundle bundle =  getIntent().getExtras();
-        // students = (ArrayList<Student>)bundle.getSerializable("Students");
         accessStudents = new AccessStudents();
+        accessUsers = new AccessUsers();
+
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_admin_create_student);
     }
@@ -63,7 +64,6 @@ public class CreateStudentActivity extends AppCompatActivity {
                 editPassword.getText().toString(),
                 editName.getText().toString(),
                 studentDegree.getText().toString());
-        //students.add(student);
         String result;
 
         result = validateStudentData(student);
@@ -83,13 +83,6 @@ public class CreateStudentActivity extends AppCompatActivity {
         } else {
             Messages.warning(this, result);
         }
-        // StudentPersistence studs = AccessStudents.getInstance();
-        //studs.insertStudent(student);
-        // finish();
-        // Bundle bundle = new Bundle();
-        // bundle.putSerializable("Students",students);
-        // createIntent.putExtras(bundle);
-        // overridePendingTransition(0,0);
 
     }
     private boolean findStudent(Student student){
