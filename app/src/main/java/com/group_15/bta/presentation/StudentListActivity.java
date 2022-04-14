@@ -110,6 +110,7 @@ public class StudentListActivity extends AppCompatActivity {
         }
         students = accessStudents.getStudentList();
         listStudents();
+        StudentID.setText(null);
     }
 
     public String validateStudentData(String id) {
