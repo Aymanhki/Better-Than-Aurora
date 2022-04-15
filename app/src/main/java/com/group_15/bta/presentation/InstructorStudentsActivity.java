@@ -43,7 +43,6 @@ public class InstructorStudentsActivity extends AppCompatActivity {
         Bundle bundle =  getIntent().getExtras();
         currentSection = (Section) bundle.getSerializable("sectionID");
         displaySectionTitle();
-        final ArrayList<StudentSection> registrations = new ArrayList<StudentSection>();
         accessStudentSections = new AccessStudentSections();
 
         studentSections = accessStudentSections.getStudentsInSection(currentSection.getSection());
@@ -83,19 +82,19 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
 
-                  if (position == selectedStudentPosition) {
+                if (position == selectedStudentPosition) {
                     listView.setItemChecked(position, false);
                     updateGradeButton.setEnabled(false);
                     selectedStudentPosition = -1;
 
-                  } else {
+                } else {
                     listView.setItemChecked(position, true);
                     updateGradeButton.setEnabled(true);
                     selectedStudentPosition = position;
                     listView.setSelection(position);
 
 
-                  }
+                }
             }
         });
     }
@@ -104,7 +103,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
         EditText updateGrade = (EditText)findViewById(R.id.Grade);
 
         StudentSection newStudent = new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
-
+        updateGrade.setText(null);
         return newStudent;
     }
 
@@ -120,13 +119,15 @@ public class InstructorStudentsActivity extends AppCompatActivity {
                     accessStudentSections.updateStudentSection(student);
                     studentSections = accessStudentSections.getStudentSectionList();
                 } catch (final Exception e) {
-                  Messages.fatalError(this, e.getMessage());
+                    Messages.fatalError(this, e.getMessage());
                 }
             } else {
                 Messages.warning(this, result);
             }
-           selectedStudentPosition = -1;
-           displayList();
+            selectedStudentPosition = -1;
+            studentSections = accessStudentSections.getStudentsInSection(currentSection.getSection());
+            displayList();
+
         }
     }
     private String validateGradeData(String grade) {
@@ -148,5 +149,4 @@ public class InstructorStudentsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
 
