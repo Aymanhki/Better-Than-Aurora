@@ -10,13 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BTA">
         <activity
+            android:name=".presentation.InstructorMenuActivity"
+            android:label="BTA">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.MainActivity" />
+        </activity>
+        <activity
             android:name=".presentation.InstructorSectionsActivity"
             android:exported="false"
             android:label="BTA: Course List"
             android:windowSoftInputMode="stateAlwaysHidden">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".presentation.MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.InstructorMenuActivity" />
         </activity>
         <activity
             android:name=".presentation.InstructorStudentsActivity"
@@ -31,13 +38,13 @@
             android:name=".presentation.AdvisorAccountActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden"/>
-                 <activity
-        android:name=".presentation.AdminMenuActivity"
-        android:label="BTA">
-                     <meta-data
-                         android:name="android.support.PARENT_ACTIVITY"
-                         android:value=".presentation.MainActivity" />
-                 </activity>
+        <activity
+            android:name=".presentation.AdminMenuActivity"
+            android:label="BTA">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.MainActivity" />
+        </activity>
         <activity
             android:name=".presentation.StudentListActivity"
             android:label="BTA: Student List"

@@ -48,20 +48,9 @@ public class InstructorSectionsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         sectionList = accessSections.getInstructorSections(currentUser.getName());
 
-       listSections();
+        listSections();
 
     }
-
-    //private ArrayList<Section> getInstructorsSection(ArrayList<Section> allSections){
-       // ArrayList<Section> instructorsSections = new ArrayList<>();
-       // for(int i=0; i<allSections.size(); i++){
-        //    if(allSections.get(i).getInstructor().equals(currentUser.getName())){
-         //       instructorsSections.add(allSections.get(i));
-         //   }
-       // }
-       // return instructorsSections;
-
-   // }
 
     private void listSections(){
         if (!sectionList.isEmpty()) {
@@ -123,4 +112,3 @@ public class InstructorSectionsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
