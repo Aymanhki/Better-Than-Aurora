@@ -43,7 +43,7 @@ public class AccessStudentSections implements StudentSectionPersistence {
 
     @Override
     public ArrayList<StudentSection> getStudentsInSection(String sectionID) {
-           return studentSectionPersistence.getStudentsInSection(sectionID);
+        return studentSectionPersistence.getStudentsInSection(sectionID);
     }
 
     public void insertSection(StudentSection currentSection) {
@@ -71,6 +71,11 @@ public class AccessStudentSections implements StudentSectionPersistence {
     }
 
     @Override
+    public ArrayList<StudentSection> getStudentSectionList(String studentID) {
+        return studentSectionPersistence.getStudentSectionList(studentID);
+    }
+
+    @Override
     public ArrayList<Course> getCourses(String studentID) {
         return studentSectionPersistence.getCourses(studentID);
     }
@@ -81,6 +86,8 @@ public class AccessStudentSections implements StudentSectionPersistence {
 
 
 }
+
+
 
 
 

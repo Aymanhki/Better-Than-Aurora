@@ -72,6 +72,10 @@
     Strings for Instructor menu page
     -------------------------------------------------------------------------------*/
     <string name="instructors_sections">My Sections</string>
+    /*-----------------------------------------------------------------------------
+    Strings for Advisor menu page
+    -------------------------------------------------------------------------------*/
+    <string name="search_students">Search Students</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

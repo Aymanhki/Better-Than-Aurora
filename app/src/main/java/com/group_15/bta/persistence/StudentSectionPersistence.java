@@ -24,6 +24,8 @@ public interface StudentSectionPersistence {
 
     ArrayList<Section> getSectionList(String studentID);
 
+    ArrayList<StudentSection> getStudentSectionList(String studentID);
+
     ArrayList<Course> getCourses(String studentID);
 
     }

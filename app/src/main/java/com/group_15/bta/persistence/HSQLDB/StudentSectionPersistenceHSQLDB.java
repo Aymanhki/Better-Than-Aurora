@@ -137,7 +137,30 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
+    @Override
+    public ArrayList<StudentSection> getStudentSectionList(String studentID) {
+        final ArrayList<StudentSection> toReturn = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ?");
+            st.setString(1, studentID);
+            final ResultSet rs = st.executeQuery();
 
+            while (rs.next()) {
+                final StudentSection studentSection = fromResultSet(rs);
+                toReturn.add(studentSection);
+            }
+
+            rs.close();
+            st.close();
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+
+
+        return toReturn;
+    }
     @Override
     public ArrayList<Section> getSectionList(String studentID) {
         final ArrayList<Section> toReturn = new ArrayList<>();
@@ -162,6 +185,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
+
+
 
     @Override
     public ArrayList<Course> getCourses(String studentID) {

@@ -35,9 +35,19 @@
                 android:value=".presentation.InstructorSectionsActivity" />
         </activity>
         <activity
-            android:name=".presentation.AdvisorAccountActivity"
-            android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:name=".presentation.AdvisorMenuActivity"
+            android:label="BTA">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.MainActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.AdvisorStudentActivity"
+            android:label="BTA">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.AdvisorMenuActivity" />
+        </activity>
         <activity
             android:name=".presentation.AdminMenuActivity"
             android:label="BTA">
