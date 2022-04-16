@@ -13,10 +13,8 @@ import com.group_15.bta.persistence.ILogInHandler;
 import com.group_15.bta.persistence.UserPersistence;
 import com.group_15.bta.presentation.AdminMenuActivity;
 import com.group_15.bta.presentation.InstructorMenuActivity;
-import com.group_15.bta.presentation.AdvisorAccountActivity;
-import com.group_15.bta.presentation.InstructorAccount;
+import com.group_15.bta.presentation.AdvisorMenuActivity;
 import com.group_15.bta.presentation.StudentAccountActivity;
-import com.group_15.bta.presentation.InstructorSectionsActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,6 +48,7 @@ public class AccessUsers implements ILogInHandler, UserPersistence {
         this.userPersistence = userPersistence;
     }
 
+
     @Override
     public Class intendedActivity(String userName, String password) {
         Class toReturn = null;
@@ -68,7 +67,7 @@ public class AccessUsers implements ILogInHandler, UserPersistence {
             }
             else if(loginAttempt instanceof Advisor)
             {
-                toReturn = AdvisorAccountActivity.class;
+                toReturn = AdvisorMenuActivity.class;
             }
             else if(loginAttempt instanceof Instructor)
             {

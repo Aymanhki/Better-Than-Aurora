@@ -59,6 +59,13 @@ public class StudentPersistenceStub implements StudentPersistence {
         }
     }
 
+    @Override
+    public void deleteStudentID(String currentStudent) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getID().equals(currentStudent)) {students.remove(i);}
+        }
+    }
+
     //TODO: Implement this method
     @Override
     public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student) {

@@ -166,5 +166,18 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         return toReturn;
     }
 
+    @Override
+    public ArrayList<StudentSection> getStudentSectionList(String studentID){
+        ArrayList<StudentSection> toReturn = new ArrayList<>();
+        for(int i=0; i<studentSections.size(); i++)
+        {
+            if(studentSections.get(i).getAssociatedStudent().equals(studentID))
+            {
+                toReturn.add(studentSections.get(i));
+            }
+        }
+        return toReturn;
+
+    }
 
 }

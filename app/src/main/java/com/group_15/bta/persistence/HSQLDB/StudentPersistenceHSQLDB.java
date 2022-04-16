@@ -147,6 +147,22 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             throw new PersistenceException(newException);
         }
     }
+    @Override
+    public void deleteStudentID(String toRemove) {
+        try (final Connection newConnection = connection()) {
+            PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE STUDENTID = ?");
+            statement.setString(1, toRemove);
+            statement.executeUpdate();
+            statement = newConnection.prepareStatement("DELETE FROM STUDENTS WHERE STUDENTID = ?");
+            statement.setString(1, toRemove);
+            statement.executeUpdate();
+
+            newConnection.close();
+            statement.close();
+        } catch (final SQLException newException) {
+            throw new PersistenceException(newException);
+        }
+    }
 
     public int getStudentDegreeInProgressCredit(Student student)
     {

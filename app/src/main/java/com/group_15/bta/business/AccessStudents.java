@@ -2,6 +2,7 @@ package com.group_15.bta.business;
 
 import com.github.mikephil.charting.data.PieEntry;
 import com.group_15.bta.application.Services;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
@@ -45,7 +46,7 @@ public class AccessStudents implements StudentPersistence {
             student = studentList.get(0);
             studentToReturn.add(student);
         }
-		return studentToReturn;
+        return studentToReturn;
     }
 
     public ArrayList<Student> getStudentList() {
@@ -64,6 +65,10 @@ public class AccessStudents implements StudentPersistence {
     public void deleteStudent(Student toRemove) {
         studentPersistence.deleteStudent(toRemove);
     }
+
+    public void deleteStudentID(String toRemove) { studentPersistence.deleteStudentID(toRemove); }
+
+
 
     @Override
     public StudentSection getEnrolledSection(Student student, Section section) {

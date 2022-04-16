@@ -24,6 +24,8 @@ public interface StudentPersistence {
 
     void deleteStudent(Student toRemove);
 
+    void deleteStudentID(String toRemove);
+
     ArrayList<PieEntry> getDegreeCreditBreakDown(Student student);
 
     ArrayList<Course> getStudentDegreeNotTakenCourses(Student student);

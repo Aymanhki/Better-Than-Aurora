@@ -93,15 +93,11 @@ public class StudentListActivity extends AppCompatActivity {
         result = validateStudentData(StudentID.getText().toString());
         if (result == null) {
             try {
+                accessStudents.deleteStudentID(StudentID.getText().toString());
+                String successfulDeleteMessage = "Student: " + StudentID.getText().toString() + " deleted.";
+                Toast.makeText(StudentListActivity.this, successfulDeleteMessage, Toast.LENGTH_SHORT).show();
+                students = accessStudents.getStudentList();
 
-                for (int i = 0; i < students.size(); i++) {
-                    if (students.get(i).getID().equals(StudentID.getText().toString())) {
-                        accessStudents.deleteStudent(students.get(i));
-                        String successfulDeleteMessage = "Student: " + StudentID.getText().toString() + " deleted.";
-                        Toast.makeText(StudentListActivity.this, successfulDeleteMessage, Toast.LENGTH_SHORT).show();
-                        students = accessStudents.getStudentList();
-                    }
-                }
             } catch (final Exception e) {
                 Messages.fatalError(this, e.getMessage());
             }
@@ -131,4 +127,3 @@ public class StudentListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
