@@ -18,7 +18,7 @@
             android:background="@color/dark_green"
             android:onClick="buttonStudentsOnClick"
             android:text="@string/student_accounts"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button3"
@@ -28,7 +28,7 @@
             android:background="@color/dark_green"
             android:onClick="buttonCoursesOnClick"
             android:text="@string/course_list"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button4"
@@ -38,7 +38,7 @@
             android:background="@color/dark_green"
             android:onClick="buttonLogOutOnClick"
             android:text="@string/log_out"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
     </RelativeLayout>
 

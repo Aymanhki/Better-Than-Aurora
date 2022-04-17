@@ -79,7 +79,7 @@
             android:background="@color/light_green"
             android:onClick="buttonCreateStudent"
             android:text="@string/create_student"
-            android:textColor="@color/white"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

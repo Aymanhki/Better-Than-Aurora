@@ -20,6 +20,7 @@
             android:gravity="center"
             android:onClick="buttonCreateStudentOnClick"
             android:text="Add Student"
+            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -33,6 +34,7 @@
             android:layout_marginBottom="5dp"
             android:onClick="buttonDeleteStudent"
             android:text="Delete Student"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

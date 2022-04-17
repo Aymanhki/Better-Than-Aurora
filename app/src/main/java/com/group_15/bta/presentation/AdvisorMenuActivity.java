@@ -1,20 +1,19 @@
 package com.group_15.bta.presentation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessStudents;
+import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.AccessUsers;
 
 import java.util.ArrayList;
 
@@ -57,6 +56,12 @@ public class AdvisorMenuActivity extends AppCompatActivity {
             Messages.warning(this, result);
         }
         StudentID.setText(null);
+    }
+
+    public void exitAdvisor(View v)
+    {
+        Intent goBack = new Intent(AdvisorMenuActivity.this, MainActivity.class);
+        AdvisorMenuActivity.this.startActivity(goBack);
     }
 
     public String validateStudentData(String id) {

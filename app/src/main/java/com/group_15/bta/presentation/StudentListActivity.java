@@ -17,10 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group_15.bta.R;
 import com.group_15.bta.R.id;
 import com.group_15.bta.business.AccessStudents;
-import com.group_15.bta.objects.Degree;
 import com.group_15.bta.objects.Student;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -51,7 +49,7 @@ public class StudentListActivity extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText(students.get(position).getName());
-                text2.setText(students.get(position).getAssociatedDegree());
+                text2.setText("ID: "+students.get(position).getID()+", "+"Degree: "+students.get(position).getAssociatedDegree());
 
                 return view;
             }
@@ -64,16 +62,10 @@ public class StudentListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == selectedStudentPosition) {
-                    listView.setItemChecked(position, false);
-                    selectedStudentPosition = -1;
-                } else {
-                    listView.setItemChecked(position, true);
-                    selectedStudentPosition = position;
-                }
+
                 Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("Position", selectedStudentPosition);
+                bundle.putInt("Position", position);
                 editIntent.putExtras(bundle);
                 StudentListActivity.this.startActivity(editIntent);
             }

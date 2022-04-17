@@ -119,6 +119,16 @@ public class EditStudentActivity extends AppCompatActivity {
                 selectANewDegree();
             }
         });
+
+        studentDegree.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b)
+                {
+                    selectANewDegree();
+                }
+            }
+        });
     }
 
     private void selectANewDegree()
@@ -171,7 +181,8 @@ public class EditStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString()))) {
-                    addAnewDegree();
+                    accessDegrees.insert(new Degree(newDegree.getText().toString()));
+                    goBackToPreviousDialog();
                     dialog.dismiss();
                 } else {
                     Toast.makeText(EditStudentActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
@@ -183,6 +194,7 @@ public class EditStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                goBackToPreviousDialog();
             }
         });
 
@@ -190,17 +202,22 @@ public class EditStudentActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if (keyCode == event.KEYCODE_ENTER) {
-                    addAnewDegree();
-                    dialog.dismiss();
+                    if (newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString()))) {
+                        accessDegrees.insert(new Degree(newDegree.getText().toString()));
+                        goBackToPreviousDialog();
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(EditStudentActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
+                    }
                 }
                 return false;
             }
         });
     }
 
-    private void addAnewDegree()
+    private void goBackToPreviousDialog()
     {
-        accessDegrees.insert(new Degree(newDegree.getText().toString()));
+
         degreesAdapted = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, accessDegrees.getDegreeListNames());
         toSelectDegrees.setAdapter(degreesAdapted);
         selectADegreeDialog.show();

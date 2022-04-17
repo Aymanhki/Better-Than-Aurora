@@ -45,6 +45,7 @@
             android:layout_marginTop="16dp"
             android:onClick="buttonAddSection"
             android:text="Add Section"
+            android:textAllCaps="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,6 +117,7 @@
             android:layout_marginBottom="16dp"
             android:onClick="buttonDeleteSec"
             android:text="Delete Section"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

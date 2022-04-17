@@ -18,7 +18,7 @@
             android:background="@color/dark_green"
             android:onClick="buttonInstructorSectionsOnClick"
             android:text="@string/instructors_sections"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button4"
@@ -29,7 +29,7 @@
             android:background="@color/dark_green"
             android:onClick="buttonLogOutOnClick"
             android:text="@string/log_out"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
     </RelativeLayout>
 

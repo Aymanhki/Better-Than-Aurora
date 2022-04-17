@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -95,6 +94,7 @@ public class AdvisorStudentActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.sectionsList);
         listView.setAdapter(sectionArrayAdapter);
+
     }
 
     private void displayPastCourseList() {
@@ -116,6 +116,7 @@ public class AdvisorStudentActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.pastSectionsList);
         listView.setAdapter(studentArrayAdapter);
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){

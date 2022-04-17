@@ -26,10 +26,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="75dp"
-            android:background="@color/dark_green"
+            android:padding="15dp"
             android:onClick="buttonAdvisorSearchStudent"
             android:text="@string/search_students"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button4"
@@ -37,10 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
-            android:background="@color/dark_green"
-            android:onClick="buttonAdvisorSearchStudent"
+            android:textAllCaps="false"
+            android:padding="15dp"
+            android:onClick="exitAdvisor"
             android:text="@string/log_out"
-            android:textColor="@color/white" />
+             />
 
     </RelativeLayout>
 

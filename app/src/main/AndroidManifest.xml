@@ -14,7 +14,8 @@
             android:label="BTA">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.MainActivity" />
+                android:value=".presentation.MainActivity"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
         </activity>
         <activity
             android:name=".presentation.InstructorSectionsActivity"
@@ -36,21 +37,25 @@
         </activity>
         <activity
             android:name=".presentation.AdvisorMenuActivity"
-            android:label="BTA">
+            android:label="BTA"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.MainActivity" />
+                android:value=".presentation.MainActivity"
+                />
         </activity>
         <activity
             android:name=".presentation.AdvisorStudentActivity"
-            android:label="BTA">
+            android:label="BTA"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.AdvisorMenuActivity" />
         </activity>
         <activity
             android:name=".presentation.AdminMenuActivity"
-            android:label="BTA">
+            android:label="BTA"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />

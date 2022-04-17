@@ -29,6 +29,7 @@
             android:layout_marginTop="28dp"
             android:onClick="buttonUpdateGrade"
             android:text="Update Grade"
+            android:textAllCaps="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
