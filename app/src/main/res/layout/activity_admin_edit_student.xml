@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/cosmic_latte"
     android:orientation="vertical"
->
+    >
 
     <LinearLayout
 
@@ -19,15 +19,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp">
+        android:layout_marginEnd="50dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="70dp"
             android:text="Student Name" />
 
         <com.google.android.material.textfield.TextInputEditText
@@ -35,67 +35,63 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="@drawable/edit_text_with_thick_border"
+            android:hint="Student Name"
             android:padding="10dp"
-            android:textSize="18sp"
-            android:hint="Student Name" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="Student ID"
-            />
+            android:layout_marginTop="70dp"
+            android:text="Student ID" />
 
         <TextView
             android:id="@+id/studentID"
+            style="@android:style/Widget.EditText"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="TextView"
-            style="@android:style/Widget.EditText"
             android:background="@drawable/edit_text_with_thick_border"
             android:padding="10dp"
-            android:textSize="18sp"
-            />
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="Student Password"
-            />
+            android:layout_marginTop="70dp"
+            android:text="Student Password" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editStudentPassword"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_marginBottom="80dp"
             android:background="@drawable/edit_text_with_thick_border"
-            android:padding="10dp"
-            android:textSize="18sp"
             android:hint="@string/password"
-            android:layout_marginBottom="80dp"/>
+            android:padding="10dp"
+            android:textSize="18sp" />
 
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Student Degree"
-            />
+            android:text="Student Degree" />
+
         <TextView
             android:id="@+id/studentDegree"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/edit_text_with_thick_border"
             android:ems="10"
             android:gravity="center_vertical"
             android:hint="Select a Degree..."
-            android:layout_gravity="center"
             android:inputType="textMultiLine"
-            android:layout_marginBottom="80dp"
-            android:paddingStart="10dp"
-            />
+            android:paddingStart="10dp" />
 
     </LinearLayout>
 
