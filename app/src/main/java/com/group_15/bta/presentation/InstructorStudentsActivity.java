@@ -1,6 +1,7 @@
 package com.group_15.bta.presentation;
 
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,17 +59,17 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     private void displayList(){
 
-        studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1,studentSections){
+        studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.select_dialog_multichoice, android.R.id.text1,studentSections){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(studentSections.get(position).getAssociatedStudent());
+
                 StudentSection studentSection = studentSections.get(position);
-                text2.setText("Grade: " + studentSection.getGrade());
+                text1.setText(studentSection.getAssociatedStudent()+": " + studentSection.getGrade());
+
 
                 return view;
             }
@@ -76,24 +77,20 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.studentSectionList);
         listView.setAdapter(studentArrayAdapter);
-
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
 
-                if (position == selectedStudentPosition) {
-                    listView.setItemChecked(position, false);
-                    updateGradeButton.setEnabled(false);
-                    selectedStudentPosition = -1;
-
-                } else {
-                    listView.setItemChecked(position, true);
+                if(listView.getCheckedItemCount() > 0)
+                {
                     updateGradeButton.setEnabled(true);
-                    selectedStudentPosition = position;
-                    listView.setSelection(position);
 
-
+                }
+                else
+                {
+                    updateGradeButton.setEnabled(false);
                 }
             }
         });
@@ -103,36 +100,70 @@ public class InstructorStudentsActivity extends AppCompatActivity {
         EditText updateGrade = (EditText)findViewById(R.id.Grade);
 
         StudentSection newStudent = new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
-        updateGrade.setText(null);
         return newStudent;
     }
 
     public void buttonUpdateGrade(View v) {
-        if (selectedStudentPosition != -1) {
-            String result;
-            StudentSection currentStudentSection = studentSections.get(selectedStudentPosition);
+        Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
+        ListView listView = (ListView)findViewById(R.id.studentSectionList);
 
-            StudentSection student = createStudentSectionFromEditText(currentStudentSection);
-            result = validateGradeData(student.getGrade());
-            if (result == null) {
-                try {
-                    accessStudentSections.updateStudentSection(student);
-                    studentSections = accessStudentSections.getStudentSectionList();
-                } catch (final Exception e) {
-                    Messages.fatalError(this, e.getMessage());
-                }
-            } else {
-                Messages.warning(this, result);
+        SparseBooleanArray checked = listView.getCheckedItemPositions();
+        ArrayList<StudentSection> toUpdate = new ArrayList<>();
+        for(int i=0; i<checked.size(); i++)
+        {
+            int position = checked.keyAt(i);
+            if(checked.valueAt(i))
+            {
+                toUpdate.add(studentSections.get(position));
             }
-            selectedStudentPosition = -1;
-            studentSections = accessStudentSections.getStudentsInSection(currentSection.getSection());
-            displayList();
 
         }
+        updateGrade(toUpdate);
+        studentSections = accessStudentSections.getStudentsInSection(currentSection.getSection());
+        displayList();
+
+        for(int i=0; i<studentSections.size(); i++)
+        {
+            listView.setItemChecked(i, false);
+        }
+
+        EditText updateGrade = (EditText)findViewById(R.id.Grade);
+        updateGrade.setText(null);
+
     }
+
+    private void updateGrade(ArrayList<StudentSection> toUpdate)
+    {
+        EditText updateGrade = (EditText)findViewById(R.id.Grade);
+        String result = validateGradeData(updateGrade.getText().toString().trim());
+        Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
+        if(result == null)
+        {
+            updateGradeButton.setEnabled(false);
+
+
+            try {
+                for(int i=0; i<toUpdate.size(); i++)
+                {
+                    accessStudentSections.updateStudentSection(createStudentSectionFromEditText(toUpdate.get(i)));
+                }
+            }
+            catch (final Exception e)
+            {
+                Messages.fatalError(this, e.getMessage());
+            }
+        }
+        else
+        {
+            Messages.warning(this, result);
+        }
+
+
+    }
+
     private String validateGradeData(String grade) {
 
-        if (grade.matches("[A-C][+]?|D|F")) {
+        if (grade.matches("[A-C][+]?|D|F|D")) {
             return null;
         }
 

@@ -71,7 +71,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     public ArrayList<Student> getStudent(Student currentStudent) {
         final ArrayList<Student> students = new ArrayList<>();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS WHERE STUDENTID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS WHERE USERNAME = ?");
             st.setString(1, currentStudent.getID());
 
             final ResultSet rs = st.executeQuery();
@@ -93,7 +93,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     public void updateStudent(Student currentStudent) {
         try (final Connection newConnection = connection()) {
 
-            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTS SET PASSWORD = ?, NAME = ?, ASSOCIATEDDEGREE = ?  WHERE STUDENTID = ?");
+            final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTS SET PASSWORD = ?, NAME = ?, ASSOCIATEDDEGREE = ?  WHERE USERNAME = ?");
             statement.setString(1, currentStudent.getPassword());
             statement.setString(2, currentStudent.getName());
             statement.setString(3, currentStudent.getAssociatedDegree());
@@ -137,7 +137,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE STUDENTID = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
-            statement = newConnection.prepareStatement("DELETE FROM STUDENTS WHERE STUDENTID = ?");
+            statement = newConnection.prepareStatement("DELETE FROM STUDENTS WHERE USERNAME = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
 
@@ -153,7 +153,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE STUDENTID = ?");
             statement.setString(1, toRemove);
             statement.executeUpdate();
-            statement = newConnection.prepareStatement("DELETE FROM STUDENTS WHERE STUDENTID = ?");
+            statement = newConnection.prepareStatement("DELETE FROM STUDENTS WHERE USERNAME = ?");
             statement.setString(1, toRemove);
             statement.executeUpdate();
 

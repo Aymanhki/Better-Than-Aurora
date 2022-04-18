@@ -61,13 +61,12 @@ public class StudentListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
                 Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("Position", position);
                 editIntent.putExtras(bundle);
                 StudentListActivity.this.startActivity(editIntent);
+                listView.setItemChecked(position, false);
             }
         });
     }
