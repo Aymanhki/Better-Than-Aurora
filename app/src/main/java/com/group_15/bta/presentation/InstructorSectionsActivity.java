@@ -1,9 +1,5 @@
 package com.group_15.bta.presentation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,20 +10,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Instructor;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
-import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
 
 public class InstructorSectionsActivity extends AppCompatActivity {
-    private Instructor instructor;
-    private Student instructorAccountInstance = new Student();
-    private AccessUsers instructorLogInInstance = new AccessUsers(instructorAccountInstance);
+
     private Instructor currentUser = (Instructor) new AccessUsers().getCurrentUser();
 
     private AccessSections accessSections;
@@ -42,7 +39,6 @@ public class InstructorSectionsActivity extends AppCompatActivity {
 
         accessSections = new AccessSections();
         super.onCreate(savedInstanceState);
-        instructor = (Instructor) getIntent().getSerializableExtra(instructorLogInInstance.getUserTypeString(instructorAccountInstance));
         setContentView(R.layout.activity_instructor_sections);
         ActionBar actionBar = getSupportActionBar();//back button
         actionBar.setDisplayHomeAsUpEnabled(true);

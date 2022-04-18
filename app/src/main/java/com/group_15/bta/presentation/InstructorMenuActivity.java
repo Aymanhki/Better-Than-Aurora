@@ -10,16 +10,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
-import com.group_15.bta.objects.Administrator;
-import com.group_15.bta.objects.Instructor;
-import com.group_15.bta.objects.Student;
 import com.group_15.bta.business.AccessUsers;
+import com.group_15.bta.objects.Instructor;
 
 public class InstructorMenuActivity extends AppCompatActivity{
 
-    private Instructor instructor;
-    private Student instructorAccountInstance = new Student();
-    private AccessUsers instructorLogInInstance = new AccessUsers(instructorAccountInstance);
     private Instructor currentUser = (Instructor) new AccessUsers().getCurrentUser();
 
     @Override
@@ -28,7 +23,6 @@ public class InstructorMenuActivity extends AppCompatActivity{
         setContentView(R.layout.activity_instructor_menu);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        instructor = (Instructor) getIntent().getSerializableExtra(instructorLogInInstance.getUserTypeString(instructorAccountInstance));
 
     }
 

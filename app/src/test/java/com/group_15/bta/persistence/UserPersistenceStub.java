@@ -1,5 +1,8 @@
 package com.group_15.bta.persistence;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.group_15.bta.objects.Administrator;
 import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Instructor;
@@ -34,7 +37,25 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
 
+    @Override
+    public User getUser(String userName, String password) {
+        return null;
+    }
 
+    @Override
+    public boolean validateLoginAttempt(String userName, String password) {
+        return false;
+    }
+
+    @Override
+    public Class intendedActivity(String userName, String password) {
+        return null;
+    }
+
+    @Override
+    public Intent destinationIntent(String userName, String password, Context currentActivity) {
+        return null;
+    }
 
     @Override
     public ArrayList<User> getUsers() {
@@ -57,10 +78,9 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
-    public void setCurrentUser(User newUser) {
-            currentUser = newUser;
+    public void setCurrentUser(String userName, String password) {
+            currentUser = getUser(userName, password);
     }
-
 
 
 

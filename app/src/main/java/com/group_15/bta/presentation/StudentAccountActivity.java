@@ -1,38 +1,28 @@
 package com.group_15.bta.presentation;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.group_15.bta.objects.Student;
 import com.group_15.bta.R;
-import com.group_15.bta.business.AccessUsers;
-
-import java.io.Serializable;
 
 public class StudentAccountActivity extends AppCompatActivity {
 
     private NavController studentNavController;
-    private Student currentUser;
-    private Student studentAccountInstance = new Student();
-    private AccessUsers studentLoginInstance = new AccessUsers(studentAccountInstance);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_account);
-        currentUser = (Student) getIntent().getSerializableExtra(studentLoginInstance.getUserTypeString(studentAccountInstance));
         BottomNavigationView studentNav = (BottomNavigationView) findViewById(R.id.student_nav_bar);
         NavHostFragment studentNavHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.student_nav_fragment);
         studentNavController = studentNavHost.getNavController();

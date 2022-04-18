@@ -10,21 +10,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
-import com.group_15.bta.objects.Administrator;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.business.AccessUsers;
 
 public class AdminMenuActivity extends AppCompatActivity{
-
-    private Administrator admin;
-    private Student adminAccountInstance = new Student();
-    private AccessUsers adminLogInInstance = new AccessUsers(adminAccountInstance);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
-        admin = (Administrator) getIntent().getSerializableExtra(adminLogInInstance.getUserTypeString(adminAccountInstance));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         //copyDatabaseToDevice();

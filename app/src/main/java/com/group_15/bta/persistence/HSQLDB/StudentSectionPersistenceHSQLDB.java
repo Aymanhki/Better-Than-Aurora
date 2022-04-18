@@ -217,7 +217,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     public ArrayList<StudentSection> getStudentsInSection(String courseID) {
         final ArrayList<StudentSection> students = new ArrayList<>();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS,STUDENTSECTIONS WHERE STUDENTS.STUDENTID=STUDENTSECTIONS.STUDENTID AND SECTIONID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS,STUDENTSECTIONS WHERE STUDENTS.USERNAME=STUDENTSECTIONS.STUDENTID AND SECTIONID = ?");
             st.setString(1, courseID);
 
             final ResultSet rs = st.executeQuery();

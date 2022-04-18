@@ -41,7 +41,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     }
 
     public Student fromResultSet(final ResultSet rs) throws SQLException {
-        final String userName = rs.getString("STUDENTID");
+        final String userName = rs.getString("USERNAME");
         final String password = rs.getString("PASSWORD");
         final String name = rs.getString("NAME");
         final String associatedDegree = rs.getString("ASSOCIATEDDEGREE");

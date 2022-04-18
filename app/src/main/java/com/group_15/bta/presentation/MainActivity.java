@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group_15.bta.R;
 import com.group_15.bta.application.Main;
 import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -48,19 +47,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                loginBtn.setText("Loading...");
-                if (logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
-                    logInHandler.setCurrentUser(new User(username.getText().toString(), password.getText().toString()));
-                    String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
-                    Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
-                    startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
-                    username.setText("");
-                    password.setText("");
-                } else {
-                    String failedLoginMessage = "Log in Failed, Sorry, user not found";
-                    Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
+                if(username.getText().toString().length() > 0 && password.getText().toString().length() > 0)
+                {
+                    loginBtn.setText("Loading...");
+                    if (logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
+                        logInHandler.setCurrentUser(username.getText().toString(), password.getText().toString());
+                        String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
+                        Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
+                        startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
+                        username.setText("");
+                        password.setText("");
+                    } else {
+                        String failedLoginMessage = "Log in Failed, Sorry, user not found";
+                        loginBtn.setText("Login");
+                        Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
+                    }
                 }
-
+                else
+                {
+                    Toast.makeText(MainActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                }
             }
         };
 

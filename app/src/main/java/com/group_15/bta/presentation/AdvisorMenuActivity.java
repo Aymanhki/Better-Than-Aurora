@@ -11,24 +11,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
 import com.group_15.bta.business.AccessStudents;
-import com.group_15.bta.business.AccessUsers;
-import com.group_15.bta.objects.Advisor;
 import com.group_15.bta.objects.Student;
 
 import java.util.ArrayList;
 
 public class AdvisorMenuActivity extends AppCompatActivity {
 
-    private Advisor advisor;
-    private Student advisorAccountInstance = new Student();
-    private AccessUsers advisorLogInInstance = new AccessUsers(advisorAccountInstance);
+
+
     private AccessStudents accessStudents;
     private ArrayList<Student> students = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        advisor = (Advisor) getIntent().getSerializableExtra(advisorLogInInstance.getUserTypeString(advisorAccountInstance));
+
         setContentView(R.layout.activity_advisor_menu);
         accessStudents = new AccessStudents();
         students = accessStudents.getStudentList();
