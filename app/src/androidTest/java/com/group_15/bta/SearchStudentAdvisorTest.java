@@ -37,59 +37,32 @@ import android.view.KeyEvent;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class EditStudentTest {
+public class SearchStudentAdvisorTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void setupDatabase(){
-        // clear student3 from the database
         StudentPersistence studentPersist = Services.getStudentPersistence();
         ArrayList<Student> student = studentPersist.getStudent(new Student("student"));
         studentPersist.updateStudent(new Student("student", "student","Ayman", "B.Sc. (Hons)"));
     }
 
     @Test
-    public void editStudent() {
+    public void searchStudent() {
         //login
-        onView(withId(R.id.userName)).perform(typeText("admin"));
+        onView(withId(R.id.userName)).perform(typeText("advisor"));
         closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("admin"));
+        onView(withId(R.id.password)).perform(typeText("advisor"));
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
 
-        //admin menu, student accounts
+        //advisor menu, search student accounts
+        onView(withId(R.id.AdvisorStudentID)).perform(typeText("student"));
         onView(withId(R.id.button2)).perform(click());
 
-        //student list, click a student
-        onData(anything()).inAdapterView(withId(R.id.listStudent)).atPosition(0).perform(click());
-
-        //edit a student
-        onView(withId(R.id.editStudentName)).perform(typeText("2"));
-        closeSoftKeyboard();
-        onView(withId(R.id.editStudentPassword)).perform(typeText("A"));
-        closeSoftKeyboard();
-        onView(withId(R.id.editStudent)).perform(click());
-
-        // verify that it was edited
-        onData(anything()).inAdapterView(withId(R.id.listStudent)).atPosition(0).perform(click());
-        onView(withId(R.id.editStudentName)).check(matches(withText("Ayman2")));
-        onView(withId(R.id.editStudentPassword)).check(matches(withText("studentA")));
-
-        //go back to login
-        pressBack();
-        pressBack();
-        pressBack();
-        pressBack();
-        pressBack();
-
-        //check can login with created student
-        onView(withId(R.id.userName)).perform(typeText("student"));
-        closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("studentA"));
-        closeSoftKeyboard();
-        onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.student_settings)).perform(click());
+        // verify correct student details are showing
+        onView(withId(R.id.StudentName)).check(matches(withText("Student: Ayman")));
 
     }
 
