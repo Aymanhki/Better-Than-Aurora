@@ -23,8 +23,8 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.pressKey;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -33,24 +33,22 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
 
-import android.view.KeyEvent;
-
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class EditStudentTest {
+public class DeleteStudentTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void setupDatabase(){
-        // clear student3 from the database
+        // add a student that will appear at top of the list
         StudentPersistence studentPersist = Services.getStudentPersistence();
-        ArrayList<Student> student = studentPersist.getStudent(new Student("student"));
-        studentPersist.updateStudent(new Student("student", "student","Ayman", "B.Sc. (Hons)"));
+        studentPersist.insertStudent(new Student("A", "A","Misa", "B.Sc. (Hons)"));
     }
 
+
     @Test
-    public void editStudent() {
+    public void deleteStudent() {
         //login
         onView(withId(R.id.userName)).perform(typeText("admin"));
         closeSoftKeyboard();
@@ -61,35 +59,28 @@ public class EditStudentTest {
         //admin menu, student accounts
         onView(withId(R.id.button2)).perform(click());
 
-        //student list, click a student
-        onData(anything()).inAdapterView(withId(R.id.listStudent)).atPosition(0).perform(click());
+        //enter student id to delete
+        onView(withId(R.id.DeleteStudentID)).perform(typeText("A"));
 
-        //edit a student
-        onView(withId(R.id.editStudentName)).perform(typeText("2"));
-        closeSoftKeyboard();
-        onView(withId(R.id.editStudentPassword)).perform(typeText("A"));
-        closeSoftKeyboard();
-        onView(withId(R.id.editStudent)).perform(click());
+        //student list, delete student
+        onView(withId(R.id.DeleteStudentButton)).perform(click());
 
-        // verify that it was edited
+        // verify that it was deleted
         onData(anything()).inAdapterView(withId(R.id.listStudent)).atPosition(0).perform(click());
-        onView(withId(R.id.editStudentName)).check(matches(withText("Ayman2")));
-        onView(withId(R.id.editStudentPassword)).check(matches(withText("studentA")));
+        onView(withText("A")) .check(doesNotExist());
 
         //go back to login
         pressBack();
         pressBack();
         pressBack();
-        pressBack();
-        pressBack();
 
-        //check can login with created student
-        onView(withId(R.id.userName)).perform(typeText("student"));
+        //check cannot login with deleted student
+        onView(withId(R.id.userName)).perform(typeText("A"));
         closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("studentA"));
+        onView(withId(R.id.password)).perform(typeText("A"));
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.student_settings)).perform(click());
+        onView(withId(R.id.student_settings)).check(doesNotExist());
 
     }
 

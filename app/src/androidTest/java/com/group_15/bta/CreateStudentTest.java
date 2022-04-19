@@ -49,9 +49,10 @@ public class CreateStudentTest {
     }
 
     @Test
-    public void createCourse() {
+    public void createStudent() {
         //login
         onView(withId(R.id.userName)).perform(typeText("admin"));
+        closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("admin"));
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
