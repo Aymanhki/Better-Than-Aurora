@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class StudentSection implements Serializable {
 
-    private Section section;
-    private String associatedStudent;
-    private Course associatedCourse;
-    private String grade;
+    private final Section section;
+    private final String associatedStudent;
+    private final Course associatedCourse;
+    private final String grade;
 
 
     public Section getSection() {
@@ -44,6 +44,7 @@ public class StudentSection implements Serializable {
         return credits;
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object another) {
         StudentSection temp = (StudentSection) another;

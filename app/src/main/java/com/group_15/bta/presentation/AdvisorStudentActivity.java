@@ -1,5 +1,6 @@
 package com.group_15.bta.presentation;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,19 +25,11 @@ import java.util.ArrayList;
 
 public class AdvisorStudentActivity extends AppCompatActivity {
     private String studentID;
-    private ArrayList<Student> currentStudent;
-    private AccessStudents accessStudents;
-    private ArrayList<Student> students = new ArrayList<>();
 
     private AccessStudentSections accessStudentSections;
-    private ArrayList<StudentSection> studentSections = new ArrayList<>();
 
     private ArrayList<Section> currentSections = new ArrayList<>();
     private ArrayList<StudentSection> pastSections = new ArrayList<>();
-
-    private ArrayAdapter<Section> sectionArrayAdapter;
-    private ArrayAdapter<StudentSection> studentArrayAdapter;
-
 
 
     @Override
@@ -45,17 +38,18 @@ public class AdvisorStudentActivity extends AppCompatActivity {
         studentID = bundle.getString("ID");
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advisor_student);
 
-        accessStudents = new AccessStudents();
-        currentStudent = accessStudents.getStudent(new Student(studentID));
+        AccessStudents accessStudents = new AccessStudents();
+        ArrayList<Student> currentStudent = accessStudents.getStudent(new Student(studentID));
         displayStudentName(currentStudent.get(0));
 
         accessStudentSections = new AccessStudentSections();
-        displayStudentGpa(currentStudent.get(0));
+        displayStudentGpa();
 
         currentSections = accessStudentSections.getSectionList(studentID,true);
         displayCurrentCourseList();
@@ -64,26 +58,28 @@ public class AdvisorStudentActivity extends AppCompatActivity {
         displayPastCourseList();
     }
 
+    @SuppressLint("SetTextI18n")
     private void displayStudentName(Student student){
-        final TextView tView = (TextView)findViewById(R.id.StudentName);
+        final TextView tView = findViewById(R.id.StudentName);
         tView.setText( "Student: " + student.getName());
     }
 
-    private void displayStudentGpa(Student student){
-        final TextView tView = (TextView)findViewById(R.id.StudentGPA);
+    @SuppressLint("SetTextI18n")
+    private void displayStudentGpa(){
+        final TextView tView = findViewById(R.id.StudentGPA);
         String gpa = Calculate.gpa(accessStudentSections.getStudentSectionList(studentID));
-        tView.setText( "GPA: " + gpa);
+        tView.setText("GPA: " + gpa);
     }
 
     private void displayCurrentCourseList() {
 
-        sectionArrayAdapter = new ArrayAdapter<Section>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, currentSections) {
+        ArrayAdapter<Section> sectionArrayAdapter = new ArrayAdapter<Section>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, currentSections) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                TextView text1 = view.findViewById(android.R.id.text1);
+                TextView text2 = view.findViewById(android.R.id.text2);
 
                 text1.setText(currentSections.get(position).getAssociatedCourse());
                 text2.setText(currentSections.get(position).getSection());
@@ -92,20 +88,20 @@ public class AdvisorStudentActivity extends AppCompatActivity {
             }
         };
 
-        ListView listView = (ListView) findViewById(R.id.sectionsList);
+        ListView listView = findViewById(R.id.sectionsList);
         listView.setAdapter(sectionArrayAdapter);
 
     }
 
     private void displayPastCourseList() {
 
-        studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, pastSections) {
+        ArrayAdapter<StudentSection> studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, pastSections) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                TextView text1 = view.findViewById(android.R.id.text1);
+                TextView text2 = view.findViewById(android.R.id.text2);
 
                 text1.setText(pastSections.get(position).getAssociatedCourse().getTitle());
                 text2.setText(pastSections.get(position).getGrade());
@@ -114,16 +110,15 @@ public class AdvisorStudentActivity extends AppCompatActivity {
             }
         };
 
-        ListView listView = (ListView) findViewById(R.id.pastSectionsList);
+        ListView listView = findViewById(R.id.pastSectionsList);
         listView.setAdapter(studentArrayAdapter);
 
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

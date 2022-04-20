@@ -1,16 +1,11 @@
 package com.group_15.bta.persistence;
 
-import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
 
 public interface SectionPersistence {
 
-    static AccessSections getInstance() {
-        return null;
-    }
     ArrayList<Section> getSectionList();
 
     ArrayList<Section> getInstructorSections(final String name);

@@ -10,11 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
         <ListView
             android:id="@+id/view_categories_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
         </ListView>
@@ -22,10 +23,10 @@
             android:id="@+id/done_selecting_categories_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:text="@string/next_btn_text_in_view_categories_for_Student_courses_fragment"
             android:textAllCaps="false"
             android:gravity="center"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             />

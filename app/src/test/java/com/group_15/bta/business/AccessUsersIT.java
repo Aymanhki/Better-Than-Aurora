@@ -1,10 +1,7 @@
 package com.group_15.bta.business;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
 import com.group_15.bta.persistence.HSQLDB.UserPersistenceHSQLDB;
 import com.group_15.bta.persistence.UserPersistence;

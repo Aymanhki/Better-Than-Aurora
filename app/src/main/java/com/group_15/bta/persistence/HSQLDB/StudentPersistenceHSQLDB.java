@@ -17,25 +17,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class StudentPersistenceHSQLDB implements StudentPersistence, Serializable {
-    private String dbPath;
-    private Connection existingConnection = null;
+    private final String dbPath;
 
     public StudentPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
-    public StudentPersistenceHSQLDB(Connection newConnection) {
-        existingConnection = newConnection;
-    }
 
     private Connection connection() throws SQLException {
         Connection toReturn;
 
-        if (existingConnection == null) {
-            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } else {
-            toReturn = existingConnection;
-        }
+        toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
 
         return toReturn;
     }
@@ -117,14 +109,6 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(3, currentStudent.getName());
             statement.setString(4, currentStudent.getAssociatedDegree());
             statement.executeUpdate();
-           /* new AccessUsers().insertUser(currentStudent);
-            StudentSectionPersistenceHSQLDB studentSectionInserter = new StudentSectionPersistenceHSQLDB(newConnection);
-            ArrayList<StudentSection> sections = studentSectionInserter.getSectionList();
-            for (int i = 0; i < sections.size(); i++) {
-                if (sections.get(i).getAssociatedStudent().equals(currentStudent.getStudentID())) {
-                    studentSectionInserter.insertSection(sections.get(i));
-                }
-            }*/
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -248,7 +232,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     @Override
     public ArrayList<PieEntry> getDegreeCreditBreakDown(Student student)
     {
-        ArrayList<PieEntry> degreeBreakDown = new ArrayList();
+        ArrayList<PieEntry> degreeBreakDown = new ArrayList<>();
         degreeBreakDown.add(new PieEntry(getStudentDegreeTakenCredit(student), "Complete"));
         degreeBreakDown.add(new PieEntry(getStudentDegreeInProgressCredit(student), "In Progress"));
         degreeBreakDown.add(new PieEntry(getStudentDegreeNotTakenCredit(student), "Unfulfilled"));
@@ -258,7 +242,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
     @Override
     public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student)
     {
-        ArrayList<Course> nonTakenCourses = new ArrayList();
+        ArrayList<Course> nonTakenCourses = new ArrayList<>();
         String studentDegree = student.getAssociatedDegree();
         try (final Connection newConnection = connection()) {
             PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID NOT IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ?) AND (ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ? OR ASSOCIATEDDEGREE LIKE ?)");

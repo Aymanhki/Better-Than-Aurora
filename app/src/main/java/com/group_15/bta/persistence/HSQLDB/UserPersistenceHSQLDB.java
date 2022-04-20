@@ -25,8 +25,7 @@ import java.util.ArrayList;
 
 public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
-    private String dbPath;
-    private Connection existingConnection = null;
+    private final String dbPath;
     private User currentUser = null;
     private final String STUDENT_ACCOUNT_TYPE = "STUDENTS";
     private final String ADMIN_ACCOUNT_TYPE = "ADMINS";
@@ -38,18 +37,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         this.dbPath = dbPath;
     }
 
-    public UserPersistenceHSQLDB(Connection newConnection) {
-        existingConnection = newConnection;
-    }
 
     private Connection connection() throws SQLException {
         Connection toReturn;
 
-        if (existingConnection == null) {
-            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } else {
-            toReturn = existingConnection;
-        }
+        toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
 
         return toReturn;
     }
@@ -61,15 +53,20 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         final String name = rs.getString("NAME");
         final String userName = rs.getString("USERNAME");
 
-        if (userType.equals(STUDENT_ACCOUNT_TYPE)) {
-            final String associatedDegree = rs.getString("ASSOCIATEDDEGREE");
-            toReturn = new Student(userName, password, name, associatedDegree);
-        } else if (userType.equals(ADMIN_ACCOUNT_TYPE)) {
-            toReturn = new Administrator(userName, password, name);
-        } else if (userType.equals(ADVISOR_ACCOUNT_TYPE)) {
-            toReturn = new Advisor(userName, password, name);
-        } else if (userType.equals(INSTRUCTOR_ACCOUNT_TYPE)) {
-            toReturn = new Instructor(userName, password, name);
+        switch (userType) {
+            case STUDENT_ACCOUNT_TYPE:
+                final String associatedDegree = rs.getString("ASSOCIATEDDEGREE");
+                toReturn = new Student(userName, password, name, associatedDegree);
+                break;
+            case ADMIN_ACCOUNT_TYPE:
+                toReturn = new Administrator(userName, password, name);
+                break;
+            case ADVISOR_ACCOUNT_TYPE:
+                toReturn = new Advisor(userName, password, name);
+                break;
+            case INSTRUCTOR_ACCOUNT_TYPE:
+                toReturn = new Instructor(userName, password, name);
+                break;
         }
 
         return toReturn;
@@ -176,7 +173,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     @Override
     public boolean validateLoginAttempt(String userName, String password)
     {
-        boolean found = false;
+        boolean found;
         try(Connection connection = connection())
         {
             PreparedStatement statement = connection.prepareStatement("SELECT USERNAME, PASSWORD FROM (SELECT USERNAME, PASSWORD FROM STUDENTS UNION ALL SELECT USERNAME, PASSWORD FROM ADMINS UNION ALL SELECT USERNAME, PASSWORD FROM ADVISORS UNION ALL SELECT USERNAME, PASSWORD FROM INSTRUCTORS) WHERE USERNAME = ? AND PASSWORD = ?");
@@ -191,6 +188,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return found;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public Class intendedActivity(String userName, String password) {
         Class toReturn = null;

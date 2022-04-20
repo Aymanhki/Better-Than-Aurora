@@ -17,7 +17,7 @@ public class Category implements Serializable {
     //constructor
     public Category(String Name){
         this.Name = Name; //category name
-        Course = new ArrayList<Course>(); //courses under this category
+        Course = new ArrayList<>(); //courses under this category
     }
 
     //constructor

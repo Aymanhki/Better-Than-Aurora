@@ -3,12 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.viewCategories">
+    tools:context=".presentation.viewCategories"
+    android:background="@color/cosmic_latte">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+        <ListView
+            android:id="@+id/view_categories_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </ListView>
+        <Button
+            android:id="@+id/done_selecting_categories_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_btn_text_in_view_categories_for_Student_courses_fragment"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            />
+    </LinearLayout>
 
 </FrameLayout>

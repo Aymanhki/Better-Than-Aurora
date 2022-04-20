@@ -15,25 +15,18 @@ import java.util.ArrayList;
 
 public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializable {
 
-    private String dbPath;
-    private Connection existingConnection = null;
+    private final String dbPath;
+
 
     public CategoryPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
-    public CategoryPersistenceHSQLDB(Connection newConnection) {
-        existingConnection = newConnection;
-    }
 
     private Connection connection() throws SQLException {
         Connection toReturn;
 
-        if (existingConnection == null || !existingConnection.isClosed()) {
-            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } else {
-            toReturn = existingConnection;
-        }
+        toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
 
         return toReturn;
 

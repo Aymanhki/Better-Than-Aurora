@@ -1,5 +1,7 @@
 package com.group_15.bta.objects;
 
+import androidx.annotation.NonNull;
+
 import com.group_15.bta.application.Services;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 
@@ -15,8 +17,7 @@ public class Student extends User implements Serializable{
 
 
    // private ArrayList<StudentSection> enrolledSections;
-    private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
-    private int MAX_CLASSES =  5;
+    private final StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private String associatedDegree;
 
     //default constructor
@@ -45,7 +46,8 @@ public class Student extends User implements Serializable{
        // enrolledSections = studentSectionPersistence.getSectionList();
     }
 
-    //tostring
+    //toString
+    @NonNull
     public String toString()
     {
         return String.format("Student: %s %s %s", id, password, name);
@@ -94,7 +96,7 @@ public class Student extends User implements Serializable{
         return studentSectionPersistence.getCourses(id);
     }
 
-    public int getMAX_CLASSES(){return MAX_CLASSES;}
+    public int getMAX_CLASSES(){ return 5;}
 
 
     public String getAssociatedDegree() {

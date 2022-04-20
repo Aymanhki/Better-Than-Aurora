@@ -5,8 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.group_15.bta.objects.Student;
-import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
+import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.utils.TestUtils;
 
 import org.junit.After;

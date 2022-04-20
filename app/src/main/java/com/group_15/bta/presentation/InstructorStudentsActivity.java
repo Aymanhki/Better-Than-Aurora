@@ -1,11 +1,11 @@
 package com.group_15.bta.presentation;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +30,6 @@ public class InstructorStudentsActivity extends AppCompatActivity {
     private ArrayList<StudentSection> studentSections = new ArrayList<>();
 
     private Section currentSection;
-    private ArrayAdapter<StudentSection> studentArrayAdapter;
-    private int selectedStudentPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +37,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_students);
         ActionBar actionBar = getSupportActionBar();//back button
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle =  getIntent().getExtras();
@@ -53,59 +52,48 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
 
     private void displaySectionTitle(){
-        final TextView tView = (TextView)findViewById(R.id.SectionName);
+        final TextView tView = findViewById(R.id.SectionName);
         tView.setText( currentSection.getSection());
     }
 
     private void displayList(){
 
-        studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.select_dialog_multichoice, android.R.id.text1,studentSections){
+        ArrayAdapter<StudentSection> studentArrayAdapter = new ArrayAdapter<StudentSection>(this, android.R.layout.select_dialog_multichoice, android.R.id.text1, studentSections) {
+            @SuppressLint("SetTextI18n")
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text1 = view.findViewById(android.R.id.text1);
 
 
                 StudentSection studentSection = studentSections.get(position);
-                text1.setText(studentSection.getAssociatedStudent()+": " + studentSection.getGrade());
+                text1.setText(studentSection.getAssociatedStudent() + ": " + studentSection.getGrade());
 
 
                 return view;
             }
         };
 
-        ListView listView = (ListView)findViewById(R.id.studentSectionList);
+        ListView listView = findViewById(R.id.studentSectionList);
         listView.setAdapter(studentArrayAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Button updateGradeButton = findViewById(R.id.UpdateGrade);
 
-                if(listView.getCheckedItemCount() > 0)
-                {
-                    updateGradeButton.setEnabled(true);
-
-                }
-                else
-                {
-                    updateGradeButton.setEnabled(false);
-                }
-            }
+            updateGradeButton.setEnabled(listView.getCheckedItemCount() > 0);
         });
     }
 
     private StudentSection createStudentSectionFromEditText(StudentSection student) {
-        EditText updateGrade = (EditText)findViewById(R.id.Grade);
+        EditText updateGrade = findViewById(R.id.Grade);
 
-        StudentSection newStudent = new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
-        return newStudent;
+        return new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
     }
 
     public void buttonUpdateGrade(View v) {
-        Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
-        ListView listView = (ListView)findViewById(R.id.studentSectionList);
+
+        ListView listView = findViewById(R.id.studentSectionList);
 
         SparseBooleanArray checked = listView.getCheckedItemPositions();
         ArrayList<StudentSection> toUpdate = new ArrayList<>();
@@ -127,16 +115,16 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             listView.setItemChecked(i, false);
         }
 
-        EditText updateGrade = (EditText)findViewById(R.id.Grade);
+        EditText updateGrade = findViewById(R.id.Grade);
         updateGrade.setText(null);
 
     }
 
     private void updateGrade(ArrayList<StudentSection> toUpdate)
     {
-        EditText updateGrade = (EditText)findViewById(R.id.Grade);
+        EditText updateGrade = findViewById(R.id.Grade);
         String result = validateGradeData(updateGrade.getText().toString().trim());
-        Button updateGradeButton = (Button)findViewById(R.id.UpdateGrade);
+        Button updateGradeButton = findViewById(R.id.UpdateGrade);
         if(result == null)
         {
             updateGradeButton.setEnabled(false);
@@ -163,7 +151,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     private String validateGradeData(String grade) {
 
-        if (grade.matches("[A-C][+]?|D|F|D")) {
+        if (grade.matches("[A-C][+]?|F|D")) {
             return null;
         }
 
@@ -172,10 +160,9 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

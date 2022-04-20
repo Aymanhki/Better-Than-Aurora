@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$PROJECT_DIR$/../../../../../../../../../../../../Android/sdk/icons/material/materialicons/arrow_drop_down/baseline_arrow_drop_down_24.xml" />
+                                      <entry key="url" value="file:$PROJECT_DIR$/../../../../../../../../../../../../Android/sdk/icons/material/materialicons/remove/baseline_remove_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="362706" />
-                            <entry key="outputName" value="ic_baseline_arrow_drop_down_24" />
+                            <entry key="color" value="e9e5d6" />
+                            <entry key="outputName" value="ic_baseline_remove_24" />
                           </map>
                         </option>
                       </PersistentState>

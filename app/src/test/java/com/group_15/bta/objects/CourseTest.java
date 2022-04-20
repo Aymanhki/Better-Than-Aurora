@@ -32,8 +32,8 @@ public class CourseTest {
 
         ArrayList<Section> sections = new ArrayList<>();
         String[] days = {"T","TR"};
-        String[] time = {"10:00am", "11:00am"};
-        Section section = new Section("A01",days,time,80);
+        String time = "10:00am - 11:00am";
+        Section section = new Section("A01",days, time,80);
         course3 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",sections);
         assertNotNull(course2);
         assertTrue("Comp 2160".equals(courses.getID()));

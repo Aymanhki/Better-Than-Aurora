@@ -86,7 +86,7 @@ public class CourseLandingActivity extends AppCompatActivity {
         });
 
         ListView listView = (ListView)findViewById(R.id.CategoriesList); //List of cats
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1,categories){
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1,categories){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

@@ -1,10 +1,7 @@
 package com.group_15.bta.objects;
 
-import java.util.ArrayList;
-
 public class Degree {
-    private String name;
-    private ArrayList<Course> courses;
+    private final String name;
 
     public Degree(String newName)
     {

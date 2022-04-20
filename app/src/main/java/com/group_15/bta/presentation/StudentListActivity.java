@@ -1,10 +1,10 @@
 package com.group_15.bta.presentation;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,8 +26,6 @@ public class StudentListActivity extends AppCompatActivity {
     private AccessStudents accessStudents;
     private ArrayList<Student> students = new ArrayList<>();
 
-    private ArrayAdapter<Student> studentArrayAdapter;
-    private int selectedStudentPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,34 +38,32 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     private void listStudents(){
-        studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, students){
+        ArrayAdapter<Student> studentArrayAdapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, students) {
+            @SuppressLint("SetTextI18n")
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                TextView text1 = view.findViewById(android.R.id.text1);
+                TextView text2 = view.findViewById(android.R.id.text2);
 
                 text1.setText(students.get(position).getName());
-                text2.setText("ID: "+students.get(position).getID()+", "+"Degree: "+students.get(position).getAssociatedDegree());
+                text2.setText("ID: " + students.get(position).getID() + ", " + "Degree: " + students.get(position).getAssociatedDegree());
 
                 return view;
             }
         };
 
-        final ListView listView = (ListView)findViewById(id.listStudent);
+        final ListView listView = findViewById(id.listStudent);
         listView.setAdapter(studentArrayAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("Position", position);
-                editIntent.putExtras(bundle);
-                StudentListActivity.this.startActivity(editIntent);
-                listView.setItemChecked(position, false);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent editIntent = new Intent(StudentListActivity.this, EditStudentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("Position", position);
+            editIntent.putExtras(bundle);
+            StudentListActivity.this.startActivity(editIntent);
+            listView.setItemChecked(position, false);
         });
     }
 
@@ -77,7 +73,7 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     public void buttonDeleteStudent(View v) {
-        EditText StudentID = (EditText) findViewById(R.id.DeleteStudentID);
+        EditText StudentID = findViewById(id.DeleteStudentID);
 
         String result;
 
@@ -110,10 +106,9 @@ public class StudentListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

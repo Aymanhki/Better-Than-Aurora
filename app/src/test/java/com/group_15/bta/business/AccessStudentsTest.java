@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.group_15.bta.objects.Student;
+import com.group_15.bta.persistence.StudentPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import com.group_15.bta.persistence.StudentPersistenceStub;
 
 public class AccessStudentsTest {
     private AccessStudents accessStudents;

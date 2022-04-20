@@ -14,6 +14,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group_15.bta.R;
 
+import java.util.Objects;
+
 public class StudentAccountActivity extends AppCompatActivity {
 
     private NavController studentNavController;
@@ -23,8 +25,9 @@ public class StudentAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_account);
-        BottomNavigationView studentNav = (BottomNavigationView) findViewById(R.id.student_nav_bar);
+        BottomNavigationView studentNav = findViewById(R.id.student_nav_bar);
         NavHostFragment studentNavHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.student_nav_fragment);
+        assert studentNavHost != null;
         studentNavController = studentNavHost.getNavController();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -45,17 +48,14 @@ public class StudentAccountActivity extends AppCompatActivity {
     {
         NavController navController = Navigation.findNavController(view);
         Button fragmentButton = view.findViewById(buttonId);
-        View.OnClickListener fragmentButtonAction = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragmentButton.setText("Loading...");
-                navController.navigate(fragmentActionId);
-            }
+        View.OnClickListener fragmentButtonAction = view1 -> {
+            fragmentButton.setText(R.string.loading_text_for_any_btn);
+            navController.navigate(fragmentActionId);
         };
         fragmentButton.setOnClickListener(fragmentButtonAction);
     }
 
     public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 }

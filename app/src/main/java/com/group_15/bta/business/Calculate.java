@@ -28,7 +28,6 @@ public class Calculate
 		{
 			for (studentSectionCount=0; studentSectionCount<studentSections.size(); studentSectionCount++)
 			{
-				grade = "";
 				if (studentSections.get(studentSectionCount) == null)
 				{	// Invalid or null element
 					missingGrades = 0;
@@ -38,8 +37,8 @@ public class Calculate
 				}
 				else
 				{
-					studentSection = (StudentSection) studentSections.get(studentSectionCount);
-					grade = ((StudentSection) studentSection).getGrade();
+					studentSection = studentSections.get(studentSectionCount);
+					grade = studentSection.getGrade();
 					found = false;
 					if (grade.trim().equals("In Progress"))
 					{	// found a course in progress, no grade yet

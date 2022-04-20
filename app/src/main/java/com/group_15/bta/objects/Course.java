@@ -11,10 +11,10 @@ import java.util.Objects;
  */
 public class Course implements Serializable {
 
-    private String ID; //course id
+    private final String ID; //course id
     private String Description;//course description
     protected ArrayList<Section> sections; //sections for this course
-    private String title;
+    private final String title;
     private String associatedCategory;
     private String associatedDegree;
     HashMap<String, String> degrees;
@@ -42,9 +42,8 @@ public class Course implements Serializable {
         String[] tempDeg = associatedDegree.split(",");
 
         degrees = new HashMap<>();
-        for(int i=0; i<tempDeg.length; i++)
-        {
-            degrees.put(tempDeg[i].trim(), tempDeg[i].trim());
+        for (String s : tempDeg) {
+            degrees.put(s.trim(), s.trim());
         }
     }
 
@@ -57,7 +56,7 @@ public class Course implements Serializable {
     }
 
     //adds section to this course
-    public void addSection(String sectionNumber, String[] Days, String[] Time, int CAP) {
+    public void addSection(String sectionNumber, String[] Days, String Time, int CAP) {
         Section S = new Section(sectionNumber, Days, Time, CAP);
         sections.add(S);
     }
@@ -66,7 +65,6 @@ public class Course implements Serializable {
         sections.add(newSection);
     }
 
-    public void addSections(ArrayList<Section> newSection){sections.addAll(newSection);}
     //getters
     public String getDescription() {
         return Description;

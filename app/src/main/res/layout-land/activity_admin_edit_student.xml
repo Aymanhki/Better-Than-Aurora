@@ -1,70 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cosmic_latte"
     android:orientation="vertical">
 
-    <LinearLayout
-
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:layout_margin="20dp">
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Student Name" />
+            android:text="@string/student_name_label_for_edit_student" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editStudentName"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:hint="Student Name" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:hint="@string/student_name_hint_for_edit_student_text_box"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textSize="18sp" />
+    </LinearLayout>
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Student ID" />
+            android:text="@string/student_id_label_for_edit_student_text_box" />
 
         <TextView
             android:id="@+id/studentID"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="TextView"
             style="@android:style/Widget.EditText"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/student_id_placeholder_text_for_edit_student_text_box"
+            android:textSize="18sp" />
+    </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Student Password" />
+            android:text="@string/student_password_label_for_edit_student_text_box" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editStudentPassword"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:hint="@string/password" />
-
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:hint="@string/password"
+            android:textSize="18sp" />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/student_degree_text_box_label_in_edit_student" />
+
+        <TextView
+            android:id="@+id/studentDegree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:hint="@string/select_a_degree_text_box_hint_in_edit_student"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
         <Button
             android:id="@+id/editStudent"
             android:layout_width="wrap_content"
@@ -72,12 +119,8 @@
             android:background="@color/dark_green"
             android:onClick="buttonEditStudent"
             android:text="@string/edit_student"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="16dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="center"
+            android:textAllCaps="false"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,66 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/cosmic_latte">
 
     <TextView
         android:id="@+id/SectionName"
+        android:text="@string/section_name"
+        android:fontFamily="serif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_green"
         android:textAlignment="center"
-        android:textColor="@color/cosmic_latte"
-        android:textSize="24sp" />
+        android:layout_weight="0"
+        android:textColor="@color/dark_brown"
+        android:textSize="30sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:background="@color/cosmic_latte">
+        android:layout_height="wrap_content"
+        android:background="@color/cosmic_latte"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp">
 
         <Button
             android:id="@+id/UpdateGrade"
-            android:layout_width="180dp"
-            android:layout_height="66dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
             android:onClick="buttonUpdateGrade"
-            android:text="Update Grade"
+            android:text="@string/update_grade"
             android:textAllCaps="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="0.2"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            />
 
         <EditText
             android:id="@+id/Grade"
-            android:layout_width="180dp"
-            android:layout_height="66dp"
-            android:layout_marginStart="212dp"
-            android:layout_marginTop="28dp"
-            android:ems="10"
-            android:hint="Grade"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:hint="@string/instructor_set_grade_text_box_hint"
+            android:textSize="18sp"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:padding="10dp"
+            android:inputType="text"
+            android:autofillHints="A+, A, B+, B, C+, C, D, F" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dark_green" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/studentSectionList"
         android:layout_width="match_parent"
-        android:layout_height="394dp"
-        android:layout_gravity="top"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/cosmic_latte"
-        android:choiceMode="singleChoice"
-        android:divider="@color/dark_green"
-        android:dividerHeight="1dp" />
+        android:background="@drawable/top_and_bottom_border" />
 
 </LinearLayout>

@@ -9,11 +9,8 @@ import com.group_15.bta.persistence.StudentSectionPersistence;
 import java.util.ArrayList;
 
 public class AccessStudentSections implements StudentSectionPersistence {
-    private static final AccessStudentSections ourInstance = new AccessStudentSections();
     private StudentSectionPersistence studentSectionPersistence;
     public ArrayList<StudentSection> studentSections = new ArrayList<>();
-    private ArrayList<StudentSection> studentsInSection = new ArrayList<>();
-    private int currentStudentSection;
 
 
     public AccessStudentSections() {
@@ -23,11 +20,6 @@ public class AccessStudentSections implements StudentSectionPersistence {
     public AccessStudentSections(final StudentSectionPersistence studentSectionPersistence) {
         this();
         this.studentSectionPersistence = studentSectionPersistence;
-    }
-
-
-    public static AccessStudentSections getInstance() {
-        return ourInstance;
     }
 
     public ArrayList<StudentSection> getStudentSectionList() {

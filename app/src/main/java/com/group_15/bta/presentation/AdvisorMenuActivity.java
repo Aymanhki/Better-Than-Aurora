@@ -20,7 +20,6 @@ public class AdvisorMenuActivity extends AppCompatActivity {
 
 
     private AccessStudents accessStudents;
-    private ArrayList<Student> students = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +27,12 @@ public class AdvisorMenuActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_advisor_menu);
         accessStudents = new AccessStudents();
-        students = accessStudents.getStudentList();
 
     }
 
 
     public void buttonAdvisorSearchStudent(View v) {
-        EditText StudentID = (EditText) findViewById(R.id.AdvisorStudentID);
+        EditText StudentID = findViewById(R.id.AdvisorStudentID);
 
         String result;
 
@@ -76,10 +74,9 @@ public class AdvisorMenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

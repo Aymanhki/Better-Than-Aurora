@@ -1,8 +1,7 @@
 package com.group_15.bta.business;
 
-import com.group_15.bta.business.AccessStudentSections;
-import com.group_15.bta.business.AccessStudents;
-import com.group_15.bta.business.Calculate;
+import static org.junit.Assert.assertTrue;
+
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.HSQLDB.StudentPersistenceHSQLDB;
@@ -13,7 +12,7 @@ import com.group_15.bta.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

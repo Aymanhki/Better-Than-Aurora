@@ -9,17 +9,19 @@
     <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="300dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/AdvisorStudentID"
             android:layout_width="240dp"
             android:layout_height="66dp"
             android:ems="10"
-            android:hint="Type Student ID"
+            android:hint="@string/student_id_hint_for_advisor_search_student_text_box"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/button2"

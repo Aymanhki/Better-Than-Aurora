@@ -1,7 +1,6 @@
 package com.group_15.bta.objects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Instructor extends User implements Serializable {

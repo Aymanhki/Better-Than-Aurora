@@ -23,7 +23,7 @@ public class AccessSectionsTest {
     public void test1()
     {
         String [] days = new String[] {"M", "F"};
-        String [] time = new String[] {"2:00 PM","3:00 PM"};
+        String time = "2:00 PM - 3:00 PM";
 
         ArrayList<Section> sections = accessSections.getSectionList();
         assertNotNull(sections);

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,6 +8,7 @@
     <TextView
         android:id="@+id/StudentName"
         android:layout_width="match_parent"
+        android:text="@string/student_name_place_holder_for_advisor_review_student_page"
         android:padding="10dp"
         android:layout_height="wrap_content"
         android:background="@color/light_green"
@@ -22,6 +21,7 @@
 
     <TextView
         android:id="@+id/StudentGPA"
+        android:text="@string/student_gpa_place_holder_for_advisor_review_student_page"
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:padding="10dp"
         android:ems="10"
         android:fontFamily="serif"
-        android:text='Current Courses'
+        android:text='@string/current_courses_place_holder_for_advisor_review_student_page'
         android:layout_weight="0"
         android:background="@color/light_green"
         android:textColor="@color/dark_brown"
@@ -61,7 +61,7 @@
         android:padding="10dp"
         android:ems="10"
         android:fontFamily="serif"
-        android:text='Past Courses'
+        android:text='@string/past_courses_place_holder_for_advisor_review_student_page'
         android:layout_weight="0"
         android:background="@color/light_green"
         android:textColor="@color/dark_brown"

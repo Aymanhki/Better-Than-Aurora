@@ -1,5 +1,6 @@
 package com.group_15.bta.objects;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,8 @@ import com.group_15.bta.R;
 import java.util.ArrayList;
 
 public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
-    private Context mainContext;
-    private int resource;
+    private final Context mainContext;
+    private final int resource;
 
     public StudentSectionAdapter(Context context, int resource, ArrayList<StudentSection> sections) {
         super(context, resource, sections);
@@ -24,6 +25,7 @@ public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
         this.resource = resource;
     }
 
+    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -36,11 +38,11 @@ public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
         LayoutInflater inflater = LayoutInflater.from(mainContext);
         convertView = inflater.inflate(resource, parent, false);
 
-        TextView courseName = (TextView) convertView.findViewById(R.id.course_name_in_graded_section_list_item);
-        TextView locationName = (TextView) convertView.findViewById(R.id.location_in_graded_section_list_item);
-        TextView instructorName = (TextView) convertView.findViewById(R.id.instructor_in_graded_section_list_item);
-        TextView credits = (TextView) convertView.findViewById(R.id.credit_hours_in_graded_section_list_item);
-        TextView gradeText = (TextView) convertView.findViewById(R.id.grade_in_graded_section_list_item);
+        TextView courseName = convertView.findViewById(R.id.course_name_in_graded_section_list_item);
+        TextView locationName = convertView.findViewById(R.id.location_in_graded_section_list_item);
+        TextView instructorName = convertView.findViewById(R.id.instructor_in_graded_section_list_item);
+        TextView credits = convertView.findViewById(R.id.credit_hours_in_graded_section_list_item);
+        TextView gradeText = convertView.findViewById(R.id.grade_in_graded_section_list_item);
 
 
         courseName.setText(courseName.getText() + " " + course);

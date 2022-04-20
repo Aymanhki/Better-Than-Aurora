@@ -3,12 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.AddOrDropCourseFragment">
+    tools:context=".presentation.AddOrDropCourseFragment"
+    android:background="@color/cosmic_latte"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+    <RelativeLayout
+        android:layout_width="320dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
+
+
+        <Button
+            android:id="@+id/add_courses_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_a_course_btn_text_in_add_or_drop_course_page"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_brown"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/drop_courses_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/drop_a_course_btn_text_in_add_or_drop_course_page"
+            android:textColor="@color/dark_brown"
+            android:textAllCaps="false"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 
 </FrameLayout>

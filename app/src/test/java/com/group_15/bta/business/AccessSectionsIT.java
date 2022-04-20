@@ -5,8 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.group_15.bta.objects.Section;
-import com.group_15.bta.persistence.SectionPersistence;
 import com.group_15.bta.persistence.HSQLDB.SectionPersistenceHSQLDB;
+import com.group_15.bta.persistence.SectionPersistence;
 import com.group_15.bta.utils.TestUtils;
 
 import org.junit.After;
@@ -54,7 +54,7 @@ public class AccessSectionsIT {
     @Test
     public void testInsertSection() {
         String [] days = new String[] {"M", "F"};
-        String [] time = new String[] {"2:00 PM","3:00 PM"};
+        String time = "2:00 PM - 3:00 PM";
 
         final Section c = new Section("A05", days, time, 120);
         accessSections.insertSection(c);

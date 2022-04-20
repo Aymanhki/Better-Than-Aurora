@@ -234,7 +234,7 @@
     <fragment
         android:id="@+id/summaryByTermFragment"
         android:name="com.group_15.bta.presentation.SummaryByTermFragment"
-        android:label="fragment_summary_by_term"
+        android:label="Account Summary"
         tools:layout="@layout/fragment_summary_by_term" />
 
     <fragment

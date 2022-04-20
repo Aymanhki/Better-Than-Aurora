@@ -1,5 +1,6 @@
 package com.group_15.bta.objects;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,8 @@ import java.util.ArrayList;
 
 public class SectionListAdapter extends ArrayAdapter<Section> {
 
-    private Context mainContext;
-    private int resource;
+    private final Context mainContext;
+    private final int resource;
 
     public SectionListAdapter(Context context, int resource, ArrayList<Section> sections)
     {
@@ -26,49 +27,40 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         this.resource = resource;
     }
 
+    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String section = getItem(position).getSection();
         String location = getItem(position).getLocation();
         String instructor = getItem(position).getInstructor();
-        String[] times = getItem(position).getTimes();
+        String time = getItem(position).getTime();
         String[] days = getItem(position).getDaysRaw();
-        String dates = "";
+        StringBuilder dates = new StringBuilder();
 
         for(int i=0; i<days.length; i++)
         {
-            dates += days[i]+":\n";
-      /*      for(int j = 0; j < times.length; j++)
-            {
-                if(j<times.length-1)
-                {
-                    dates += times[j].trim() + ",\n";
-                }
-                else
-                {
-                    dates += times[j].trim() + "\n";
-                }
-            }*/
-            dates+= times[i].trim() + "\n";
+            dates.append(days[i]);
 
             if(i < days.length-1)
             {
-                dates += "\n";
+                dates.append(", ");
             }
         }
+
+        dates.append(":\n").append(time);
 
         int capacity = getItem(position).getCAP();
         int available = getItem(position).getAvailable();
         LayoutInflater inflater = LayoutInflater.from(mainContext);
         convertView = inflater.inflate(resource, parent, false);
 
-        TextView sectionName = (TextView) convertView.findViewById(R.id.section_name_list_item);
-        TextView locationName = (TextView) convertView.findViewById(R.id.location_name_list_item);
-        TextView instructorName = (TextView) convertView.findViewById(R.id.instructor_name_list_item);
-        TextView datesBox = (TextView) convertView.findViewById(R.id.times_values_list_item);
-        TextView capacityNumber = (TextView) convertView.findViewById(R.id.capacity_number_list_item);
-        TextView availableNumber = (TextView) convertView.findViewById(R.id.available_number_list_item);
+        TextView sectionName = convertView.findViewById(R.id.section_name_list_item);
+        TextView locationName = convertView.findViewById(R.id.location_name_list_item);
+        TextView instructorName = convertView.findViewById(R.id.instructor_name_list_item);
+        TextView datesBox = convertView.findViewById(R.id.times_values_list_item);
+        TextView capacityNumber = convertView.findViewById(R.id.capacity_number_list_item);
+        TextView availableNumber = convertView.findViewById(R.id.available_number_list_item);
 
         sectionName.setText(sectionName.getText() + "" + section);
         locationName.setText(locationName.getText() + "" + location);

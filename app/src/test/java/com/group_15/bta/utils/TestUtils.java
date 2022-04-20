@@ -1,7 +1,6 @@
 package com.group_15.bta.utils;
 
 import com.google.common.io.Files;
-
 import com.group_15.bta.application.Main;
 
 import java.io.File;

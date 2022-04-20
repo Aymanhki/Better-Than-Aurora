@@ -2,35 +2,24 @@ package com.group_15.bta.business;
 
 import com.github.mikephil.charting.data.PieEntry;
 import com.group_15.bta.application.Services;
-import com.group_15.bta.business.AccessUsers;
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.StudentSection;
 import com.group_15.bta.persistence.StudentPersistence;
-import com.group_15.bta.persistence.StudentSectionPersistence;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AccessStudents implements StudentPersistence {
 
-    private static final AccessStudents ourInstance = new AccessStudents();
     public ArrayList<Student> studentList = new ArrayList<>();
     private StudentPersistence studentPersistence;
-
-
-
-    private StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
-    private Student student;
 
     public AccessStudents() {
         studentPersistence = Services.getStudentPersistence();
     }
 
-    public static AccessStudents getInstance() {
-        return ourInstance;
-    }
 
     public AccessStudents(final StudentPersistence studentPersistence) {
         this();
@@ -38,7 +27,7 @@ public class AccessStudents implements StudentPersistence {
     }
 
     public ArrayList<Student> getStudent (Student getStudent) {
-        student = null;
+        Student student;
         ArrayList<Student> studentToReturn = new ArrayList<>();
         studentList = studentPersistence.getStudent(new Student(getStudent.getID()));
         if (studentList.size()==1)

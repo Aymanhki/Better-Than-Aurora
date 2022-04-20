@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,22 +24,22 @@ import java.util.ArrayList;
 
 public class InstructorSectionsActivity extends AppCompatActivity {
 
-    private Instructor currentUser = (Instructor) new AccessUsers().getCurrentUser();
+    private final Instructor currentUser = (Instructor) new AccessUsers().getCurrentUser();
 
-    private AccessSections accessSections;
     private ArrayList<Section> sectionList;
 
-    protected ArrayAdapter arrayAdapter;
+    protected SectionListAdapter arrayAdapter;
 
 
     private int selectedSectionPosition=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        accessSections = new AccessSections();
+        AccessSections accessSections = new AccessSections();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_sections);
         ActionBar actionBar = getSupportActionBar();//back button
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         sectionList = accessSections.getInstructorSections(currentUser.getName());
 
@@ -50,60 +49,56 @@ public class InstructorSectionsActivity extends AppCompatActivity {
 
     private void listSections(){
         if (!sectionList.isEmpty()) {
-            ListView listView = (ListView) findViewById(R.id.listSections);
+            ListView listView = findViewById(R.id.listSections);
             arrayAdapter = new SectionListAdapter(this, R.layout.section_list_item, sectionList);
             listView.setAdapter(arrayAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            listView.setOnItemClickListener((parent, view, position, id) -> {
 
-                    if (position == selectedSectionPosition) {
-                        listView.setItemChecked(position, false);
-                        selectedSectionPosition = -1;
-                    } else {
-                        listView.setItemChecked(position, true);
-                        selectedSectionPosition = position;
+                if (position == selectedSectionPosition) {
+                    listView.setItemChecked(position, false);
+                    selectedSectionPosition = -1;
+                } else {
+                    listView.setItemChecked(position, true);
+                    selectedSectionPosition = position;
 
-                        Intent editIntent = new Intent(InstructorSectionsActivity.this, InstructorStudentsActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("sectionID", sectionList.get(selectedSectionPosition));
-                        editIntent.putExtras(bundle);
-                        InstructorSectionsActivity.this.startActivity(editIntent);
-                    }
-
-
+                    Intent editIntent = new Intent(InstructorSectionsActivity.this, InstructorStudentsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("sectionID", sectionList.get(selectedSectionPosition));
+                    editIntent.putExtras(bundle);
+                    InstructorSectionsActivity.this.startActivity(editIntent);
                 }
+
+
             });
         }
         else {
             ArrayList<String> noSections = new ArrayList<>();
             noSections.add("No assigned sections.");
-            ListView listView = (ListView) findViewById(R.id.listSections);
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, noSections) {
+            ListView listView = findViewById(R.id.listSections);
+
+            listView.setAdapter( new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, noSections) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
 
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                    TextView text1 = view.findViewById(android.R.id.text1);
+                    TextView text2 = view.findViewById(android.R.id.text2);
 
-                    text1.setText("No assigned sections.");
-                    text2.setText("Contact an administrator for more information.");
+                    text1.setText(R.string.no_assigned_sections_for_instructor_place_holder);
+                    text2.setText(R.string.no_assigned_section_instructor_action);
 
                     return view;
                 }
-            };
-            listView.setAdapter(arrayAdapter);
+            });
 
         }
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

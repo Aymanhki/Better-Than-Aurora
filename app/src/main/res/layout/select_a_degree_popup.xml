@@ -16,7 +16,7 @@
         android:textSize="24sp"
         android:textColor="@color/dark_brown"
         android:fontFamily="serif"
-        android:text="Select the degree for this student"/>
+        android:text="@string/prompt_message_for_select_a_degree_for_Student_dialog"/>
 
     <ListView
         android:id="@+id/to_select_a_degree_from_list"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center"
-            android:text="Add a new Degree"
+            android:text="@string/add_a_new_degree_btn_text_in_select_a_degree_for_student_dialog"
             android:textAllCaps="false"
             android:textSize="18sp" />
 </LinearLayout>

@@ -1,155 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cosmic_latte"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.MainActivity"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
         android:background="@color/light_green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/welcomeMessageTitle"
-        android:layout_width="400dp"
-        android:layout_height="90dp"
-        android:fontFamily="serif"
-        android:text="Welcome"
-        android:textAlignment="center"
-        android:textColor="@color/dark_brown"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/welcomeMessageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="@string/welcome_message_in_main_activity"
+            android:textColor="@color/dark_brown"
+            android:textSize="80sp" />
 
-    <me.biubiubiu.justifytext.library.JustifyTextView
-        android:id="@+id/welcomeMessageDescription"
-        android:layout_width="302dp"
-        android:layout_height="32dp"
-        android:fontFamily="serif"
-        android:text="Better Than Aurora"
-        android:textColor="@color/dark_brown"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209"
-        tools:ignore="HardcodedText" />
+        <me.biubiubiu.justifytext.library.JustifyTextView
+            android:id="@+id/welcomeMessageDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="300dp"
+            android:fontFamily="serif"
+            android:text="@string/app_title_in_main_activity"
+            android:textColor="@color/dark_brown"
+            android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:background="@drawable/edit_text_with_border"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="PIN"
-        android:inputType="textPassword"
-        android:paddingStart="10dp"
-        android:textColor="@color/dark_brown"
-        android:textColorHint="@color/dark_brown"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66"
-        tools:ignore="HardcodedText"
-        android:drawableLeft="@drawable/ic_baseline_lock_24"
-        android:drawablePadding="10dp"
-        />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/forgetPassword"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_margin="0dp"
-        android:backgroundTint="@color/cosmic_latte"
-        android:padding="0dp"
-        android:text="@string/forgetPassword"
-        android:textAllCaps="false"
-        android:textColor="@color/dark_brown"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.579"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815" />
 
-    <EditText
-        android:id="@+id/userName"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:background="@drawable/edit_text_with_border"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="User ID"
-        android:inputType="text"
-        android:paddingLeft="10dp"
-        android:textColor="@color/dark_brown"
-        android:textColorHint="@color/dark_brown"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521"
-        tools:ignore="HardcodedText"
-        android:drawableLeft="@drawable/student_profile_icon"
-        android:drawablePadding="10dp"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/cosmic_latte"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingBottom="100dp">
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textColor="@color/dark_brown"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809"
-        tools:ignore="HardcodedText"
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:hint="@string/hint_for_user_name_text_box_in_log_in_page"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColorHint="@color/dark_brown"
+            android:textSize="18sp"
+            android:textColor="@color/dark_brown"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="300dp"
+            tools:ignore="Autofill" />
 
-        />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:hint="@string/hint_for_password_text_box_in_log_in_page"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColorHint="@color/dark_brown"
+            android:textSize="18sp"
+            android:textColor="@color/dark_brown"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="300dp"
+            tools:ignore="Autofill" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/cosmic_latte"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="300dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_button_text_in_main_activity"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle" />
+
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:text="@string/forgetPassword"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_brown" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/autofocusDummy"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-
-        >
-
+        tools:ignore="Autofill">
         <requestFocus />
     </EditText>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 

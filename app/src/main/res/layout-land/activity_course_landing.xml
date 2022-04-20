@@ -1,67 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cosmic_latte"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="96dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp">
         <Button
             android:id="@+id/addCategories"
-            android:layout_width="272dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="buttonAddCategory"
-            android:text="Add Category"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/text_for_add_a_category_button_in_admin_side"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_weight="0.5"
+            android:layout_margin="10dp"/>
 
         <EditText
             android:id="@+id/newCategoryName"
-            android:layout_width="268dp"
-            android:layout_height="61dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="Category Name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="596dp"
-        android:layout_height="674dp"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="598dp"
-            android:layout_height="1dp"
-            android:background="@color/dark_green" />
-
-        <ListView
-            android:id="@+id/CategoriesList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_for_category_name_text_box_in_add_a_category_page"
+            android:inputType="text"
+            android:textSize="18sp"
             android:layout_weight="1"
-            android:background="@color/cosmic_latte"
-            android:choiceMode="singleChoice"
-            android:divider="@color/dark_green"
-            android:dividerHeight="1dp"
-            android:listSelector="@color/light_green" />
-
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:layout_margin="10dp"
+            tools:ignore="Autofill" />
     </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/CategoriesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cosmic_latte" />
 
 </LinearLayout>

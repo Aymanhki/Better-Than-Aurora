@@ -1,23 +1,21 @@
 package com.group_15.bta.business;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import com.group_15.bta.objects.Category;
+import com.group_15.bta.persistence.CategoryPersistence;
+import com.group_15.bta.persistence.HSQLDB.CategoryPersistenceHSQLDB;
+import com.group_15.bta.utils.TestUtils;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
-
-import com.group_15.bta.business.AccessCategories;
-import com.group_15.bta.objects.Category;
-import com.group_15.bta.persistence.CategoryPersistence;
-import com.group_15.bta.persistence.HSQLDB.CategoryPersistenceHSQLDB;
-import com.group_15.bta.utils.TestUtils;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class AccessCategoriesIT {
     private AccessCategories accessCategories;

@@ -9,27 +9,29 @@
     <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="300dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        tools:ignore="UselessParent">
 
         <EditText
-            android:id="@+id/StudentID"
+            android:id="@+id/AdvisorStudentID"
             android:layout_width="240dp"
             android:layout_height="66dp"
             android:ems="10"
-            android:hint="Type Student ID"
+            android:hint="@string/student_id_hint_for_advisor_search_student_text_box"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="75dp"
-            android:background="@color/dark_green"
             android:onClick="buttonAdvisorSearchStudent"
+            android:padding="15dp"
             android:text="@string/search_students"
-            android:textColor="@color/white" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button4"
@@ -37,10 +39,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
-            android:background="@color/dark_green"
-            android:onClick="buttonLogOutOnClick"
+            android:textAllCaps="false"
+            android:padding="15dp"
+            android:onClick="exitAdvisor"
             android:text="@string/log_out"
-            android:textColor="@color/white" />
+            />
 
     </RelativeLayout>
 

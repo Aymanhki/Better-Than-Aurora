@@ -13,25 +13,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DegreePersistenceHSQLDB implements DegreePersistence {
-    private String dbPath;
-    private Connection existingConnection = null;
+    private final String dbPath;
 
     public DegreePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
-    public DegreePersistenceHSQLDB(Connection newConnection) {
-        existingConnection = newConnection;
-    }
 
     private Connection connection() throws SQLException {
         Connection toReturn;
 
-        if (existingConnection == null) {
-            toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } else {
-            toReturn = existingConnection;
-        }
+        toReturn = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
 
         return toReturn;
     }

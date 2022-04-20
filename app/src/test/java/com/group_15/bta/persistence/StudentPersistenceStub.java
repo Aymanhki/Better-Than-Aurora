@@ -9,7 +9,7 @@ import com.group_15.bta.objects.StudentSection;
 import java.util.ArrayList;
 
 public class StudentPersistenceStub implements StudentPersistence {
-    private ArrayList<Student> students;
+    private final ArrayList<Student> students;
 
     public StudentPersistenceStub() {
         this.students = new ArrayList<>();

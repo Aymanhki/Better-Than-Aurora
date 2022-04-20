@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerHorizontal="false"
+    android:orientation="vertical"
     android:background="@color/cosmic_latte">
+
+
+    <Button
+        android:id="@+id/AddStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="0"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_gravity="center"
+        android:onClick="buttonCreateStudentOnClick"
+        android:text="@string/add_student_for_admin_button"
+        android:textAllCaps="false" />
+
+    <ListView
+        android:id="@+id/listStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/cosmic_latte" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="724dp"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/listStudent"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:background="@color/cosmic_latte"
-            android:choiceMode="singleChoice"
-            android:divider="@color/dark_green"
-            android:dividerHeight="1dp"
-            android:listSelector="@color/light_green" />
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp">
 
         <Button
-            android:id="@+id/createStudent"
+            android:id="@+id/DeleteStudentButton"
             android:layout_width="wrap_content"
-            android:layout_height="69dp"
-            android:layout_marginTop="768dp"
-            android:backgroundTint="@color/light_green"
-            android:onClick="buttonCreateStudentOnClick"
-            android:text="@string/create_student"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:onClick="buttonDeleteStudent"
+            android:layout_weight="1"
+            android:text="@string/delete_student_for_admin_button"
+            android:layout_margin="10dp"
+            android:textAllCaps="false" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/DeleteStudentID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/edit_text_with_thick_border"
+            android:hint="@string/student_id_hint_for_admin_delete_student_text_box"
+            android:inputType="text"
+            tools:ignore="Autofill" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -23,7 +23,6 @@
             android:id="@+id/student_nav_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@color/cosmic_latte"
             app:itemIconSize="50dp"
             app:labelVisibilityMode="unlabeled"

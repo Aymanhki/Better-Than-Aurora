@@ -9,7 +9,6 @@ import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,13 +40,11 @@ public class CategoryActivity extends AppCompatActivity {
     EditText newDegree;
     Button addDegreeBtn;
     Button cancel;
-    String previousText;
     ArrayAdapter<String> degreesAdapted;
     AccessDegrees accessDegrees = new AccessDegrees();
     public CategoryActivity() {
-        courses = new ArrayList<Course>();
+        courses = new ArrayList<>();
     }
-    private final String ADD_A_DEGREE_COMMAND = "Add a Degree...";
     CourseListAdapter coursesAdapted;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,41 +55,35 @@ public class CategoryActivity extends AppCompatActivity {
             this.Name = b.getString("Title"); //should be some global call to get name
 
             ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        final TextView tView = (TextView)findViewById(R.id.CategoryName);
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        final TextView tView = findViewById(R.id.CategoryName);
             tView.setText(this.Name);
 
             courses = courseList.getCategoryCourses(Name);
 
             listCourses();
 
-            ListView listView = (ListView) findViewById(R.id.coursesList);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Bundle b = new Bundle();
-                    Intent i = new Intent(CategoryActivity.this, CourseActivity.class);
-                    b.putString("Title",courses.get(position).getID());
-                    b.putString("Description",courses.get(position).getDescription());
-                    b.putString("Category", Name);
-                    i.putExtras(b);
-                    startActivity(i);
-                }
+            ListView listView = findViewById(R.id.coursesList);
+            listView.setOnItemClickListener((parent, view, position, id) -> {
+                Bundle b1 = new Bundle();
+                Intent i = new Intent(CategoryActivity.this, CourseActivity.class);
+                b1.putString("Title",courses.get(position).getID());
+                b1.putString("Description",courses.get(position).getDescription());
+                b1.putString("Category", Name);
+                i.putExtras(b1);
+                startActivity(i);
             });
         }
 
 
         public void buttonAddCourse(View v){
-            EditText CourseID = (EditText) findViewById(R.id.CourseID);
-            EditText CourseName = (EditText) findViewById(R.id.CourseName);
-            EditText CourseDescription = (EditText) findViewById(R.id.CourseDescription);
-            EditText CourseCreditHours = (EditText) findViewById(R.id.CourseCreditHours);
-            EditText TuitionFee = (EditText) findViewById(R.id.TuitionFee);
+            EditText CourseID = findViewById(R.id.CourseID);
+            EditText CourseName = findViewById(R.id.CourseName);
+            EditText CourseDescription = findViewById(R.id.CourseDescription);
+            EditText CourseCreditHours = findViewById(R.id.CourseCreditHours);
+            EditText TuitionFee = findViewById(R.id.TuitionFee);
 
-
-            //TODO: Alex, this long if statement should be a boolean function(s)
-            // and it should not just check for if the field is empty,
-            // for example, a course ID should not be more than 9 chars.
             if(CourseID.getText().toString().length() != 0 && CourseName.getText().toString().length() != 0 &&
                     CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0
             && TuitionFee.getText().toString().length() !=0 && courseDegrees.getText().toString().length() != 0) {
@@ -112,7 +103,7 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
     public void buttonDeleteCourse(View v){
-        EditText CourseID = (EditText) findViewById(R.id.DeleteCourseID);
+        EditText CourseID = findViewById(R.id.DeleteCourseID);
 
         for(int i =0; i< courses.size();i++){
             if(0 == courses.get(i).getID().compareTo(CourseID.getText().toString())){
@@ -124,17 +115,16 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     public void listCourses(){
-        ListView listView = (ListView) findViewById(R.id.coursesList);
+        ListView listView = findViewById(R.id.coursesList);
         coursesAdapted = new CourseListAdapter(this, R.layout.course_list_item, courses);
         listView.setAdapter(coursesAdapted);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,21 +132,13 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        courseDegrees = (TextView) findViewById(R.id.courseDegree);
-        courseDegrees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectANewDegree();
-            }
-        });
+        courseDegrees = findViewById(R.id.courseDegree);
+        courseDegrees.setOnClickListener(view -> selectANewDegree());
 
-        courseDegrees.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b)
-                {
-                    selectANewDegree();
-                }
+        courseDegrees.setOnFocusChangeListener((view, b) -> {
+            if(b)
+            {
+                selectANewDegree();
             }
         });
     }
@@ -171,43 +153,37 @@ public class CategoryActivity extends AppCompatActivity {
         selectADegreeDialog.show();
 
 
-        toSelectDegrees = (ListView) selectADegree.findViewById(R.id.to_select_degrees_list);
-        Button doneBtn = (Button) selectADegree.findViewById(R.id.done_selecting_degrees);
-        Button addANewDegree = (Button) selectADegree.findViewById(R.id.add_a_new_degree_btn);
+        toSelectDegrees = selectADegree.findViewById(R.id.to_select_degrees_list);
+        Button doneBtn = selectADegree.findViewById(R.id.done_selecting_degrees);
+        Button addANewDegree = selectADegree.findViewById(R.id.add_a_new_degree_btn);
 
-        degreesAdapted = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, accessDegrees.getDegreeListNames());
+        degreesAdapted = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, accessDegrees.getDegreeListNames());
         toSelectDegrees.setAdapter(degreesAdapted);
         toSelectDegrees.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        addANewDegree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectADegreeDialog.dismiss();
-                promptAddNewDegree();
+        addANewDegree.setOnClickListener(view -> {
+            selectADegreeDialog.dismiss();
+            promptAddNewDegree();
 
-            }
         });
 
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList positions = getSelectedItems();
-                String selectedDegrees = "";
-                for(int i=0; i<positions.size(); i++)
-                {
+        doneBtn.setOnClickListener(view -> {
+            ArrayList<Integer> positions = getSelectedItems();
+            StringBuilder selectedDegrees = new StringBuilder();
+            for(int i=0; i<positions.size(); i++)
+            {
 
-                    if(i < positions.size() - 1)
-                    {
-                        selectedDegrees += degreesAdapted.getItem((Integer) positions.get(i))+", ";
-                    }
-                    else
-                    {
-                        selectedDegrees += degreesAdapted.getItem((Integer) positions.get(i));
-                    }
+                if(i < positions.size() - 1)
+                {
+                    selectedDegrees.append(degreesAdapted.getItem( positions.get(i))).append(", ");
                 }
-                selectADegreeDialog.dismiss();
-                courseDegrees.setText(selectedDegrees);
+                else
+                {
+                    selectedDegrees.append(degreesAdapted.getItem(positions.get(i)));
+                }
             }
+            selectADegreeDialog.dismiss();
+            courseDegrees.setText(selectedDegrees.toString());
         });
     }
 
@@ -220,71 +196,63 @@ public class CategoryActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        newDegree = (EditText) enterADegreePopUp.findViewById(R.id.new_degree_text_box);
-        addDegreeBtn = (Button) enterADegreePopUp.findViewById(R.id.add_a_degree_btn);
-        cancel = (Button) enterADegreePopUp.findViewById(R.id.cancel_add_a_degree_button);
+        newDegree = enterADegreePopUp.findViewById(R.id.new_degree_text_box);
+        addDegreeBtn = enterADegreePopUp.findViewById(R.id.add_a_degree_btn);
+        cancel = enterADegreePopUp.findViewById(R.id.cancel_add_a_degree_button);
 
-        addDegreeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString()))) {
+        addDegreeBtn.setOnClickListener(view -> {
+            if (newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString()))) {
+                accessDegrees.insert(new Degree(newDegree.getText().toString()));
+                goBackToPreviousDialog();
+                dialog.dismiss();
+            } else {
+                Toast.makeText(CategoryActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        cancel.setOnClickListener(view -> {
+            dialog.dismiss();
+            goBackToPreviousDialog();
+        });
+
+        newDegree.setOnKeyListener((v, keyCode, event) -> {
+
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                if(newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString())))
+                {
                     accessDegrees.insert(new Degree(newDegree.getText().toString()));
                     goBackToPreviousDialog();
                     dialog.dismiss();
-                } else {
+                }
+                else
+                {
                     Toast.makeText(CategoryActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
                 }
+
             }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                goBackToPreviousDialog();
-            }
-        });
-
-        newDegree.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (keyCode == event.KEYCODE_ENTER) {
-                    if(newDegree.getText().toString().length() > 0 && !accessDegrees.contains(new Degree(newDegree.getText().toString())))
-                    {
-                        accessDegrees.insert(new Degree(newDegree.getText().toString()));
-                        goBackToPreviousDialog();
-                        dialog.dismiss();
-                    }
-                    else
-                    {
-                        Toast.makeText(CategoryActivity.this, "Please make sure you enter a new degree.",Toast.LENGTH_LONG).show();
-                    }
-
-                }
-                return false;
-            }
+            return false;
         });
     }
 
     private void goBackToPreviousDialog()
     {
 
-        degreesAdapted = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, accessDegrees.getDegreeListNames());
-        ArrayList positions = getSelectedItems();
+        degreesAdapted = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, accessDegrees.getDegreeListNames());
+        ArrayList<Integer> positions = getSelectedItems();
         toSelectDegrees.setAdapter(degreesAdapted);
         selectADegreeDialog.show();
 
         for(int i=0; i<positions.size(); i++)
         {
-            toSelectDegrees.setSelection((Integer) positions.get(i));
-           toSelectDegrees.setItemChecked((Integer) positions.get(i), true);
+            toSelectDegrees.setSelection(positions.get(i));
+           toSelectDegrees.setItemChecked(positions.get(i), true);
 
         }
     }
 
-    private ArrayList getSelectedItems()
+    private ArrayList<Integer> getSelectedItems()
     {
-        ArrayList toReturn = new ArrayList();
+        ArrayList<Integer> toReturn = new ArrayList<>();
         SparseBooleanArray checked = toSelectDegrees.getCheckedItemPositions();
 
         for(int i=0; i<checked.size(); i++)

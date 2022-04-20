@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_border"
+    android:theme="@style/dialog_custom_style"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@color/dark_brown"
+        android:fontFamily="serif"
+        android:text="@string/prompt_message_for_select_section_days_dialog"/>
+
+    <ListView
+        android:id="@+id/to_select_a_days_from_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/done_selecting_days_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:text="@string/done_selecting_Section_days_btn_text_for_select_section_days_dialog"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+</LinearLayout>

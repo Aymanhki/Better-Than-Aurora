@@ -3,12 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.StudentCoursesFragment">
+    tools:context=".presentation.StudentCoursesFragment"
+    android:background="@color/cosmic_latte">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Courses" />
 
+    <RelativeLayout
+        android:layout_width="310dp"
+        android:layout_height="490dp"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
+
+
+        <Button
+            android:id="@+id/add_or_drop_courses_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_drop_courses_btn_text_for_student_courses_fragment"
+            android:textColor="@color/dark_brown"
+            android:textAllCaps="false"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/view_courses_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/view_available_courses_btn_text_for_student_courses_fragment"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_brown"
+
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/history_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/history_btn_text_for_student_courses_fragment"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_brown"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 </FrameLayout>

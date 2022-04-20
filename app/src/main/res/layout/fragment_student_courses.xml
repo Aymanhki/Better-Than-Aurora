@@ -8,17 +8,17 @@
 
 
     <RelativeLayout
-        android:layout_width="307dp"
-        android:layout_height="486dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center">
+        android:layout_width="310dp"
+        android:layout_height="490dp"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
 
 
         <Button
             android:id="@+id/add_or_drop_courses_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add/Drop Courses"
+            android:text="@string/add_drop_courses_btn_text_for_student_courses_fragment"
             android:textColor="@color/dark_brown"
             android:textAllCaps="false"
             android:textSize="30sp" />
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="View Available Courses"
+            android:text="@string/view_available_courses_btn_text_for_student_courses_fragment"
             android:textAllCaps="false"
             android:textColor="@color/dark_brown"
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="History"
+            android:text="@string/history_btn_text_for_student_courses_fragment"
             android:textAllCaps="false"
             android:textColor="@color/dark_brown"
             android:textSize="30sp" />

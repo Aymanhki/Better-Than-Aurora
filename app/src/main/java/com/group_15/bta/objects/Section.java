@@ -1,10 +1,13 @@
 package com.group_15.bta.objects;
 
+import android.annotation.SuppressLint;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Scanner;
 
 /*
@@ -12,18 +15,16 @@ import java.util.Scanner;
  * used to store the section name, as well as other details for a section (days, time, cap)
  */
 public class Section implements Serializable {
-    private String section;
-    private String[] Days;
-    private String[] Time;
+    private final String section;
+    private final String[] Days;
+    private final String Time;
     private String instructor = "TBA";
     private String location = "TBA";
 
     private int available;
-    private int CAP;
+    private final int CAP;
     private String associatedCourse;
     private String associatedCategory;
-    private static String[] validDays = new String[]{"M", "Monday", "T", "Tuesday", "W", "Wednesday", "TR", "Thursday", "F", "Friday"};
-
 
     enum ClassDays{
         Monday,
@@ -32,11 +33,11 @@ public class Section implements Serializable {
         Thursday,
         Friday,
         NotValid
-    };
+    }
 
     private ClassDays[] classDays;
     //constructor
-    public Section(String section, String[] days, String[] time, int CAP) {
+    public Section(String section, String[] days, String time, int CAP) {
         this.section = section;
         Days = days;
         Time = time;
@@ -52,13 +53,13 @@ public class Section implements Serializable {
         return associatedCategory;
     }
 
-    public Section(String sectionID, String instructor, String[] days, String[] times,
+    public Section(String sectionID, String instructor, String[] days, String time,
                    String location, int available, int capacity,
                    String associatedCourse, String associatedCategory) {
         section = sectionID;
         this.instructor = instructor;
         Days = days;
-        Time = times;
+        Time = time;
         this.location = location;
         this.available = available;
         this.CAP = capacity;
@@ -110,22 +111,20 @@ public class Section implements Serializable {
         return section;
     }
 
-
-
     public String getDays() {
-        String ret = classDays[0].toString();
+        StringBuilder ret = new StringBuilder(classDays[0].toString());
 
         for(int i = 1; i< classDays.length;i++){
-            ret = ret + ", " + classDays[i].toString();
+            ret.append(", ").append(classDays[i].toString());
         }
-        return ret;
+        return ret.toString();
     }
 
     public String getCap(){
         return String.valueOf(CAP);
     }
 
-    public String[] getTimes()
+    public String getTime()
     {
         return Time;
     }
@@ -138,8 +137,6 @@ public class Section implements Serializable {
     public String getLocation() {
         return location;
     }
-
-
 
     public int getAvailable() {
         return available;
@@ -156,49 +153,31 @@ public class Section implements Serializable {
 
     public boolean interferes(Section potential) {
         boolean toReturn = false;
-        String[] toCompare = potential.Time;
+        Scanner scanner;
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
 
-        for (int i = 0; i < toCompare.length && !toReturn; i++) {
-            if (i < Time.length) {
-                Scanner scanner;
-                String potentialTime = toCompare[i];
-                String currentTime = Time[i];
-                DateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
-
-                try {
-                    scanner = new Scanner(potentialTime);
-                    scanner.useDelimiter("-");
-                    String potentialTimeStart = scanner.next().trim();
-                    String potentialTimeEnd = scanner.next().trim();
-                    Date startTimeA = dateFormat.parse(potentialTimeStart);
-                    Date endTimeA = dateFormat.parse(potentialTimeEnd);
-                    scanner = new Scanner(currentTime);
-                    scanner.useDelimiter("-");
-                    String otherTimeStart = scanner.next().trim();
-                    String otherTimeEnd = scanner.next().trim();
-                    Date startTimeB = dateFormat.parse(otherTimeStart);
-                    Date endTimeB = dateFormat.parse(otherTimeEnd);
-                    toReturn  = startTimeA.getTime() <= endTimeB.getTime() && startTimeB.getTime() <= endTimeA.getTime();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return toReturn;
-    }
-
-    public static boolean validDay(String day)
-    {
-        boolean toReturn = false;
-
-        for(int i=0; i<validDays.length && !toReturn; i++)
-        {
-            if(validDays[i].equals(day))
-            {
-                toReturn = true;
-            }
+        try {
+            scanner = new Scanner(potential.Time);
+            scanner.useDelimiter("-");
+            String potentialTimeStart = scanner.next().trim();
+            String potentialTimeEnd = scanner.next().trim();
+            Date startTimeA = dateFormat.parse(potentialTimeStart);
+            Date endTimeA = dateFormat.parse(potentialTimeEnd);
+            scanner = new Scanner(Time);
+            scanner.useDelimiter("-");
+            String otherTimeStart = scanner.next().trim();
+            String otherTimeEnd = scanner.next().trim();
+            Date startTimeB = dateFormat.parse(otherTimeStart);
+            Date endTimeB = dateFormat.parse(otherTimeEnd);
+            assert startTimeA != null;
+            assert endTimeB != null;
+            toReturn  = startTimeA.getTime() <= endTimeB.getTime() && Objects.requireNonNull(startTimeB).getTime() <= Objects.requireNonNull(endTimeA).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         return toReturn;
     }
+
+
 }

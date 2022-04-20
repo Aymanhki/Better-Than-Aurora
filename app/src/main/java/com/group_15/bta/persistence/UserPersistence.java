@@ -21,6 +21,7 @@ public interface UserPersistence {
     boolean validateLoginAttempt(String userName, String password);
 
 
+    @SuppressWarnings("rawtypes")
     Class intendedActivity(String userName, String password);
 
     Intent destinationIntent(String userName, String password, Context currentActivity);

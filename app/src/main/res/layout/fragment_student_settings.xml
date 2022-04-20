@@ -8,10 +8,10 @@
 
 
     <RelativeLayout
-        android:layout_width="307dp"
-        android:layout_height="486dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center">
+        android:layout_width="300dp"
+        android:layout_height="490dp"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
 
 
         <Button
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Logout"
+            android:text="@string/logout_btn_text_for_student_settings_fragment"
             android:textAllCaps="false"
             android:textColor="@color/dark_brown"
             android:textSize="30sp" />

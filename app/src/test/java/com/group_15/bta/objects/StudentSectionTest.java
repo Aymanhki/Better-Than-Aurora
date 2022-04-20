@@ -1,10 +1,11 @@
 package com.group_15.bta.objects;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-
-import com.group_15.bta.objects.Section;
-
-import static org.junit.Assert.*;
 
 public class StudentSectionTest {
     @Test
@@ -15,8 +16,8 @@ public class StudentSectionTest {
         Section section;
 
         String[] days = {"T","TR"};
-        String[] time = {"10:00am", "11:00am"};
-        section = new Section("A01",days,time,80);
+        String time = "10:00am - 11:00am";
+        section = new Section("A01",days, time,80);
 
         studentSection = new StudentSection("001", "A",section,  new Course("", ""));
 

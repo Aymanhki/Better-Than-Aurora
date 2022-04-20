@@ -8,25 +8,15 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
 import androidx.test.rule.ActivityTestRule;
 
-import com.group_15.bta.application.Services;
-import com.group_15.bta.objects.Section;
-import com.group_15.bta.objects.Student;
-import com.group_15.bta.objects.StudentSection;
-import com.group_15.bta.persistence.StudentPersistence;
-import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.presentation.MainActivity;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 public class UpdateGradeInstructorTest {
     @Rule
@@ -35,9 +25,9 @@ public class UpdateGradeInstructorTest {
     @Test
     public void updateGrade() {
         //login
-        onView(withId(R.id.userName)).perform(typeText("instructor1"));
+        onView(withId(R.id.userName)).perform(typeText("instructor"));
         closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("instructor1"));
+        onView(withId(R.id.password)).perform(typeText("instructor"));
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
 
@@ -55,7 +45,7 @@ public class UpdateGradeInstructorTest {
         onView(withId(R.id.UpdateGrade)).perform(click());
         onData(anything())
                 .inAdapterView(withId(R.id.studentSectionList))
-                .atPosition(0)
+                .atPosition(1)
                 .check(matches(withText(startsWith("student: A+"))));
     }
 

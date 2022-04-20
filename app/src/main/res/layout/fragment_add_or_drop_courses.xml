@@ -9,17 +9,17 @@
 
 
     <RelativeLayout
-        android:layout_width="317dp"
-        android:layout_height="207dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center">
+        android:layout_width="320dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
 
 
         <Button
             android:id="@+id/add_courses_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add a course"
+            android:text="@string/add_a_course_btn_text_in_add_or_drop_course_page"
             android:textAllCaps="false"
             android:textColor="@color/dark_brown"
             android:textSize="30sp" />
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="Drop a course"
+            android:text="@string/drop_a_course_btn_text_in_add_or_drop_course_page"
             android:textColor="@color/dark_brown"
             android:textAllCaps="false"
             android:textSize="30sp" />

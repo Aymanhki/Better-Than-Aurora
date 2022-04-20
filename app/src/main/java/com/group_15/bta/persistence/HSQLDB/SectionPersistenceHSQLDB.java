@@ -41,13 +41,13 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         final String sectionID = rs.getString("SECTIONID");
         final String instructor = rs.getString("INSTRUCTOR");
         final String[] days = rs.getString("DAYS").split(",");
-        final String[] times = rs.getString("TIMES").split(",");
+        final String time = rs.getString("TIME");
         final String location = rs.getString("LOCATION");
         final int available = rs.getInt("AVAILABLE");
         final int capacity = rs.getInt("CAPACITY");
         final String associatedCourse = rs.getString("COURSEID");
         final String associatedCategory = rs.getString("NAME");
-        return new Section(sectionID, instructor, days, times, location, available, capacity, associatedCourse, associatedCategory);
+        return new Section(sectionID, instructor, days, time, location, available, capacity, associatedCourse, associatedCategory);
     }
 
     @Override
@@ -128,27 +128,18 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             statement.setString(1, currentSection.getSection());
             statement.setString(2, currentSection.getInstructor());
 
-            String tempDays[] = currentSection.getDaysRaw();
-            String daysToAdd = "";
+            String[] tempDays = currentSection.getDaysRaw();
+            StringBuilder daysToAdd = new StringBuilder();
             for (int i = 0; i < tempDays.length; i++) {
-                daysToAdd += tempDays[i];
+                daysToAdd.append(tempDays[i]);
 
                 if (i < tempDays.length - 1) {
-                    daysToAdd += ", ";
+                    daysToAdd.append(", ");
                 }
             }
-            statement.setString(3, daysToAdd);
 
-            String tempTimes[] = currentSection.getTimes();
-            String timesToAdd = "";
-            for (int i = 0; i < tempTimes.length; i++) {
-                timesToAdd += tempTimes[i];
-
-                if (i < tempTimes.length - 1) {
-                    timesToAdd += ", ";
-                }
-            }
-            statement.setString(4, timesToAdd);
+            statement.setString(3, daysToAdd.toString());
+            statement.setString(4, currentSection.getTime());
             statement.setString(5, currentSection.getLocation());
             statement.setString(6, Integer.toString(currentSection.getAvailable()));
             statement.setString(7, Integer.toString(currentSection.getCAP()));
@@ -168,7 +159,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE SECTIONS SET " +
                     "INSTRUCTOR = ?, " +
                     "DAYS = ?, " +
-                    "TIMES = ?, " +
+                    "TIME = ?, " +
                     "LOCATION = ?  " +
                     "AVAILABLE = ?, " +
                     "CAPACITY = ?, " +
@@ -177,27 +168,17 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                     "WHERE SECTIONID = ?");
             statement.setString(1, currentSection.getInstructor());
 
-            String tempDays[] = currentSection.getDaysRaw();
-            String daysToAdd = "";
+            String[] tempDays = currentSection.getDaysRaw();
+            StringBuilder daysToAdd = new StringBuilder();
             for (int i = 0; i < tempDays.length; i++) {
-                daysToAdd += tempDays[i];
+                daysToAdd.append(tempDays[i]);
 
                 if (i < tempDays.length - 1) {
-                    daysToAdd += ", ";
+                    daysToAdd.append(", ");
                 }
             }
-            statement.setString(2, daysToAdd);
-
-            String tempTimes[] = currentSection.getTimes();
-            String timesToAdd = "";
-            for (int i = 0; i < tempTimes.length; i++) {
-                timesToAdd += tempTimes[i];
-
-                if (i < tempTimes.length - 1) {
-                    timesToAdd += ", ";
-                }
-            }
-            statement.setString(3, timesToAdd);
+            statement.setString(2, daysToAdd.toString());
+            statement.setString(3, currentSection.getTime());
             statement.setString(4, String.valueOf(currentSection.getLocation()));
             statement.setString(5, String.valueOf(currentSection.getAvailable()));
             statement.setString(6, String.valueOf(currentSection.getCAP()));

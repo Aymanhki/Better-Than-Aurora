@@ -35,7 +35,7 @@ public class AccessStudentSectionsTest {
         assertEquals("1",String.valueOf(studentsFound.size()));
 
         String [] days = new String[] {"M", "F"};
-        String [] time = new String[] {"2:00 PM","3:00 PM"};
+        String time = "2:00 PM - 3:00 PM";
 
         Section section = new Section("A01", "Sara", days, time, "Online", 10, 50, "COMP 4000","Computer Science");
         accessStudentSections.insertSection(new StudentSection("505", "F",section,  new Course("", "")));

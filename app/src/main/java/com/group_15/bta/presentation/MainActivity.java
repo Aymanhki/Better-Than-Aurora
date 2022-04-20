@@ -22,14 +22,17 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
 
 
+
     private AccessUsers logInHandler;
     private Button loginBtn;
+    private TextView forgetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginBtn = (Button) findViewById(R.id.login);
+        loginBtn =  findViewById(R.id.login);
+        forgetPassword = findViewById(R.id.forgetPassword);
         copyDatabaseToDevice();
         logInHandler = new AccessUsers();
         handleLogIn();
@@ -38,45 +41,48 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleLogIn()
     {
-        TextView username = (TextView) findViewById(R.id.userName);
-        TextView password = (TextView) findViewById(R.id.password);
+        TextView username = findViewById(R.id.userName);
+        TextView password = findViewById(R.id.password);
 
-
-        View.OnClickListener loginAction = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-
-                if(username.getText().toString().length() > 0 && password.getText().toString().length() > 0)
-                {
-                    loginBtn.setText("Loading...");
-                    if (logInHandler.validateLoginAttempt(username.getText().toString(), password.getText().toString())) {
-                        logInHandler.setCurrentUser(username.getText().toString(), password.getText().toString());
-                        String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
-                        Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
-                        startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
-                        username.setText("");
-                        password.setText("");
-                    } else {
-                        String failedLoginMessage = "Log in Failed, Sorry, user not found";
-                        loginBtn.setText("Login");
-                        Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
-                    }
+        View.OnClickListener loginAction = view -> {
+            loginBtn.setText(R.string.loading_text_for_any_btn);
+            String userNameString = username.getText().toString();
+            String passwordString = password.getText().toString();
+            if(userNameString.length() > 0 && passwordString.length() > 0)
+            {
+                if (logInHandler.validateLoginAttempt(userNameString, passwordString)) {
+                    logInHandler.setCurrentUser(userNameString, passwordString);
+                    String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
+                    Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
+                    startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
+                    username.setText("");
+                    password.setText("");
+                } else {
+                    String failedLoginMessage = "Log in Failed, Sorry, user not found";
+                    loginBtn.setText(R.string.login_button_text_in_main_activity);
+                    Toast.makeText(MainActivity.this, failedLoginMessage, Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(MainActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                }
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                loginBtn.setText(R.string.login_button_text_in_main_activity);
             }
         };
 
         loginBtn.setOnClickListener(loginAction);
+
+        forgetPassword.setOnClickListener(view -> Messages.message(MainActivity.this, "Please Contact IST Service Desk\nInformation Services and Technology\n" +
+                "123 Fletcher Argue\n" +
+                "University of Manitoba, Winnipeg, MB R3T 2N2 Canada\n" +
+                "Office: 204-474-8600   Fax: 204-474-7983\n" +
+                "Servicedesk@umanitoba.ca"));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        loginBtn.setText("Login");
+        loginBtn.setText(R.string.login_button_text_in_main_activity);
     }
 
     private void copyDatabaseToDevice() {

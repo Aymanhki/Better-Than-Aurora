@@ -2,7 +2,7 @@ package com.group_15.bta.presentation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import com.group_15.bta.R;
 
 public class Messages {
@@ -11,12 +11,15 @@ public class Messages {
 
         alertDialog.setTitle(owner.getString(R.string.fatalError));
         alertDialog.setMessage(message);
-        alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                owner.finish();
-            }
-        });
+        alertDialog.setOnCancelListener(dialog -> owner.finish());
 
+        alertDialog.show();
+    }
+
+    public static void message(final Activity owner, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+        alertDialog.setTitle(owner.getString(R.string.message_title_text_for_system_prompt));
+        alertDialog.setMessage(message);
         alertDialog.show();
     }
 

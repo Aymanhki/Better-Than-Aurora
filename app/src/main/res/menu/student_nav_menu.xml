@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/student_home"
-        android:title="Home"
+        android:title="@string/home_fragment_title"
         android:icon="@drawable/student_home_icon"
     />
 
     <item
         android:id="@+id/student_courses"
-        android:title="Courses"
+        android:title="@string/courses_fragment_title"
         android:icon="@drawable/student_courses_icon"
     />
     <item
         android:id="@+id/student_profile"
-        android:title="Profile"
+        android:title="@string/profile_fragment_title"
         android:icon="@drawable/student_profile_icon"
     />
     <item
         android:id="@+id/student_settings"
-        android:title="Settings"
+        android:title="@string/settings_fragment_title"
         android:icon="@drawable/student_settings_icon"
     />
 </menu>

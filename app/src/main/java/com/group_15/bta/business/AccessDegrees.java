@@ -8,7 +8,7 @@ import com.group_15.bta.persistence.DegreePersistence;
 import java.util.ArrayList;
 
 public class AccessDegrees implements DegreePersistence {
-    private DegreePersistence degreePersistence;
+    private final DegreePersistence degreePersistence;
 
     public AccessDegrees(){degreePersistence = Services.getDegreePersistence(); }
 
