@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -95,35 +96,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
-                    android:id="@+id/StartTime"
+                    android:id="@+id/section_time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_for_start_time_text_box_for_add_a_section_page"
                     android:layout_weight="1"
+                    android:inputType="none"
                     android:textSize="18sp"
+                    android:padding="10dp"
                     android:layout_margin="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/edit_text_with_thick_border" />
+                    android:background="@drawable/edit_text_with_thick_border"
+                    android:hint="@string/section_time_picker_hint_in_add_a_section_page" />
 
-                <TextView
-                    android:id="@+id/EndTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_for_end_time_text_box_for_add_a_section_page"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/edit_text_with_thick_border" />
 
                 <TextView
                     android:id="@+id/Days"

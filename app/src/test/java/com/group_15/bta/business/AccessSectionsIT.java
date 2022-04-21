@@ -53,8 +53,8 @@ public class AccessSectionsIT {
 
     @Test
     public void testInsertSection() {
-        String [] days = new String[] {"M", "F"};
-        String time = "2:00 PM - 3:00 PM";
+        Section.availableSectionDays[] days = new Section.availableSectionDays[] {Section.availableSectionDays.Monday, Section.availableSectionDays.Friday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.afternoonBirdWithLongCommute;
 
         final Section c = new Section("A05", days, time, 120);
         accessSections.insertSection(c);

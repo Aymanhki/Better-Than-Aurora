@@ -19,7 +19,7 @@
         android:text="@string/prompt_message_for_select_section_days_dialog"/>
 
     <ListView
-        android:id="@+id/to_select_a_days_from_list"
+        android:id="@+id/to_select_days_from_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"/>

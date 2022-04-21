@@ -31,8 +31,8 @@ public class CourseTest {
         assertTrue("Computer Science".equals(course2.getAssociatedCategory()));
 
         ArrayList<Section> sections = new ArrayList<>();
-        String[] days = {"T","TR"};
-        String time = "10:00am - 11:00am";
+        Section.availableSectionDays[] days = new Section.availableSectionDays[] {Section.availableSectionDays.Tuesday, Section.availableSectionDays.Thursday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.barelyEarlyBird;
         Section section = new Section("A01",days, time,80);
         course3 = new Course("COMP 2160", "Object Orientation", "Objects and stuff.",sections);
         assertNotNull(course2);

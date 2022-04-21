@@ -56,7 +56,7 @@ public class Course implements Serializable {
     }
 
     //adds section to this course
-    public void addSection(String sectionNumber, String[] Days, String Time, int CAP) {
+    public void addSection(String sectionNumber, Section.availableSectionDays[] Days, Section.availableSectionTimes Time, int CAP) {
         Section S = new Section(sectionNumber, Days, Time, CAP);
         sections.add(S);
     }

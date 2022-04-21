@@ -193,5 +193,7 @@
     <string name="no_assigned_section_instructor_action">Contact an administrator for more information.</string>
     <string name="hint_for_password_text_box_in_log_in_page">Password</string>
     <string name="message_title_text_for_system_prompt">Message</string>
+    <string name="section_time_picker_hint_in_add_a_section_page">Pick Section Time</string>
+    <string name="select_the_section_time_prompt_message_for_dialog">Select the section time</string>
 
 </resources>

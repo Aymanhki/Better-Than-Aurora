@@ -6,9 +6,43 @@ import java.util.ArrayList;
 
 public class Calculate
 {
+	public enum grades  {
+		APlus("A+"),
+		A("A"),
+		BPlus("B+"),
+		B("B"),
+		CPlus("C+"),
+		C("C"),
+		D("D"),
+		F("F");
+
+		String grade;
+		grades(String grade)
+		{
+			this.grade = grade;
+		}
+	}
+
+	public enum gpa {
+		fourPointFive(4.5),
+		four(4.0),
+		threePointFive(3.5),
+		three(3.0),
+		twoPointFive(2.5),
+		two(2.0),
+		one(1.0),
+		zero(0.0);
+
+		double gpa;
+		gpa(double gpa)
+		{
+			this.gpa = gpa;
+		}
+	}
+
 	public static String gpa(ArrayList<StudentSection> studentSections)
 	{
-		final String[] grades = {"A+","A","B+","B","C+","C","D","F"};
+		final String[] grades = {"A+", "A", "B+", "C+", "C", "D", "F"};
 		final double[] values = {4.5,4.0,3.5,3.0,2.5,2.0,1.0,0.0};
 		StudentSection studentSection;
 		String gpa;

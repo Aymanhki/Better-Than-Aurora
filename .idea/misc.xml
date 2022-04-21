@@ -84,6 +84,7 @@
         <entry key="app/src/main/res/drawable/student_home_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/student_profile_icon.xml" value="0.221" />
         <entry key="app/src/main/res/drawable/student_settings_icon.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/time_picker_dropdown_background.xml" value="0.1648056030273437" />
         <entry key="app/src/main/res/drawable/top_and_bottom_border.xml" value="0.18" />
         <entry key="app/src/main/res/layout-land/activity_admin_create_student.xml" value="0.20808317122920866" />
         <entry key="app/src/main/res/layout-land/activity_admin_edit_student.xml" value="0.22009569377990432" />
@@ -126,10 +127,12 @@
         <entry key="app/src/main/res/layout-land/fragment_view_sections.xml" value="0.2605820105820106" />
         <entry key="app/src/main/res/layout-land/loading_alert_dialog.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout-land/section_list_item.xml" value="0.1111111111111111" />
+        <entry key="app/src/main/res/layout-land/section_time_item.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout-land/select_a_degree_popup.xml" value="0.31613756613756616" />
         <entry key="app/src/main/res/layout-land/select_day_and_time_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/select_degrees_popup.xml" value="0.22009569377990432" />
         <entry key="app/src/main/res/layout-land/select_section_days_popup.xml" value="0.24338624338624337" />
+        <entry key="app/src/main/res/layout-land/select_section_time_popup.xml" value="0.24426807760141092" />
         <entry key="app/src/main/res/layout-land/student_section_list_item.xml" value="0.26851851851851855" />
         <entry key="app/src/main/res/layout-land/time_list_item.xml" value="0.31613756613756616" />
         <entry key="app/src/main/res/layout/activity_admin_create_student.xml" value="0.2939515216127811" />
@@ -140,7 +143,7 @@
         <entry key="app/src/main/res/layout/activity_advisor_menu.xml" value="0.2765625" />
         <entry key="app/src/main/res/layout/activity_advisor_student.xml" value="0.2765625" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.22014465332031252" />
-        <entry key="app/src/main/res/layout/activity_course.xml" value="0.35160217285156253" />
+        <entry key="app/src/main/res/layout/activity_course.xml" value="0.36253776435045315" />
         <entry key="app/src/main/res/layout/activity_course_landing.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/activity_instructor_account.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/activity_instructor_menu.xml" value="0.24166666666666667" />
@@ -169,7 +172,7 @@
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.2825668334960938" />
         <entry key="app/src/main/res/layout/fragment_student_courses.xml" value="0.3070388349514563" />
         <entry key="app/src/main/res/layout/fragment_student_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.14047393798828123" />
+        <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.4803466796875" />
         <entry key="app/src/main/res/layout/fragment_student_settings.xml" value="0.3070388349514563" />
         <entry key="app/src/main/res/layout/fragment_summary_by_term.xml" value="0.254247572815534" />
         <entry key="app/src/main/res/layout/fragment_view_categories.xml" value="0.1707977294921875" />
@@ -177,10 +180,12 @@
         <entry key="app/src/main/res/layout/fragment_view_sections.xml" value="0.46171875" />
         <entry key="app/src/main/res/layout/loading_alert_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/section_list_item.xml" value="0.5407608695652174" />
+        <entry key="app/src/main/res/layout/section_time_item.xml" value="0.1403242147922999" />
         <entry key="app/src/main/res/layout/select_a_degree_popup.xml" value="0.2482638888888889" />
         <entry key="app/src/main/res/layout/select_day_and_time_popup.xml" value="0.18388977050781252" />
-        <entry key="app/src/main/res/layout/select_degrees_popup.xml" value="0.36076660156250007" />
+        <entry key="app/src/main/res/layout/select_degrees_popup.xml" value="0.1994827270507813" />
         <entry key="app/src/main/res/layout/select_section_days_popup.xml" value="0.19981842041015627" />
+        <entry key="app/src/main/res/layout/select_section_time_popup.xml" value="0.28854166666666664" />
         <entry key="app/src/main/res/layout/student_section_list_item.xml" value="0.41687774658203125" />
         <entry key="app/src/main/res/layout/time_list_item.xml" value="0.24637536940231822" />
         <entry key="app/src/main/res/menu/courses_menu.xml" value="0.44609375" />

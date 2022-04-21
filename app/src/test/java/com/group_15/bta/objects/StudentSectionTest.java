@@ -15,8 +15,8 @@ public class StudentSectionTest {
 
         Section section;
 
-        String[] days = {"T","TR"};
-        String time = "10:00am - 11:00am";
+        Section.availableSectionDays[] days = {Section.availableSectionDays.Tuesday, Section.availableSectionDays.Thursday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.barelyEarlyBird;
         section = new Section("A01",days, time,80);
 
         studentSection = new StudentSection("001", "A",section,  new Course("", ""));

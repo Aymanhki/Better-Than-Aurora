@@ -22,8 +22,8 @@ public class AccessSectionsTest {
     @Test
     public void test1()
     {
-        String [] days = new String[] {"M", "F"};
-        String time = "2:00 PM - 3:00 PM";
+        Section.availableSectionDays[] days = new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Friday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.afternoonBirdWithLongCommute;
 
         ArrayList<Section> sections = accessSections.getSectionList();
         assertNotNull(sections);

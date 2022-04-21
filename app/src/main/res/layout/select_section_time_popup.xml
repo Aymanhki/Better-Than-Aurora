@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_border"
+    android:theme="@style/dialog_custom_style"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@color/dark_brown"
+        android:fontFamily="serif"
+        android:text="@string/select_the_section_time_prompt_message_for_dialog"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_and_bottom_border"
+        android:layout_margin="8dp">
+        <ListView
+            android:id="@+id/to_select_time_from_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="1.5dp"
+            android:layout_margin="8dp"
+            android:divider="@color/dark_brown"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -34,21 +34,8 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         String section = getItem(position).getSection();
         String location = getItem(position).getLocation();
         String instructor = getItem(position).getInstructor();
-        String time = getItem(position).getTime();
-        String[] days = getItem(position).getDaysRaw();
-        StringBuilder dates = new StringBuilder();
-
-        for(int i=0; i<days.length; i++)
-        {
-            dates.append(days[i]);
-
-            if(i < days.length-1)
-            {
-                dates.append(", ");
-            }
-        }
-
-        dates.append(":\n").append(time);
+        String time = getItem(position).getTime().toString();
+        String days = Section.toString(getItem(position).getDaysRaw());
 
         int capacity = getItem(position).getCAP();
         int available = getItem(position).getAvailable();
@@ -65,7 +52,7 @@ public class SectionListAdapter extends ArrayAdapter<Section> {
         sectionName.setText(sectionName.getText() + "" + section);
         locationName.setText(locationName.getText() + "" + location);
         instructorName.setText(instructorName.getText() + "" + instructor);
-        datesBox.setText(datesBox.getText() + "\n" + dates);
+        datesBox.setText(datesBox.getText() + days + ":\n" + time);
         capacityNumber.setText(capacityNumber.getText() + "" + capacity);
         availableNumber.setText(availableNumber.getText() + "" + available);
 

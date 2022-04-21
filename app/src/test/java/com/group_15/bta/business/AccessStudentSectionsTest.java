@@ -34,8 +34,8 @@ public class AccessStudentSectionsTest {
         ArrayList<StudentSection> studentsFound = accessStudentSections.getStudentsInSection(testSection.getSection().getSection());
         assertEquals("1",String.valueOf(studentsFound.size()));
 
-        String [] days = new String[] {"M", "F"};
-        String time = "2:00 PM - 3:00 PM";
+        Section.availableSectionDays[] days = new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Friday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.afternoonBirdWithLongCommute;
 
         Section section = new Section("A01", "Sara", days, time, "Online", 10, 50, "COMP 4000","Computer Science");
         accessStudentSections.insertSection(new StudentSection("505", "F",section,  new Course("", "")));

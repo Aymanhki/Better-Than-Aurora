@@ -1,7 +1,7 @@
 package com.group_15.bta.objects;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -12,8 +12,8 @@ public class SectionTest  {
         Section section;
         Section section2;
 
-        String[] days = {"T","TR"};
-        String time = "10:00am - 11:00am";
+        Section.availableSectionDays[] days = {Section.availableSectionDays.Monday, Section.availableSectionDays.Thursday};
+        Section.availableSectionTimes time = Section.availableSectionTimes.barelyEarlyBird;
 
         System.out.println("\nStarting Section Test");
 
@@ -23,21 +23,21 @@ public class SectionTest  {
         section2 = new Section("A02", "Sara", days, time, "Online", 10, 100, "COMP 1010", "Computer Science");
         assertNotNull(section);
 
-        assertTrue("80".equals(section.getCap()));
-        assertTrue("A01".equals(section.getSection()));
-        assertTrue(days.equals(section.getDaysRaw()));
-        assertTrue(time.equals(section.getTime()));
+        assertEquals("80", section.getCap());
+        assertEquals("A01", section.getSection());
+        assertEquals(days, section.getDaysRaw());
+        assertEquals(time, section.getTime());
 
-        assertTrue("A02".equals(section2.getSection()));
-        assertTrue("Sara".equals(section2.getInstructor()));
-        assertTrue(days.equals(section2.getDaysRaw()));
-        assertTrue(time.equals(section2.getTime()));
+        assertEquals("A02", section2.getSection());
+        assertEquals("Sara", section2.getInstructor());
+        assertEquals(days, section2.getDaysRaw());
+        assertEquals(time, section2.getTime());
 
-        assertTrue("Online".equals(section2.getLocation()));
-        assertTrue("10".equals(String.valueOf(section2.getAvailable())));
-        assertTrue("100".equals(String.valueOf(section2.getCAP())));
-        assertTrue("COMP 1010".equals(section2.getAssociatedCourse()));
-        assertTrue("Computer Science".equals(section2.getAssociatedCategory()));
+        assertEquals("Online", section2.getLocation());
+        assertEquals("10", String.valueOf(section2.getAvailable()));
+        assertEquals("100", String.valueOf(section2.getCAP()));
+        assertEquals("COMP 1010", section2.getAssociatedCourse());
+        assertEquals("Computer Science", section2.getAssociatedCategory());
 
         System.out.println("\nDone Section Test");
     }

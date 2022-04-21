@@ -1,18 +1,18 @@
 package com.group_15.bta.presentation;
 
-import android.app.TimePickerDialog;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,10 +27,7 @@ import com.group_15.bta.business.AccessSections;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.SectionListAdapter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CourseActivity extends AppCompatActivity {
     protected String Name;
@@ -40,19 +37,22 @@ public class CourseActivity extends AppCompatActivity {
     protected SectionListAdapter sectionsAdapted;
     protected AccessSections sectionList = new AccessSections();
     protected TextView daysSelector;
-    protected TextView startTimePicker;
-    protected TextView endTimePicker;
+    protected TextView timePicker;
+    protected Section.availableSectionTimes selectedTime;
     protected String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-    protected ArrayAdapter daysAdapted;
+    protected ArrayAdapter<Section.availableSectionDays> daysAdapted;
     protected ListView daysList;
+    protected ListView timesList;
     protected Button doneSelectingDays;
-    protected String selectedDays = "";
+    protected ArrayAdapter<Section.availableSectionTimes> sectionTimesAdapted;
+    protected Section.availableSectionDays[] selectedDays;
     protected int hour;
     protected int minute;
-    public CourseActivity(){ sections = new ArrayList<Section>();}
+    public CourseActivity(){ sections = new ArrayList<>();}
     protected void onCreate(Bundle savedInstanceState) {
 
         ActionBar actionBar = getSupportActionBar();//back button
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         super.onCreate(savedInstanceState);
@@ -79,24 +79,14 @@ public class CourseActivity extends AppCompatActivity {
         EditText Instructor = (EditText) findViewById(id.Instructor);
         EditText Location = (EditText) findViewById(id.Location);
 
-        if(section.getText().toString().length() != 0 && startTimePicker.getText().toString().length() != 0 &&
-            endTimePicker.getText().toString().length() != 0 && daysSelector.getText().toString().length() != 0 &&
-            CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 &&
+        if(section.getText().toString().length() != 0  && daysSelector.getText().toString().length() != 0 &&
+            CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 && timePicker.getText().toString().length() > 0 &&
             Location.getText().toString().length() != 0) {
-
-            String startTime = startTimePicker.getText().toString();
-            String endTime = endTimePicker.getText().toString();
-            String d = daysSelector.getText().toString();
-            d = d.replaceAll("\\s+", "");
-            String[] ds;
-            String Time;
 
             try
             {
-                ds = d.split(",");
-                Time = startTime +" - "+endTime;
                 int Cap = Integer.parseInt(CAP.getText().toString());
-                Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), ds, Time,
+                Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), selectedDays, selectedTime,
                         Location.getText().toString(), Cap, Cap, Name, Category);
                 sectionList.insertSection(s);
                 sections = sectionList.getCourseSections(Name);
@@ -130,7 +120,7 @@ public class CourseActivity extends AppCompatActivity {
 
     private void listSections(){
         ListView listView = (ListView) findViewById(R.id.sectionsList);
-        String sectionName = this.Name;
+
 
         sectionsAdapted = new SectionListAdapter(this, R.layout.section_list_item, sections);
         listView.setAdapter(sectionsAdapted);
@@ -139,72 +129,35 @@ public class CourseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish(  );
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onResume() {
         super.onResume();
         daysSelector = (TextView) findViewById(id.Days);
-        startTimePicker = (TextView) findViewById(id.StartTime);
-        endTimePicker = (TextView) findViewById(id.EndTime);
-
-        daysSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        daysSelector.setOnClickListener(view -> selectDays());
+        daysSelector.setOnFocusChangeListener((view, b) -> {
+            if(b)
+            {
                 selectDays();
             }
         });
 
-        daysSelector.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b)
-                {
-                    selectDays();
-                }
+
+        timePicker = findViewById(id.section_time_picker);
+        timePicker.setOnClickListener(view -> selectTime());
+        timePicker.setOnFocusChangeListener((view, b) -> {
+            if(b)
+            {
+                selectTime();
             }
         });
-
-        startTimePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickTime(startTimePicker);
-            }
-        });
-
-        startTimePicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b)
-                {
-                    pickTime(startTimePicker);
-                }
-            }
-        });
-
-        endTimePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickTime(endTimePicker);
-            }
-        });
-
-        endTimePicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b)
-                {
-                    pickTime(endTimePicker);
-                }
-            }
-        });
-
 
     }
 
@@ -212,8 +165,8 @@ public class CourseActivity extends AppCompatActivity {
     {
         AlertDialog.Builder dialogBuildr = new AlertDialog.Builder(this);
         final View selectDaysPopUp = getLayoutInflater().inflate(R.layout.select_section_days_popup, null);
-        daysList = selectDaysPopUp.findViewById(id.to_select_a_days_from_list);
-        daysAdapted = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, days);
+        daysList = selectDaysPopUp.findViewById(id.to_select_days_from_list);
+        daysAdapted = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, Section.availableSectionDays.values());
         daysList.setAdapter(daysAdapted);
         daysList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         doneSelectingDays = selectDaysPopUp.findViewById(id.done_selecting_days_btn);
@@ -222,64 +175,49 @@ public class CourseActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        doneSelectingDays.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SparseBooleanArray checked = daysList.getCheckedItemPositions();
-                ArrayList<String> selectedDaysList = new ArrayList<>();
-                for (int i = 0; i < checked.size(); i++) {
-                    int position = checked.keyAt(i);
-                    if (checked.valueAt(i)) {
-                        selectedDaysList.add((String) daysAdapted.getItem(position));
-                    }
+        doneSelectingDays.setOnClickListener(view -> {
+            SparseBooleanArray checked = daysList.getCheckedItemPositions();
+            ArrayList<Section.availableSectionDays> selectedDaysList = new ArrayList<>();
+            for (int i = 0; i < checked.size(); i++) {
+                int position = checked.keyAt(i);
+                if (checked.valueAt(i)) {
+                    selectedDaysList.add(daysAdapted.getItem(position));
                 }
-                selectedDays = "";
-                for(int i=0; i<selectedDaysList.size(); i++)
-                {
-                    selectedDays += selectedDaysList.get(i);
-
-                    if(i < selectedDaysList.size() - 1)
-                    {
-                        selectedDays += ", ";
-                    }
-                }
-
-                daysSelector.setText(selectedDays);
-                dialog.dismiss();
             }
+
+            selectedDays = new Section.availableSectionDays[selectedDaysList.size()];
+            for(int i=0; i<selectedDaysList.size(); i++)
+            {
+                selectedDays[i] = selectedDaysList.get(i);
+            }
+
+            daysSelector.setText(Section.toString(selectedDays));
+            dialog.dismiss();
         });
 
     }
 
-    private void pickTime(TextView toSet)
+    private void selectTime()
     {
+        AlertDialog.Builder dialogBuildr = new AlertDialog.Builder(this);
+        final View selectTimePopup = getLayoutInflater().inflate(R.layout.select_section_time_popup, null);
+        timesList = selectTimePopup.findViewById(id.to_select_time_from_list);
+        sectionTimesAdapted = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Section.availableSectionTimes.values());
+        timesList.setAdapter(sectionTimesAdapted);
+        dialogBuildr.setView(selectTimePopup);
+        AlertDialog dialog = dialogBuildr.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog
-                (this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                hour = i;
-                                minute = i1;
-                                String time = hour+":"+minute;
-                                SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
-
-                                try {
-
-                                        Date date = f24Hours.parse(time);
-                                        SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
-                                        toSet.setText(f12Hours.format(date));
-                                    }
-                                    catch (ParseException newException)
-                                    {
-                                        Messages.fatalError(CourseActivity.this, newException.getMessage());
-                                    }
-                            }
-                        }, 12, 0, false
-                );
-        timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        timePickerDialog.updateTime(hour, minute);
-        timePickerDialog.show();
+        timesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedTime = sectionTimesAdapted.getItem(i);
+                timePicker.setText(selectedTime.toString());
+                dialog.dismiss();
+            }
+        });
     }
+
+
 }

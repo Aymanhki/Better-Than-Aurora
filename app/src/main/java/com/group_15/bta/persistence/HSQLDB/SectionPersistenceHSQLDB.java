@@ -37,18 +37,21 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         return toReturn;
     }
 
+
     public Section fromResultSet(final ResultSet rs) throws SQLException {
         final String sectionID = rs.getString("SECTIONID");
         final String instructor = rs.getString("INSTRUCTOR");
-        final String[] days = rs.getString("DAYS").split(",");
-        final String time = rs.getString("TIME");
+        final Section.availableSectionDays[] sectionDays = Section.toDays(rs.getString("DAYS").split(","));
+        final Section.availableSectionTimes time = Section.availableSectionTimes.getEnum(rs.getString("TIME"));
         final String location = rs.getString("LOCATION");
         final int available = rs.getInt("AVAILABLE");
         final int capacity = rs.getInt("CAPACITY");
         final String associatedCourse = rs.getString("COURSEID");
         final String associatedCategory = rs.getString("NAME");
-        return new Section(sectionID, instructor, days, time, location, available, capacity, associatedCourse, associatedCategory);
+        return new Section(sectionID, instructor, sectionDays, time, location, available, capacity, associatedCourse, associatedCategory);
     }
+
+
 
     @Override
     public ArrayList<Section> getSectionList() {
@@ -128,10 +131,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             statement.setString(1, currentSection.getSection());
             statement.setString(2, currentSection.getInstructor());
 
-            String[] tempDays = currentSection.getDaysRaw();
+            Section.availableSectionDays[] tempDays = currentSection.getDaysRaw();
+
             StringBuilder daysToAdd = new StringBuilder();
             for (int i = 0; i < tempDays.length; i++) {
-                daysToAdd.append(tempDays[i]);
+                daysToAdd.append(tempDays[i].toString());
 
                 if (i < tempDays.length - 1) {
                     daysToAdd.append(", ");
@@ -139,7 +143,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             }
 
             statement.setString(3, daysToAdd.toString());
-            statement.setString(4, currentSection.getTime());
+            statement.setString(4, currentSection.getTime().toString());
             statement.setString(5, currentSection.getLocation());
             statement.setString(6, Integer.toString(currentSection.getAvailable()));
             statement.setString(7, Integer.toString(currentSection.getCAP()));
@@ -168,17 +172,19 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                     "WHERE SECTIONID = ?");
             statement.setString(1, currentSection.getInstructor());
 
-            String[] tempDays = currentSection.getDaysRaw();
+            Section.availableSectionDays[] tempDays = currentSection.getDaysRaw();
             StringBuilder daysToAdd = new StringBuilder();
+
             for (int i = 0; i < tempDays.length; i++) {
-                daysToAdd.append(tempDays[i]);
+                daysToAdd.append(tempDays[i].toString());
 
                 if (i < tempDays.length - 1) {
                     daysToAdd.append(", ");
                 }
             }
+
             statement.setString(2, daysToAdd.toString());
-            statement.setString(3, currentSection.getTime());
+            statement.setString(3, currentSection.getTime().toString());
             statement.setString(4, String.valueOf(currentSection.getLocation()));
             statement.setString(5, String.valueOf(currentSection.getAvailable()));
             statement.setString(6, String.valueOf(currentSection.getCAP()));
