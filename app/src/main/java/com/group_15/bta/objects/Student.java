@@ -9,20 +9,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/*
+/**
  * Class for Student object
  * used to store the student's name, as well as other details for a student (student id, password)
  */
 public class Student extends User implements Serializable{
 
 
-   // private ArrayList<StudentSection> enrolledSections;
     private final StudentSectionPersistence studentSectionPersistence = Services.getStudentSectionPersistence();
     private String associatedDegree;
 
     //default constructor
     public Student() {
-       // enrolledSections = studentSectionPersistence.getSectionList();
     }
     public Student(final String newID)
     {
@@ -33,7 +31,6 @@ public class Student extends User implements Serializable{
     //constructor (used on student side)
     public Student(String newName, String newPassword) {
         super(newName, newPassword);
-       // enrolledSections = studentSectionPersistence.getSectionList();
     }
 
     //constructor (used on admin side)
@@ -43,14 +40,6 @@ public class Student extends User implements Serializable{
         this.name = newStudentName;
         this.associatedDegree = associatedDegree;
 
-       // enrolledSections = studentSectionPersistence.getSectionList();
-    }
-
-    //toString
-    @NonNull
-    public String toString()
-    {
-        return String.format("Student: %s %s %s", id, password, name);
     }
 
     public int hashCode()
@@ -58,18 +47,19 @@ public class Student extends User implements Serializable{
         return Objects.hash(id, password, name);
     }
 
+    //equals
     public boolean equals(final Student o) {
         return Objects.equals(this.id, o.id) &&
                 Objects.equals(this.password, o.password) &&
                 Objects.equals(this.name, o.name);
     }
 
+    //methods to access student section database
     public ArrayList<StudentSection> getEnrolledSections() {
         return studentSectionPersistence.getStudentSectionList();
     }
 
     public void addSection(StudentSection addedSection) {
-         //   enrolledSections.add(addedSection);
             studentSectionPersistence.insertSection(addedSection);
     }
 
@@ -96,12 +86,21 @@ public class Student extends User implements Serializable{
         return studentSectionPersistence.getCourses(id);
     }
 
+    //student can be in max 5 classes
     public int getMAX_CLASSES(){ return 5;}
 
-
+    //getter
     public String getAssociatedDegree() {
         return associatedDegree;
     }
+
+    //toString
+    @NonNull
+    public String toString()
+    {
+        return String.format("Student: %s %s %s", id, password, name);
+    }
+
 }
 
 

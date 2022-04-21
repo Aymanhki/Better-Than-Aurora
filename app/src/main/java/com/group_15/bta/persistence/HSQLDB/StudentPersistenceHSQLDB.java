@@ -40,6 +40,11 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return new Student(userName, password, name, associatedDegree);
     }
 
+    /**
+     * getStudentList
+     * gets all the students in the database
+     * @return - an arraylist with all the students in the database
+     */
     @Override
     public ArrayList<Student> getStudentList() {
         ArrayList<Student> students = new ArrayList<>();
@@ -59,6 +64,13 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
 
         return students;
     }
+
+    /**
+     * getStudent
+     * get a student from the database
+     * @param currentStudent - the student we want
+     * @return - student that we requested in a list (at pos 0)
+     */
     @Override
     public ArrayList<Student> getStudent(Student currentStudent) {
         final ArrayList<Student> students = new ArrayList<>();
@@ -81,6 +93,11 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         }
     }
 
+    /**
+     * updateStudent
+     * update a student in the database
+     * @param currentStudent- student to be updated
+     */
     @Override
     public void updateStudent(Student currentStudent) {
         try (final Connection newConnection = connection()) {
@@ -98,7 +115,11 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         }
     }
 
-
+    /**
+     * insertStudent
+     * inserts a student into the database
+     * @param currentStudent - student to be inserted
+     */
     @Override
     public void insertStudent(Student currentStudent) {
 
@@ -115,6 +136,11 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         }
     }
 
+    /**
+     * deleteStudent
+     * deletes a student from the database
+     * @param toRemove - student to be deleted
+     */
     @Override
     public void deleteStudent(Student toRemove) {
         try (final Connection newConnection = connection()) {
@@ -131,6 +157,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             throw new PersistenceException(newException);
         }
     }
+
+    /**
+     * deleteStudentID
+     * deletes a student with a particular id from the database
+     * @param toRemove - string of student id that we want deleted
+     */
     @Override
     public void deleteStudentID(String toRemove) {
         try (final Connection newConnection = connection()) {
@@ -148,6 +180,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         }
     }
 
+    /**
+     * getStudentDegreeInProgressCredit
+     * returns the credit hours of the courses a student is currently enrolled in
+     * @param student - student we want the credit hours for
+     * @return - int representing the credit hours for the courses a student is currently working on
+     */
     public int getStudentDegreeInProgressCredit(Student student)
     {
         int sumRequiredInProgressCourses = 0;
@@ -175,7 +213,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return sumRequiredInProgressCourses;
     }
 
-
+    /**
+     * getStudentDegreeTakenCredit
+     * gets the credit hours from the courses that a student has already completed
+     * @param student - the student we want the credit hours for
+     * @return - int representing the credit hours of the course a student has already taken
+     */
     public int getStudentDegreeTakenCredit(Student student)
     {
         int sumRequiredTakenCourses = 0;
@@ -203,6 +246,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return sumRequiredTakenCourses;
     }
 
+    /**
+     * getStudentDegreeNotTakenCredit
+     * gets the credit hours from the courses that a student has not already completed
+     * @param student - the student we want the credit hours for
+     * @return - int representing the credit hours for the courses a student has not already taken
+     */
     public int getStudentDegreeNotTakenCredit(Student student)
     {
         int sumRequiredNotTakenCourses = 0;
@@ -229,6 +278,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return sumRequiredNotTakenCourses;
     }
 
+    /**
+     * getDegreeCreditBreakdown
+     * returns an array list representing a chart that shows the degree progress for a student
+     * @param student - the student we want to show degree progress for
+     * @return - an arraylist with the values to show progress
+     */
     @Override
     public ArrayList<PieEntry> getDegreeCreditBreakDown(Student student)
     {
@@ -239,6 +294,12 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return degreeBreakDown;
     }
 
+    /**
+     * getStudentDegreeNotTakenCourses
+     * gets the courses a student still needs in order to complete their degree
+     * @param student - the student we want to find the courses they still need for
+     * @return - an arraylist of courses representing the courses the student still needs for their degree
+     */
     @Override
     public ArrayList<Course> getStudentDegreeNotTakenCourses(Student student)
     {
@@ -280,6 +341,13 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
         return nonTakenCourses;
     }
 
+    /**
+     * getEnrolledSection
+     * gets the student section for a student and a section
+     * @param student - student we want the student section for
+     * @param section - section we want the student section for
+     * @return - the student section that is associated with the given student and section
+     */
     @Override
     public StudentSection getEnrolledSection(Student student, Section section) {
         StudentSection toReturn = null;

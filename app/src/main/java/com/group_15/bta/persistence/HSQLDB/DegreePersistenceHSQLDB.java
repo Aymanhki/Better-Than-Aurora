@@ -31,6 +31,11 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
         return new Degree(rs.getString("NAME"));
     }
 
+    /**
+     * insert
+     * inserts a degree into the database
+     * @param newDegree - degree to be inserted
+     */
     @Override
     public void insert(Degree newDegree) {
         try (final Connection newConnection = connection()) {
@@ -43,6 +48,12 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
         }
     }
 
+    /**
+     * contains
+     * finds if a degree is currently in the database
+     * @param newDegree - degree to check if exists
+     * @return - true if degree found, false if not
+     */
     @Override
     public boolean contains(Degree newDegree) {
         Degree degree = null;
@@ -66,6 +77,11 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
         return degree != null;
     }
 
+    /**
+     * getDegreesList
+     * gets all the degrees in the database
+     * @return - an arraylist with all the degrees in the database
+     */
     @Override
     public ArrayList<Degree> getDegreesList() {
         final ArrayList<Degree> degrees = new ArrayList<>();
@@ -86,6 +102,11 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
         return degrees;
     }
 
+    /**
+     * getDegreeListNames
+     * gets all the degrees in the database by name
+     * @return - an arraylist with all the names of the degrees in the database
+     */
     @Override
     public ArrayList<String> getDegreeListNames() {
         ArrayList<Degree> degrees = getDegreesList();
@@ -97,6 +118,11 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
         return degreesNames;
     }
 
+    /**
+     * getDegreeCourses
+     * gets all the courses in the database that are needed for a particular degree
+     * @return - an arraylist with all the courses in the database needed for a particular degree
+     */
     @Override
     public ArrayList<Course> getDegreeCourses(String newDegree) {
         ArrayList<Course> toReturn = new ArrayList<>();
