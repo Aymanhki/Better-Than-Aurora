@@ -61,6 +61,11 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         return new Course(COURSEID, COURSE_NAME, COURSE_DESCRIPTION, CREDIT, CATEGORY, TUITION, ASSOCIATED_DEGREE);
     }
 
+    /**
+     * getCourseList
+     * gets all the courses in the database
+     * @return - an arraylist with all the courses in the database
+     */
     @Override
     public ArrayList<Course> getCourseList() {
         final ArrayList<Course> courses = new ArrayList<>();
@@ -94,7 +99,11 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     }
 
 
-
+    /**
+     * insertCourses
+     * inserts a course into the database
+     * @param currentCourse - course to be inserted
+     */
     @Override
     public void insertCourses(Course currentCourse) {
         try (final Connection newConnection = connection()) {
@@ -119,6 +128,11 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         }
     }
 
+    /**
+     * updateCourse
+     * update a course in the database
+     * @param currentCourse - course to be updated
+     */
     @Override
     public void updateCourse(Course currentCourse) {
         try (final Connection newConnection = connection()) {
@@ -136,6 +150,11 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         }
     }
 
+    /**
+     * deleteCourses
+     * deletes a course from the database
+     * @param toRemove - course to be deleted
+     */
     @Override
     public void deleteCourses(Course toRemove) {
         try (final Connection newConnection = connection()) {
@@ -150,6 +169,12 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         }
     }
 
+    /**
+     * getCategoryCourses
+     * get courses that are associated with a particular category
+     * @param catName - category name we want to get the courses for
+     * @return - an arraylist of all the courses in the database associated with the category
+     */
     @Override
     public ArrayList<Course> getCategoryCourses(String catName){
         final ArrayList<Course> courses = new ArrayList<>();
@@ -182,6 +207,12 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         }
     }
 
+    /**
+     * getCourse
+     * gets a course from the database
+     * @param courseID - id of course we want
+     * @return - null if course not found, course if found
+     */
     @Override
     public Course getCourse(String courseID) {
         Course toReturn = null;

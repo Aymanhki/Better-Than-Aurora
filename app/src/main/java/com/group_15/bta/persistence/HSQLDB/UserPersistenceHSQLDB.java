@@ -72,6 +72,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
+    /**
+     * getUsers
+     * gets all the users in the database
+     * @return - an arraylist with all the users in the database
+     */
     @Override
     public ArrayList<User> getUsers() {
         ArrayList<User> toReturn = new ArrayList<>();
@@ -108,6 +113,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
+    /**
+     * insertUsers
+     * inserts a user into the database
+     * @param newUser - user to be inserted
+     */
     @Override
     public void insertUser(User newUser) {
         try (final Connection newConnection = connection()) {
@@ -136,6 +146,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         }
     }
 
+    /**
+     * deleteUser
+     * deletes a user from the database
+     * @param toRemove - user to be deleted
+     */
     @Override
     public void deleteUser(User toRemove) {
         try (final Connection newConnection = connection()) {
@@ -160,16 +175,34 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         }
     }
 
+    /**
+     * getCurrentUser
+     * gets the user currently logged in
+     * @return - the user currently logged in
+     */
     @Override
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * setCurrentUser
+     * sets the user currently logged in
+     * @param userName - user name of the user
+     * @param password - password of the user
+     */
     @Override
     public void setCurrentUser(String userName, String password) {
         currentUser = getUser(userName, password);
     }
 
+    /**
+     * validateLoginAttempt
+     * checks to see if a user is in the database
+     * @param userName - username of the user
+     * @param password - password of the user
+     * @return - true if user found, false if not
+     */
     @Override
     public boolean validateLoginAttempt(String userName, String password)
     {
@@ -188,6 +221,13 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return found;
     }
 
+    /**
+     * intendedActivity
+     * sets the activity a user is trying to log in to (admin,student,advisor,instructor)
+     * @param userName - username entered in log in
+     * @param password - password entered in log in
+     * @return - the activity that will start if log in is valid
+     */
     @SuppressWarnings("rawtypes")
     @Override
     public Class intendedActivity(String userName, String password) {
@@ -218,6 +258,14 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
+    /**
+     * destinationIntent
+     * sets which account a user log ins to and continues if log in is valid
+     * @param userName - username entered in log in
+     * @param password - password entered in log in
+     * @param currentActivity - activity to go to if log in is valid
+     * @return
+     */
     @Override
     public Intent destinationIntent(String userName, String password, Context currentActivity) {
         Intent toReturn = new Intent(currentActivity, currentActivity.getClass());
@@ -231,6 +279,13 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
+    /**
+     * getUser
+     * get a user from the database
+     * @param userName - the user name of the user we want
+     * @param password - the password of the user we want
+     * @return - user that we requested
+     */
     @Override
     public User getUser(String userName, String password)
     {
@@ -259,6 +314,13 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
         return toReturn;
     }
 
+    /**
+     * getUserTable
+     * gets the user table for a user from the database
+     * @param userName - the user name of the user table we want
+     * @param password - the password of the user table we want
+     * @return - string representing the user that we requested
+     */
     private String getUserTable(String userName, String password)
     {
         String toReturn = null;

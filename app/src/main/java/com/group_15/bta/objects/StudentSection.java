@@ -4,7 +4,10 @@ import com.group_15.bta.business.AccessCourses;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ * Class for StudentSection object
+ * used to store the information for a student for a particular section they are enrolled in
+ */
 public class StudentSection implements Serializable {
 
     private final Section section;
@@ -12,7 +15,15 @@ public class StudentSection implements Serializable {
     private final Course associatedCourse;
     private final String grade;
 
+    //constructor
+    public StudentSection(String studentID, String newGrade, Section newSection, Course associatedCourse) {
+        associatedStudent = studentID;
+        grade = newGrade;
+        section = newSection;
+        this.associatedCourse = associatedCourse;
+    }
 
+    //getters
     public Section getSection() {
         return section;
     }
@@ -25,13 +36,11 @@ public class StudentSection implements Serializable {
         return grade;
     }
 
-    public StudentSection(String studentID, String newGrade, Section newSection, Course associatedCourse) {
-        associatedStudent = studentID;
-        grade = newGrade;
-        section = newSection;
-        this.associatedCourse = associatedCourse;
+    public Course getAssociatedCourse() {
+        return associatedCourse;
     }
 
+    //returns credit hours for the course linked to this student section
     public int getCreditHours() {
         int credits = -1;
         ArrayList<Course> courses = new AccessCourses().getCourseList();
@@ -51,8 +60,4 @@ public class StudentSection implements Serializable {
         return associatedStudent.equals(temp.associatedStudent) && grade.equals(temp.grade) && section.getSection().equals(temp.section.getSection());
     }
 
-
-    public Course getAssociatedCourse() {
-        return associatedCourse;
-    }
 }

@@ -51,8 +51,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         return new Section(sectionID, instructor, sectionDays, time, location, available, capacity, associatedCourse, associatedCategory);
     }
 
-
-
+    /**
+     * getSectionList
+     * gets all the sections in the database
+     * @return - an arraylist with all the sections in the database
+     */
     @Override
     public ArrayList<Section> getSectionList() {
         final ArrayList<Section> sections = new ArrayList<>();
@@ -74,6 +77,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         return sections;
     }
 
+    /**
+     * getInstructorSections
+     * gets all the sections under a particular instructor in the database
+     * @return - an arraylist with all the sections taught by a instructor in the database
+     */
     @Override
     public ArrayList<Section> getInstructorSections(String name) {
         final ArrayList<Section> sections = new ArrayList<>();
@@ -99,6 +107,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         }
     }
 
+    /**
+     * getCourseSections
+     * gets all the sections for a particular course in the database
+     * @return - an arraylist with all the sections for a course in the database
+     */
     @Override
     public ArrayList<Section> getCourseSections(String courseID) {
         final ArrayList<Section> sections = new ArrayList<>();
@@ -124,6 +137,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         }
     }
 
+    /**
+     * insertSection
+     * inserts a section into the database
+     * @param currentSection - section to be inserted
+     */
     @Override
     public void insertSection(Section currentSection) {
         try (final Connection newConnection = connection()) {
@@ -155,6 +173,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         }
     }
 
+    /**
+     * updateSection
+     * update a section in the database
+     * @param currentSection - section to be updated
+     */
     @Override
     public void updateSection(Section currentSection) {
         try (final Connection newConnection = connection()) {
@@ -198,6 +221,11 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         }
     }
 
+    /**
+     * deleteSection
+     * deletes a section from the database
+     * @param toRemove - section to be deleted
+     */
     @Override
     public void deleteSection(Section toRemove) {
         try (final Connection newConnection = connection()) {
@@ -209,6 +237,12 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
         }
     }
 
+    /**
+     * getSection
+     * get a section with a particular id from the database
+     * @param sectionID - the section id of the section that we want
+     * @return - a section with the id that we requested
+     */
     @Override
     public Section getSection(String sectionID) {
         Section toReturn = null;
