@@ -9,6 +9,8 @@ import org.junit.runners.Suite;
         DeleteStudentTest.class,
         EditStudentTest.class,
         SearchStudentAdvisorTest.class,
+        CreateCourseTest.class,
+        DeleteCourseTest.class,
         UpdateGradeInstructorTest.class,
 
 })
