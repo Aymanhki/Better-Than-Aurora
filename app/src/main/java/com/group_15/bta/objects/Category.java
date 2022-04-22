@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-/*
+/**
  * Class for Category object
  * used to store the name of a category for which a group of courses fall under
  */
@@ -40,6 +40,7 @@ public class Category implements Serializable {
         Course.add(newCourse);
     }
 
+    //equals
     public boolean equals(final Category o)
     {
         return Objects.equals(this.Name, o.Name) &&

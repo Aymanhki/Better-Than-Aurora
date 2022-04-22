@@ -3,9 +3,18 @@ package com.group_15.bta.business;
 import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
-
+/**
+ * Calculate
+ * Class to calculate gpa and credit hours
+ */
 public class Calculate
 {
+	/**
+	 * gpa
+	 * calculates the gpa for a student given a list of student sections
+	 * @param studentSections - list of student sections to calculate gpa for
+	 * @return - a string containing the gpa
+	 */
 	public static StudentSection.gpa gpa(ArrayList<StudentSection> studentSections)
 	{
 		StudentSection.grades[] grades = StudentSection.grades.values();
@@ -77,6 +86,12 @@ public class Calculate
 		return gpa;
 	}
 
+	/**
+	 * creditHours
+	 * calculates the credit hours given a list of student sections
+	 * @param studentSections - list of student sections we want to get the credit hours for
+	 * @return - a string representing the credit hours
+	 */
 	public static String creditHours(ArrayList<StudentSection> studentSections)
 	{
 

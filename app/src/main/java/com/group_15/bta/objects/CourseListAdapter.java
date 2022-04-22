@@ -14,7 +14,10 @@ import androidx.annotation.Nullable;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;
-
+/**
+ * CourseListAdapter
+ * used to display course list
+ */
 public class CourseListAdapter extends ArrayAdapter<Course> {
 
     private final Context mainContext;

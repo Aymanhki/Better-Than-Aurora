@@ -14,7 +14,10 @@ import androidx.annotation.Nullable;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;
-
+/**
+ * StudentSectionAdapter
+ * used to display the student section list
+ */
 public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
     private final Context mainContext;
     private final int resource;

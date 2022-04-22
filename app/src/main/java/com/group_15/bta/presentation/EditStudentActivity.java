@@ -75,13 +75,10 @@ public class EditStudentActivity extends AppCompatActivity {
         String id = (String) tView.getText();
 
         Student student = new Student(id, password.toString(), name.toString(), studentDegree.getText().toString());
-        // students.add(student);
         accessStudents = new AccessStudents();
         accessStudents.updateStudent(student);
-        //studs.updateStudent(student);
         Intent createIntent = new Intent(EditStudentActivity.this, StudentListActivity.class);
         EditStudentActivity.this.startActivity(createIntent);
-        //overridePendingTransition(0,0);
     }
 
     @Override

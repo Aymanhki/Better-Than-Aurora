@@ -26,11 +26,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CourseLandingActivity extends AppCompatActivity {
-    //ArrayList<Category> categories = new ArrayList<Category>();
     AccessCategories getter = new AccessCategories();
     private ArrayList<Category> categories = getter.getCategoryList();
     ArrayAdapter<String> arrayAdapter;
-    //SearchView searchView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

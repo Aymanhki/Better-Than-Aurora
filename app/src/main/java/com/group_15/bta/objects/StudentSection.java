@@ -1,7 +1,10 @@
 package com.group_15.bta.objects;
 import androidx.annotation.NonNull;
 import java.io.Serializable;
-
+/**
+ * Class for StudentSection object
+ * used to store the information for a student for a particular section they are enrolled in
+ */
 public class StudentSection implements Serializable {
 
     private final Section section;
@@ -87,6 +90,15 @@ public class StudentSection implements Serializable {
         }
     }
 
+    //constructor
+    public StudentSection(String studentID, grades newGrade, Section newSection, Course associatedCourse) {
+        associatedStudent = studentID;
+        grade = newGrade;
+        section = newSection;
+        this.associatedCourse = associatedCourse;
+    }
+
+    //getter
     public Section getSection() {
         return section;
     }
@@ -99,13 +111,7 @@ public class StudentSection implements Serializable {
         return grade;
     }
 
-    public StudentSection(String studentID, grades newGrade, Section newSection, Course associatedCourse) {
-        associatedStudent = studentID;
-        grade = newGrade;
-        section = newSection;
-        this.associatedCourse = associatedCourse;
-    }
-
+    //returns credit hours for the course linked to this student section
     public int getCreditHours(){
         return associatedCourse.getCreditHours();
     }

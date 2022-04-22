@@ -11,11 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
-
-/*
+/**
  * Class for Section object
  * used to store the section name, as well as other details for a section (days, time, cap)
  */
+
 public class Section implements Serializable {
     private final String section;
     private final availableSectionDays[] Days;
