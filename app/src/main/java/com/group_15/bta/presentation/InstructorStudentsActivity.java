@@ -1,6 +1,8 @@
 package com.group_15.bta.presentation;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.MenuItem;
@@ -8,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
@@ -28,7 +30,10 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     private AccessStudentSections accessStudentSections;
     private ArrayList<StudentSection> studentSections = new ArrayList<>();
-
+    private TextView gradeSelector;
+    private ListView gradesList;
+    private StudentSection.grades selectedGrade;
+    private ArrayAdapter<StudentSection.grades> gradesAdapted;
     private Section currentSection;
 
     @Override
@@ -68,7 +73,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
 
                 StudentSection studentSection = studentSections.get(position);
-                text1.setText(studentSection.getAssociatedStudent() + ": " + studentSection.getGrade());
+                text1.setText(studentSection.getAssociatedStudent() + ": " + studentSection.getGrade().toString());
 
 
                 return view;
@@ -86,9 +91,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
     }
 
     private StudentSection createStudentSectionFromEditText(StudentSection student) {
-        EditText updateGrade = findViewById(R.id.Grade);
-
-        return new StudentSection(student.getAssociatedStudent(), updateGrade.getText().toString(), student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
+        return new StudentSection(student.getAssociatedStudent(), selectedGrade, student.getSection(), new AccessCourses().getCourse(student.getAssociatedCourse().getID()));
     }
 
     public void buttonUpdateGrade(View v) {
@@ -115,15 +118,15 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             listView.setItemChecked(i, false);
         }
 
-        EditText updateGrade = findViewById(R.id.Grade);
-        updateGrade.setText(null);
+
+        gradeSelector.setText(null);
+        selectedGrade = null;
 
     }
 
     private void updateGrade(ArrayList<StudentSection> toUpdate)
     {
-        EditText updateGrade = findViewById(R.id.Grade);
-        String result = validateGradeData(updateGrade.getText().toString().trim());
+        String result = validateGradeData(selectedGrade.toString());
         Button updateGradeButton = findViewById(R.id.UpdateGrade);
         if(result == null)
         {
@@ -165,6 +168,29 @@ public class InstructorStudentsActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gradeSelector = findViewById(R.id.Grade);
+        gradeSelector.setOnClickListener(view -> {
+            AlertDialog.Builder dialogBuildr = new AlertDialog.Builder(InstructorStudentsActivity.this);
+            final View selectGradePopup = getLayoutInflater().inflate(R.layout.select_students_grade_popup, null);
+            gradesList = selectGradePopup.findViewById(R.id.to_select_grade_from_list);
+            gradesAdapted = new ArrayAdapter<>(InstructorStudentsActivity.this, android.R.layout.simple_list_item_1, StudentSection.grades.values());
+            gradesList.setAdapter(gradesAdapted);
+            dialogBuildr.setView(selectGradePopup);
+            AlertDialog dialog = dialogBuildr.create();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            gradesList.setOnItemClickListener((adapterView, view1, i, l) -> {
+                selectedGrade = gradesAdapted.getItem(i);
+                gradeSelector.setText(selectedGrade.toString());
+                dialog.dismiss();
+            });
+        });
     }
 }
 

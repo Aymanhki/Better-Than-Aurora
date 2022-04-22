@@ -1,29 +1,92 @@
 package com.group_15.bta.objects;
-
-import com.group_15.bta.business.AccessCourses;
-
+import androidx.annotation.NonNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-/**
- * Class for StudentSection object
- * used to store the information for a student for a particular section they are enrolled in
- */
+
 public class StudentSection implements Serializable {
 
     private final Section section;
     private final String associatedStudent;
     private final Course associatedCourse;
-    private final String grade;
+    private final grades grade;
 
-    //constructor
-    public StudentSection(String studentID, String newGrade, Section newSection, Course associatedCourse) {
-        associatedStudent = studentID;
-        grade = newGrade;
-        section = newSection;
-        this.associatedCourse = associatedCourse;
+    public enum grades  {
+        APlus("A+"),
+        A("A"),
+        BPlus("B+"),
+        B("B"),
+        CPlus("C+"),
+        C("C"),
+        D("D"),
+        F("F"),
+        IP("In Progress");
+
+        String grade;
+        grades(String grade)
+        {
+            this.grade = grade;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return  grade;
+        }
+
+        public static grades getEnum(String value) {
+            for(grades v : values())
+                if(v.toString().equals(value)) return v;
+            throw new IllegalArgumentException();
+        }
+
+        public boolean equals(grades another){ return grade.equals(another.grade);}
     }
 
-    //getters
+    public enum gpa {
+        fourPointFive(4.5),
+        four(4.0),
+        threePointFive(3.5),
+        three(3.0),
+        twoPointFive(2.5),
+        two(2.0),
+        one(1.0),
+        zero(0.0),
+        invalid(-1);
+
+        double gpa;
+        gpa(double gpa)
+        {
+            this.gpa = gpa;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return String.valueOf(gpa);
+        }
+
+        public double getGpa() {
+            return gpa;
+        }
+
+        //Takes a valid gpa double and returns the closest value in the enum
+        public static gpa getGpa( double target) {
+            gpa[] GPAs = values();
+            int idx = 0;
+            double dist = Math.abs(GPAs[0].gpa - target);
+
+            for (int i = 1; i< GPAs.length; i++) {
+                double cDist = Math.abs(GPAs[i].gpa - target);
+
+                if (cDist < dist) {
+                    idx = i;
+                    dist = cDist;
+                }
+            }
+
+            return GPAs[idx];
+        }
+    }
+
     public Section getSection() {
         return section;
     }
@@ -32,25 +95,19 @@ public class StudentSection implements Serializable {
         return associatedStudent;
     }
 
-    public String getGrade() {
+    public grades getGrade() {
         return grade;
     }
 
-    public Course getAssociatedCourse() {
-        return associatedCourse;
+    public StudentSection(String studentID, grades newGrade, Section newSection, Course associatedCourse) {
+        associatedStudent = studentID;
+        grade = newGrade;
+        section = newSection;
+        this.associatedCourse = associatedCourse;
     }
 
-    //returns credit hours for the course linked to this student section
-    public int getCreditHours() {
-        int credits = -1;
-        ArrayList<Course> courses = new AccessCourses().getCourseList();
-        for (int i = 0; i < courses.size() && credits == -1; i++) {
-            if (courses.get(i).getID().equals(section.getAssociatedCourse())) {
-                credits = courses.get(i).getCreditHours();
-            }
-        }
-
-        return credits;
+    public int getCreditHours(){
+        return associatedCourse.getCreditHours();
     }
 
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -60,4 +117,7 @@ public class StudentSection implements Serializable {
         return associatedStudent.equals(temp.associatedStudent) && grade.equals(temp.grade) && section.getSection().equals(temp.section.getSection());
     }
 
+    public Course getAssociatedCourse() {
+        return associatedCourse;
+    }
 }

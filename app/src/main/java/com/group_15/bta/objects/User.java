@@ -1,14 +1,10 @@
 package com.group_15.bta.objects;
-/**
- * Class for User object
- * used to store the id, name, and password for a user.
- */
+
 public class User implements IUser {
     protected String id;
     protected String password;
     protected String name;
 
-    //constructors
     public User() {
     }
 
@@ -23,7 +19,6 @@ public class User implements IUser {
         name = newName;
     }
 
-    //getters
     @Override
     public String getID() {
         return id;
@@ -34,14 +29,14 @@ public class User implements IUser {
         return password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    //equals
     @Override
     public Boolean equals(User anotherUser)
     {
         return (this == anotherUser) || ( (id!=null && id.equals(anotherUser.id)) && ( password!=null && password.equals(anotherUser.password) ) );
+    }
+
+
+    public String getName() {
+        return name;
     }
 }

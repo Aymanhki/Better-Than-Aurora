@@ -1,10 +1,7 @@
 package com.group_15.bta.objects;
 
 import java.io.Serializable;
-/**
- * Advisor
- * class for the advisor user
- */
+
 public class Advisor extends User implements Serializable {
 
 

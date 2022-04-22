@@ -11,26 +11,6 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
 
     public StudentSectionPersistenceStub() {
         this.studentSections = new ArrayList<>();
-        /**
-         * Dictionary:
-         * 8:30 AM - 9:20 AM earlyBird
-         * 8:30 AM - 9:45 AM earlyBirdWithCoffee
-         * 8:30 AM - 11:20 AM longDayEarlyBird
-         * 9:30 AM - 10:20 AM perfectEarlyBird
-         * 10:00 AM - 10:50 AM longCommuteEarlyBird
-         * 10:30 AM - 11:20 AM likesSleepingEarlyBird
-         * 11:30 AM - 12:20 PM barelyEarlyBird
-         * 11:30 AM - 12:45 PM noLongerEarlyBird
-         * 12:30 PM - 1:20 PM afternoonBird
-         * 12:30 PM - 3:45 PM longDayAfternoonBird
-         * 1:00 PM - 2:15 PM afternoonBirdWithLongCommute
-         * 1:30 PM - 2:20 PM shortLikesSleepingAfternoonBird
-         * 2:30 PM - 3:20 PM likesSleepingAfternoonBird
-         * 2:30 PM - 3:45 PM longLikesSleepingAfternoonBird
-         * 2:30 PM - 5:20 PM almostOwl
-         * 4:00 PM - 5:15 PM earlyOwl
-         * 7:00 PM - 9:45 PM lateOwl
-         */
         Course comp3350Course = new Course("COMP 3350", "Software Engineering I", "Introduction to software engineering. Software life cycle models, system and software requirements analysis, specifications, software design, testing and maintenance, software quality.", 3, "Computer Science", 1782.25, "B.Sc. (Hons)");
         Course biol1300Course = new Course("BIOL 1300", "Economic Plants", "A survey of economically important plants and their products. The history of plant use, plants in folklore and medicine, fermentation and viticulture, domestication of plants, and forestry are the major topics covered. Chemical, structural, and nutritional aspects of plant products are also discussed.", 3, "Biological Sciences", 1782.25, "B.Sc. (Hons)");
         Course math1500Course = new Course("MATH 1500", "Introduction to Calculus", "(Lab Required) Differentiation and integration of elementary functions, with applications to maxima and minima, rates of change, area, and volume", 3, "Mathematics", 1782.25, "B.Sc. (Hons)");
@@ -48,15 +28,15 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         Section math1300 = new Section("MATH 1300 - A02", "Wallar", new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Wednesday, Section.availableSectionDays.Friday}, Section.availableSectionTimes.perfectEarlyBird, "Remote", 5, 175, "MATH 1300", "Mathematics");
         Section comp1012 = new Section("COMP 1012 - B01", "Siegward", new Section.availableSectionDays[]{Section.availableSectionDays.Wednesday}, Section.availableSectionTimes.earlyBird, "Remote", 2, 16, "COMP 1012", "Computer Science");
         Section biol1010 = new Section("BIOL 1010 - A01", "Gascoigne", new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Wednesday, Section.availableSectionDays.Friday}, Section.availableSectionTimes.likesSleepingEarlyBird, "Remote", 10, 198, "BIOL 1010", "Biological Sciences");
-        studentSections.add(new StudentSection("student", "In Progress", comp3350, comp3350Course));
-        studentSections.add(new StudentSection("student", "In Progress", biol1300, biol1300Course));
-        studentSections.add(new StudentSection("student", "In Progress", math1500, math1500Course));
-        studentSections.add(new StudentSection("student", "In Progress", math1500Lab, math1500Course));
-        studentSections.add(new StudentSection("student", "In Progress", engl1400, engl1400Course));
-        studentSections.add(new StudentSection("student", "A+", chem1110, chem1110Course));
-        studentSections.add(new StudentSection("student", "C+", math1300, math1300Course));
-        studentSections.add(new StudentSection("student", "C", comp1012, comp1012Course));
-        studentSections.add(new StudentSection("student", "B", biol1010, biol1010Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.IP, comp3350, comp3350Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.IP, biol1300, biol1300Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.IP, math1500, math1500Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.IP, math1500Lab, math1500Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.IP, engl1400, engl1400Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.APlus, chem1110, chem1110Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.CPlus, math1300, math1300Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.C, comp1012, comp1012Course));
+        studentSections.add(new StudentSection("student", StudentSection.grades.B, biol1010, biol1010Course));
     }
     @Override
     public ArrayList<StudentSection> getStudentSectionList() {
@@ -71,7 +51,7 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         {
             for(int i=0; i<studentSections.size(); i++)
             {
-                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && studentSections.get(i).getGrade().equals("In Progress"))
+                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && studentSections.get(i).getGrade().equals(StudentSection.grades.IP))
                 {
                     toReturn.add(studentSections.get(i));
                 }
@@ -81,7 +61,7 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         {
             for(int i=0; i<studentSections.size(); i++)
             {
-                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && !studentSections.get(i).getGrade().equals("In Progress"))
+                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && !studentSections.get(i).getGrade().equals(StudentSection.grades.IP))
                 {
                     toReturn.add(studentSections.get(i));
                 }
@@ -135,7 +115,7 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         {
             for(int i=0; i<studentSections.size(); i++)
             {
-                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && studentSections.get(i).getGrade().equals("In Progress"))
+                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && studentSections.get(i).getGrade().toString().equals(StudentSection.grades.IP.toString()))
                 {
                     toReturn.add(studentSections.get(i).getSection());
                 }
@@ -145,7 +125,7 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         {
             for(int i=0; i<studentSections.size(); i++)
             {
-                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && !studentSections.get(i).getGrade().equals("In Progress"))
+                if(studentSections.get(i).getAssociatedStudent().equals(studentID) && !studentSections.get(i).getGrade().toString().equals(StudentSection.grades.IP.toString()))
                 {
                     toReturn.add(studentSections.get(i).getSection());
                 }

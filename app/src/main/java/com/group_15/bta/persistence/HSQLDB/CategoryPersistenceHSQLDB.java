@@ -37,11 +37,6 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
         return new Category(category);
     }
 
-    /**
-     * getCategoryList
-     * gets all categories in database
-     * @return - an arraylist of all the categories
-     */
     @Override
     public ArrayList<Category> getCategoryList() {
         final ArrayList<Category> categories = new ArrayList<>();
@@ -69,11 +64,6 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
         return categories;
     }
 
-    /**
-     * insertCategory
-     * inserts a category into the database
-     * @param currentCategory - category to insert
-     */
     @Override
     public void insertCategory(Category currentCategory) {
         try (final Connection newConnection = connection()) {
@@ -91,11 +81,7 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
         }
     }
 
-    /**
-     * deleteCategory
-     * deletes a category from the database
-     * @param toRemove - category to remove from the database
-     */
+
     @Override
     public void deleteCategory(Category toRemove) {
         try (final Connection newConnection = connection()) {

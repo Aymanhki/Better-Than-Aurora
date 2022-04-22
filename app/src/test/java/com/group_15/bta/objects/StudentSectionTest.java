@@ -3,7 +3,6 @@ package com.group_15.bta.objects;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -19,15 +18,15 @@ public class StudentSectionTest {
         Section.availableSectionTimes time = Section.availableSectionTimes.barelyEarlyBird;
         section = new Section("A01",days, time,80);
 
-        studentSection = new StudentSection("001", "A",section,  new Course("", ""));
+        studentSection = new StudentSection("001", StudentSection.grades.A,section,  new Course("", ""));
 
         assertNotNull(studentSection);
         assertEquals("001", studentSection.getAssociatedStudent());
-        assertEquals("A", studentSection.getGrade());
-        assertTrue(studentSection.getSection().equals(section));
+        assertEquals(StudentSection.grades.A, studentSection.getGrade());
+        assertEquals(studentSection.getSection(), section);
 
-        studentSection2 = new StudentSection("002", "A",section, new Course("", ""));
-        assertTrue(studentSection.equals(studentSection));
+        studentSection2 = new StudentSection("002",  StudentSection.grades.A,section, new Course("", ""));
+        assertEquals(studentSection, studentSection);
         assertFalse(studentSection.equals(studentSection2));
     }
 }

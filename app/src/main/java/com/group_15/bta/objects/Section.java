@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
-/**
+/*
  * Class for Section object
  * used to store the section name, as well as other details for a section (days, time, cap)
  */
@@ -22,11 +22,11 @@ public class Section implements Serializable {
     private final availableSectionTimes Time;
     private String instructor = "TBA";
     private String location = "TBA";
-
     private int available;
     private final int CAP;
     private String associatedCourse;
     private String associatedCategory;
+
     public enum availableSectionMinutes {
         zero(0),
         ten(10),
@@ -37,6 +37,7 @@ public class Section implements Serializable {
         fifty(50);
 
         private final int minute;
+
         availableSectionMinutes(int minute)
         {
             this.minute = minute;
@@ -168,13 +169,11 @@ public class Section implements Serializable {
         time startTime;
         time endTime;
 
-
         availableSectionTimes(time startTime, time endTime) {
             this.startTime = startTime;
             this.endTime = endTime;
 
         }
-
 
         @NonNull
         @Override
@@ -183,14 +182,13 @@ public class Section implements Serializable {
             return startTime.toString() +" - "+endTime.toString();
         }
 
-
-
         public static availableSectionTimes getEnum(String value) {
             for(availableSectionTimes v : values())
                 if(v.toString().equalsIgnoreCase(value)) return v;
             throw new IllegalArgumentException();
         }
     }
+
     public enum availableSectionDays {
         Monday,
         Tuesday,
@@ -198,6 +196,7 @@ public class Section implements Serializable {
         Thursday,
         Friday
     }
+
     //constructor
     public Section(String section, availableSectionDays[] days, availableSectionTimes time, int CAP) {
         this.section = section;
@@ -205,7 +204,6 @@ public class Section implements Serializable {
         Time = time;
         this.CAP = CAP;
     }
-
 
     public String getAssociatedCourse() {
         return associatedCourse;
@@ -275,7 +273,6 @@ public class Section implements Serializable {
         return instructor;
     }
 
-
     public boolean interferes(Section potential) {
         boolean toReturn = false;
         Scanner scanner;
@@ -304,8 +301,6 @@ public class Section implements Serializable {
         return toReturn;
     }
 
-
-
     public static String toString(availableSectionDays[] sectionDays) {
         StringBuilder toReturn = new StringBuilder();
 
@@ -331,6 +326,6 @@ public class Section implements Serializable {
         return toReturn;
     }
 
-
+    public boolean availablePosition (){ return available+1 <= CAP;}
 
 }

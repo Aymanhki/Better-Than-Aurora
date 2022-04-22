@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
+/*
  * Class for Courses object
  * used to store the course id, description, and sections that are available for this course
  */
@@ -20,11 +20,14 @@ public class Course implements Serializable {
     HashMap<String, String> degrees;
     private int creditHours;
     private double tuition;
-
     //constructor
     public Course(String ID, String title) {
         this.title = title;
         this.ID = ID;
+    }
+
+    public String getAssociatedDegree() {
+        return associatedDegree;
     }
 
     public Course(String courseID, String courseTitle, String courseDescription, int credit, String associatedCategory, double tuition, String associatedDegree) {
@@ -63,10 +66,6 @@ public class Course implements Serializable {
     }
 
     //getters
-    public String getAssociatedDegree() {
-        return associatedDegree;
-    }
-
     public String getDescription() {
         return Description;
     }
@@ -91,21 +90,6 @@ public class Course implements Serializable {
         return creditHours;
     }
 
-    public double getTuition() { return tuition;
-    }
-
-    /**
-     * associatedWithDegree
-     * checks if this course is associated with a particular degree
-      * @param newDegree - degree to check
-     * @return - true if this course is associated with the degree, false if not
-     */
-    public boolean associatedWithDegree(String newDegree)
-    {
-        return degrees.get(newDegree) != null;
-    }
-
-    //equals
     public boolean equals(final Course o)
     {
         return Objects.equals(this.ID, o.ID) &&
@@ -115,6 +99,14 @@ public class Course implements Serializable {
                 Objects.equals(this.associatedCategory, o.associatedCategory) &&
                 Objects.equals(this.creditHours, o.creditHours);
 
+    }
+
+    public double getTuition() { return tuition;
+    }
+
+    public boolean associatedWithDegree(String newDegree)
+    {
+        return degrees.get(newDegree) != null;
     }
 
 }

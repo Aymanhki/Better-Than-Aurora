@@ -188,12 +188,13 @@
     <string name="courses_fragment_title">Courses</string>
     <string name="profile_fragment_title">Profile</string>
     <string name="settings_fragment_title">Settings</string>
-    <string name="loading_text_for_any_btn">Loading...</string>
+    <string name="loading_text_for_any_btn">Loading…</string>
     <string name="no_assigned_sections_for_instructor_place_holder">No assigned sections.</string>
     <string name="no_assigned_section_instructor_action">Contact an administrator for more information.</string>
     <string name="hint_for_password_text_box_in_log_in_page">Password</string>
     <string name="message_title_text_for_system_prompt">Message</string>
     <string name="section_time_picker_hint_in_add_a_section_page">Pick Section Time</string>
     <string name="select_the_section_time_prompt_message_for_dialog">Select the section time</string>
+    <string name="select_the_student_s_grade_prompt_message_for_instructor_assigning_grades_popup">Select the Student(s) Grade</string>
 
 </resources>

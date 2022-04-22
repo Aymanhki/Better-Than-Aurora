@@ -41,7 +41,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
     public StudentSection fromResultSet(final ResultSet rs) throws SQLException {
         final String studentID = rs.getString("STUDENTID");
-        final String grade = rs.getString("GRADE");
+        final StudentSection.grades grade = StudentSection.grades.getEnum(rs.getString("GRADE"));
         final String sectionID = rs.getString("SECTIONID");
         final String courseID = rs.getString("COURSEID");
         SectionPersistenceHSQLDB sectionGetter = new SectionPersistenceHSQLDB(connection());
@@ -52,11 +52,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
     }
 
-    /**
-     * getStudentSectionList
-     * gets all the student sections in the database
-     * @return - an arraylist with all the student sections in the database
-     */
     @Override
     public ArrayList<StudentSection> getStudentSectionList() {
 
@@ -79,13 +74,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
-    /**
-     * getStudentSectionList
-     * gets all the student sections that are graded or ungraded in the database
-     * @param studentID - the student id we want the student sections for
-     * @param inProgress - true if we want the student sections to be ungraded, false if graded
-     * @return - an arraylist with all the student sections in the database with the same grade status
-     */
     @Override
     public ArrayList<StudentSection> getStudentSectionList(String studentID, boolean inProgress) {
 
@@ -118,13 +106,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
-    /**
-     * getSectionList
-     * gets all the sections that are graded or ungraded in the database
-     * @param studentID - the student id we want the student sections for
-     * @param inProgress - true if we want the student sections to be ungraded, false if graded
-     * @return - an arraylist with all the sections in the database with the same grade status
-     */
     @Override
     public ArrayList<Section> getSectionList(String studentID, boolean inProgress) {
 
@@ -156,13 +137,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
-
-    /**
-     * getStudentSectionList
-     * gets all the student sections in the database for a particular student
-     * @param studentID - the student id we want the student sections for
-     * @return - an arraylist with all the student sections for one student in the database
-     */
     @Override
     public ArrayList<StudentSection> getStudentSectionList(String studentID) {
         final ArrayList<StudentSection> toReturn = new ArrayList<>();
@@ -187,13 +161,6 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         return toReturn;
     }
-
-    /**
-     * getSectionList
-     * gets all the sections in the database for a particular student
-     * @param studentID - the student id we want the sections for
-     * @return - an arraylist with all the sections for one student in the database
-     */
     @Override
     public ArrayList<Section> getSectionList(String studentID) {
         final ArrayList<Section> toReturn = new ArrayList<>();
@@ -219,12 +186,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
-    /**
-     * getCourses
-     * gets all the courses in the database for a particular student
-     * @param studentID - the student id we want the courses for
-     * @return - an arraylist with all the courses for one student in the database
-     */
+
+
     @Override
     public ArrayList<Course> getCourses(String studentID) {
         ArrayList<Course> toReturn = new ArrayList<>();
@@ -249,12 +212,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return toReturn;
     }
 
-    /**
-     * getStudentsInSection
-     * gets all the student sections in the database for a particular section
-     * @param courseID - the course id we want the student sections for
-     * @return - an arraylist with all the student sections for one section in the database
-     */
+
     @Override
     public ArrayList<StudentSection> getStudentsInSection(String courseID) {
         final ArrayList<StudentSection> students = new ArrayList<>();
@@ -282,17 +240,12 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         return students;
     }
 
-    /**
-     * updateStudentSection
-     * update a student section in the database
-     * @param currentSection- student section to be updated
-     */
     @Override
     public void updateStudentSection(StudentSection currentSection) {
         try (final Connection newConnection = connection()) {
 
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTSECTIONS SET GRADE = ?  WHERE STUDENTID = ? AND SECTIONID = ?");
-            statement.setString(1, currentSection.getGrade());
+            statement.setString(1, currentSection.getGrade().toString());
             statement.setString(2, currentSection.getAssociatedStudent());
             statement.setString(3, currentSection.getSection().getSection());
             statement.executeUpdate();
@@ -301,17 +254,12 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         }
     }
 
-    /**
-     * insertSection
-     * inserts a student section into the database
-     * @param currentSection - student section to be inserted
-     */
     @Override
     public void insertSection(StudentSection currentSection) {
         try (final Connection newConnection = connection()) {
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTSECTIONS VALUES(?, ?, ?, ?)");
             statement.setString(1, currentSection.getAssociatedStudent());
-            statement.setString(2, currentSection.getGrade());
+            statement.setString(2, currentSection.getGrade().toString());
             statement.setString(3, currentSection.getSection().getSection());
             statement.setString(4, currentSection.getAssociatedCourse().getID());
             statement.executeUpdate();
@@ -320,22 +268,16 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
         }
     }
 
-    /**
-     * deleteSection
-     * deletes a student section from the database
-     * @param toRemove - student section to be deleted
-     */
     @Override
     public void deleteSection(StudentSection toRemove) {
         try (final Connection newConnection = connection()) {
             final PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE = ? AND SECTIONID = ?");
             statement.setString(1, toRemove.getAssociatedStudent());
-            statement.setString(2, toRemove.getGrade());
+            statement.setString(2, toRemove.getGrade().toString());
             statement.setString(3, toRemove.getSection().getSection());
             statement.executeUpdate();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
     }
-
 }

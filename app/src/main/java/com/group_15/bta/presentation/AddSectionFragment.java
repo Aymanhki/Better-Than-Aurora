@@ -30,6 +30,13 @@ import java.util.ArrayList;
 public class AddSectionFragment extends Fragment {
 
 
+    private final AccessUsers usersPersistence = new AccessUsers();
+    private final AccessStudentSections studentSectionsPersistence = new AccessStudentSections();
+    private final AccessStudents studentsPersistence = new AccessStudents();
+    private final AccessSections sectionsPersistence = new AccessSections();
+    private final Student currentUser = (Student) usersPersistence.getCurrentUser();
+    private final AccessCourses coursesPersistence = new AccessCourses();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,18 +60,28 @@ public class AddSectionFragment extends Fragment {
         selectedSections.add(selectedSection);
         SectionListAdapter sectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, selectedSections);
         confirmSectionList.setAdapter(sectionsAdapted);
-        Student currentUser = (Student) new AccessUsers().getCurrentUser();
-
-
         NavController navController = NavHostFragment.findNavController(this);
         Button addSectionBtn = view.findViewById(R.id.add_section_btn);
+
         addSectionBtn.setOnClickListener(view1 -> {
-            StudentSection toAdd = new StudentSection(currentUser.getID(), "In Progress", selectedSection,  new AccessCourses().getCourse(selectedSection.getAssociatedCourse()));
-            if (!new AccessStudentSections().duplicate(toAdd)){
-                if(!new AccessStudents().fullTime()) {
-                    if(!new AccessSections().overlaps(selectedSection))
+            if (!studentSectionsPersistence.duplicate(currentUser, selectedSection)){
+                if(!studentsPersistence.fullTime(currentUser)) {
+                    if(!studentSectionsPersistence.overlaps(selectedSection))
                     {
-                        currentUser.addSection(new StudentSection(currentUser.getID(), "In Progress", selectedSection, new AccessCourses().getCourse(selectedSection.getAssociatedCourse())));
+                        if(selectedSection.availablePosition())
+                        {
+                            Section updatedSelectedSection = new Section(selectedSection.getSection(), selectedSection.getInstructor(), selectedSection.getDaysRaw(),
+                                    selectedSection.getTime(), selectedSection.getLocation(), selectedSection.getAvailable()+1,
+                                    selectedSection.getCAP(), selectedSection.getAssociatedCourse(), selectedSection.getAssociatedCategory());
+                            sectionsPersistence.updateSection(updatedSelectedSection);
+                            currentUser.addSection(new StudentSection(currentUser.getID(), StudentSection.grades.IP, updatedSelectedSection, coursesPersistence.getCourse(updatedSelectedSection.getAssociatedCourse())));
+                            Toast.makeText(getContext(), "You are now enrolled in "+selectedSection.getSection(), Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "There is no room in "+selectedSection.getSection(), Toast.LENGTH_LONG).show();
+                        }
+
                     }
                     else
                     {
@@ -75,9 +92,12 @@ public class AddSectionFragment extends Fragment {
                 {
                     Toast.makeText(getContext(), "You are already enrolled in the maximum number of classes", Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(getContext(), "You are already enrolled in this section", Toast.LENGTH_LONG).show();
             }
+            else
+            {
+                Toast.makeText(getContext(), "You are already enrolled in this course", Toast.LENGTH_LONG).show();
+            }
+
             navController.navigate(R.id.action_add_a_course_with_section_confirmation_to_student_home);
         });
     }

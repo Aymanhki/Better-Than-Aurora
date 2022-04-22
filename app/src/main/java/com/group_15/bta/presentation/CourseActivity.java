@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,8 +45,6 @@ public class CourseActivity extends AppCompatActivity {
     protected Button doneSelectingDays;
     protected ArrayAdapter<Section.availableSectionTimes> sectionTimesAdapted;
     protected Section.availableSectionDays[] selectedDays;
-    protected int hour;
-    protected int minute;
     public CourseActivity(){ sections = new ArrayList<>();}
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -209,13 +206,10 @@ public class CourseActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        timesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedTime = sectionTimesAdapted.getItem(i);
-                timePicker.setText(selectedTime.toString());
-                dialog.dismiss();
-            }
+        timesList.setOnItemClickListener((adapterView, view, i, l) -> {
+            selectedTime = sectionTimesAdapted.getItem(i);
+            timePicker.setText(selectedTime.toString());
+            dialog.dismiss();
         });
     }
 

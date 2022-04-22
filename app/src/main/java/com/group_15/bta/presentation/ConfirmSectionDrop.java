@@ -51,14 +51,11 @@ public class ConfirmSectionDrop extends Fragment {
 
         NavController navController = NavHostFragment.findNavController(this);
         Button dropSectionBtn = (Button) view.findViewById(R.id.drop_section_btn);
-        dropSectionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        dropSectionBtn.setOnClickListener(view1 -> {
 
-                currentUser.deleteSection(selectedSection);
-                Toast.makeText(getContext(), "Course Dropped", Toast.LENGTH_LONG).show();
-                navController.navigate(R.id.action_confirm_dropping_a_course_to_student_home);
-            }
+            currentUser.deleteSection(selectedSection);
+            Toast.makeText(getContext(), "Course Dropped", Toast.LENGTH_LONG).show();
+            navController.navigate(R.id.action_confirm_dropping_a_course_to_student_home);
         });
 
     }

@@ -15,10 +15,6 @@ import com.group_15.bta.R;
 
 import java.util.ArrayList;
 
-/**
- * SectionListAdapter
- * used to display the section list
- */
 public class SectionListAdapter extends ArrayAdapter<Section> {
 
     private final Context mainContext;

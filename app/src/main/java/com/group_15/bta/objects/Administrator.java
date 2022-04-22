@@ -2,11 +2,8 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 
-/**
- * Administrator
- * class for the administrator user
- */
 public class Administrator extends User implements Serializable {
+
 
     public Administrator() {
         super();

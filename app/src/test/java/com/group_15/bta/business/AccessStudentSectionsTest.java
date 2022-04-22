@@ -38,7 +38,7 @@ public class AccessStudentSectionsTest {
         Section.availableSectionTimes time = Section.availableSectionTimes.afternoonBirdWithLongCommute;
 
         Section section = new Section("A01", "Sara", days, time, "Online", 10, 50, "COMP 4000","Computer Science");
-        accessStudentSections.insertSection(new StudentSection("505", "F",section,  new Course("", "")));
+        accessStudentSections.insertSection(new StudentSection("505", StudentSection.grades.F,section,  new Course("", "")));
         sections = accessStudentSections.getStudentSectionList();
         currSize = sections.size();
         assertEquals("10", String.valueOf(currSize));

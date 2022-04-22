@@ -14,10 +14,7 @@ import androidx.annotation.Nullable;
 import com.group_15.bta.R;
 
 import java.util.ArrayList;
-/**
- * StudentSectionAdapter
- * used to display the student section list
- */
+
 public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
     private final Context mainContext;
     private final int resource;
@@ -36,7 +33,7 @@ public class StudentSectionAdapter extends ArrayAdapter<StudentSection> {
         String location = getItem(position).getSection().getLocation();
         String instructor = getItem(position).getSection().getInstructor();
         String creditHours = getItem(position).getCreditHours()+"";
-        String grade = getItem(position).getGrade();
+        String grade = getItem(position).getGrade().toString();
 
         LayoutInflater inflater = LayoutInflater.from(mainContext);
         convertView = inflater.inflate(resource, parent, false);

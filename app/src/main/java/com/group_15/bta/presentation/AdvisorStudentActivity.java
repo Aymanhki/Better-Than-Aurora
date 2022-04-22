@@ -67,7 +67,7 @@ public class AdvisorStudentActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void displayStudentGpa(){
         final TextView tView = findViewById(R.id.StudentGPA);
-        String gpa = Calculate.gpa(accessStudentSections.getStudentSectionList(studentID));
+        String gpa = Calculate.gpa(accessStudentSections.getStudentSectionList(studentID)).toString();
         tView.setText("GPA: " + gpa);
     }
 
@@ -104,7 +104,7 @@ public class AdvisorStudentActivity extends AppCompatActivity {
                 TextView text2 = view.findViewById(android.R.id.text2);
 
                 text1.setText(pastSections.get(position).getAssociatedCourse().getTitle());
-                text2.setText(pastSections.get(position).getGrade());
+                text2.setText(pastSections.get(position).getGrade().toString());
 
                 return view;
             }

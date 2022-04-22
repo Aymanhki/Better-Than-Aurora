@@ -44,8 +44,7 @@
         android:orientation="vertical"
         android:background="@color/cosmic_latte"
         android:layout_weight="1"
-        android:gravity="center"
-        android:paddingBottom="100dp">
+        android:layout_marginTop="150dp">
 
         <EditText
             android:id="@+id/userName"
@@ -95,24 +94,17 @@
             android:layout_marginEnd="180dp"
             tools:ignore="Autofill" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/cosmic_latte"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="180dp"
-            android:layout_marginEnd="180dp"
-            android:gravity="center">
-
+            >
             <Button
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login_button_text_in_main_activity"
                 android:textSize="18sp"
-                android:layout_weight="1"
+                android:layout_marginStart="180dp"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 tools:ignore="ButtonStyle" />
@@ -121,14 +113,15 @@
                 android:id="@+id/forgetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="310dp"
+                android:paddingTop="20dp"
                 android:text="@string/forgetPassword"
-                android:textAllCaps="false"
-                android:layout_weight="1"
-                android:textColor="@color/dark_brown" />
+                android:textColor="@color/dark_brown"
+                android:textSize="12sp" />
 
+        </RelativeLayout>
         </LinearLayout>
 
-    </LinearLayout>
 
     <EditText
         android:id="@+id/autofocusDummy"

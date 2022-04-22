@@ -42,7 +42,7 @@
             android:textSize="18sp"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/Grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,6 @@
             android:textSize="18sp"
             android:background="@drawable/edit_text_with_thick_border"
             android:padding="10dp"
-            android:inputType="text"
             android:autofillHints="A+, A, B+, B, C+, C, D, F" />
 
     </LinearLayout>

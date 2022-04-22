@@ -3,62 +3,21 @@ package com.group_15.bta.business;
 import com.group_15.bta.objects.StudentSection;
 
 import java.util.ArrayList;
-/**
- * Calculate
- * Class to calculate gpa and credit hours
- */
+
 public class Calculate
 {
-	public enum grades  {
-		APlus("A+"),
-		A("A"),
-		BPlus("B+"),
-		B("B"),
-		CPlus("C+"),
-		C("C"),
-		D("D"),
-		F("F");
-
-		String grade;
-		grades(String grade)
-		{
-			this.grade = grade;
-		}
-	}
-
-	public enum gpa {
-		fourPointFive(4.5),
-		four(4.0),
-		threePointFive(3.5),
-		three(3.0),
-		twoPointFive(2.5),
-		two(2.0),
-		one(1.0),
-		zero(0.0);
-
-		double gpa;
-		gpa(double gpa)
-		{
-			this.gpa = gpa;
-		}
-	}
-
-	/**
-	 * gpa
-	 * calculates the gpa for a student given a list of student sections
-	 * @param studentSections - list of student sections to calculate gpa for
-	 * @return - a string containing the gpa
-	 */
-	public static String gpa(ArrayList<StudentSection> studentSections)
+	public static StudentSection.gpa gpa(ArrayList<StudentSection> studentSections)
 	{
-		final String[] grades = {"A+", "A", "B+", "C+", "C", "D", "F"};
-		final double[] values = {4.5,4.0,3.5,3.0,2.5,2.0,1.0,0.0};
+		StudentSection.grades[] grades = StudentSection.grades.values();
+		StudentSection.gpa[] values = StudentSection.gpa.values();
+
 		StudentSection studentSection;
-		String gpa;
-		String grade;
+		StudentSection.gpa gpa = null;
+		StudentSection.grades grade;
 		double gradeTotal;
 		int studentSectionCount;
 		int validGrades;
+		int totalCredit;
 		int missingGrades;
 		int count;
 		boolean found;
@@ -66,7 +25,8 @@ public class Calculate
 		validGrades = 0;
 		missingGrades = 0;
 		gradeTotal = 0;
-		gpa = " ";
+		totalCredit = 0;
+
 		if ((studentSections!=null) && (studentSections.size()>0))
 		{
 			for (studentSectionCount=0; studentSectionCount<studentSections.size(); studentSectionCount++)
@@ -76,26 +36,29 @@ public class Calculate
 					missingGrades = 0;
 					validGrades = 0;
 					studentSectionCount = studentSections.size()+1;
-					gpa = "?";
+					gpa = StudentSection.gpa.invalid;
 				}
 				else
 				{
 					studentSection = studentSections.get(studentSectionCount);
 					grade = studentSection.getGrade();
 					found = false;
-					if (grade.trim().equals("In Progress"))
+					if (grade.equals(StudentSection.grades.IP))
 					{	// found a course in progress, no grade yet
 						missingGrades++;
 					}
 					else
 					{
-						for (count=0; count<grades.length&&!found; count++)
+
+						for (count=0; count<grades.length && !found; count++)
 						{
 							if (grades[count].equals(grade))
 							{
 								found = true;
-								gradeTotal += values[count];
-								validGrades++;
+								double credit = studentSection.getCreditHours();
+								gradeTotal += values[count].getGpa()*credit;
+								validGrades ++;
+								totalCredit += credit;
 							}
 						}
 					}
@@ -103,22 +66,17 @@ public class Calculate
 			}
 			if (((validGrades+missingGrades)==studentSections.size()) && (validGrades>0))
 			{
-				gpa = "" +(gradeTotal/validGrades);
+				gpa = StudentSection.gpa.getGpa(gradeTotal/totalCredit);
 			}
 			else if (missingGrades != studentSections.size())
 			{	// Invalid grade
-				gpa = "?";
+				gpa = StudentSection.gpa.invalid;
 			}
 		}
+
 		return gpa;
 	}
 
-	/**
-	 * creditHours
-	 * calculates the credit hours given a list of student sections
-	 * @param studentSections - list of student sections we want to get the credit hours for
-	 * @return - a string representing the credit hours
-	 */
 	public static String creditHours(ArrayList<StudentSection> studentSections)
 	{
 
