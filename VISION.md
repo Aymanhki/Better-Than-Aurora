@@ -48,44 +48,4 @@ In the early stages, the success of the system will be measured by a poll. If th
 
 Our team had discussed the thought about using Git flow as our branching strategy. As we progressed with the project, we committed and pushed all our changes to specified branches with a description of what that branch contained. Once it was made sure that there were not any bugs and the feature worked as intended with the rest of the program, we then merged the branch to main. We chose this branching method so that everything would update steadily, and everyone could stay up to date with all changes.
 
-## Worksheet Iteration 1 link:
 
-https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/Group15worksheet.md
-
-## Worksheet Iteration 2 link:
-
-https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/i2_Worksheet_Group15.md 
-
-## **Additional Notes: Account Login Credentials**
-
-*Students:*
-<br />
-username: student
-<br />
-password: student
-
----
-
-*Administrator:*
-<br />
-username: admin
-<br />
-password: admin
-
----
-
-*Advisor:*
-<br />
-username: advisor
-<br />
-password: advisor
-
----	
-
-*Instructor:*
-<br />
-username: instructor1
-<br />
-password: instructor1
-
----	
