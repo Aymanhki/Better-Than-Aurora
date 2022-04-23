@@ -83,23 +83,66 @@ public class CategoryActivity extends AppCompatActivity {
             EditText CourseDescription = findViewById(R.id.CourseDescription);
             EditText CourseCreditHours = findViewById(R.id.CourseCreditHours);
             EditText TuitionFee = findViewById(R.id.TuitionFee);
+            int CH;
+            double TF;
+            if(CourseCreditHours.getText().toString().length() > 0) {
+                CH = Integer.parseInt(CourseCreditHours.getText().toString());
+            }
+            else { CH = -1;}
+            if(TuitionFee.getText().toString().length() > 0) {
+                TF = Double.parseDouble(TuitionFee.getText().toString());;
+            }
+            else { TF = 0;}
+            Course c = new Course(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name, TF, courseDegrees.getText().toString());
 
-            if(CourseID.getText().toString().length() != 0 && CourseName.getText().toString().length() != 0 &&
-                    CourseDescription.getText().toString().length() != 0 && CourseCreditHours.getText().toString().length() != 0
-            && TuitionFee.getText().toString().length() !=0 && courseDegrees.getText().toString().length() != 0) {
+            String result = validateCourse(c);
 
-                double TF = Double.parseDouble(TuitionFee.getText().toString());
-                int CH =  Integer.parseInt(CourseCreditHours.getText().toString());
-                Course c = new Course(CourseID.getText().toString(), CourseName.getText().toString(), CourseDescription.getText().toString(), CH, Name, TF, courseDegrees.getText().toString());
+            if(result == null) {
                 courseList.insertCourses(c);
             }
             else
             {
-                Toast.makeText(CategoryActivity.this, "Please make sure all fields are filled properly.",Toast.LENGTH_LONG).show();
+                Messages.warning(this, result);
             }
             courses = courseList.getCategoryCourses(Name);
-
             listCourses();
+        }
+        private String validateCourse(Course course){
+            if(course.getID().length() == 0 || course.getID().length()>9 || findCourse(course))
+            {
+                return "Valid Course ID required";
+            }
+            if(course.getTitle().length() == 0)
+            {
+                return "Course Name required";
+            }
+            if(course.getDescription().length() == 0)
+            {
+                return "Course Description required";
+            }
+            if (course.getCreditHours() == -1)
+            {
+                return "Course Hours required";
+            }
+            if(course.getTuition() == 0)
+            {
+                return "Tuition Fee required";
+            }
+            if(course.getAssociatedDegree().length() ==0){
+                return "Associated Degree required";
+            }
+            return null;
+        }
+        private boolean findCourse(Course course){
+        boolean result = false;
+        ArrayList<Course> courseFound;
+        courseFound = courseList.getCategoryCourses(Name);
+        for(int i = 0; i<courseFound.size();i++){
+            if(courseFound.get(i).getID().equals(course.getID())){
+                result = true;
+            }
+        }
+        return result;
         }
 
     public void buttonDeleteCourse(View v){

@@ -75,16 +75,19 @@ public class CourseActivity extends AppCompatActivity {
         EditText CAP = (EditText) findViewById(id.CAP);
         EditText Instructor = (EditText) findViewById(id.Instructor);
         EditText Location = (EditText) findViewById(id.Location);
+        int Cap;
+        if(CAP.getText().toString().length() > 0) {
+            Cap = Integer.parseInt(CAP.getText().toString());
+        }
+        else { Cap = 0;}
+        Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), selectedDays, selectedTime,
+                Location.getText().toString(), Cap, Cap, Name, Category);
+        String result = validateSection(s);
 
-        if(section.getText().toString().length() != 0  && daysSelector.getText().toString().length() != 0 &&
-            CAP.getText().toString().length() !=0 && Instructor.getText().toString().length() != 0 && timePicker.getText().toString().length() > 0 &&
-            Location.getText().toString().length() != 0) {
+        if(result == null) {
 
             try
             {
-                int Cap = Integer.parseInt(CAP.getText().toString());
-                Section s = new Section(this.Name + " - " + section.getText().toString(), Instructor.getText().toString(), selectedDays, selectedTime,
-                        Location.getText().toString(), Cap, Cap, Name, Category);
                 sectionList.insertSection(s);
                 sections = sectionList.getCourseSections(Name);
                 Services.setCourseToTrue();
@@ -97,11 +100,50 @@ public class CourseActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(CourseActivity.this, "Please make sure all fields are filled.",Toast.LENGTH_LONG).show();
+            Messages.warning(this, result);
         }
 
 
     }
+    private String validateSection(Section section){
+        if(section.getSection().length() == 0 || section.getSection().length()>15 || findSection(section))
+        {
+            return "Valid Section ID required";
+        }
+        if(section.getDaysRaw() == null)
+        {
+            return "Days selection required";
+        }
+        if(section.getTime() == null)
+        {
+            return "Time selection required";
+        }
+        if(section.getInstructor().length() == 0)
+        {
+            return "Instructor Required";
+        }
+        if(section.getLocation().length() == 0)
+        {
+            return "Location Required";
+        }
+        if(section.getCAP() == 0)
+        {
+            return "Section Capacity is required";
+        }
+        return null;
+    }
+    private boolean findSection(Section section){
+        boolean result = false;
+        ArrayList<Section> sectionFound;
+        sectionFound = sectionList.getCourseSections(Name);
+        for(int i = 0; i<sectionFound.size();i++){
+            if(sectionFound.get(i).getSection() == section.getSection()){
+                result = true;
+            }
+        }
+        return result;
+    }
+
 
     public void buttonDeleteSec(View v){
         EditText section = (EditText) findViewById(id.DelSecID);
