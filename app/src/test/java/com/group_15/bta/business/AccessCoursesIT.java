@@ -48,7 +48,7 @@ public class AccessCoursesIT {
 
     @Test
     public void testInsertCourse() {
-        final Course c = new Course("COMP 3190", "AI");
+        final Course c = new Course("COMP 3190", "AI","An Introductory course to Artificial Intelligence",3,"Computer Science",1738.0,"B.Sc. (Hons)");
         accessCourses.insertCourses(c);
         assertEquals(15, accessCourses.getCourseList().size());
     }

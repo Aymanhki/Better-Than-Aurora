@@ -46,7 +46,8 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
     public ArrayList<Category> getCategoryList() {
         final ArrayList<Category> categories = new ArrayList<>();
 
-        try (Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final Statement statement = newConnection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM CATEGORIES");
             CoursePersistenceHSQLDB coursesGetter = new CoursePersistenceHSQLDB(newConnection);
@@ -79,7 +80,8 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
      */
     @Override
     public void insertCategory(Category currentCategory) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO CATEGORIES VALUES(?)");
             statement.setString(1, currentCategory.getName());
             statement.executeUpdate();
@@ -105,7 +107,8 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
      */
     @Override
     public void deleteCategory(Category toRemove) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE NAME = ?");
             statement.setString(1, toRemove.getName());
             statement.executeUpdate();

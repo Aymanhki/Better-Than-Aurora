@@ -61,6 +61,18 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         return new Course(COURSEID, COURSE_NAME, COURSE_DESCRIPTION, CREDIT, CATEGORY, TUITION, ASSOCIATED_DEGREE);
     }
 
+    public Section makeSection(final ResultSet rs) throws SQLException {
+        final String sectionID = rs.getString("SECTIONID");
+        final String instructor = rs.getString("INSTRUCTOR");
+        final Section.availableSectionDays[] sectionDays = Section.toDays(rs.getString("DAYS").split(","));
+        final Section.availableSectionTimes time = Section.availableSectionTimes.getEnum(rs.getString("TIME"));
+        final String location = rs.getString("LOCATION");
+        final int available = rs.getInt("AVAILABLE");
+        final int capacity = rs.getInt("CAPACITY");
+        final String associatedCourse = rs.getString("COURSEID");
+        final String associatedCategory = rs.getString("NAME");
+        return new Section(sectionID, instructor, sectionDays, time, location, available, capacity, associatedCourse, associatedCategory);
+    }
     /**
      * getCourseList
      * gets all the courses in the database
@@ -70,28 +82,29 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     public ArrayList<Course> getCourseList() {
         final ArrayList<Course> courses = new ArrayList<>();
 
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final Statement newStatement = newConnection.createStatement();
             final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM COURSES");
-            SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(newConnection);
-            ArrayList<Section> sections = sectionsGetter.getSectionList();
-
             while (newResultSet.next()) {
                 final Course course = fromResultSet(newResultSet);
-
-
-                for (int i = 0; i < sections.size(); i++) {
-                    if (sections.get(i).getAssociatedCourse().equals(course.getID())) {
-                        course.addSection(sections.get(i));
-                    }
+                final PreparedStatement preparedStatement=newConnection.prepareStatement("SELECT * FROM SECTIONS WHERE COURSEID=?");
+                preparedStatement.setString(1, newResultSet.getString("COURSEID"));
+                final ResultSet getSectionSet=preparedStatement.executeQuery();
+                while(getSectionSet.next())
+                {
+                    course.addSection(makeSection(getSectionSet));
                 }
 
                 courses.add(course);
+                preparedStatement.close();
+                getSectionSet.close();
+
             }
 
-            newConnection.close();
             newResultSet.close();
             newStatement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -107,7 +120,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void insertCourses(Course currentCourse) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
             statement.setString(2, currentCourse.getTitle());
@@ -139,7 +153,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void updateCourse(Course currentCourse) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?, TUITION = ?, ASSOCIATEDDEGREE = ?  WHERE COURSEID = ?");
             statement.setString(1, currentCourse.getTitle());
             statement.setString(2, currentCourse.getDescription());
@@ -163,7 +178,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void deleteCourses(Course toRemove) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE COURSEID = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
@@ -186,28 +202,29 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public ArrayList<Course> getCategoryCourses(String catName){
         final ArrayList<Course> courses = new ArrayList<>();
-        try(final Connection c = connection()){
+        try {
+            final Connection c = connection();
             final PreparedStatement st = c.prepareStatement("SELECT * FROM COURSES WHERE NAME = ?");
             st.setString(1,catName);
             final ResultSet rs = st.executeQuery();
-            SectionPersistenceHSQLDB sectionsGetter = new SectionPersistenceHSQLDB(c);
-            ArrayList<Section> sections = sectionsGetter.getSectionList();
             while(rs.next()){
                 final Course record = fromResultSet(rs);
-
-                for (int i = 0; i < sections.size(); i++) {
-                    if (sections.get(i).getAssociatedCourse().equals(record.getID())) {
-                        record.addSection(sections.get(i));
-                    }
+                final PreparedStatement preparedStatement=c.prepareStatement("SELECT * FROM SECTIONS WHERE COURSEID=?");
+                preparedStatement.setString(1,record.getID());
+                final ResultSet getSections=preparedStatement.executeQuery();
+                while(getSections.next())
+                {
+                    record.addSection(makeSection(getSections));
                 }
 
                 courses.add(record);
+                preparedStatement.close();
+                getSections.close();
             }
 
-            c.close();
             rs.close();
             st.close();
-
+            c.close();
             return courses;
         }
         catch (final SQLException e)
@@ -225,8 +242,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public Course getCourse(String courseID) {
         Course toReturn = null;
-        try (Connection newConnection = connection())
-        {
+        try {
+            final Connection newConnection = connection();
             final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID = ?");
             statement.setString(1, courseID);
             ResultSet rs = statement.executeQuery();

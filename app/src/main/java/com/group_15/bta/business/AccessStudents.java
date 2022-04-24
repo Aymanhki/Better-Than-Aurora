@@ -143,11 +143,9 @@ public class AccessStudents implements StudentPersistence {
         //go through student sections and check if they are full time
         for(int i=0; i<studentSections.size(); i++)
         {
-            Scanner scanner = new Scanner(studentSections.get(i).getSection().getSection());
-            scanner.useDelimiter("-");
-            String sectionID = scanner.next().trim();
-
-            if(!sectionID.contains("B0"))
+            String section = studentSections.get(i).getSection().getSection();
+            System.out.println("Section contains B0? Answer:"+section.contains("B0"));
+            if(!section.contains("B0"))
             {
                 counter++;
             }

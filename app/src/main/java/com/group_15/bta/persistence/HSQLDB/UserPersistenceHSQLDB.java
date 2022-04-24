@@ -81,7 +81,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     public ArrayList<User> getUsers() {
         ArrayList<User> toReturn = new ArrayList<>();
 
-        try (Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
             final Statement statement = newConnection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM STUDENTS");
@@ -106,6 +107,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
             statement.close();
             resultSet.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -120,7 +122,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
      */
     @Override
     public void insertUser(User newUser) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
 
             PreparedStatement statement = null;
 
@@ -145,6 +148,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
 
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -157,7 +161,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
      */
     @Override
     public void deleteUser(User toRemove) {
-        try (final Connection newConnection = connection()) {
+        try {
+            final Connection newConnection = connection();
 
             PreparedStatement statement = newConnection.prepareStatement("");
 
@@ -175,6 +180,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
             statement.executeUpdate();
 
             statement.close();
+            newConnection.close();
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -213,8 +219,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     public boolean validateLoginAttempt(String userName, String password)
     {
         boolean found;
-        try(Connection connection = connection())
-        {
+        try{
+            final Connection connection = connection();
             PreparedStatement statement = connection.prepareStatement("SELECT USERNAME, PASSWORD FROM (SELECT USERNAME, PASSWORD FROM STUDENTS UNION ALL SELECT USERNAME, PASSWORD FROM ADMINS UNION ALL SELECT USERNAME, PASSWORD FROM ADVISORS UNION ALL SELECT USERNAME, PASSWORD FROM INSTRUCTORS) WHERE USERNAME = ? AND PASSWORD = ?");
             statement.setString(1, userName);
             statement.setString(2, password);
@@ -301,8 +307,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
         User toReturn = null;
 
-        try(Connection connection = connection())
-        {
+        try{
+            final Connection connection = connection();
             String prepare = "SELECT * FROM "+getUserTable(userName, password)+" WHERE USERNAME = ? AND PASSWORD = ?";
             PreparedStatement statement = connection.prepareStatement(prepare);
             statement.setString(1, userName);
@@ -337,8 +343,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     {
         String toReturn = null;
 
-        try(Connection connection = connection())
-        {
+        try{
+            final Connection connection = connection();
             PreparedStatement statement = connection.prepareStatement("SELECT USERNAME, PASSWORD, 'STUDENTS' AS SOURCE FROM STUDENTS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +
                                                                         "SELECT USERNAME, PASSWORD, 'ADMINS' AS SOURCE FROM ADMINS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +
                                                                         "SELECT USERNAME, PASSWORD, 'ADVISORS' AS SOURCE FROM ADVISORS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +

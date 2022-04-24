@@ -24,6 +24,8 @@ public class AccessStudentSectionsIT {
     private AccessStudentSections accessStudentSections;
     private AccessStudents accessStudents;
     private File tempDB;
+    private int numStudentSection=10;
+    private int studentIn3350=2;
 
 
     @Before
@@ -61,22 +63,22 @@ public class AccessStudentSectionsIT {
     @Test
     public void testGetStudentSections() {
         final ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(9, studentSections.size());
+        assertEquals(numStudentSection, studentSections.size());
     }
 
     @Test
     public void testGetStudentsInSection() {
         final ArrayList<StudentSection> students = accessStudentSections.getStudentsInSection("COMP 3350 - A01");
-        assertEquals(1, students.size());
+        assertEquals(studentIn3350, students.size());
     }
     @Test
     public void testDeleteStudentSection() {
         final StudentSection c = accessStudentSections.getStudentSectionList().get(0);
         ArrayList<StudentSection> studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(9, studentSections.size());
+        assertEquals(numStudentSection, studentSections.size());
         accessStudentSections.deleteSection(c);
         studentSections = accessStudentSections.getStudentSectionList();
-        assertEquals(8, studentSections.size());
+        assertEquals(numStudentSection-1, studentSections.size());
     }
 
     @After

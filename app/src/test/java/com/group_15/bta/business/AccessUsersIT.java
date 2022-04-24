@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class AccessUsersIT {
     private AccessUsers accessUsers;
     private File tempDB;
+    private int totalUsers=14;
 
 
     @Before
@@ -30,7 +31,7 @@ public class AccessUsersIT {
     @Test
     public void testGetUsers() {
         final ArrayList<User> users = accessUsers.getUsers();
-        assertEquals(16, users.size());
+        assertEquals(totalUsers, users.size());
     }
 
     @After

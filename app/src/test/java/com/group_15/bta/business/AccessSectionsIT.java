@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class AccessSectionsIT {
     private AccessSections accessSections;
     private File tempDB;
+    private int numSections=30;
 
 
     @Before
@@ -35,14 +36,14 @@ public class AccessSectionsIT {
 
         section = accessSections.getSectionList().get(0);
         assertNotNull("first sequential course should not be null", section);
-        assertTrue("BIOL 1000 - A01".equals(section.getSection()));
+        assertTrue("BIOL 1010 - A01".equals(section.getSection()));
 
     }
 
     @Test
     public void testGetSections() {
         final ArrayList<Section> sections = accessSections.getSectionList();
-        assertEquals(62, sections.size());
+        assertEquals(numSections, sections.size());
     }
 
     @Test
@@ -58,7 +59,7 @@ public class AccessSectionsIT {
 
         final Section c = new Section("A05", days, time, 120);
         accessSections.insertSection(c);
-        assertEquals(63, accessSections.getSectionList().size());
+        assertEquals(numSections+1, accessSections.getSectionList().size());
     }
 
     @After

@@ -33,7 +33,16 @@ public class HistoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         studentSections = new AccessStudentSections().getStudentSectionList(new AccessUsers().getCurrentUser().getID(), false);
-        gpa = Calculate.gpa(studentSections).toString();
+        if(Calculate.gpa(studentSections)!=null)
+        {
+            gpa = Calculate.gpa(studentSections).toString();
+        }
+        else
+        {
+            gpa="0.0";
+        }
+
+
         creditHours = Calculate.creditHours(studentSections);
     }
 
