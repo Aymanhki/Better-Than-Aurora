@@ -20,6 +20,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.adevinta.android.barista.interaction.BaristaSleepInteractions;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Degree;
@@ -72,10 +73,11 @@ public class DegreeProgressTest {
         ArrayList<User>  users = userPersistence.getUsers();
 
 
-        if(users.contains(testStudent))
+        if(!users.contains(testStudent))
         {
             userPersistence.insertUser(testStudent);
         }
+
 
 
     }
@@ -88,7 +90,6 @@ public class DegreeProgressTest {
         onView(withId(R.id.password)).perform(typeText("student5"));
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
-
         onView(ViewMatchers.withId(R.id.student_landing_page)).perform(ViewActions.swipeUp());
 
 

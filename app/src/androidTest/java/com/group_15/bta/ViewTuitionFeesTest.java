@@ -102,6 +102,7 @@ public class ViewTuitionFeesTest {
         onData(anything()).inAdapterView(withId(R.id.student_required_courses)).atPosition(0).perform(click());
         BaristaSleepInteractions.sleep(2000);
         onView(withId(R.id.sections_list_to_be_added)).perform(click());
+        onView(withId(R.id.sections_list_to_be_added)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.sections_list_to_be_added)).atPosition(0).perform(click());
         onView(withId(R.id.add_section_btn)).perform(click());
         onView(withId(R.id.student_profile)).perform(click());

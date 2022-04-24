@@ -145,10 +145,12 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 statement.executeUpdate();
 
             }
+            else{
+                System.out.println("Statement is null");
+            }
 
 
             statement.close();
-            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

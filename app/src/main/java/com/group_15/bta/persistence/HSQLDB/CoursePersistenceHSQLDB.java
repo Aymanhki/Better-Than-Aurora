@@ -60,7 +60,11 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
         final String ASSOCIATED_DEGREE = rs.getString("ASSOCIATEDDEGREE");
         return new Course(COURSEID, COURSE_NAME, COURSE_DESCRIPTION, CREDIT, CATEGORY, TUITION, ASSOCIATED_DEGREE);
     }
-
+    /**
+     * makeSection
+     * gets all the parameters from a resultSet
+     * @return - a Section object with all the parameters from the database
+     */
     public Section makeSection(final ResultSet rs) throws SQLException {
         final String sectionID = rs.getString("SECTIONID");
         final String instructor = rs.getString("INSTRUCTOR");

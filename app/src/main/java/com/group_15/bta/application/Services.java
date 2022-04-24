@@ -29,7 +29,7 @@ public class Services implements Serializable {
 
     public static synchronized StudentPersistence getStudentPersistence() {
         if (studentPersistence == null) {
-
+            //studentPersistence = new StudentPersistenceStub();
             studentPersistence = new StudentPersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -38,7 +38,7 @@ public class Services implements Serializable {
 
     public static synchronized CoursePersistence getCoursePersistence() {
         if (coursePersistence == null) {
-
+            //coursePersistence = new CoursePersistenceStub();
             coursePersistence = new CoursePersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -47,7 +47,7 @@ public class Services implements Serializable {
 
     public static synchronized SectionPersistence getSectionPersistence() {
         if (sectionPersistence == null) {
-
+            //sectionPersistence = new SectionPersistenceStub();
             sectionPersistence = new SectionPersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -56,7 +56,7 @@ public class Services implements Serializable {
 
     public static synchronized CategoryPersistence getCategoryPersistence() {
         if (categoryPersistence == null) {
-
+            //categoryPersistence = new CategoryPersistenceStub();
             categoryPersistence = new CategoryPersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -65,7 +65,7 @@ public class Services implements Serializable {
 
     public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) {
-
+            //userPersistence = new UserPersistenceStub();
             userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -74,7 +74,7 @@ public class Services implements Serializable {
 
     public static synchronized StudentSectionPersistence getStudentSectionPersistence() {
         if (studentSectionPersistence == null) {
-
+            //studentPersistence=new StudentSectionPersistenceStub();
             studentSectionPersistence = new StudentSectionPersistenceHSQLDB(Main.getDBPathName());
         }
 
@@ -83,7 +83,7 @@ public class Services implements Serializable {
 
     public static synchronized DegreePersistence getDegreePersistence() {
         if (degreePersistence == null) {
-
+            //degreePersistence = new DegreePersistenceStub();
             degreePersistence = new DegreePersistenceHSQLDB(Main.getDBPathName());
         }
         return degreePersistence;

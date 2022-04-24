@@ -5,16 +5,16 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        LoginTests.class,
+        /*LoginTests.class,
         CreateStudentTest.class,
         DeleteStudentTest.class,
         EditStudentTest.class,
-        SearchStudentAdvisorTest.class,
+        SearchStudentAdvisorTest.class,*/
         CreateCourseTest.class,
         DeleteCourseTest.class,
-        UpdateGradeInstructorTest.class,
+        /*UpdateGradeInstructorTest.class,
         DegreeProgressTest.class,
-        ViewTuitionFeesTest.class,
+        ViewTuitionFeesTest.class,*/
 
 })
 public class AllTests {
