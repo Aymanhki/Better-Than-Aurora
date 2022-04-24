@@ -71,7 +71,7 @@ public class AddSectionFragment extends Fragment {
                         if(selectedSection.availablePosition())
                         {
                             Section updatedSelectedSection = new Section(selectedSection.getSection(), selectedSection.getInstructor(), selectedSection.getDaysRaw(),
-                                    selectedSection.getTime(), selectedSection.getLocation(), selectedSection.getAvailable()+1,
+                                    selectedSection.getTime(), selectedSection.getLocation(), selectedSection.getAvailable()-1,
                                     selectedSection.getCAP(), selectedSection.getAssociatedCourse(), selectedSection.getAssociatedCategory());
                             sectionsPersistence.updateSection(updatedSelectedSection);
                             currentUser.addSection(new StudentSection(currentUser.getID(), StudentSection.grades.IP, updatedSelectedSection, coursesPersistence.getCourse(updatedSelectedSection.getAssociatedCourse())));

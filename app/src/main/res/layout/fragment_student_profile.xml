@@ -17,8 +17,8 @@
             android:id="@+id/show_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="@string/view_student_records_btn_text_for_student_fees_fragment"
-            android:textAllCaps="false"
-            android:layout_centerVertical="true"/>
+            android:textAllCaps="false" />
     </RelativeLayout>
 </FrameLayout>

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     logInHandler.setCurrentUser(userNameString, passwordString);
                     String successfulLoginMessage = "Log in Successful, Hi " + logInHandler.getCurrentUser().getName();
                     Toast.makeText(MainActivity.this, successfulLoginMessage, Toast.LENGTH_SHORT).show();
-                    startActivity(logInHandler.destinationIntent(username.getText().toString(), password.getText().toString(), MainActivity.this));
+                    startActivity(logInHandler.destinationIntent(userNameString, passwordString, MainActivity.this));
                     username.setText("");
                     password.setText("");
                 } else {
@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(loginAction);
 
-        forgetPassword.setOnClickListener(view -> Messages.message(MainActivity.this, "Please Contact IST Service Desk\nInformation Services and Technology\n" +
+        forgetPassword.setOnClickListener(view -> Messages.message(MainActivity.this,
+        "Please Contact IST Service Desk" +
+                "\nInformation Services and Technology\n" +
                 "123 Fletcher Argue\n" +
                 "University of Manitoba, Winnipeg, MB R3T 2N2 Canada\n" +
                 "Office: 204-474-8600   Fax: 204-474-7983\n" +

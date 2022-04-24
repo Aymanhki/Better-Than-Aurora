@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.StudentHomeFragment"
-    android:background="@color/cosmic_latte"
-    android:orientation="vertical">
+    android:fillViewport="true"
+    android:id="@+id/student_landing_page">
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:id="@+id/student_home_summary"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        tools:context=".presentation.StudentHomeFragment"
+        android:background="@color/cosmic_latte"
+        android:orientation="vertical">
+
+
 
 
         <LinearLayout
@@ -121,5 +124,6 @@
 
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</FrameLayout>
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>
+

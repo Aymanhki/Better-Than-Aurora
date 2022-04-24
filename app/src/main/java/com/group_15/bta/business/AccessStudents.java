@@ -138,7 +138,7 @@ public class AccessStudents implements StudentPersistence {
     {
         int counter = 0;
         //get the sections
-        ArrayList<StudentSection> studentSections = student.getEnrolledSections();
+        ArrayList<StudentSection> studentSections = student.getStudentSections( true);
 
         //go through student sections and check if they are full time
         for(int i=0; i<studentSections.size(); i++)

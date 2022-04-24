@@ -3,7 +3,6 @@ package com.group_15.bta.objects;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Class for Courses object
@@ -105,14 +104,10 @@ public class Course implements Serializable {
     }
 
     //equals
-    public boolean equals(final Course o)
+    @Override
+    public boolean equals(final Object o)
     {
-        return Objects.equals(this.ID, o.ID) &&
-                Objects.equals(this.Description, o.Description) &&
-                Objects.equals(this.sections, o.sections) &&
-                Objects.equals(this.title, o.title) &&
-                Objects.equals(this.associatedCategory, o.associatedCategory) &&
-                Objects.equals(this.creditHours, o.creditHours);
+        return ID.equals(((Course)o).ID);
 
     }
 

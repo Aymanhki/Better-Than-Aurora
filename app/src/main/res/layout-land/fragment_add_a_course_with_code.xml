@@ -7,7 +7,7 @@
     android:background="@color/cosmic_latte">
 
     <ListView
-        android:id="@+id/sections_list_fragment"
+        android:id="@+id/sections_list_to_be_added"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

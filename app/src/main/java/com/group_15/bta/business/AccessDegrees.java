@@ -69,4 +69,6 @@ public class AccessDegrees implements DegreePersistence {
     public ArrayList<Course> getDegreeCourses(String newDegree) {
         return degreePersistence.getDegreeCourses(newDegree);
     }
+
+
 }

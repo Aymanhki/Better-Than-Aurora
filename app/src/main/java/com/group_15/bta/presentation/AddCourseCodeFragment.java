@@ -44,7 +44,7 @@ public class AddCourseCodeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Course selectedCourse = AddCourseCodeFragmentArgs.fromBundle(requireArguments()).getCourse();
-        ListView sectionsList = view.findViewById(R.id.sections_list_fragment);
+        ListView sectionsList = view.findViewById(R.id.sections_list_to_be_added);
         sectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, selectedCourse.getSections());
         sectionsList.setAdapter(sectionsAdapted);
 

@@ -140,7 +140,11 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 statement.setString(2, newUser.getPassword());
                 statement.setString(3, newUser.getName());
                 statement.executeUpdate();
+
             }
+
+
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -169,6 +173,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
+
+            statement.close();
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -213,6 +219,10 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
             statement.setString(1, userName);
             statement.setString(2, password);
             found = statement.executeQuery().next();
+
+            connection.close();
+            statement.close();
+
         }
         catch (final SQLException newException)
         {
@@ -264,7 +274,6 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
      * @param userName - username entered in log in
      * @param password - password entered in log in
      * @param currentActivity - activity to go to if log in is valid
-     * @return
      */
     @Override
     public Intent destinationIntent(String userName, String password, Context currentActivity) {
@@ -305,6 +314,9 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 toReturn = fromResultSet(rs, rs.getMetaData().getTableName(1));
             }
 
+            connection.close();
+            statement.close();
+            rs.close();
         }
         catch (final SQLException newException)
         {
@@ -345,6 +357,10 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
             {
                 toReturn = rs.getString("SOURCE").trim();
             }
+
+            connection.close();
+            statement.close();
+            rs.close();
         }
         catch (final SQLException newException)
         {

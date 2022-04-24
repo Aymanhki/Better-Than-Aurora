@@ -61,6 +61,9 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
                 }
                 categories.add(category);
             }
+            newConnection.close();
+            statement.close();
+            resultSet.close();
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -86,6 +89,9 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
                 courseInserter.insertCourses(currentCategory.getCourses().get(i));
             }
 
+            newConnection.close();
+            statement.close();
+
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -109,6 +115,8 @@ public class CategoryPersistenceHSQLDB implements CategoryPersistence, Serializa
             statement = newConnection.prepareStatement("DELETE FROM CATEGORIES WHERE NAME = ?");
             statement.setString(1, toRemove.getName());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

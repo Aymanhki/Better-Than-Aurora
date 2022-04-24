@@ -6,7 +6,8 @@
     android:paddingStart="200dp"
     android:paddingEnd="200dp"
     android:paddingTop="200dp"
-    android:paddingBottom="200dp">
+    android:paddingBottom="200dp"
+    android:id="@+id/admin_landing_page">
 
 
 

@@ -55,7 +55,7 @@ public class Student extends User implements Serializable{
 
     //methods to access student section database
     public ArrayList<StudentSection> getEnrolledSections() {
-        return studentSectionPersistence.getStudentSectionList();
+        return studentSectionPersistence.getStudentSectionList(id, true);
     }
 
     public void addSection(StudentSection addedSection) {

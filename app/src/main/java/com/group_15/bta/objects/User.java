@@ -41,9 +41,9 @@ public class User implements IUser {
 
     //equals
     @Override
-    public Boolean equals(User anotherUser)
+    public boolean equals(Object anotherUser)
     {
-        return (this == anotherUser) || ( (id!=null && id.equals(anotherUser.id)) && ( password!=null && password.equals(anotherUser.password) ) );
+        return (this == anotherUser) || ( (id!=null && id.equals(((User)anotherUser).id)) && ( password!=null && password.equals(((User)anotherUser).password) ) );
     }
 
 

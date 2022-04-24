@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        LoginTests.class,
         CreateStudentTest.class,
         DeleteStudentTest.class,
         EditStudentTest.class,
@@ -12,7 +13,13 @@ import org.junit.runners.Suite;
         CreateCourseTest.class,
         DeleteCourseTest.class,
         UpdateGradeInstructorTest.class,
+        DegreeProgressTest.class,
+        ViewTuitionFeesTest.class,
 
 })
-public class AllTests {}
+public class AllTests {
+
+}
+
+
 

@@ -68,6 +68,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(section);
             }
 
+            newConnection.close();
             newResultSet.close();
             newStatement.close();
         } catch (final SQLException newException) {
@@ -96,6 +97,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(record);
             }
 
+            c.close();
             rs.close();
             st.close();
 
@@ -126,6 +128,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(record);
             }
 
+            c.close();
             rs.close();
             st.close();
 
@@ -168,6 +171,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             statement.setString(8, currentSection.getAssociatedCourse());
             statement.setString(9, currentSection.getAssociatedCategory());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -187,7 +192,7 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                     "INSTRUCTOR = ?, " +
                     "DAYS = ?, " +
                     "TIME = ?, " +
-                    "LOCATION = ?  " +
+                    "LOCATION = ?,  " +
                     "AVAILABLE = ?, " +
                     "CAPACITY = ?, " +
                     "COURSEID = ?, " +
@@ -216,6 +221,9 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             statement.setString(9, currentSection.getSection());
 
             statement.executeUpdate();
+
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -232,6 +240,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             final PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE SECTIONID = ?");
             statement.setString(1, toRemove.getSection());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -255,6 +265,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             {
                 toReturn = fromResultSet(rs);
             }
+
+            newConnection.close();
             rs.close();
             statement.close();
         }

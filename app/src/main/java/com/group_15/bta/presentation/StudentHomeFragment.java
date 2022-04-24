@@ -37,23 +37,25 @@ public class StudentHomeFragment extends Fragment {
 
 
     public StudentHomeFragment(){}
-    private final Student currentUser = (Student) new AccessUsers().getCurrentUser();
-    private final AccessStudents studentsPersistence = new AccessStudents();
+
+    private Student currentUser;
+    private AccessStudents studentsPersistence;
     private NavController navController;
     private PieChart pieChart;
-    private final ArrayList<PieEntry> pieEntries = studentsPersistence.getDegreeCreditBreakDown( currentUser );
+    private ArrayList<PieEntry> pieEntries;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        currentUser = (Student) new AccessUsers().getCurrentUser();
+        studentsPersistence = new AccessStudents();
+        pieEntries = studentsPersistence.getDegreeCreditBreakDown( currentUser );
         if(Services.getNewCourse()){
             Toast toast = Toast.makeText(getContext(), "New Courses Available", Toast.LENGTH_LONG);
             toast.show();
             Services.setCourseToFalse();
         }
-
     }
 
 
@@ -74,6 +76,32 @@ public class StudentHomeFragment extends Fragment {
         pieChart = view.findViewById(R.id.degree_breakdown_pie);
         setupPieChart();
 
+
+
+    }
+
+    public void setupPieChart() {
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, currentUser.getAssociatedDegree());
+        int[] pieColors = new int[]{Color.rgb(58, 202, 116), Color.rgb(57, 153, 216), Color.rgb(234, 118, 110)};
+
+        pieDataSet.setColors(pieColors);
+        pieDataSet.setValueTextColor(Color.rgb(233, 229, 214));
+        pieDataSet.setValueTextSize(20f);
+        pieDataSet.setValueTextSize(30f);
+        pieChart.setData(new PieData( pieDataSet) );
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setUsePercentValues(false);
+        pieChart.animateX(300);
+        pieChart.animateY(300);
+        pieChart.getLegend().setEnabled(false);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        View view = getView();
         ArrayList<Section> studentCurrentSections = currentUser.getSections(true);
         SectionListAdapter enrolledSectionsAdapted = new SectionListAdapter(getContext(), R.layout.section_list_item, studentCurrentSections);
         ListView enrolledSectionsList = view.findViewById(R.id.student_enrolled_courses);
@@ -109,23 +137,4 @@ public class StudentHomeFragment extends Fragment {
 
 
     }
-
-    public void setupPieChart() {
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, currentUser.getAssociatedDegree());
-        int[] pieColors = new int[]{Color.rgb(58, 202, 116), Color.rgb(57, 153, 216), Color.rgb(234, 118, 110)};
-
-        pieDataSet.setColors(pieColors);
-        pieDataSet.setValueTextColor(Color.rgb(233, 229, 214));
-        pieDataSet.setValueTextSize(20f);
-        pieDataSet.setValueTextSize(30f);
-        pieChart.setData(new PieData( pieDataSet) );
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setDrawHoleEnabled(false);
-        pieChart.setUsePercentValues(false);
-        pieChart.animateX(300);
-        pieChart.animateY(300);
-        pieChart.getLegend().setEnabled(false);
-
-    }
-
 }

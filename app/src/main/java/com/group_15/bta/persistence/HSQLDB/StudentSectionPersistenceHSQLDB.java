@@ -70,6 +70,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(section);
             }
 
+            newConnection.close();
             newResultSet.close();
             newStatement.close();
         } catch (final SQLException newException) {
@@ -109,6 +110,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection);
             }
 
+            newConnection.close();
             newResultSet.close();
             preparedStatement.close();
         } catch (final SQLException newException) {
@@ -148,6 +150,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection.getSection());
             }
 
+            newConnection.close();
             newResultSet.close();
             preparedStatement.close();
         } catch (final SQLException newException) {
@@ -176,6 +179,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection);
             }
 
+            c.close();
             rs.close();
             st.close();
         }
@@ -207,6 +211,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection.getSection());
             }
 
+            c.close();
             rs.close();
             st.close();
         }
@@ -240,6 +245,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             {
                 toReturn.add(courseParser.fromResultSet(rs));
             }
+
+            newConnection.close();
             rs.close();
             statement.close();
         }
@@ -271,6 +278,7 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 students.add(record);
             }
 
+            c.close();
             rs.close();
             st.close();
 
@@ -298,6 +306,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             statement.setString(2, currentSection.getAssociatedStudent());
             statement.setString(3, currentSection.getSection().getSection());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -317,6 +327,9 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             statement.setString(3, currentSection.getSection().getSection());
             statement.setString(4, currentSection.getAssociatedCourse().getID());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
+
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -335,6 +348,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
             statement.setString(2, toRemove.getGrade().toString());
             statement.setString(3, toRemove.getSection().getSection());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

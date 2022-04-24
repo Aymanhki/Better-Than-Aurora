@@ -56,6 +56,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 final Student student = fromResultSet(resultSet);
                 students.add(student);
             }
+            newConnection.close();
             statement.close();
             resultSet.close();
         } catch (final SQLException newException) {
@@ -84,6 +85,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 students.add(student);
             }
 
+            c.close();
             rs.close();
             st.close();
 
@@ -130,7 +132,6 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(3, currentStudent.getName());
             statement.setString(4, currentStudent.getAssociatedDegree());
             statement.executeUpdate();
-
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -236,6 +237,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 sumRequiredTakenCourses += rs.getInt("CREDIT");
             }
 
+
             newConnection.close();
             rs.close();
             statement.close();
@@ -267,6 +269,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             {
                 sumRequiredNotTakenCourses += rs.getInt("CREDIT");
             }
+
             newConnection.close();
             rs.close();
             statement.close();
@@ -332,8 +335,8 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
 
 
             newConnection.close();
-            rs.close();
             statement.close();
+            rs.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -364,6 +367,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 toReturn = parser.fromResultSet(rs);
             }
 
+            newConnection.close();
             rs.close();
             statement.close();
         }

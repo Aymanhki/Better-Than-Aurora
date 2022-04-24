@@ -42,7 +42,8 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO DEGREES VALUES(?)");
             statement.setString(1, newDegree.getName());
             statement.executeUpdate();
-
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -68,6 +69,7 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 degree = fromResultSet(resultSet);
             }
 
+            newConnection.close();
             statement.close();
             resultSet.close();
         } catch (final SQLException newException) {
@@ -93,6 +95,7 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 degrees.add(fromResultSet(resultSet));
             }
 
+            newConnection.close();
             statement.close();
             resultSet.close();
         } catch (final SQLException newException) {
@@ -137,6 +140,9 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 toReturn.add(course);
             }
 
+            newConnection.close();
+            statement.close();
+            resultSet.close();
 
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);

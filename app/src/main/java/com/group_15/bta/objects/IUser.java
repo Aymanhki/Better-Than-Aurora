@@ -8,7 +8,5 @@ public interface IUser {
 
     String getPassword();
 
-    Boolean equals(User anotherUser);
-
     String getName();
 }

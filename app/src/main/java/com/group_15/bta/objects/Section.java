@@ -81,6 +81,7 @@ public class Section implements Serializable {
             return  String.valueOf(hour);
         }
     }
+
     public enum time {
         eightThirtyAm(hours.eight, availableSectionMinutes.thirty, morningEvening.AM),
         nineTwentyAm(hours.nine, availableSectionMinutes.twenty, morningEvening.AM),
@@ -326,6 +327,11 @@ public class Section implements Serializable {
         return toReturn;
     }
 
-    public boolean availablePosition (){ return available+1 <= CAP;}
+    public boolean availablePosition (){ return available-1 >= 0;}
 
+    @Override
+    public boolean equals(Object another)
+    {
+        return section.equals(((Section)another).section);
+    }
 }

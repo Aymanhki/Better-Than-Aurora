@@ -89,6 +89,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                 courses.add(course);
             }
 
+            newConnection.close();
             newResultSet.close();
             newStatement.close();
         } catch (final SQLException newException) {
@@ -123,6 +124,9 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                     sectionInserter.insertSection(currentCourse.getSections().get(i));
                 }
             }
+
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -145,6 +149,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
             statement.setString(7, currentCourse.getAssociatedDegree());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -164,6 +170,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             statement = newConnection.prepareStatement("DELETE FROM COURSES WHERE COURSEID = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
+            newConnection.close();
+            statement.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -196,6 +204,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                 courses.add(record);
             }
 
+            c.close();
             rs.close();
             st.close();
 
@@ -226,6 +235,7 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                 toReturn = fromResultSet(rs);
             }
 
+            newConnection.close();
             rs.close();
             statement.close();
         }

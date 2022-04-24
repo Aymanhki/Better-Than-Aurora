@@ -15,4 +15,10 @@ public class Degree {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        return name.equals(((Degree)o).name);
+    }
 }
