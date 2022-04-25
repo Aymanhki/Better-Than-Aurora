@@ -60,3 +60,6 @@ username: instructor1
 password: instructor1
 
 ---	
+
+## Please Note: Running the allTests file for the completion tests will crash the app. 
+## Please reset the persistence layer after every test to ensure passing.

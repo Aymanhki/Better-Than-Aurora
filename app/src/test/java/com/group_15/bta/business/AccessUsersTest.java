@@ -47,28 +47,4 @@ public class AccessUsersTest
         verify(userPersistence).getUser("Ayman", "Ayman");
     }
 
-    @Test
-    public void insertUserTest() {
-
-    }
-
-    @Test
-    public void deleteUserTest() {
-
-    }
-
-    @Test
-    public void getCurrentUserTest() {
-    }
-
-    @Test
-    public void setCurrentUserTest() {
-
-    }
-
-    @Test
-    public void getUserTest()
-    {
-
-    }
 }
