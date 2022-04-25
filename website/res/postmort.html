@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	 <head>
+		<link rel="stylesheet" href="postmort.css">
+	</head>
+	
+	<body>
+	
+	<div class="top-bar">
+		<div class="name">
+			<a href="../index.html" class="home">
+				<div class="bta">BTA</div>
+			</a>
+		</div>
+		<ul class="nav">
+			<li class="nav-item"><a href=vision.html>VISION</a></li>
+			<li class="nav-item"><a href=team.html>TEAM</a></li>
+			<li class="nav-item"><a href=demo.html>DEMO</a></li>
+			<li class="nav-item"><a class="active" href=postmort.html>POST MORTEM</a></li>
+			<li class="nav-item"><a href=chart.html>CHARTS</a></li>
+		</ul>
+	</div>
+	
+	<div class="main">
+		<div class="header">
+			POST MORTEM
+		</div>
+		
+		<div class="sub-head">
+		What went right in the development process?
+		</div>
+		<div class="body">
+		During the development process one of the things that worked in our favour was communication. 
+		We were able to effectively communicate our ideas, which allowed us to create BTA and the design for BTA quickly. 
+		We were also able to figure out what each of our roles in the group were, making the division of tasks easy. 
+		We were able to use everyones time and skills well. By dividing up tasks we could also have each member be specialized 
+		in a certain area of development.
+		</div>
+		
+		<div class="sub-head">
+		What went wrong in the development process?
+		</div>
+		<div class="body">
+		Looking back at it now, Version Control must’ve been the most problematic aspect of the development process. Every iteration, 
+		one or more of us would experience loss of relatively big chunks of code due to the way some merge conflicts were handled locally. 
+		This was frustrating sometimes, and it caused a lot of unnecessary delays, ironically close to release dates. It wasn’t 
+		that we didn’t know how to use git, it was the fact that we occasionally pushed incomplete or broken pieces of code, and so 
+		fixing a bug after a merge meant editing, re-writing, or completely removing pieces of code pushed by another team member, which
+		sometimes caused more bugs because a lot of our code was very dependent, at least before we implemented the database layer. 
+		We did write unit tests, but they were mostly a placeholder to fulfil requirements rather than tests for our implementation. 
+		Also, writing code for a user story or a unit test that works temporarily with no account for edge cases, coupling, or general 
+		dynamicity in mind is sometimes an enormous technical debt and it will lead to a lot of conflicts. Finally, planning how something 
+		will work in iteration 3 so in iteration 1 is not some sort of sinful waste of time, it’s pretty clever actually. For example, in 
+		iteration 3 we had to add new fields and tables to the database, which meant we had to edit all associated objects constructors’, 
+		their getters, and the interface for each associated persistence class including off course the data stubs. This took days because 
+		our app has a wide variety of users. Sadly, we didn’t include any of these problems in our retrospective for iteration 1 or 2 because 
+		we were focused on getting new things to work rather than getting old things to work correctly.
+		</div>
+		
+		<div class="sub-head">
+		What would you do differently, if you had the chance to start over?
+		</div>
+		<div class="body">
+		Ideally it would have been great to have had the time to learn git, android studio, and more about setting up a database prior to 
+		starting the project. Given the chance to start over, we would have all taken more time to ensure that we were more careful when merging. 
+		We could have prevented others work from being lost, and been more careful about the bugs that our code may cause. We could have saved 
+		some time, allowing us to add more features for the release. In the third iteration we divided up the requirements and set intermediate 
+		deadlines before the actual iteration deadline. By doing this we were able to focus more and stress less. Looking back, we should have set 
+		similar deadlines in the previous iterations. Overall, we would have aimed to be more organized and efficient.
+		</div>
+		
+	</div>
+	
+	<div class="footer">
+		COMP 3350, Group 15 2022
+	</div>
+	
+	</body>
+</html>
