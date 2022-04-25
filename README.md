@@ -23,6 +23,10 @@ https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registr
 
 https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/i2_Worksheet_Group15.md 
 
+## Worksheet Iteration 3 link:
+
+https://code.cs.umanitoba.ca/winter-2022-a01/group-15/better-than-aurora-registration-system-a01/-/blob/main/i3_worksheet_Group15.md
+
 ## **Additional Notes: Account Login Credentials**
 
 *Students:*
