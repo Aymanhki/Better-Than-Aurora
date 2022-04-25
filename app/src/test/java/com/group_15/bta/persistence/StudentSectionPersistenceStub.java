@@ -29,6 +29,7 @@ public class StudentSectionPersistenceStub implements StudentSectionPersistence 
         Section comp1012 = new Section("COMP 1012 - B01", "Siegward", new Section.availableSectionDays[]{Section.availableSectionDays.Wednesday}, Section.availableSectionTimes.earlyBird, "Remote", 2, 16, "COMP 1012", "Computer Science");
         Section biol1010 = new Section("BIOL 1010 - A01", "Gascoigne", new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Wednesday, Section.availableSectionDays.Friday}, Section.availableSectionTimes.likesSleepingEarlyBird, "Remote", 10, 198, "BIOL 1010", "Biological Sciences");
         studentSections.add(new StudentSection("student", StudentSection.grades.IP, comp3350, comp3350Course));
+        studentSections.add(new StudentSection("student2", StudentSection.grades.IP, comp3350, comp3350Course));
         studentSections.add(new StudentSection("student", StudentSection.grades.IP, biol1300, biol1300Course));
         studentSections.add(new StudentSection("student", StudentSection.grades.IP, math1500, math1500Course));
         studentSections.add(new StudentSection("student", StudentSection.grades.IP, math1500Lab, math1500Course));

@@ -28,11 +28,11 @@ public class AccessStudentSectionsTest {
         assertNotNull(sections);
 
         int currSize = sections.size();
-        assertEquals("9", String.valueOf(currSize));
+        assertEquals("10", String.valueOf(currSize));
 
         StudentSection testSection = sections.get(0);
         ArrayList<StudentSection> studentsFound = accessStudentSections.getStudentsInSection(testSection.getSection().getSection());
-        assertEquals("1",String.valueOf(studentsFound.size()));
+        assertEquals("2",String.valueOf(studentsFound.size()));
 
         Section.availableSectionDays[] days = new Section.availableSectionDays[]{Section.availableSectionDays.Monday, Section.availableSectionDays.Friday};
         Section.availableSectionTimes time = Section.availableSectionTimes.afternoonBirdWithLongCommute;
@@ -41,13 +41,12 @@ public class AccessStudentSectionsTest {
         accessStudentSections.insertSection(new StudentSection("505", StudentSection.grades.F,section,  new Course("", "")));
         sections = accessStudentSections.getStudentSectionList();
         currSize = sections.size();
-        assertEquals("10", String.valueOf(currSize));
+        assertEquals("11", String.valueOf(currSize));
 
         accessStudentSections.deleteSection(sections.get(4));
         accessStudentSections.deleteSection(sections.get(3));
         sections = accessStudentSections.getStudentSectionList();
         currSize = sections.size();
-        assertEquals("8", String.valueOf(currSize));
-
+        assertEquals("9", String.valueOf(currSize));
     }
 }

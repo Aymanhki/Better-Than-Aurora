@@ -154,7 +154,7 @@ public class InstructorStudentsActivity extends AppCompatActivity {
 
     private String validateGradeData(String grade) {
 
-        if (grade.matches("[A-C][+]?|F|D")) {
+        if (grade.matches("[A-C][+]?|F|D|In Progress")) {
             return null;
         }
 

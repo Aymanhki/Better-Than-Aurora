@@ -35,6 +35,7 @@ public class InstructorMenuActivity extends AppCompatActivity{
     }
 
     public void buttonLogOutOnClick(View v) {
+
         Intent courseIntent = new Intent(InstructorMenuActivity.this, MainActivity.class);
         InstructorMenuActivity.this.startActivity(courseIntent);
     }

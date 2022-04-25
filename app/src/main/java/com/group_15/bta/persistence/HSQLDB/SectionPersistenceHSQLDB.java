@@ -60,8 +60,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
     public ArrayList<Section> getSectionList() {
         final ArrayList<Section> sections = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final Statement newStatement = newConnection.createStatement();
             final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM SECTIONS");
             while (newResultSet.next()) {
@@ -69,9 +69,10 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(section);
             }
 
-            newConnection.close();
+
             newResultSet.close();
             newStatement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -87,8 +88,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
     @Override
     public ArrayList<Section> getInstructorSections(String name) {
         final ArrayList<Section> sections = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM SECTIONS WHERE INSTRUCTOR = ?");
             st.setString(1, name);
 
@@ -99,10 +100,10 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(record);
             }
 
-            c.close();
+
             rs.close();
             st.close();
-
+            c.close();
             return sections;
         }
         catch (final SQLException e)
@@ -119,8 +120,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
     @Override
     public ArrayList<Section> getCourseSections(String courseID) {
         final ArrayList<Section> sections = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM SECTIONS WHERE COURSEID = ?");
             st.setString(1, courseID);
 
@@ -131,10 +132,10 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 sections.add(record);
             }
 
-            c.close();
+
             rs.close();
             st.close();
-
+            c.close();
             return sections;
         }
         catch (final SQLException e)
@@ -150,8 +151,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
      */
     @Override
     public void insertSection(Section currentSection) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection())
+        {
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO SECTIONS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentSection.getSection());
             statement.setString(2, currentSection.getInstructor());
@@ -175,8 +176,9 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
             statement.setString(8, currentSection.getAssociatedCourse());
             statement.setString(9, currentSection.getAssociatedCategory());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -189,8 +191,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
      */
     @Override
     public void updateSection(Section currentSection) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection();){
+
 
             // new Section(sectionID, instructor, days, times, location, available, capacity, associatedCourse, associatedCategory);
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE SECTIONS SET " +
@@ -227,8 +229,9 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
 
             statement.executeUpdate();
 
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -241,13 +244,14 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
      */
     @Override
     public void deleteSection(Section toRemove) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE SECTIONID = ?");
             statement.setString(1, toRemove.getSection());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -262,8 +266,8 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
     @Override
     public Section getSection(String sectionID) {
         Section toReturn = null;
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM SECTIONS WHERE SECTIONID = ?");
             statement.setString(1, sectionID);
             ResultSet rs = statement.executeQuery();
@@ -272,9 +276,10 @@ public class SectionPersistenceHSQLDB implements SectionPersistence, Serializabl
                 toReturn = fromResultSet(rs);
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
+            newConnection.close();
         }
         catch (final SQLException newException)
         {

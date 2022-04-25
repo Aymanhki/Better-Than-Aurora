@@ -17,6 +17,7 @@ public class AccessDegrees implements DegreePersistence {
 
     //constructor, to start/set database
     public AccessDegrees(){degreePersistence = Services.getDegreePersistence(); }
+    public AccessDegrees(DegreePersistence degreePersistence){this.degreePersistence = degreePersistence; }
 
     /**
      * insert
@@ -69,6 +70,4 @@ public class AccessDegrees implements DegreePersistence {
     public ArrayList<Course> getDegreeCourses(String newDegree) {
         return degreePersistence.getDegreeCourses(newDegree);
     }
-
-
 }

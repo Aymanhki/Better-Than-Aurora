@@ -62,8 +62,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         ArrayList<StudentSection> toReturn = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection();){
+
             final Statement newStatement = newConnection.createStatement();
             final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM STUDENTSECTIONS");
             while (newResultSet.next()) {
@@ -71,9 +71,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(section);
             }
 
-            newConnection.close();
+
             newResultSet.close();
             newStatement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -93,8 +94,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         ArrayList<StudentSection> toReturn = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection();){
+
             PreparedStatement preparedStatement;
             if(inProgress)
             {
@@ -112,9 +113,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection);
             }
 
-            newConnection.close();
+
             newResultSet.close();
             preparedStatement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -134,8 +136,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
 
         ArrayList<Section> toReturn = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection();){
+
             PreparedStatement preparedStatement;
             if(inProgress)
             {
@@ -153,9 +155,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection.getSection());
             }
 
-            newConnection.close();
+
             newResultSet.close();
             preparedStatement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -172,8 +175,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     @Override
     public ArrayList<StudentSection> getStudentSectionList(String studentID) {
         final ArrayList<StudentSection> toReturn = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ?");
             st.setString(1, studentID);
             final ResultSet rs = st.executeQuery();
@@ -183,9 +186,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection);
             }
 
-            c.close();
+
             rs.close();
             st.close();
+            c.close();
         }
         catch (final SQLException e)
         {
@@ -205,8 +209,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     @Override
     public ArrayList<Section> getSectionList(String studentID) {
         final ArrayList<Section> toReturn = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTSECTIONS WHERE STUDENTID = ?");
             st.setString(1, studentID);
             final ResultSet rs = st.executeQuery();
@@ -216,9 +220,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(studentSection.getSection());
             }
 
-            c.close();
+
             rs.close();
             st.close();
+            c.close();
         }
         catch (final SQLException e)
         {
@@ -239,8 +244,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     @Override
     public ArrayList<Course> getCourses(String studentID) {
         ArrayList<Course> toReturn = new ArrayList<>();
-        try{
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
 
             PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID IN (SELECT COURSEID FROM STUDENTSECTIONS WHERE STUDENTID = ?)");
             statement.setString(1, studentID);
@@ -251,9 +256,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 toReturn.add(courseParser.fromResultSet(rs));
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
+            newConnection.close();
         }
         catch(final SQLException newException)
         {
@@ -272,8 +278,8 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
     @Override
     public ArrayList<StudentSection> getStudentsInSection(String courseID) {
         final ArrayList<StudentSection> students = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM STUDENTS,STUDENTSECTIONS WHERE STUDENTS.USERNAME=STUDENTSECTIONS.STUDENTID AND SECTIONID = ?");
             st.setString(1, courseID);
 
@@ -284,10 +290,10 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
                 students.add(record);
             }
 
-            c.close();
+
             rs.close();
             st.close();
-
+            c.close();
 
         }
         catch (final SQLException e)
@@ -305,16 +311,17 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
      */
     @Override
     public void updateStudentSection(StudentSection currentSection) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
 
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE STUDENTSECTIONS SET GRADE = ?  WHERE STUDENTID = ? AND SECTIONID = ?");
             statement.setString(1, currentSection.getGrade().toString());
             statement.setString(2, currentSection.getAssociatedStudent());
             statement.setString(3, currentSection.getSection().getSection());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -327,17 +334,17 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
      */
     @Override
     public void insertSection(StudentSection currentSection) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO STUDENTSECTIONS VALUES(?, ?, ?, ?)");
             statement.setString(1, currentSection.getAssociatedStudent());
             statement.setString(2, currentSection.getGrade().toString());
             statement.setString(3, currentSection.getSection().getSection());
             statement.setString(4, currentSection.getAssociatedCourse().getID());
             statement.executeUpdate();
-            newConnection.close();
-            statement.close();
 
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -350,15 +357,16 @@ public class StudentSectionPersistenceHSQLDB implements StudentSectionPersistenc
      */
     @Override
     public void deleteSection(StudentSection toRemove) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection();){
+
             final PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE STUDENTID = ? AND GRADE = ? AND SECTIONID = ?");
             statement.setString(1, toRemove.getAssociatedStudent());
             statement.setString(2, toRemove.getGrade().toString());
             statement.setString(3, toRemove.getSection().getSection());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

@@ -38,6 +38,7 @@ public class AdminMenuActivity extends AppCompatActivity{
     }
 
     public void buttonLogOutOnClick(View v) {
+
         Intent courseIntent = new Intent(AdminMenuActivity.this, MainActivity.class);
         AdminMenuActivity.this.startActivity(courseIntent);
     }

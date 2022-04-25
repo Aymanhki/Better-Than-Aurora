@@ -8,26 +8,23 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
 
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.adevinta.android.barista.interaction.BaristaSleepInteractions;
 import com.group_15.bta.application.Services;
+import com.group_15.bta.objects.Category;
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Degree;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.objects.Student;
 import com.group_15.bta.objects.User;
+import com.group_15.bta.persistence.CategoryPersistence;
 import com.group_15.bta.persistence.CoursePersistence;
 import com.group_15.bta.persistence.DegreePersistence;
 import com.group_15.bta.persistence.SectionPersistence;
@@ -50,9 +47,11 @@ public class ViewTuitionFeesTest {
     @Before
     public void setupDatabase(){
         Degree testDegree = new Degree("Hello");
+        Category testCategory = new Category("AAAAAAAAAAA");
         Student testStudent = new Student("student5", "student5", "Ayman2", "Hello");
-        Course testCourse = new Course("Hello 101", "Hi", "Teaches you how to say hello", 3, "English", 1782.25, "Hello");
-        Section testSection = new Section("Hello 101 - A01", "Me", new Section.availableSectionDays[]{Section.availableSectionDays.Monday}, Section.availableSectionTimes.earlyBird, "Remote", 500, 500, "Hello 101", "English");
+        Course testCourse = new Course("Hello 101", "Hi", "Teaches you how to say hello", 3, "AAAAAAAAAAA", 1782.25, "Hello");
+        Section testSection = new Section("Hello 101 - A01", "Me", new Section.availableSectionDays[]{Section.availableSectionDays.Monday}, Section.availableSectionTimes.earlyBird, "Remote", 500, 500, "Hello 101", "AAAAAAAAAAA");
+
         DegreePersistence degreePersistence = Services.getDegreePersistence();
         ArrayList<Degree> degrees = degreePersistence.getDegreesList();
 
@@ -62,6 +61,14 @@ public class ViewTuitionFeesTest {
         }
         degrees = degreePersistence.getDegreesList();
         assert degrees.contains(testDegree);
+
+        CategoryPersistence categoryPersistence =  Services.getCategoryPersistence();
+        ArrayList<Category> categories = categoryPersistence.getCategoryList();
+
+        if(!categories.contains(testCategory))
+        {
+            categoryPersistence.insertCategory(testCategory);
+        }
 
         CoursePersistence coursePersistence = Services.getCoursePersistence();
         ArrayList<Course> courses = coursePersistence.getCourseList();
@@ -98,13 +105,14 @@ public class ViewTuitionFeesTest {
         closeSoftKeyboard();
         onView(withId(R.id.login)).perform(click());
 
-        onView(ViewMatchers.withId(R.id.student_landing_page)).perform(ViewActions.swipeUp());
-        onData(anything()).inAdapterView(withId(R.id.student_required_courses)).atPosition(0).perform(click());
-        BaristaSleepInteractions.sleep(2000);
-        onView(withId(R.id.sections_list_to_be_added)).perform(click());
-        onView(withId(R.id.sections_list_to_be_added)).perform(click());
+        onView(withId(R.id.student_courses)).perform(click());
+        onView(withId(R.id.add_or_drop_courses_btn)).perform(click());
+        onView(withId(R.id.add_courses_btn)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.categories_list_in_add_courses_fragment)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses_list_in_add_courses)).atPosition(0).perform(click());
         onData(anything()).inAdapterView(withId(R.id.sections_list_to_be_added)).atPosition(0).perform(click());
         onView(withId(R.id.add_section_btn)).perform(click());
+
         onView(withId(R.id.student_profile)).perform(click());
         onView(withId(R.id.show_summary)).perform(click());
         onView(withId(R.id.open_account_summary)).perform(click());
@@ -117,27 +125,7 @@ public class ViewTuitionFeesTest {
         onData(anything()).inAdapterView(withId(R.id.student_enrolled_courses)).atPosition(0).perform(click());
         onView(withId(R.id.drop_section_btn)).perform(click());
 
+        onView(withId(R.id.student_settings)).perform(click());
+        onView(withId(R.id.logout_student_account_btn)).perform(click());
     }
-
-
-    public static boolean waitForElementUntilDisplayed(ViewInteraction element) {
-        int i = 0;
-        while (i++ < 5) {
-            try {
-                element.check(matches(isDisplayed()));
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e1) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
-
-
-
 }

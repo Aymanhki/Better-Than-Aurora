@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group_15.bta.R;
+import com.group_15.bta.application.Services;
 import com.group_15.bta.business.AccessCourses;
 import com.group_15.bta.business.AccessDegrees;
 import com.group_15.bta.objects.Course;
@@ -104,6 +105,8 @@ public class CategoryActivity extends AppCompatActivity {
             {
                 Messages.warning(this, result);
             }
+
+            Services.setCourseToTrue();
             courses = courseList.getCategoryCourses(Name);
             listCourses();
         }

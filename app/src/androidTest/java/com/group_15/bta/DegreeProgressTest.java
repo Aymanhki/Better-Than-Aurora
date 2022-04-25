@@ -10,7 +10,6 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
 
@@ -20,7 +19,6 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.adevinta.android.barista.interaction.BaristaSleepInteractions;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Course;
 import com.group_15.bta.objects.Degree;

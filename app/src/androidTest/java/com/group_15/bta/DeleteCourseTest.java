@@ -16,8 +16,6 @@ import androidx.test.runner.AndroidJUnit4;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.SectionPersistence;
-
-
 import com.group_15.bta.presentation.MainActivity;
 
 import org.junit.Before;

@@ -3,7 +3,6 @@ package com.group_15.bta.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 /**
@@ -41,9 +40,9 @@ public class Category implements Serializable {
     }
 
     //equals
-    public boolean equals(final Category o)
+    @Override
+    public boolean equals(final Object o)
     {
-        return Objects.equals(this.Name, o.Name) &&
-                Objects.equals(this.Course, o.Course);
+        return ((Category)o).Name.equals(Name);
     }
 }

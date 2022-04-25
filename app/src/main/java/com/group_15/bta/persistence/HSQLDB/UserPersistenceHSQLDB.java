@@ -81,8 +81,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     public ArrayList<User> getUsers() {
         ArrayList<User> toReturn = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final Statement statement = newConnection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM STUDENTS");
@@ -105,8 +105,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 toReturn.add(fromResultSet(resultSet, INSTRUCTOR_ACCOUNT_TYPE));
             }
 
-            statement.close();
             resultSet.close();
+            statement.close();
             newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
@@ -122,8 +122,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
      */
     @Override
     public void insertUser(User newUser) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
 
             PreparedStatement statement = null;
 
@@ -151,6 +151,7 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
 
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -163,8 +164,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
      */
     @Override
     public void deleteUser(User toRemove) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
 
             PreparedStatement statement = newConnection.prepareStatement("");
 
@@ -221,16 +222,16 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     public boolean validateLoginAttempt(String userName, String password)
     {
         boolean found;
-        try{
-            final Connection connection = connection();
+        try (final Connection connection = connection()){
+
             PreparedStatement statement = connection.prepareStatement("SELECT USERNAME, PASSWORD FROM (SELECT USERNAME, PASSWORD FROM STUDENTS UNION ALL SELECT USERNAME, PASSWORD FROM ADMINS UNION ALL SELECT USERNAME, PASSWORD FROM ADVISORS UNION ALL SELECT USERNAME, PASSWORD FROM INSTRUCTORS) WHERE USERNAME = ? AND PASSWORD = ?");
             statement.setString(1, userName);
             statement.setString(2, password);
             found = statement.executeQuery().next();
 
-            connection.close();
-            statement.close();
 
+            statement.close();
+            connection.close();
         }
         catch (final SQLException newException)
         {
@@ -309,8 +310,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
         User toReturn = null;
 
-        try{
-            final Connection connection = connection();
+        try ( final Connection connection = connection()){
+
             String prepare = "SELECT * FROM "+getUserTable(userName, password)+" WHERE USERNAME = ? AND PASSWORD = ?";
             PreparedStatement statement = connection.prepareStatement(prepare);
             statement.setString(1, userName);
@@ -322,9 +323,10 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 toReturn = fromResultSet(rs, rs.getMetaData().getTableName(1));
             }
 
-            connection.close();
-            statement.close();
+
             rs.close();
+            statement.close();
+            connection.close();
         }
         catch (final SQLException newException)
         {
@@ -345,8 +347,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     {
         String toReturn = null;
 
-        try{
-            final Connection connection = connection();
+        try (final Connection connection = connection()){
+
             PreparedStatement statement = connection.prepareStatement("SELECT USERNAME, PASSWORD, 'STUDENTS' AS SOURCE FROM STUDENTS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +
                                                                         "SELECT USERNAME, PASSWORD, 'ADMINS' AS SOURCE FROM ADMINS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +
                                                                         "SELECT USERNAME, PASSWORD, 'ADVISORS' AS SOURCE FROM ADVISORS WHERE USERNAME = ? AND PASSWORD = ? UNION ALL " +
@@ -366,9 +368,10 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
                 toReturn = rs.getString("SOURCE").trim();
             }
 
-            connection.close();
-            statement.close();
+
             rs.close();
+            statement.close();
+            connection.close();
         }
         catch (final SQLException newException)
         {

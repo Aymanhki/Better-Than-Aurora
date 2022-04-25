@@ -3,6 +3,7 @@ package com.group_15.bta;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -22,9 +23,11 @@ public class UpdateGradeInstructorTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
+
     @Test
     public void updateGrade() {
         //login
+
         onView(withId(R.id.userName)).perform(typeText("instructor"));
         closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("instructor"));
@@ -53,5 +56,9 @@ public class UpdateGradeInstructorTest {
                 .inAdapterView(withId(R.id.studentSectionList))
                 .atPosition(1)
                 .check(matches(withText(containsString("A+"))));
+
+        pressBack();
+        pressBack();
+        onView(withId(R.id.button4)).perform(click());
     }
 }

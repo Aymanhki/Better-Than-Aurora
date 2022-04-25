@@ -38,13 +38,14 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
      */
     @Override
     public void insert(Degree newDegree) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO DEGREES VALUES(?)");
             statement.setString(1, newDegree.getName());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -59,8 +60,8 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
     @Override
     public boolean contains(Degree newDegree) {
         Degree degree = null;
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
 
             final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM DEGREES WHERE NAME = ?");
             statement.setString(1, newDegree.getName());
@@ -71,9 +72,9 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 degree = fromResultSet(resultSet);
             }
 
-            newConnection.close();
-            statement.close();
             resultSet.close();
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -89,8 +90,8 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
     @Override
     public ArrayList<Degree> getDegreesList() {
         final ArrayList<Degree> degrees = new ArrayList<>();
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final Statement statement = newConnection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM DEGREES");
 
@@ -98,9 +99,9 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 degrees.add(fromResultSet(resultSet));
             }
 
-            newConnection.close();
-            statement.close();
             resultSet.close();
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -132,9 +133,8 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
     @Override
     public ArrayList<Course> getDegreeCourses(String newDegree) {
         ArrayList<Course> toReturn = new ArrayList<>();
-        try {
-            final Connection newConnection = connection();
-
+        try (final Connection newConnection = connection())
+        {
             final Statement statement = newConnection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM COURSES");
             CoursePersistenceHSQLDB instance = new CoursePersistenceHSQLDB(newConnection);
@@ -144,10 +144,9 @@ public class DegreePersistenceHSQLDB implements DegreePersistence {
                 toReturn.add(course);
             }
 
-            newConnection.close();
-            statement.close();
             resultSet.close();
-
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }

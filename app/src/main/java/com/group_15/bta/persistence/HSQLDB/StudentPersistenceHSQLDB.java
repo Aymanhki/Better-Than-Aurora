@@ -56,9 +56,9 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 final Student student = fromResultSet(resultSet);
                 students.add(student);
             }
-            newConnection.close();
-            statement.close();
             resultSet.close();
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -85,10 +85,10 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 students.add(student);
             }
 
-            c.close();
+
             rs.close();
             st.close();
-
+            c.close();
             return students;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
@@ -110,8 +110,9 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(3, currentStudent.getAssociatedDegree());
             statement.setString(4, currentStudent.getID());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -132,6 +133,7 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(3, currentStudent.getName());
             statement.setString(4, currentStudent.getAssociatedDegree());
             statement.executeUpdate();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -152,8 +154,8 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
 
-            newConnection.close();
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -174,8 +176,8 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             statement.setString(1, toRemove);
             statement.executeUpdate();
 
-            newConnection.close();
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -204,9 +206,10 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 sumRequiredInProgressCourses += rs.getInt("CREDIT");
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -237,10 +240,9 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 sumRequiredTakenCourses += rs.getInt("CREDIT");
             }
 
-
-            newConnection.close();
             rs.close();
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -270,10 +272,10 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 sumRequiredNotTakenCourses += rs.getInt("CREDIT");
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
-
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -334,9 +336,9 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
             }
 
 
-            newConnection.close();
-            statement.close();
             rs.close();
+            statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -367,9 +369,10 @@ public class StudentPersistenceHSQLDB implements StudentPersistence, Serializabl
                 toReturn = parser.fromResultSet(rs);
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
+            newConnection.close();
         }
         catch (final SQLException newException)
         {

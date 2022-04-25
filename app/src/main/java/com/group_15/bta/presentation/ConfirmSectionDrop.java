@@ -57,7 +57,7 @@ public class ConfirmSectionDrop extends Fragment {
             Section selectedSection = selectedStudentSection.getSection();
             currentUser.deleteSection(selectedStudentSection);
             Section updatedSelectedSection = new Section(selectedSection.getSection(), selectedSection.getInstructor(), selectedSection.getDaysRaw(),
-                    selectedSection.getTime(), selectedSection.getLocation(), selectedSection.getAvailable()-1,
+                    selectedSection.getTime(), selectedSection.getLocation(), selectedSection.getAvailable()+1,
                     selectedSection.getCAP(), selectedSection.getAssociatedCourse(), selectedSection.getAssociatedCategory());
             new AccessSections().updateSection(updatedSelectedSection);
             Toast.makeText(getContext(), "Course Dropped", Toast.LENGTH_LONG).show();

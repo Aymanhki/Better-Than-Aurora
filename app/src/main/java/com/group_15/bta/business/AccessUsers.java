@@ -24,7 +24,6 @@ public class AccessUsers implements UserPersistence {
 
     //constructor, to set database when it has already been started
     public AccessUsers(final UserPersistence userPersistence) {
-        this();
         this.userPersistence = userPersistence;
     }
 

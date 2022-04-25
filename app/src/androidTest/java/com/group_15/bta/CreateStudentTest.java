@@ -35,7 +35,7 @@ public class CreateStudentTest {
 
     @Before
     public void setupDatabase(){
-        // clear student3 from the database
+
         StudentPersistence studentPersist = Services.getStudentPersistence();
         ArrayList<Student> student = studentPersist.getStudent(new Student("student3"));
         for (Student s: student)

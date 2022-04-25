@@ -10,7 +10,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
-
+import static org.hamcrest.CoreMatchers.containsString;
 
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -19,8 +19,6 @@ import androidx.test.runner.AndroidJUnit4;
 import com.group_15.bta.application.Services;
 import com.group_15.bta.objects.Section;
 import com.group_15.bta.persistence.SectionPersistence;
-
-
 import com.group_15.bta.presentation.MainActivity;
 
 import org.junit.Before;
@@ -84,7 +82,9 @@ public class CreateCourseTest{
         onView(withId(R.id.AddSection)).perform(click());
 
         //verify that it was actually created
-        onData(anything()).inAdapterView(withId(R.id.sectionsList)).atPosition(0).onChildView(withId(R.id.section_name_list_item)).check(matches(withText("Section:BIOL 1000 - A01")));
+        onData(anything()).inAdapterView(withId(R.id.sectionsList)).atPosition(0).onChildView(withId(R.id.section_name_list_item)).check(matches(withText(containsString("A01"))));
+        onData(anything()).inAdapterView(withId(R.id.sectionsList)).atPosition(0).onChildView(withId(R.id.capacity_number_list_item)).check(matches(withText(containsString("65"))));
+        onData(anything()).inAdapterView(withId(R.id.sectionsList)).atPosition(0).onChildView(withId(R.id.location_name_list_item)).check(matches(withText(containsString("Remote"))));
 
         pressBack();
         pressBack();
@@ -92,5 +92,6 @@ public class CreateCourseTest{
 
         onView(withId(R.id.button4)).perform(click());
     }
+
 
 }

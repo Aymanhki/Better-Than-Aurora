@@ -55,6 +55,7 @@ public class AdvisorMenuActivity extends AppCompatActivity {
 
     public void exitAdvisor(View v)
     {
+
         Intent goBack = new Intent(AdvisorMenuActivity.this, MainActivity.class);
         AdvisorMenuActivity.this.startActivity(goBack);
     }

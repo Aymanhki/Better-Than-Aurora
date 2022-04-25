@@ -86,8 +86,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     public ArrayList<Course> getCourseList() {
         final ArrayList<Course> courses = new ArrayList<>();
 
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final Statement newStatement = newConnection.createStatement();
             final ResultSet newResultSet = newStatement.executeQuery("SELECT * FROM COURSES");
             while (newResultSet.next()) {
@@ -124,8 +124,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void insertCourses(Course currentCourse) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("INSERT INTO COURSES VALUES(?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, currentCourse.getID());
             statement.setString(2, currentCourse.getTitle());
@@ -143,8 +143,9 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                 }
             }
 
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -157,8 +158,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void updateCourse(Course currentCourse) {
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("UPDATE COURSES SET TITLE = ?, DESCRIPTION = ?, CREDIT = ?, NAME = ?, TUITION = ?, ASSOCIATEDDEGREE = ?  WHERE COURSEID = ?");
             statement.setString(1, currentCourse.getTitle());
             statement.setString(2, currentCourse.getDescription());
@@ -168,8 +169,9 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
             statement.setBigDecimal(6, BigDecimal.valueOf(currentCourse.getTuition()));
             statement.setString(7, currentCourse.getAssociatedDegree());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -182,16 +184,21 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
      */
     @Override
     public void deleteCourses(Course toRemove) {
-        try {
-            final Connection newConnection = connection();
-            PreparedStatement statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE COURSEID = ?");
+        try (final Connection newConnection = connection())
+        {
+
+            PreparedStatement statement = newConnection.prepareStatement("DELETE FROM STUDENTSECTIONS WHERE COURSEID = ?");
+            statement.setString(1, toRemove.getID());
+            statement.executeUpdate();
+            statement = newConnection.prepareStatement("DELETE FROM SECTIONS WHERE COURSEID = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
             statement = newConnection.prepareStatement("DELETE FROM COURSES WHERE COURSEID = ?");
             statement.setString(1, toRemove.getID());
             statement.executeUpdate();
-            newConnection.close();
+
             statement.close();
+            newConnection.close();
         } catch (final SQLException newException) {
             throw new PersistenceException(newException);
         }
@@ -206,8 +213,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public ArrayList<Course> getCategoryCourses(String catName){
         final ArrayList<Course> courses = new ArrayList<>();
-        try {
-            final Connection c = connection();
+        try (final Connection c = connection()){
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM COURSES WHERE NAME = ?");
             st.setString(1,catName);
             final ResultSet rs = st.executeQuery();
@@ -246,8 +253,8 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
     @Override
     public Course getCourse(String courseID) {
         Course toReturn = null;
-        try {
-            final Connection newConnection = connection();
+        try (final Connection newConnection = connection()){
+
             final PreparedStatement statement = newConnection.prepareStatement("SELECT * FROM COURSES WHERE COURSEID = ?");
             statement.setString(1, courseID);
             ResultSet rs = statement.executeQuery();
@@ -256,9 +263,10 @@ public class CoursePersistenceHSQLDB implements CoursePersistence, Serializable 
                 toReturn = fromResultSet(rs);
             }
 
-            newConnection.close();
+
             rs.close();
             statement.close();
+            newConnection.close();
         }
         catch (final SQLException newException)
         {

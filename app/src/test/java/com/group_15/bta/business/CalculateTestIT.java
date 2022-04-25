@@ -8,6 +8,7 @@ import com.group_15.bta.persistence.StudentPersistence;
 import com.group_15.bta.persistence.StudentSectionPersistence;
 import com.group_15.bta.utils.TestUtils;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,5 +39,20 @@ public class CalculateTestIT {
         final ArrayList<StudentSection> sections = accessStudentSections.getStudentSectionList(student.getID(), false);
 
         Assert.assertEquals(StudentSection.gpa.three, Calculate.gpa(sections));
+    }
+
+    @Test
+    public void testCalculateCreditHours()
+    {
+        final ArrayList<Student> students = accessStudents.getStudentList();
+        Student student = students.get(0);
+        final ArrayList<StudentSection> sections = accessStudentSections.getStudentSectionList(student.getID(), false);
+        Assert.assertEquals(String.valueOf(12.0), Calculate.creditHours(sections));
+    }
+
+    @After
+    public void tearDown() {
+        // reset DB
+        this.tempDB.delete();
     }
 }

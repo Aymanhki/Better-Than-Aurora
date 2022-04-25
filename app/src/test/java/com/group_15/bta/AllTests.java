@@ -3,6 +3,7 @@ package com.group_15.bta;
 
 import com.group_15.bta.business.AccessCategoriesTest;
 import com.group_15.bta.business.AccessCoursesTest;
+import com.group_15.bta.business.AccessDegreesTest;
 import com.group_15.bta.business.AccessSectionsTest;
 import com.group_15.bta.business.AccessStudentSectionsTest;
 import com.group_15.bta.business.AccessStudentsTest;
@@ -27,6 +28,7 @@ import org.junit.runners.Suite;
         AccessStudentSectionsTest.class,
         AccessStudentsTest.class,
         AdministratorTest.class,
+        AccessDegreesTest.class,
         AdvisorTest.class,
         CategoryTest.class,
         CourseTest.class,

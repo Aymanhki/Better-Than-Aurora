@@ -75,5 +75,4 @@ public class DeleteStudentTest {
         onView(withId(R.id.student_settings)).check(doesNotExist());
 
     }
-
 }

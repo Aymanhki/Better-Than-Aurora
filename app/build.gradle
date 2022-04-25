@@ -14,8 +14,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         multiDexEnabled true
     }
+
 
     buildTypes {
         release {
@@ -63,11 +65,8 @@ dependencies {
     androidTestImplementation ('com.android.support.test:rules:1.0.2'){
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-
     androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
     androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
     androidTestImplementation('com.adevinta.android:barista:4.2.0')
-
-
 
 }

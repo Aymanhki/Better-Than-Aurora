@@ -191,6 +191,8 @@ public class Section implements Serializable {
     }
 
     public enum availableSectionDays {
+        Saturday,
+        Sunday,
         Monday,
         Tuesday,
         Wednesday,

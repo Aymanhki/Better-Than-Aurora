@@ -39,7 +39,6 @@ public class LoginTests {
 
     @Before
     public void setupDatabase(){
-
         Student testStudent = new Student("student", "student", "Ayman", "B.Sc. (Hons)");
         Instructor testInstructor = new Instructor("instructor", "instructor", "Dr. Heather Matheson");
         Advisor testAdvisor = new Advisor("advisor", "advisor", "Velka");
@@ -80,6 +79,7 @@ public class LoginTests {
         onView(withId(R.id.student_landing_page)).check(matches(isDisplayed()));
         pressBack();
 
+
         onView(withId(R.id.userName)).perform(typeText("instructor"));
         closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("instructor"));
@@ -96,6 +96,7 @@ public class LoginTests {
         onView(withId(R.id.advisor_landing_page)).check(matches(isDisplayed()));
         pressBack();
 
+
         onView(withId(R.id.userName)).perform(typeText("admin"));
         closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("admin"));
@@ -105,5 +106,6 @@ public class LoginTests {
         pressBack();
 
     }
+
 }
 
