@@ -144,7 +144,6 @@ public class AccessStudents implements StudentPersistence {
         for(int i=0; i<studentSections.size(); i++)
         {
             String section = studentSections.get(i).getSection().getSection();
-            System.out.println("Section contains B0? Answer:"+section.contains("B0"));
             if(!section.contains("B0"))
             {
                 counter++;
